@@ -11,8 +11,8 @@ export const Home = () => {
 };
 
 const HomeContainer = styled.div`
-  width: 800px;
-  height: 800px;
+  width: 900px;
+  height: 900px;
   background-color: rgb(49, 46, 68);
   box-shadow: 0px 10px 100px 10px rgba(0, 0, 0, 0.2);
   padding: 20px;

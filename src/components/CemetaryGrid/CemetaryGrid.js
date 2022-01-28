@@ -1,13 +1,20 @@
 import React from "react";
 import styled from "styled-components/macro";
+
+import GrassPattern from "../../img/grave/grass-p-2.png";
+
 import { Grave } from "../Grave";
 
 export const CemetaryGrid = () => {
   return (
     <CemetaryGridContainer>
-      <Cell><Grave /></Cell>
+      <Cell>
+        <Grave />
+      </Cell>
       <Cell></Cell>
-      <Cell><Grave /></Cell>
+      <Cell>
+        <Grave />
+      </Cell>
       <Cell></Cell>
       <Cell></Cell>
       <Cell></Cell>
@@ -30,19 +37,33 @@ const Cell = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+  background: url(${GrassPattern}) repeat;
+  background-size: 50%;
+  position: relative;
+  cursor: pointer;
   &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    &::after {
+      transition: all 0.2s linear;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+  &::after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
   }
 `;
 
 const CemetaryGridContainer = styled.div`
   height: 100%;
   width: 100%;
-  background-color: #1C3C1A;
+  background-color: #1c3c1a;
   display: grid;
-  grid-template-columns: 181px 181px 181px 181px;
-  grid-template-rows: 243px 243px 243px;
-  grid-gap: 5px;
+  grid-template-columns: 210px 210px 210px 210px;
+  grid-template-rows: 280px 280px 280px;
   padding: 10px;
 `;
