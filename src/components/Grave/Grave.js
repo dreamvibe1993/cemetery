@@ -4,10 +4,18 @@ import styled from "styled-components/macro";
 export const Grave = () => {
   return (
     <GraveCont>
+      <Monument />
       <GraveGrass />
     </GraveCont>
   );
 };
+
+const Monument = styled.div`
+  width: 100%;
+  height: 20px;
+  background-color: #A29B9B;
+  box-shadow: 0px 20px 10px 0px rgba(0, 0, 0, 0.2);
+`;
 
 const GraveCont = styled.div`
   background-color: gray;
@@ -15,10 +23,13 @@ const GraveCont = styled.div`
   height: 70%;
   position: relative;
   padding: 20px;
+  padding-top: 5px;
+  box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.2);
 `;
 
 const GraveGrass = styled.div`
   background-color: green;
   width: 100%;
-  height: 100%;
+  height: 85%;
+  box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
 `;

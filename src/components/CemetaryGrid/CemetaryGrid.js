@@ -25,12 +25,12 @@ const Cell = styled.div`
   width: 100%;
   height: 100%;
   transition: all 0.2s linear;
-  border: 1px solid #000;
   background-color: #183516;
   padding: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
   &:hover {
     background-color: rgba(255, 255, 255, 0.1);
   }
