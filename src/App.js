@@ -1,8 +1,15 @@
 import "./App.css";
-import { Home } from "./pages/Home/Home";
+import { Router, Routes, Route } from "react-router-dom";
+import { Paths } from "./Paths";
+import { Home } from "./pages/Home";
+import { createBrowserHistory } from "history";
+
+const history = createBrowserHistory();
 
 function App() {
-  return <Home />;
+  return (
+    <Paths />
+  );
 }
 
 export default App;
