@@ -5,7 +5,7 @@ import { ReactComponent as ChevroneLeft } from "../../media/svg/chevrone.svg";
 export const Gallery = ({ src, onClose = () => {} }) => {
   const picRef = React.useRef(null);
   const [x, setX] = React.useState(0);
-  const [y, setY] = React.useState(0);
+  const [y, setY] = React.useState(40);
   const [scale, setScale] = React.useState(1);
 
   const [isMouseKeyPressed, setMouseKeyPressed] = React.useState(false);
@@ -115,6 +115,7 @@ const TopPanel = styled.div`
   display: flex;
   align-items: center;
   z-index: 99999999999;
+  padding: 40px 0px 0px 40px;
   svg {
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.2);
@@ -173,11 +174,11 @@ const Pic = styled.img`
 `;
 
 const PictureGallery = styled.div`
-  position: absolute;
+  position: fixed;
   height: 100%;
-  max-height: 900px;
   width: 100%;
   top: 0;
+  left: 0;
   z-index: 9999999999999 !important;
   background-color: rgba(0, 0, 0, 0.7);
 `;
