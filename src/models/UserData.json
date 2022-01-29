@@ -1,0 +1,51 @@
+{
+  "users": [
+    {
+      "id": "123",
+      "name": "Alexander Vasiliev",
+      "born": "1948-01-23T01:23:45.678+09:00",
+      "died": "2022-01-23T01:23:45.678+09:00",
+      "lastWords": "Fuck you all! Ha ha ha!",
+      "gifts": {
+        "candies": [{ "by": "Lisa", "wish": "I miss you." }],
+        "btc": [{ "by": "Monique", "wish": "I hope these btcs will help." }],
+        "vodka": [
+          { "by": "John", "wish": "Друган, держи биток ёма..." },
+          { "by": "Jake", "wish": "RIP Friend." }
+        ]
+      },
+      "chatLogs": [
+        "Lisa left 1.25 BTC for Test Test.",
+        "Mark left left a Candy for Test Test.",
+        "Cynthia left a message: RIP God rest your soul ashes to ashes dust to dust ashes to ashes dust to dust ashes to ashes dust to dust",
+        "Lisa left 1.25 BTC for Test Test."
+      ],
+      "songs": ["zemfira"],
+      "graveCellNum": 0
+    },
+    {
+      "id": "1233",
+      "name": "Mata Hari",
+      "born": "1888-01-23T01:23:45.678+09:00",
+      "died": "1917-01-23T01:23:45.678+09:00",
+      "lastWords": "Воровать мильён, е###ь так королевну!",
+      "gifts": {
+        "candies": [{ "by": "Сашок", "wish": "Бабушка, спи крепко." }],
+        "btc": [{ "by": "Саня", "wish": "Друган, держи биток ёма..." }],
+        "vodka": [
+          {
+            "by": "Машулька",
+            "wish": "Жаль ты больше не придешь на ноготочки"
+          },
+          { "by": "Jake", "wish": "RIP Friend." }
+        ]
+      },
+      "chatLogs": [
+        "Сашок left a message: гы гы гы гы.",
+        "Паша Техник: я идиот! Упячка!"
+      ],
+      "songs": ["zemfira"],
+      "graveCellNum": 1
+    }
+  ]
+}
