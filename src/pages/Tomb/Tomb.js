@@ -3,6 +3,9 @@ import styled from "styled-components/macro";
 import { MainContainer } from "../../sc-components/ScComponents";
 
 import Deceased from "../../media/img/common/user_photo.png";
+import Deceased2 from "../../media/img/common/user_photo-2.png";
+import Deceased3 from "../../media/img/common/user_photo-3.jpg";
+
 import { ReactComponent as Eye } from "../../media/svg/eye.svg";
 import { Gallery } from "../../components/Gallery";
 
@@ -57,6 +60,36 @@ export const Tomb = () => {
                   </PhotoButton>
                   <Photo src={Deceased} draggable={false} />
                 </PhotoWrapper>
+                <PhotoWrapper>
+                  <PhotoButton onClick={() => showPhoto(Deceased2)}>
+                    <Eye />
+                  </PhotoButton>
+                  <Photo src={Deceased2} draggable={false} />
+                </PhotoWrapper>
+                <PhotoWrapper>
+                  <PhotoButton onClick={() => showPhoto(Deceased3)}>
+                    <Eye />
+                  </PhotoButton>
+                  <Photo src={Deceased3} draggable={false} />
+                </PhotoWrapper>
+                <PhotoWrapper>
+                  <PhotoButton onClick={() => showPhoto(Deceased)}>
+                    <Eye />
+                  </PhotoButton>
+                  <Photo src={Deceased} draggable={false} />
+                </PhotoWrapper>
+                <PhotoWrapper>
+                  <PhotoButton onClick={() => showPhoto(Deceased2)}>
+                    <Eye />
+                  </PhotoButton>
+                  <Photo src={Deceased2} draggable={false} />
+                </PhotoWrapper>
+                <PhotoWrapper>
+                  <PhotoButton onClick={() => showPhoto(Deceased3)}>
+                    <Eye />
+                  </PhotoButton>
+                  <Photo src={Deceased3} draggable={false} />
+                </PhotoWrapper>
               </PhotoContPhotosWrapper>
             </PhotoCont>
             <DateLiving>19.19.1999 - 19.19.1999</DateLiving>
@@ -85,6 +118,12 @@ export const Tomb = () => {
 
 const PhotoWrapper = styled.div`
   position: relative;
+  width: 163px;
+  height: 290px;
+  overflow: hidden;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
 `;
 
 const PhotoButton = styled.div`
@@ -145,7 +184,7 @@ const Text = styled.span`
 `;
 
 const Photo = styled.img`
-  object-fit: contain;
+  object-fit: cover;
   height: 100%;
   pointer-events: none;
   user-select: none;

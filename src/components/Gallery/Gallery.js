@@ -70,7 +70,7 @@ export const Gallery = ({ src, onClose = () => {} }) => {
           transform: `translate(${x + "px"}, ${y + "px"}) scale(${scale})`, //x y
         }}
       >
-        <NftPic
+        <Pic
           src={src}
           onLoad={endLoading}
           style={{ visibility: !isLoading ? "visible" : "hidden" }}
@@ -117,6 +117,8 @@ const TopPanel = styled.div`
   z-index: 99999999999;
   svg {
     cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 20px 20px rgba(0, 0, 0, 0.2);
   }
 `;
 
@@ -163,7 +165,7 @@ const ButtonsPanel = styled.div`
   padding: 5px 5px;
 `;
 
-const NftPic = styled.img`
+const Pic = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
