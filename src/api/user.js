@@ -24,6 +24,7 @@ export const loadUsers = () => {
   });
 };
 
+// eslint-disable-next-line no-unused-vars
 const getFirebaseDownloadURL = (photo, storage) => {
   return new Promise((resolve, reject) => {
     const ref = storageRef(storage, photo);

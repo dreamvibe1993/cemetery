@@ -6,12 +6,14 @@ import styled from "styled-components/macro";
 import GrassPattern from "../../media/img/grave/grass-p-2.png";
 
 import { Grave } from "../Grave";
+import { NewGraveModal } from "../NewGraveModal/NewGraveModal";
 import { Tooltip } from "../Tooltip";
 
 export const CemetaryGrid = () => {
   const { users } = useSelector((state) => state.user);
   const [redirect, setRedirect] = React.useState(null);
   const [cells, setCells] = React.useState([]);
+  const [isNewGrvDiagOpen, setNewGrvDiagOpen] = React.useState(false);
 
   React.useEffect(() => {
     if (!users) return;
@@ -27,26 +29,34 @@ export const CemetaryGrid = () => {
     setRedirect("/tomb?userId=" + user.id);
   };
 
+  const askNewGrave = () => {
+    setNewGrvDiagOpen(true);
+  };
+
   if (redirect) return <Navigate to={redirect} />;
 
   return (
-    <CemetaryGridContainer>
-      {cells.map((cell, i) =>
-        cell ? (
-          <Tooltip
-            content={`This grave belongs to ${cell?.name}. \nClick to visit.`}
-            direction="bottom"
-            key={cell?.name + i}
-          >
-            <Cell onClick={() => visitTomb(cell)}>
-              <Grave />
-            </Cell>
-          </Tooltip>
-        ) : (
-          <Cell key={i + new Date().getTime()}></Cell>
-        )
-      )}
-    </CemetaryGridContainer>
+    <>
+      {" "}
+      {isNewGrvDiagOpen && <NewGraveModal />}
+      <CemetaryGridContainer>
+        {cells.map((cell, i) =>
+          cell ? (
+            <Tooltip
+              content={`This grave belongs to ${cell?.name}. \nClick to visit.`}
+              direction="bottom"
+              key={cell?.name + i}
+            >
+              <Cell onClick={() => visitTomb(cell)}>
+                <Grave />
+              </Cell>
+            </Tooltip>
+          ) : (
+            <Cell key={i + new Date().getTime()} onClick={askNewGrave}></Cell>
+          )
+        )}
+      </CemetaryGridContainer>
+    </>
   );
 };
 

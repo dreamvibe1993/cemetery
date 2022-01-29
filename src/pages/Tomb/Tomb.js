@@ -2,9 +2,6 @@ import React from "react";
 import styled from "styled-components/macro";
 import { MainContainer } from "../../sc-components/ScComponents";
 
-import Deceased from "../../media/img/common/user_photo.png";
-import Deceased2 from "../../media/img/common/user_photo-2.png";
-import Deceased3 from "../../media/img/common/user_photo-3.jpg";
 import PMML from "../../media/audio/zemfira-pmml.mp3";
 
 import { ReactComponent as Eye } from "../../media/svg/eye.svg";
@@ -16,7 +13,7 @@ import { ReactComponent as Pause } from "../../media/svg/pause.svg";
 import { Gallery } from "../../components/Gallery";
 import { Gifts } from "../../components/Gifts";
 import { DonateGift } from "../../components/Gifts/DonateGift";
-import { Navigate, useSearchParams } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { Tooltip } from "../../components/Tooltip";
 import { useSelector } from "react-redux";
 import { Preloader } from "../../components/Preloader";
