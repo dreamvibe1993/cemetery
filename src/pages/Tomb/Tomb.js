@@ -4,9 +4,11 @@ import { MainContainer } from "../../sc-components/ScComponents";
 
 import Deceased from "../../media/img/common/user_photo.png";
 import { ReactComponent as Eye } from "../../media/svg/eye.svg";
+import { Gallery } from "../../components/Gallery";
 
 export const Tomb = () => {
   const [isClicked, setClicked] = React.useState(false);
+  const [isGalleryOpen, setGalleryOpen] = React.useState(false);
 
   const photoContRef = React.useRef(null);
   const x = React.useRef(0);
@@ -26,73 +28,58 @@ export const Tomb = () => {
     photoContRef.current.scrollTo(x.current - e.clientX, 0);
   };
 
+  const showPhoto = (src) => {
+    setGalleryOpen(src);
+  };
+
+  const hidePhoto = () => {
+    setGalleryOpen(false);
+  };
+
   return (
-    <MainContainer>
-      <Monument>
-        <MainInfoCont>
-          <Name>Test Test</Name>
-          <PhotoCont ref={photoContRef}>
-            <PhotoContPhotosWrapper
-              onMouseMove={(e) => move(e)}
-              onMouseDown={(e) => captureClick(e)}
-              onMouseUp={releaseClick}
-              onMouseLeave={releaseClick}
-              draggable={false}
-            >
-              <PhotoWrapper>
-                <PhotoButton>
-                  <Eye />
-                </PhotoButton>
-                <Photo src={Deceased} draggable={false} />
-              </PhotoWrapper>
-              <PhotoWrapper>
-                <PhotoButton>
-                  <Eye />
-                </PhotoButton>
-                <Photo src={Deceased} draggable={false} />
-              </PhotoWrapper>              <PhotoWrapper>
-                <PhotoButton>
-                  <Eye />
-                </PhotoButton>
-                <Photo src={Deceased} draggable={false} />
-              </PhotoWrapper>              <PhotoWrapper>
-                <PhotoButton>
-                  <Eye />
-                </PhotoButton>
-                <Photo src={Deceased} draggable={false} />
-              </PhotoWrapper>              <PhotoWrapper>
-                <PhotoButton>
-                  <Eye />
-                </PhotoButton>
-                <Photo src={Deceased} draggable={false} />
-              </PhotoWrapper>              <PhotoWrapper>
-                <PhotoButton>
-                  <Eye />
-                </PhotoButton>
-                <Photo src={Deceased} draggable={false} />
-              </PhotoWrapper>
-            </PhotoContPhotosWrapper>
-          </PhotoCont>
-          <DateLiving>19.19.1999 - 19.19.1999</DateLiving>
-          <LastWords>Perfect time to die you filthy bastards!</LastWords>
-        </MainInfoCont>
-        <LogsCont>
-          <Log>
-            <LogEntry>&gt; Lisa left 1.25 BTC for Test Test.</LogEntry>
-            <LogEntry>&gt; Mark left left a Candy for Test Test.</LogEntry>
-            <LogEntry>
-              &gt; Cynthia left a message: RIP God rest your soul ashes to ashes
-              dust to dust ashes to ashes dust to dust ashes to ashes dust to
-              dust
-            </LogEntry>
-            <LogEntry>&gt; Lisa left 1.25 BTC for Test Test.</LogEntry>
-          </Log>
-        </LogsCont>
-        <OpenGiftsButton>
-          <span>Gifts</span>
-        </OpenGiftsButton>
-      </Monument>
-    </MainContainer>
+    <>
+      {isGalleryOpen && <Gallery src={isGalleryOpen} onClose={hidePhoto} />}
+      <MainContainer>
+        <Monument>
+          <MainInfoCont>
+            <Name>Test Test</Name>
+            <PhotoCont ref={photoContRef}>
+              <PhotoContPhotosWrapper
+                onMouseMove={(e) => move(e)}
+                onMouseDown={(e) => captureClick(e)}
+                onMouseUp={releaseClick}
+                onMouseLeave={releaseClick}
+                draggable={false}
+              >
+                <PhotoWrapper>
+                  <PhotoButton onClick={() => showPhoto(Deceased)}>
+                    <Eye />
+                  </PhotoButton>
+                  <Photo src={Deceased} draggable={false} />
+                </PhotoWrapper>
+              </PhotoContPhotosWrapper>
+            </PhotoCont>
+            <DateLiving>19.19.1999 - 19.19.1999</DateLiving>
+            <LastWords>Perfect time to die you filthy bastards!</LastWords>
+          </MainInfoCont>
+          <LogsCont>
+            <Log>
+              <LogEntry>&gt; Lisa left 1.25 BTC for Test Test.</LogEntry>
+              <LogEntry>&gt; Mark left left a Candy for Test Test.</LogEntry>
+              <LogEntry>
+                &gt; Cynthia left a message: RIP God rest your soul ashes to
+                ashes dust to dust ashes to ashes dust to dust ashes to ashes
+                dust to dust
+              </LogEntry>
+              <LogEntry>&gt; Lisa left 1.25 BTC for Test Test.</LogEntry>
+            </Log>
+          </LogsCont>
+          <OpenGiftsButton>
+            <span>Gifts</span>
+          </OpenGiftsButton>
+        </Monument>
+      </MainContainer>
+    </>
   );
 };
 
