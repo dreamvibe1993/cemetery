@@ -3,9 +3,11 @@ import { Paths } from "./Paths";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./firebaseConfig";
 import { getDatabase } from "firebase/database";
+import { getStorage } from "firebase/storage";
 
 export const app = initializeApp(firebaseConfig);
 export const database = getDatabase(app);
+export const storage = getStorage();
 
 function App() {
   return <Paths />;

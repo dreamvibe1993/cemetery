@@ -16,20 +16,40 @@ import { ReactComponent as Pause } from "../../media/svg/pause.svg";
 import { Gallery } from "../../components/Gallery";
 import { Gifts } from "../../components/Gifts";
 import { DonateGift } from "../../components/Gifts/DonateGift";
-import { Navigate } from "react-router-dom";
+import { Navigate, useSearchParams } from "react-router-dom";
 import { Tooltip } from "../../components/Tooltip";
+import { useSelector } from "react-redux";
+import { Preloader } from "../../components/Preloader";
+import { loadUsers } from "../../api/user";
 
 export const Tomb = () => {
+  const { users } = useSelector((state) => state.user);
+
   const [isClicked, setClicked] = React.useState(false);
   const [isGalleryOpen, setGalleryOpen] = React.useState(false);
   const [isGiftsOpen, setGiftsOpen] = React.useState(false);
   const [isDonateOpen, setDonateOpen] = React.useState(false);
   const [isSongPlaying, setSongPlaying] = React.useState(false);
   const [redirect, setRedirect] = React.useState(null);
+  const [isLoading, setLoading] = React.useState(true);
+  const [user, setUser] = React.useState(null);
 
   const photoContRef = React.useRef(null);
   const x = React.useRef(0);
   const song = React.useRef(new Audio(PMML));
+
+  React.useEffect(() => {
+    if (!users) {
+      loadUsers();
+      return;
+    } else {
+      setLoading(false);
+    }
+
+    const urlSP = new URLSearchParams(window.location.search);
+    const userId = urlSP.get("userId");
+    setUser(users.find((user) => user.id === userId));
+  }, [users]);
 
   const captureClick = (e) => {
     x.current = e.clientX + x.current;
@@ -86,6 +106,15 @@ export const Tomb = () => {
   };
 
   if (redirect) return <Navigate to={redirect} />;
+
+  if (isLoading)
+    return (
+      <MainContainer bgCol="rgb(49, 46, 68)">
+        <LoadingContainer>
+          <Preloader />
+        </LoadingContainer>
+      </MainContainer>
+    );
 
   return (
     <>
@@ -177,6 +206,15 @@ export const Tomb = () => {
     </>
   );
 };
+
+const LoadingContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 const TopPanel = styled.div`
   position: absolute;

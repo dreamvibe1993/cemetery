@@ -1,14 +1,33 @@
-import { database } from "../App";
+import { database, storage } from "../App";
 import { ref, onValue } from "firebase/database";
 import store from "../redux/store";
 import { setUsers } from "../redux/user/userReducer";
+import { getDownloadURL, ref as storageRef } from "firebase/storage";
 
 // const analytics = getAnalytics(app);
 
 export const loadUsers = () => {
   const starCountRef = ref(database, "users");
-  onValue(starCountRef, (snapshot) => {
-    const data = snapshot.val();
+  onValue(starCountRef, async (snapshot) => {
+    const data = await snapshot.val();
+    /*
+    const arr = await Promise.all(
+      data.map(async (user) => {
+        user.photos = await Promise.all(
+          user.photos.map(async (photo) => await asyncThing(photo, storage))
+        );
+        return user;
+      })
+    );*/
     store.dispatch(setUsers(data));
+  });
+};
+
+const getFirebaseDownloadURL = (photo, storage) => {
+  return new Promise((resolve, reject) => {
+    const ref = storageRef(storage, photo);
+    getDownloadURL(ref).then((link) => {
+      resolve(link);
+    });
   });
 };

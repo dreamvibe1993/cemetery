@@ -23,8 +23,8 @@ export const CemetaryGrid = () => {
     setCells(cells);
   }, [users]);
 
-  const visitTomb = () => {
-    setRedirect("/tomb");
+  const visitTomb = (user) => {
+    setRedirect("/tomb?userId=" + user.id);
   };
 
   if (redirect) return <Navigate to={redirect} />;
@@ -38,7 +38,7 @@ export const CemetaryGrid = () => {
             direction="bottom"
             key={cell?.name + i}
           >
-            <Cell onClick={visitTomb}>
+            <Cell onClick={() => visitTomb(cell)}>
               <Grave />
             </Cell>
           </Tooltip>
