@@ -7,13 +7,17 @@ import Deceased2 from "../../media/img/common/user_photo-2.png";
 import Deceased3 from "../../media/img/common/user_photo-3.jpg";
 
 import { ReactComponent as Eye } from "../../media/svg/eye.svg";
+import { ReactComponent as Donate } from "../../media/svg/donate.svg";
+import { ReactComponent as Play } from "../../media/svg/play.svg";
 import { Gallery } from "../../components/Gallery";
 import { Gifts } from "../../components/Gifts";
+import { DonateGift } from "../../components/Gifts/DonateGift";
 
 export const Tomb = () => {
   const [isClicked, setClicked] = React.useState(false);
   const [isGalleryOpen, setGalleryOpen] = React.useState(false);
   const [isGiftsOpen, setGiftsOpen] = React.useState(false);
+  const [isDonateOpen, setDonateOpen] = React.useState(false);
 
   const photoContRef = React.useRef(null);
   const x = React.useRef(0);
@@ -49,14 +53,27 @@ export const Tomb = () => {
     setGiftsOpen(false);
   };
 
+  const openDonateGift = () => {
+    setDonateOpen(true)
+  };
+
+  const closeDonateGift = () => {
+    setDonateOpen(false)
+  };
+
   return (
     <>
+      {isDonateOpen && <DonateGift onClose={closeDonateGift} />}
       {isGiftsOpen && <Gifts onClose={closeGifts} />}
       {isGalleryOpen && <Gallery src={isGalleryOpen} onClose={hidePhoto} />}
       <MainContainer>
         <Monument>
           <MainInfoCont>
-            <Name>Test Test</Name>
+            <TopBar>
+              <Donate onClick={openDonateGift} />
+              <Name>Test Test</Name>
+              <Play />
+            </TopBar>
             <PhotoCont ref={photoContRef}>
               <PhotoContPhotosWrapper
                 onMouseMove={(e) => move(e)}
@@ -108,6 +125,23 @@ export const Tomb = () => {
     </>
   );
 };
+
+const TopBar = styled.div`
+  display: flex;
+  height: 60px;
+  justify-content: space-around;
+  svg {
+    transition: all 0.2s linear;
+    cursor: pointer;
+    height: 100%;
+    width: 60px;
+    border-radius: 50%;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.06);
+      box-shadow: 0px 0px 19px 5px rgba(0, 0, 0, 0.1);
+    }
+  }
+`;
 
 const PhotoWrapper = styled.div`
   position: relative;

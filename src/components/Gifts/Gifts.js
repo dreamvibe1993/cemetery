@@ -2,10 +2,13 @@ import React from "react";
 import styled from "styled-components/macro";
 import { MainContainer } from "../../sc-components/ScComponents";
 import { ReactComponent as ChevroneLeft } from "../../media/svg/chevrone.svg";
+import { ReactComponent as Vodka } from "../../media/svg/vodka.svg";
+import { ReactComponent as Candy } from "../../media/svg/candy.svg";
+import { ReactComponent as BTC } from "../../media/svg/btc.svg";
 
 export const Gifts = ({ onClose = () => {} }) => {
   return (
-    <PictureGallery>
+    <GiftsCont>
       <TopPanel>
         <ChevroneLeft onClick={onClose} />
       </TopPanel>
@@ -14,9 +17,15 @@ export const Gifts = ({ onClose = () => {} }) => {
         style={{ width: "750px", height: "750px" }}
       >
         <GiftsGrid>
-          <Cell></Cell>
-          <Cell></Cell>
-          <Cell></Cell>
+          <Cell>
+            <Vodka />
+          </Cell>
+          <Cell>
+            <Candy />
+          </Cell>
+          <Cell>
+            <BTC />
+          </Cell>
           <Cell></Cell>
           <Cell></Cell>
           <Cell></Cell>
@@ -32,7 +41,7 @@ export const Gifts = ({ onClose = () => {} }) => {
           <Cell></Cell>
         </GiftsGrid>
       </MainContainer>
-    </PictureGallery>
+    </GiftsCont>
   );
 };
 
@@ -58,18 +67,23 @@ const Cell = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 15px;
+  svg {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const GiftsGrid = styled.div`
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(4, auto);
-  grid-template-rows: repeat(4, auto);
+  grid-template-columns: repeat(4, 170px);
+  grid-template-rows: repeat(4, 170px);
   grid-gap: 10px;
 `;
 
-const PictureGallery = styled.div`
+const GiftsCont = styled.div`
   position: fixed;
   height: 100%;
   width: 100%;
