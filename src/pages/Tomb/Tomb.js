@@ -7,14 +7,22 @@ export const Tomb = () => {
   return (
     <MainContainer>
       <Monument>
-        <Name>Test Test</Name>
-        <PhotoCont>
-          <Photo src={Deceased} />
-        </PhotoCont>
-        <DateLiving>19.19.1999 - 19.19.1999</DateLiving>
-        <PhotosCont></PhotosCont>
-        <LastWords>Perfect time to die you filthy bastards!</LastWords>
-        <GiftsCont>
+        <MainInfoCont>
+          <Name>Test Test</Name>
+          <PhotoCont>
+            <PhotoContPhotosWrapper>
+              <Photo src={Deceased} draggable={false} />
+              <Photo src={Deceased} draggable={false} />
+              <Photo src={Deceased} draggable={false} />
+              <Photo src={Deceased} draggable={false} />
+              <Photo src={Deceased} draggable={false} />
+              <Photo src={Deceased} draggable={false} />
+            </PhotoContPhotosWrapper>
+          </PhotoCont>
+          <DateLiving>19.19.1999 - 19.19.1999</DateLiving>
+          <LastWords>Perfect time to die you filthy bastards!</LastWords>
+        </MainInfoCont>
+        <LogsCont>
           <Log>
             <LogEntry>&gt; Lisa left 1.25 BTC for Test Test.</LogEntry>
             <LogEntry>&gt; Mark left left a Candy for Test Test.</LogEntry>
@@ -23,12 +31,36 @@ export const Tomb = () => {
               dust to dust ashes to ashes dust to dust ashes to ashes dust to
               dust
             </LogEntry>
+            <LogEntry>&gt; Lisa left 1.25 BTC for Test Test.</LogEntry>
           </Log>
-        </GiftsCont>
+        </LogsCont>
+        <OpenGiftsButton>
+          <span>Gifts</span>
+        </OpenGiftsButton>
       </Monument>
     </MainContainer>
   );
 };
+
+const MainInfoCont = styled.div`
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 20px;
+`;
+
+const OpenGiftsButton = styled.div`
+  transition: all 0.2s linear;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.1);
+  font-size: 24px;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+`;
 
 const LogEntry = styled.span`
   display: block;
@@ -39,6 +71,8 @@ const Log = styled.div`
   height: 100%;
   width: 100%;
   padding: 10px;
+  max-height: 236px;
+  overflow-y: auto;
 `;
 
 const Text = styled.span`
@@ -51,24 +85,38 @@ const Photo = styled.img`
   height: 100%;
 `;
 
-const GiftsCont = styled.span`
+const LogsCont = styled.span`
   flex: 1;
+  margin-top: 5px;
 `; //left a candy; left 1.25 btc
 
 const LastWords = styled(Text)`
   font-size: 30px;
 `;
 
-const PhotosCont = styled.div``;
-
 const DateLiving = styled(Text)`
   font-size: 45px;
+  margin-top: 15px;
+`;
+
+const PhotoContPhotosWrapper = styled.div`
+  display: flex;
+  cursor: grab;
+  &:active {
+    cursor: grabbing;
+  }
+  & > * {
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
+  }
 `;
 
 const PhotoCont = styled.div`
   max-height: 330px;
-  display: flex;
-  justify-content: center;
+  padding: 20px 0;
+  overflow-x: auto;
+  overflow-y: hidden;
 `;
 
 const Name = styled(Text)`
