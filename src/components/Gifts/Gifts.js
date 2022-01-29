@@ -5,6 +5,7 @@ import { ReactComponent as ChevroneLeft } from "../../media/svg/chevrone.svg";
 import { ReactComponent as Vodka } from "../../media/svg/vodka.svg";
 import { ReactComponent as Candy } from "../../media/svg/candy.svg";
 import { ReactComponent as BTC } from "../../media/svg/btc.svg";
+import { Tooltip } from "../Tooltip";
 
 export const Gifts = ({ onClose = () => {} }) => {
   return (
@@ -17,15 +18,27 @@ export const Gifts = ({ onClose = () => {} }) => {
         style={{ width: "750px", height: "750px" }}
       >
         <GiftsGrid>
-          <Cell>
-            <Vodka />
-          </Cell>
-          <Cell>
-            <Candy />
-          </Cell>
-          <Cell>
-            <BTC />
-          </Cell>
+          <Tooltip
+            direction="bottom"
+            content="By Lisa. We will always remember you."
+          >
+            <Cell>
+              <Vodka />
+            </Cell>
+          </Tooltip>
+          <Tooltip direction="bottom" content="By Mark. R.I.P. friend.">
+            <Cell>
+              <Candy />{" "}
+            </Cell>
+          </Tooltip>
+          <Tooltip
+            direction="bottom"
+            content="By Judith. I hope this sum will help."
+          >
+            <Cell>
+              <BTC />
+            </Cell>
+          </Tooltip>
           <Cell></Cell>
           <Cell></Cell>
           <Cell></Cell>

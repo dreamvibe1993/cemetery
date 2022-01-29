@@ -15,6 +15,7 @@ import { Gallery } from "../../components/Gallery";
 import { Gifts } from "../../components/Gifts";
 import { DonateGift } from "../../components/Gifts/DonateGift";
 import { Navigate } from "react-router-dom";
+import { Tooltip } from "../../components/Tooltip";
 
 export const Tomb = () => {
   const [isClicked, setClicked] = React.useState(false);
@@ -83,9 +84,23 @@ export const Tomb = () => {
         <Monument>
           <MainInfoCont>
             <TopBar>
-              <Donate onClick={openDonateGift} />
+              <Tooltip
+                content={
+                  "Leave something on the grave \nto honor the deceased."
+                }
+                direction="left"
+              >
+                <Donate onClick={openDonateGift} />
+              </Tooltip>
               <Name>Test Test</Name>
-              <Play />
+              <Tooltip
+                content={
+                  "Listen to the song this person bequeathed to play at their funeral."
+                }
+                direction="right"
+              >
+                <Play />
+              </Tooltip>
             </TopBar>
             <PhotoCont ref={photoContRef}>
               <PhotoContPhotosWrapper
@@ -130,9 +145,16 @@ export const Tomb = () => {
               <LogEntry>&gt; Lisa left 1.25 BTC for Test Test.</LogEntry>
             </Log>
           </LogsCont>
-          <OpenGiftsButton onClick={openGifts}>
-            <span>Gifts</span>
-          </OpenGiftsButton>
+          <Tooltip
+            content={
+              "Gifts people left to honor the person laying here."
+            }
+            direction="top"
+          >
+            <OpenGiftsButton onClick={openGifts}>
+              <span>Gifts</span>
+            </OpenGiftsButton>
+          </Tooltip>
         </Monument>
       </MainContainer>
     </>
@@ -145,7 +167,7 @@ const TopPanel = styled.div`
   left: 0;
   display: flex;
   align-items: center;
-  z-index: 99999999999;
+  z-index: 999;
   padding: 40px 0px 0px 20px;
   svg {
     cursor: pointer;

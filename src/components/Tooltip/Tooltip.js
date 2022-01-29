@@ -16,6 +16,12 @@ export const Tooltip = ({ delay, direction, children, content }) => {
     setActive(false);
   };
 
+  React.useEffect(() => {
+    return () => {
+      clearInterval(timeout);
+    };
+  }, [timeout]);
+
   return (
     <TooltipWrapper onMouseEnter={showTip} onMouseLeave={hideTip}>
       {children}
@@ -36,8 +42,9 @@ const TooltipTip = styled.div`
   background: var(--tooltip-background-color);
   font-size: 18px;
   line-height: 1;
-  z-index: 100;
-  white-space: nowrap;
+  z-index: 9999;
+  width: fit-content;
+  white-space: pre-line;
 
   /* CSS border triangles */
   &::before {
