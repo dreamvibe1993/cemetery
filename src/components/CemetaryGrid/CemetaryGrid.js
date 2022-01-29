@@ -4,13 +4,16 @@ import styled from "styled-components/macro";
 import GrassPattern from "../../media/img/grave/grass-p-2.png";
 
 import { Grave } from "../Grave";
+import { Tooltip } from "../Tooltip";
 
 export const CemetaryGrid = () => {
   return (
     <CemetaryGridContainer>
-      <Cell>
-        <Grave />
-      </Cell>
+      <Tooltip content="Grave belongs to Test Test" direction="bottom">
+        <Cell>
+          <Grave />
+        </Cell>
+      </Tooltip>
       <Cell></Cell>
       <Cell>
         <Grave />

@@ -8,16 +8,20 @@ import Deceased3 from "../../media/img/common/user_photo-3.jpg";
 
 import { ReactComponent as Eye } from "../../media/svg/eye.svg";
 import { ReactComponent as Donate } from "../../media/svg/donate.svg";
+import { ReactComponent as ChevroneLeft } from "../../media/svg/chevrone.svg";
 import { ReactComponent as Play } from "../../media/svg/play.svg";
+
 import { Gallery } from "../../components/Gallery";
 import { Gifts } from "../../components/Gifts";
 import { DonateGift } from "../../components/Gifts/DonateGift";
+import { Navigate } from "react-router-dom";
 
 export const Tomb = () => {
   const [isClicked, setClicked] = React.useState(false);
   const [isGalleryOpen, setGalleryOpen] = React.useState(false);
   const [isGiftsOpen, setGiftsOpen] = React.useState(false);
   const [isDonateOpen, setDonateOpen] = React.useState(false);
+  const [redirect, setRedirect] = React.useState(null);
 
   const photoContRef = React.useRef(null);
   const x = React.useRef(0);
@@ -54,12 +58,18 @@ export const Tomb = () => {
   };
 
   const openDonateGift = () => {
-    setDonateOpen(true)
+    setDonateOpen(true);
   };
 
   const closeDonateGift = () => {
-    setDonateOpen(false)
+    setDonateOpen(false);
   };
+
+  const backToGYard = () => {
+    setRedirect("/");
+  };
+
+  if (redirect) return <Navigate to={redirect} />;
 
   return (
     <>
@@ -67,6 +77,9 @@ export const Tomb = () => {
       {isGiftsOpen && <Gifts onClose={closeGifts} />}
       {isGalleryOpen && <Gallery src={isGalleryOpen} onClose={hidePhoto} />}
       <MainContainer>
+        <TopPanel>
+          <ChevroneLeft onClick={backToGYard} />
+        </TopPanel>
         <Monument>
           <MainInfoCont>
             <TopBar>
@@ -126,6 +139,23 @@ export const Tomb = () => {
   );
 };
 
+const TopPanel = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  z-index: 99999999999;
+  padding: 40px 0px 0px 20px;
+  svg {
+    cursor: pointer;
+    transition: all 0.2s linear;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+      box-shadow: 0px 0px 20px 20px rgba(0, 0, 0, 0.1);
+    }
+  }
+`;
 const TopBar = styled.div`
   display: flex;
   height: 60px;

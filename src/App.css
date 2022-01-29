@@ -5,9 +5,18 @@ body {
   background-color: rgb(41, 35, 73);
   position: relative;
   width: 900px;
-  margin: 50px auto;
+  margin: 0 auto;
+  padding-top: 10px;
   color: #fff;
   font-family: Overpass;
+}
+
+/* Custom properties */
+:root {
+  --tooltip-text-color: white;
+  --tooltip-background-color: black;
+  --tooltip-margin: 30px;
+  --tooltip-arrow-size: 6px;
 }
 
 * {
