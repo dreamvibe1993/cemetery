@@ -8,10 +8,12 @@ import Deceased3 from "../../media/img/common/user_photo-3.jpg";
 
 import { ReactComponent as Eye } from "../../media/svg/eye.svg";
 import { Gallery } from "../../components/Gallery";
+import { Gifts } from "../../components/Gifts";
 
 export const Tomb = () => {
   const [isClicked, setClicked] = React.useState(false);
   const [isGalleryOpen, setGalleryOpen] = React.useState(false);
+  const [isGiftsOpen, setGiftsOpen] = React.useState(false);
 
   const photoContRef = React.useRef(null);
   const x = React.useRef(0);
@@ -39,8 +41,17 @@ export const Tomb = () => {
     setGalleryOpen(false);
   };
 
+  const openGifts = () => {
+    setGiftsOpen(true);
+  };
+
+  const closeGifts = () => {
+    setGiftsOpen(false);
+  };
+
   return (
     <>
+      {isGiftsOpen && <Gifts onClose={closeGifts} />}
       {isGalleryOpen && <Gallery src={isGalleryOpen} onClose={hidePhoto} />}
       <MainContainer>
         <Monument>
@@ -54,24 +65,6 @@ export const Tomb = () => {
                 onMouseLeave={releaseClick}
                 draggable={false}
               >
-                <PhotoWrapper>
-                  <PhotoButton onClick={() => showPhoto(Deceased)}>
-                    <Eye />
-                  </PhotoButton>
-                  <Photo src={Deceased} draggable={false} />
-                </PhotoWrapper>
-                <PhotoWrapper>
-                  <PhotoButton onClick={() => showPhoto(Deceased2)}>
-                    <Eye />
-                  </PhotoButton>
-                  <Photo src={Deceased2} draggable={false} />
-                </PhotoWrapper>
-                <PhotoWrapper>
-                  <PhotoButton onClick={() => showPhoto(Deceased3)}>
-                    <Eye />
-                  </PhotoButton>
-                  <Photo src={Deceased3} draggable={false} />
-                </PhotoWrapper>
                 <PhotoWrapper>
                   <PhotoButton onClick={() => showPhoto(Deceased)}>
                     <Eye />
@@ -107,7 +100,7 @@ export const Tomb = () => {
               <LogEntry>&gt; Lisa left 1.25 BTC for Test Test.</LogEntry>
             </Log>
           </LogsCont>
-          <OpenGiftsButton>
+          <OpenGiftsButton onClick={openGifts}>
             <span>Gifts</span>
           </OpenGiftsButton>
         </Monument>
