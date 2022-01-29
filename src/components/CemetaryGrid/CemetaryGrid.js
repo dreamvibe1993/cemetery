@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/macro";
 
-import GrassPattern from "../../img/grave/grass-p-2.png";
+import GrassPattern from "../../media/img/grave/grass-p-2.png";
 
 import { Grave } from "../Grave";
 

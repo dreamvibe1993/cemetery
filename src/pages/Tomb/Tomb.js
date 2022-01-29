@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components/macro";
 import { MainContainer } from "../../sc-components/ScComponents";
-import Deceased from "../../img/common/user_photo.png";
+
+import Deceased from "../../media/img/common/user_photo.png";
+import { ReactComponent as Eye } from "../../media/svg/eye.svg";
 
 export const Tomb = () => {
   const [isClicked, setClicked] = React.useState(false);
@@ -37,13 +39,38 @@ export const Tomb = () => {
               onMouseLeave={releaseClick}
               draggable={false}
             >
-              <Photo src={Deceased} draggable={false} />
-              <Photo src={Deceased} draggable={false} />
-              <Photo src={Deceased} draggable={false} />
-              <Photo src={Deceased} draggable={false} />
-              <Photo src={Deceased} draggable={false} />
-              <Photo src={Deceased} draggable={false} />
-              <Photo src={Deceased} draggable={false} />
+              <PhotoWrapper>
+                <PhotoButton>
+                  <Eye />
+                </PhotoButton>
+                <Photo src={Deceased} draggable={false} />
+              </PhotoWrapper>
+              <PhotoWrapper>
+                <PhotoButton>
+                  <Eye />
+                </PhotoButton>
+                <Photo src={Deceased} draggable={false} />
+              </PhotoWrapper>              <PhotoWrapper>
+                <PhotoButton>
+                  <Eye />
+                </PhotoButton>
+                <Photo src={Deceased} draggable={false} />
+              </PhotoWrapper>              <PhotoWrapper>
+                <PhotoButton>
+                  <Eye />
+                </PhotoButton>
+                <Photo src={Deceased} draggable={false} />
+              </PhotoWrapper>              <PhotoWrapper>
+                <PhotoButton>
+                  <Eye />
+                </PhotoButton>
+                <Photo src={Deceased} draggable={false} />
+              </PhotoWrapper>              <PhotoWrapper>
+                <PhotoButton>
+                  <Eye />
+                </PhotoButton>
+                <Photo src={Deceased} draggable={false} />
+              </PhotoWrapper>
             </PhotoContPhotosWrapper>
           </PhotoCont>
           <DateLiving>19.19.1999 - 19.19.1999</DateLiving>
@@ -68,6 +95,29 @@ export const Tomb = () => {
     </MainContainer>
   );
 };
+
+const PhotoWrapper = styled.div`
+  position: relative;
+`;
+
+const PhotoButton = styled.div`
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 20%;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s linear;
+  &:hover {
+    opacity: 1;
+  }
+  svg {
+    height: 100%;
+  }
+`;
 
 const MainInfoCont = styled.div`
   background-color: rgba(0, 0, 0, 0.1);
@@ -134,6 +184,8 @@ const DateLiving = styled(Text)`
 
 const PhotoContPhotosWrapper = styled.div`
   display: flex;
+  flex: 1;
+  justify-content: center;
   cursor: grab;
   width: fit-content;
   user-select: none;
@@ -156,6 +208,7 @@ const PhotoCont = styled.div`
   padding: 20px 0;
   overflow-x: auto;
   overflow-y: hidden;
+  display: flex;
 `;
 
 const Name = styled(Text)`

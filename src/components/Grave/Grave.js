@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/macro";
-import StonePattern from '../../img/grave/stone-p-2.png'
-import GrassPattern from '../../img/grave/grass-p.png'
+import StonePattern from '../../media/img/grave/stone-p-2.png'
+import GrassPattern from '../../media/img/grave/grass-p.png'
 
 export const Grave = () => {
   return (
