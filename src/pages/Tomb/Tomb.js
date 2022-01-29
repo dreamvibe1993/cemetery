@@ -45,7 +45,6 @@ export const Tomb = () => {
     } else {
       setLoading(false);
     }
-
     const urlSP = new URLSearchParams(window.location.search);
     const userId = urlSP.get("userId");
     setUser(users.find((user) => user.id === userId));
@@ -160,12 +159,7 @@ export const Tomb = () => {
               >
                 {user?.photos.map((src, i) => {
                   return (
-                    <PhotoWrapper key={src + i}>
-                      <PhotoButton onClick={() => showPhoto(src)}>
-                        <Eye />
-                      </PhotoButton>
-                      <Photo src={src} draggable={false} />
-                    </PhotoWrapper>
+                    <Picture src={src} key={src + i} showPhoto={showPhoto} />
                   );
                 })}
               </PhotoContPhotosWrapper>
@@ -193,6 +187,37 @@ export const Tomb = () => {
     </>
   );
 };
+
+const Picture = ({ src, showPhoto = () => {} }) => {
+  const [isLoading, setLoading] = React.useState(true);
+
+  return (
+    <PhotoWrapper>
+      <PreloaderCont style={{ visibility: isLoading ? "visible" : "hidden" }}>
+        <Preloader />
+      </PreloaderCont>
+      <PhotoButton
+        onClick={() => showPhoto(src)}
+        style={{ visibility: isLoading ? "hidden" : "visible" }}
+      >
+        <Eye />
+      </PhotoButton>
+      <Photo src={src} draggable={false} onLoad={() => setLoading(false)} />
+    </PhotoWrapper>
+  );
+};
+
+const PreloaderCont = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
 
 const LoadingContainer = styled.div`
   width: 100%;

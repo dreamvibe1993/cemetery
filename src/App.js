@@ -10,6 +10,9 @@ export const database = getDatabase(app);
 export const storage = getStorage();
 
 function App() {
+  // alert(
+  //   "TODO: \n1. Добавить прелоудеры к фоткам. \n2. Добавить возможность похоронить. \n3. Добавить возможность подарить подарок. \n4. Добавить регистрацию и авторизацию. \n5. Отписки от вебсокета."
+  // );
   return <Paths />;
 }
 
