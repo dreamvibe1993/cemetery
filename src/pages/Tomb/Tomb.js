@@ -136,7 +136,7 @@ export const Tomb = () => {
               >
                 <Donate onClick={openDonateGift} />
               </Tooltip>
-              <Name>Test Test</Name>
+              <Name>{user?.name}</Name>
               <Tooltip
                 content={
                   "Listen to the song this person bequeathed to play at their funeral."
@@ -158,39 +158,26 @@ export const Tomb = () => {
                 onMouseLeave={releaseClick}
                 draggable={false}
               >
-                <PhotoWrapper>
-                  <PhotoButton onClick={() => showPhoto(Deceased)}>
-                    <Eye />
-                  </PhotoButton>
-                  <Photo src={Deceased} draggable={false} />
-                </PhotoWrapper>
-                <PhotoWrapper>
-                  <PhotoButton onClick={() => showPhoto(Deceased2)}>
-                    <Eye />
-                  </PhotoButton>
-                  <Photo src={Deceased2} draggable={false} />
-                </PhotoWrapper>
-                <PhotoWrapper>
-                  <PhotoButton onClick={() => showPhoto(Deceased3)}>
-                    <Eye />
-                  </PhotoButton>
-                  <Photo src={Deceased3} draggable={false} />
-                </PhotoWrapper>
+                {user?.photos.map((src, i) => {
+                  return (
+                    <PhotoWrapper key={src + i}>
+                      <PhotoButton onClick={() => showPhoto(src)}>
+                        <Eye />
+                      </PhotoButton>
+                      <Photo src={src} draggable={false} />
+                    </PhotoWrapper>
+                  );
+                })}
               </PhotoContPhotosWrapper>
             </PhotoCont>
             <DateLiving>19.19.1999 - 19.19.1999</DateLiving>
-            <LastWords>Perfect time to die you filthy bastards!</LastWords>
+            <LastWords>{user?.lastWords}</LastWords>
           </MainInfoCont>
           <LogsCont>
             <Log>
-              <LogEntry>&gt; Lisa left 1.25 BTC for Test Test.</LogEntry>
-              <LogEntry>&gt; Mark left left a Candy for Test Test.</LogEntry>
-              <LogEntry>
-                &gt; Cynthia left a message: RIP God rest your soul ashes to
-                ashes dust to dust ashes to ashes dust to dust ashes to ashes
-                dust to dust
-              </LogEntry>
-              <LogEntry>&gt; Lisa left 1.25 BTC for Test Test.</LogEntry>
+              {user?.chatLogs.map((entry, i) => {
+                return <LogEntry key={entry + i}>&gt; {entry}</LogEntry>;
+              })}
             </Log>
           </LogsCont>
           <Tooltip
@@ -237,6 +224,7 @@ const TopBar = styled.div`
   display: flex;
   height: 60px;
   justify-content: space-around;
+  align-items: center;
   svg {
     transition: all 0.2s linear;
     cursor: pointer;
@@ -372,7 +360,7 @@ const PhotoCont = styled.div`
 `;
 
 const Name = styled(Text)`
-  font-size: 60px;
+  font-size: 40px;
 `;
 
 const Monument = styled.div`
