@@ -164,7 +164,7 @@ export const Tomb = () => {
                 })}
               </PhotoContPhotosWrapper>
             </PhotoCont>
-            <DateLiving>19.19.1999 - 19.19.1999</DateLiving>
+            <DateLiving>{user?.born} - {user?.died}</DateLiving>
             <LastWords>{user?.lastWords}</LastWords>
           </MainInfoCont>
           <LogsCont>

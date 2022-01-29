@@ -3,6 +3,7 @@ import { ref, onValue } from "firebase/database";
 import store from "../redux/store";
 import { setUsers } from "../redux/user/userReducer";
 import { getDownloadURL, ref as storageRef } from "firebase/storage";
+import { userToModel } from "../lib/common-functions/common-functions";
 
 // const analytics = getAnalytics(app);
 
@@ -19,7 +20,7 @@ export const loadUsers = () => {
         return user;
       })
     );*/
-    store.dispatch(setUsers(data));
+    store.dispatch(setUsers(data.map(user => userToModel(user))));
   });
 };
 
