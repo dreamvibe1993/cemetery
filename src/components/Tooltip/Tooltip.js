@@ -17,11 +17,7 @@ export const Tooltip = ({ delay, direction, children, content }) => {
   };
 
   return (
-    <TooltipWrapper
-      className="Tooltip-Wrapper"
-      onMouseEnter={showTip}
-      onMouseLeave={hideTip}
-    >
+    <TooltipWrapper onMouseEnter={showTip} onMouseLeave={hideTip}>
       {children}
       {active && (
         <TooltipTip className={` ${direction || "top"}`}>{content}</TooltipTip>
@@ -35,11 +31,10 @@ const TooltipTip = styled.div`
   border-radius: 4px;
   left: 50%;
   transform: translateX(-50%);
-  padding: 6px;
+  padding: 16px;
   color: var(--tooltip-text-color);
   background: var(--tooltip-background-color);
-  font-size: 14px;
-  font-family: sans-serif;
+  font-size: 18px;
   line-height: 1;
   z-index: 100;
   white-space: nowrap;

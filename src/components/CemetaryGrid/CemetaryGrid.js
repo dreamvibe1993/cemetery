@@ -9,7 +9,7 @@ import { Tooltip } from "../Tooltip";
 export const CemetaryGrid = () => {
   return (
     <CemetaryGridContainer>
-      <Tooltip content="Grave belongs to Test Test" direction="bottom">
+      <Tooltip content="This grave belongs to Test Test. Click to visit." direction="bottom">
         <Cell>
           <Grave />
         </Cell>
