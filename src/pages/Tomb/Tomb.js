@@ -4,13 +4,37 @@ import { MainContainer } from "../../sc-components/ScComponents";
 import Deceased from "../../img/common/user_photo.png";
 
 export const Tomb = () => {
+  const [isClicked, setClicked] = React.useState(false);
+
+  const photoContRef = React.useRef(null);
+  const x = React.useRef(0);
+
+  const captureClick = (e) => {
+    x.current = e.clientX + x.current;
+    setClicked(true);
+  };
+
+  const releaseClick = (e) => {
+    x.current = photoContRef.current.scrollLeft;
+    setClicked(false);
+  };
+
+  const move = (e) => {
+    if (!isClicked) return;
+    photoContRef.current.scrollTo(x.current - e.clientX, 0);
+  };
+
   return (
     <MainContainer>
       <Monument>
         <MainInfoCont>
           <Name>Test Test</Name>
-          <PhotoCont>
-            <PhotoContPhotosWrapper>
+          <PhotoCont ref={photoContRef}>
+            <PhotoContPhotosWrapper
+              onMouseMove={(e) => move(e)}
+              onMouseDown={(e) => captureClick(e)}
+              onMouseUp={(e) => releaseClick(e)}
+            >
               <Photo src={Deceased} draggable={false} />
               <Photo src={Deceased} draggable={false} />
               <Photo src={Deceased} draggable={false} />
