@@ -14,13 +14,13 @@ export const Tomb = () => {
     setClicked(true);
   };
 
-  const releaseClick = (e) => {
+  const releaseClick = () => {
     x.current = photoContRef.current.scrollLeft;
     setClicked(false);
   };
 
   const move = (e) => {
-    if (!isClicked) return;
+    if (!isClicked || !photoContRef.current) return;
     photoContRef.current.scrollTo(x.current - e.clientX, 0);
   };
 
@@ -33,8 +33,11 @@ export const Tomb = () => {
             <PhotoContPhotosWrapper
               onMouseMove={(e) => move(e)}
               onMouseDown={(e) => captureClick(e)}
-              onMouseUp={(e) => releaseClick(e)}
+              onMouseUp={releaseClick}
+              onMouseLeave={releaseClick}
+              draggable={false}
             >
+              <Photo src={Deceased} draggable={false} />
               <Photo src={Deceased} draggable={false} />
               <Photo src={Deceased} draggable={false} />
               <Photo src={Deceased} draggable={false} />
@@ -107,6 +110,12 @@ const Text = styled.span`
 const Photo = styled.img`
   object-fit: contain;
   height: 100%;
+  pointer-events: none;
+  user-select: none;
+  -khtml-user-select: none;
+  -o-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
 `;
 
 const LogsCont = styled.span`
@@ -126,6 +135,12 @@ const DateLiving = styled(Text)`
 const PhotoContPhotosWrapper = styled.div`
   display: flex;
   cursor: grab;
+  width: fit-content;
+  user-select: none;
+  -khtml-user-select: none;
+  -o-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
   &:active {
     cursor: grabbing;
   }
