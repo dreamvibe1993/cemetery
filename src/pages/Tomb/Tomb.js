@@ -5,11 +5,13 @@ import { MainContainer } from "../../sc-components/ScComponents";
 import Deceased from "../../media/img/common/user_photo.png";
 import Deceased2 from "../../media/img/common/user_photo-2.png";
 import Deceased3 from "../../media/img/common/user_photo-3.jpg";
+import PMML from "../../media/audio/zemfira-pmml.mp3";
 
 import { ReactComponent as Eye } from "../../media/svg/eye.svg";
 import { ReactComponent as Donate } from "../../media/svg/donate.svg";
 import { ReactComponent as ChevroneLeft } from "../../media/svg/chevrone.svg";
 import { ReactComponent as Play } from "../../media/svg/play.svg";
+import { ReactComponent as Pause } from "../../media/svg/pause.svg";
 
 import { Gallery } from "../../components/Gallery";
 import { Gifts } from "../../components/Gifts";
@@ -22,10 +24,12 @@ export const Tomb = () => {
   const [isGalleryOpen, setGalleryOpen] = React.useState(false);
   const [isGiftsOpen, setGiftsOpen] = React.useState(false);
   const [isDonateOpen, setDonateOpen] = React.useState(false);
+  const [isSongPlaying, setSongPlaying] = React.useState(false);
   const [redirect, setRedirect] = React.useState(null);
 
   const photoContRef = React.useRef(null);
   const x = React.useRef(0);
+  const song = React.useRef(new Audio(PMML));
 
   const captureClick = (e) => {
     x.current = e.clientX + x.current;
@@ -70,6 +74,17 @@ export const Tomb = () => {
     setRedirect("/");
   };
 
+  const playSong = () => {
+    if (!song.current) return;
+    if (!song.current.paused) {
+      song.current.pause();
+      setSongPlaying(false);
+    } else {
+      song.current.play();
+      setSongPlaying(true);
+    }
+  };
+
   if (redirect) return <Navigate to={redirect} />;
 
   return (
@@ -99,7 +114,11 @@ export const Tomb = () => {
                 }
                 direction="right"
               >
-                <Play />
+                {isSongPlaying ? (
+                  <Pause onClick={playSong} />
+                ) : (
+                  <Play onClick={playSong} />
+                )}
               </Tooltip>
             </TopBar>
             <PhotoCont ref={photoContRef}>
@@ -146,9 +165,7 @@ export const Tomb = () => {
             </Log>
           </LogsCont>
           <Tooltip
-            content={
-              "Gifts people left to honor the person laying here."
-            }
+            content={"Gifts people left to honor the person laying here."}
             direction="top"
           >
             <OpenGiftsButton onClick={openGifts}>
