@@ -8,7 +8,6 @@ export const app = initializeApp(firebaseConfig);
 export const database = getDatabase(app);
 
 function App() {
-  console.log(process.env)
   return <Paths />;
 }
 
