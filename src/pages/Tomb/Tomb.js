@@ -18,7 +18,6 @@ import { Gifts } from "../../components/Gifts";
 import { DonateGift } from "../../components/Gifts/DonateGift";
 import { Navigate } from "react-router-dom";
 import { Tooltip } from "../../components/Tooltip";
-import { loadUsers } from "../../api/user";
 
 export const Tomb = () => {
   const [isClicked, setClicked] = React.useState(false);

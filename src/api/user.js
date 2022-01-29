@@ -1,6 +1,7 @@
-import axios from "axios";
 import { database } from "../App";
 import { ref, onValue } from "firebase/database";
+import store from "../redux/store";
+import { setUsers } from "../redux/user/userReducer";
 
 // const analytics = getAnalytics(app);
 
@@ -8,6 +9,6 @@ export const loadUsers = () => {
   const starCountRef = ref(database, "users");
   onValue(starCountRef, (snapshot) => {
     const data = snapshot.val();
-    console.log(data)
+    store.dispatch(setUsers(data));
   });
 };

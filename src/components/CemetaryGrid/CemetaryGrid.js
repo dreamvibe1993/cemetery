@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import styled from "styled-components/macro";
 
@@ -8,7 +9,19 @@ import { Grave } from "../Grave";
 import { Tooltip } from "../Tooltip";
 
 export const CemetaryGrid = () => {
+  const { users } = useSelector((state) => state.user);
   const [redirect, setRedirect] = React.useState(null);
+  const [cells, setCells] = React.useState([]);
+
+  React.useEffect(() => {
+    if (!users) return;
+    if (users.length > 12) return;
+    const cells = new Array(12).fill(null);
+    users.forEach((user) => {
+      cells[user?.graveCellNum] = user;
+    });
+    setCells(cells);
+  }, [users]);
 
   const visitTomb = () => {
     setRedirect("/tomb");
@@ -18,27 +31,21 @@ export const CemetaryGrid = () => {
 
   return (
     <CemetaryGridContainer>
-      <Tooltip
-        content={"This grave belongs to Test Test. \nClick to visit."}
-        direction="bottom"
-      >
-        <Cell onClick={visitTomb}>
-          <Grave />
-        </Cell>
-      </Tooltip>
-      <Cell></Cell>
-      <Cell>
-        <Grave />
-      </Cell>
-      <Cell></Cell>
-      <Cell></Cell>
-      <Cell></Cell>
-      <Cell></Cell>
-      <Cell></Cell>
-      <Cell></Cell>
-      <Cell></Cell>
-      <Cell></Cell>
-      <Cell></Cell>
+      {cells.map((cell, i) =>
+        cell ? (
+          <Tooltip
+            content={`This grave belongs to ${cell?.name}. \nClick to visit.`}
+            direction="bottom"
+            key={cell?.name + i}
+          >
+            <Cell onClick={visitTomb}>
+              <Grave />
+            </Cell>
+          </Tooltip>
+        ) : (
+          <Cell key={i + new Date().getTime()}></Cell>
+        )
+      )}
     </CemetaryGridContainer>
   );
 };
