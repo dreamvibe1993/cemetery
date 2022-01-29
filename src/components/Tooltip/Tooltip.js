@@ -104,9 +104,6 @@ const TooltipTip = styled.div`
 `;
 
 const TooltipWrapper = styled.div`
-  /* Wrapping */
   display: inline-block;
   position: relative;
-
-  /* Absolute positioning */
 `;

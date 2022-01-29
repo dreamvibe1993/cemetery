@@ -1,4 +1,5 @@
 import React from "react";
+import { Navigate } from "react-router-dom";
 import styled from "styled-components/macro";
 
 import GrassPattern from "../../media/img/grave/grass-p-2.png";
@@ -7,10 +8,21 @@ import { Grave } from "../Grave";
 import { Tooltip } from "../Tooltip";
 
 export const CemetaryGrid = () => {
+  const [redirect, setRedirect] = React.useState(null);
+
+  const visitTomb = () => {
+    setRedirect("/tomb");
+  };
+
+  if (redirect) return <Navigate to={redirect} />;
+
   return (
     <CemetaryGridContainer>
-      <Tooltip content="This grave belongs to Test Test. Click to visit." direction="bottom">
-        <Cell>
+      <Tooltip
+        content={"This grave belongs to Test Test. \nClick to visit."}
+        direction="bottom"
+      >
+        <Cell onClick={visitTomb}>
           <Grave />
         </Cell>
       </Tooltip>
