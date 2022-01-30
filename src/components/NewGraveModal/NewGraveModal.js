@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components/macro";
 import Select from "react-select";
-import * as yup from "yup";
 import { setLocale } from "yup";
 
 import { ReactComponent as Cross } from "../../media/svg/cross.svg";
 import { compressPhotos } from "../../lib/common-functions/common-functions";
 import { addNewBurial } from "../../api/user";
 import { Preloader } from "../Preloader";
+import { graveSchema } from "../../models/yup/yup-schemas";
 
 setLocale({
   string: {
@@ -16,21 +16,6 @@ setLocale({
   date: {
     typeError: "the field must not me empty",
   },
-});
-
-let schema = yup.object().shape({
-  name: yup.string().required().min(2),
-  dateB: yup.date().required(),
-  dateD: yup.date().required(),
-  lWords: yup.string().max(32, "максимум 32 буквы. давай лаконичнее"),
-  song: yup.string().required("выбери песню а"),
-  pics: yup
-    .array()
-    .min(1, "добавь фотку а")
-    .max(
-      4,
-      "воу паринь палехче у меня нет стока денек чтобы хранить всё это фотографическое искусство. удаляй пока не станет 4"
-    ),
 });
 
 export const NewGraveModal = ({ cellN, onClose = () => {} }) => {
@@ -93,7 +78,7 @@ export const NewGraveModal = ({ cellN, onClose = () => {} }) => {
       song: song.value,
       pics,
     };
-    schema
+    graveSchema
       .validate(dataToPost)
       .then(async () => {
         try {

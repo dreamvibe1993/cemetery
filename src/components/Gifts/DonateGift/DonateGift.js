@@ -23,7 +23,7 @@ export const DonateGift = ({ onClose = () => {} }) => {
   };
 
   const leaveGift = () => {
-    console.log(gift, name);
+    console.log(gift, name, wish);
   };
 
   return (
@@ -51,17 +51,18 @@ export const DonateGift = ({ onClose = () => {} }) => {
             <BTC />
           </Gift>
         </GiftsRow>
-        <LEAVE>LEAVE THE GIFT</LEAVE>
         <WishRow>
           Also you can leave some warm words for the donatee{" "}
           <Input
             type="text"
             defaultValue={wish}
             onChange={handleWishInput}
-            maxLength={7}
-            style={{ flex: 1, marginRight: 0 }}
-          />
+            maxLength={30}
+            style={{ flex: 1 }}
+          />{" "}
+          <span style={{ fontSize: "10px" }}>(max 30)</span>
         </WishRow>
+        <LEAVE onClick={leaveGift}>LEAVE THE GIFT</LEAVE>
       </ChooseGiftBlock>
     </DonateGiftCont>
   );
@@ -70,6 +71,7 @@ export const DonateGift = ({ onClose = () => {} }) => {
 const WishRow = styled.div`
   display: flex;
   justify-content: stretch;
+  align-items: center;
   margin-top: 10px;
 `;
 
