@@ -1,14 +1,13 @@
 import imageCompression from "browser-image-compression";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import { backModel } from "../../models/backModel";
 
 export const convertToFrontModel = (userData) => {
   for (let key in backModel) {
     if (!userData[key]) {
-      userData[key] = backModel[key]
+      userData[key] = backModel[key];
     }
   }
-
   userData.born = returnDDMMYYYY(userData?.born);
   userData.died = returnDDMMYYYY(userData?.died);
   return userData;
@@ -29,11 +28,14 @@ export const convertToBackModel = ({ data, photoLinks }) => {
     lastWords: data.lWords,
     photos: photoLinks,
     name: data.name,
-    songs: [data.song]
+    songs: [data.song],
   };
   for (let key in converted) {
-    if(!converted[key]) {
-      throw new Error(`Back model is not consistent! No ${key} value provided! JSON: ` + JSON.stringify(converted, null, 1));
+    if (!converted[key]) {
+      throw new Error(
+        `Back model is not consistent! No ${key} value provided! JSON: ` +
+          JSON.stringify(converted, null, 1)
+      );
     }
   }
   return converted;
@@ -77,4 +79,24 @@ export const compressPhotos = async (e) => {
     url: URL.createObjectURL(file),
     id: URL.createObjectURL(file),
   }));
+};
+
+export const convertToISO = (ddmmyyyy) => {
+  const dateArr = ddmmyyyy.split(".");
+  return new Date(dateArr[2], dateArr[1] - 1, dateArr[0]).toISOString();
+};
+
+export const returnUpdatedGifts = (data, user) => {
+  user = JSON.stringify(user);
+  let locUser = { ...JSON.parse(user) };
+  if (!locUser.gifts[data.gift]) {
+    locUser.gifts[data.gift] = [];
+  }
+  locUser.gifts[data.gift] = [
+    ...locUser.gifts[data.gift],
+    { by: data.name, wish: data.wish },
+  ];
+  locUser.born = convertToISO(locUser.born);
+  locUser.died = convertToISO(locUser.died);
+  return locUser;
 };

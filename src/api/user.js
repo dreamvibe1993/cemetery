@@ -1,5 +1,5 @@
 import { database, storage } from "../App";
-import { ref, onValue, set } from "firebase/database";
+import { ref, onValue, set, get } from "firebase/database";
 import store from "../redux/store";
 import { setUsers } from "../redux/user/userReducer";
 import {
@@ -10,6 +10,7 @@ import {
 import {
   convertToBackModel,
   convertToFrontModel,
+  returnUpdatedGifts,
 } from "../lib/common-functions/common-functions";
 
 export const loadUsers = () => {
@@ -86,6 +87,24 @@ export const getPhotosUrls = async (file) => {
         });
       }
     );
+  });
+};
+
+export const updateUser = (data, user) => {
+  const dbRef = ref(database, "users");
+  returnUpdatedGifts(data, user);
+  return new Promise((res, rej) => {
+    get(dbRef).then((s) => {
+      const db = s.val();
+      const indexToUpd = db.findIndex((gr) => gr.id === user.id);
+      set(ref(database, "users/" + indexToUpd), returnUpdatedGifts(data, user))
+        .then((v) => {
+          res(v);
+        })
+        .catch((e) => {
+          rej(e);
+        });
+    });
   });
 };
 

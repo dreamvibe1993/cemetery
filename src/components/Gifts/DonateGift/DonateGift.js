@@ -4,17 +4,22 @@ import { ReactComponent as ChevroneLeft } from "../../../media/svg/chevrone.svg"
 import { ReactComponent as Vodka } from "../../../media/svg/vodka.svg";
 import { ReactComponent as Candy } from "../../../media/svg/candy.svg";
 import { ReactComponent as BTC } from "../../../media/svg/btc.svg";
+import { giftSchema } from "../../../models/yup/yup-schemas";
+import { updateUser } from "../../../api/user";
 
-export const DonateGift = ({ onClose = () => {} }) => {
+export const DonateGift = ({ onClose = () => {}, user }) => {
   const [gift, setGift] = React.useState(null);
   const [name, setName] = React.useState("");
   const [wish, setWish] = React.useState("");
+  const [errThrown, setErrThrown] = React.useState("");
 
   const chooseGift = (giftName) => {
+    setErrThrown("");
     setGift(giftName);
   };
 
   const handleNameInput = (e) => {
+    setErrThrown("");
     setName(e.target.value);
   };
 
@@ -23,7 +28,20 @@ export const DonateGift = ({ onClose = () => {} }) => {
   };
 
   const leaveGift = () => {
-    console.log(gift, name, wish);
+    const dataToValidate = { gift, name, wish };
+    giftSchema
+      .validate(dataToValidate)
+      .then((val) => {
+        updateUser(dataToValidate, user).then(() => onClose());
+      })
+      .catch((err) => {
+        console.error(err);
+        console.trace(err);
+        if (err?.params?.path !== "gift" && err?.errors?.length > 0) {
+          alert(err.errors[0]);
+        }
+        setErrThrown(err?.params?.path);
+      });
   };
 
   return (
@@ -34,10 +52,15 @@ export const DonateGift = ({ onClose = () => {} }) => {
       <ChooseGiftBlock>
         <Header>
           Type your name{" "}
-          <Input type="text" defaultValue={name} onChange={handleNameInput} />{" "}
+          <Input
+            type="text"
+            defaultValue={name}
+            onChange={handleNameInput}
+            errThrown={errThrown === "name"}
+          />{" "}
           and choose a gift you'd like to leave on the grave:
         </Header>
-        <GiftsRow>
+        <GiftsRow errThrown={errThrown === "gift"}>
           <Gift onClick={() => chooseGift("vodka")} chosen={gift === "vodka"}>
             <Vodka />
           </Gift>
@@ -59,6 +82,7 @@ export const DonateGift = ({ onClose = () => {} }) => {
             onChange={handleWishInput}
             maxLength={30}
             style={{ flex: 1 }}
+            errThrown={errThrown === "wish"}
           />{" "}
           <span style={{ fontSize: "10px" }}>(max 30)</span>
         </WishRow>
@@ -76,7 +100,8 @@ const WishRow = styled.div`
 `;
 
 const Input = styled.input`
-  border: 1px solid black;
+  transition: border 0.5s linear;
+  border: ${(p) => (p.errThrown ? "1px solid red" : "none")};
   background-color: rgba(0, 0, 0, 0.2);
   height: 20px;
   margin: 0px 5px;
@@ -95,6 +120,7 @@ const LEAVE = styled.div`
   justify-content: center;
   align-items: center;
   transition: all 0.1s linear;
+  user-select: none;
   &:hover {
     background-color: #165c59;
   }
@@ -135,10 +161,12 @@ const Gift = styled.div`
 `;
 
 const GiftsRow = styled.div`
+  transition: border 0.5s linear;
   width: 100%;
   display: flex;
   align-items: stretch;
   margin-top: 10px;
+  border: ${(p) => (p.errThrown ? "1px solid red" : "none")};
   & > * {
     &:not(:last-child) {
       margin-right: 5px;

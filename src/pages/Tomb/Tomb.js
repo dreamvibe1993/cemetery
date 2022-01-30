@@ -44,7 +44,12 @@ export const Tomb = () => {
     }
     const urlSP = new URLSearchParams(window.location.search);
     const userId = urlSP.get("userId");
-    setUser(users.find((user) => user.id === userId));
+    const user = users.find((user) => user.id === userId);
+    if (!user) {
+      setRedirect("/");
+    } else {
+      setUser(user);
+    }
   }, [users]);
 
   const captureClick = (e) => {
@@ -114,7 +119,7 @@ export const Tomb = () => {
 
   return (
     <>
-      {isDonateOpen && <DonateGift onClose={closeDonateGift} />}
+      {isDonateOpen && <DonateGift onClose={closeDonateGift} user={user} />}
       {isGiftsOpen && <Gifts onClose={closeGifts} />}
       {isGalleryOpen && <Gallery src={isGalleryOpen} onClose={hidePhoto} />}
       <MainContainer>
@@ -161,7 +166,9 @@ export const Tomb = () => {
                 })}
               </PhotoContPhotosWrapper>
             </PhotoCont>
-            <DateLiving>{user?.born} - {user?.died}</DateLiving>
+            <DateLiving>
+              {user?.born} - {user?.died}
+            </DateLiving>
             <LastWords>{user?.lastWords}</LastWords>
           </MainInfoCont>
           <LogsCont>
