@@ -5,7 +5,27 @@ import { ReactComponent as Vodka } from "../../../media/svg/vodka.svg";
 import { ReactComponent as Candy } from "../../../media/svg/candy.svg";
 import { ReactComponent as BTC } from "../../../media/svg/btc.svg";
 
-export const DonateGift = ({ onChoose = () => {}, onClose = () => {} }) => {
+export const DonateGift = ({ onClose = () => {} }) => {
+  const [gift, setGift] = React.useState(null);
+  const [name, setName] = React.useState("");
+  const [wish, setWish] = React.useState("");
+
+  const chooseGift = (giftName) => {
+    setGift(giftName);
+  };
+
+  const handleNameInput = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleWishInput = (e) => {
+    setWish(e.target.value);
+  };
+
+  const leaveGift = () => {
+    console.log(gift, name);
+  };
+
   return (
     <DonateGiftCont>
       <TopPanel>
@@ -13,27 +33,46 @@ export const DonateGift = ({ onChoose = () => {}, onClose = () => {} }) => {
       </TopPanel>
       <ChooseGiftBlock>
         <Header>
-          Type your name <NameInput /> and choose a gift you'd like to leave on
-          the grave
+          Type your name{" "}
+          <Input type="text" defaultValue={name} onChange={handleNameInput} />{" "}
+          and choose a gift you'd like to leave on the grave:
         </Header>
         <GiftsRow>
-          <Gift onClick={() => onChoose(1)}>
+          <Gift onClick={() => chooseGift("vodka")} chosen={gift === "vodka"}>
             <Vodka />
           </Gift>
-          <Gift onClick={() => onChoose(2)}>
+          <Gift
+            onClick={() => chooseGift("candies")}
+            chosen={gift === "candies"}
+          >
             <Candy />
           </Gift>
-          <Gift onClick={() => onChoose(3)}>
+          <Gift onClick={() => chooseGift("btc")} chosen={gift === "btc"}>
             <BTC />
           </Gift>
         </GiftsRow>
-        <LEAVE>LEAVE</LEAVE>
+        <LEAVE>LEAVE THE GIFT</LEAVE>
+        <WishRow>
+          Also you can leave some warm words for the donatee{" "}
+          <Input
+            type="text"
+            defaultValue={wish}
+            onChange={handleWishInput}
+            style={{ flex: 1, marginRight: 0 }}
+          />
+        </WishRow>
       </ChooseGiftBlock>
     </DonateGiftCont>
   );
 };
 
-const NameInput = styled.input`
+const WishRow = styled.div`
+  display: flex;
+  justify-content: stretch;
+  margin-top: 10px;
+`;
+
+const Input = styled.input`
   border: 1px solid black;
   background-color: rgba(0, 0, 0, 0.2);
   height: 20px;
@@ -77,7 +116,7 @@ const TopPanel = styled.div`
 `;
 
 const Gift = styled.div`
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, ${(p) => (p.chosen ? 0.2 : 0.3)});
   transition: all 0.2s linear;
   align-items: stretch;
   padding: 10px;
