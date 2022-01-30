@@ -4,6 +4,7 @@ import Select from "react-select";
 import * as yup from "yup";
 import { setLocale } from "yup";
 
+import { ReactComponent as Cross } from "../../media/svg/cross.svg";
 import { compressPhotos } from "../../lib/common-functions/common-functions";
 import { getPhotosUrls } from "../../api/user";
 
@@ -20,8 +21,14 @@ let schema = yup.object().shape({
   name: yup.string().required().min(2),
   dateB: yup.date().required(),
   dateD: yup.date().required(),
-  song: yup.string().required(),
-  pics: yup.array().min(1),
+  song: yup.string().required("выбери песню а"),
+  pics: yup
+    .array()
+    .min(1, 'добавь фотку а')
+    .max(
+      4,
+      "воу паринь палехче у меня нет стока денек чтобы хранить всё это фотографическое искусство. удаляй пока не станет 4"
+    ),
 });
 
 export const NewGraveModal = ({ cellN }) => {
@@ -58,28 +65,33 @@ export const NewGraveModal = ({ cellN }) => {
     }
   };
 
+  const deletePhoto = (id) => {
+    setPics((prev) => prev.filter((blob) => blob.id !== id));
+  };
+
   const handleNameInput = (e) => {
-    setErrThrown('')
+    setErrThrown("");
     setName(e.target.value);
   };
   const handleDateBInput = (e) => {
-    setErrThrown('')
+    setErrThrown("");
     setDateB(new Date(e.target.value).toISOString());
   };
   const handleDateDInput = (e) => {
-    setErrThrown('')
+    setErrThrown("");
     setDateD(new Date(e.target.value).toISOString());
   };
   const handleLWordsInput = (e) => {
-    setErrThrown('')
+    setErrThrown("");
     setLWords(e.target.value);
   };
   const handleLSongInput = (v) => {
-    setErrThrown('')
+    setErrThrown("");
     setSong(v.value);
   };
 
   const submitData = () => {
+    setErrThrown("");
     /*
     schema
       .isValid({
@@ -97,9 +109,13 @@ export const NewGraveModal = ({ cellN }) => {
         dateD,
         lWords,
         song,
+        pics,
       })
       .then((value) => console.log(value))
       .catch((err) => {
+        if (err.params.path === "song" || err.params.path === "pics") {
+          alert(err.errors[0]);
+        }
         setErrThrown(err.params.path);
       });
   };
@@ -190,7 +206,12 @@ export const NewGraveModal = ({ cellN }) => {
             {pics.length < 1 ? (
               <InputName>CLICK TO UPLOAD</InputName>
             ) : (
-              pics.map((blob) => <LilPic key={blob.id} src={blob.url} />)
+              pics.map((blob) => (
+                <LilPicCont key={blob.id} >
+                  <Cross onClick={() => deletePhoto(blob.id)} />
+                  <LilPic src={blob.url} />
+                </LilPicCont>
+              ))
             )}
             <input
               type="file"
@@ -209,6 +230,29 @@ export const NewGraveModal = ({ cellN }) => {
   );
 };
 
+const LilPicCont = styled.div`
+  position: relative;
+  z-index: 10;
+  &:hover {
+    & > svg {
+      opacity: 1;
+    }
+  }
+  svg {
+    transition: opacity 0.4s linear;
+    width: 11px;
+    height: 11px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    cursor: pointer;
+  }
+`;
+
 const LilPic = styled.img`
   height: 100%;
   margin: 0px 5px;
@@ -223,6 +267,7 @@ const FileInput = styled.div`
   text-align: center;
   display: flex;
   justify-content: center;
+  overflow-x: auto;
   ${(p) => p.errThrown && "border: 1px solid rgba(245, 66, 66, .8);"}
   input {
     opacity: 0;
@@ -243,6 +288,14 @@ const Button = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  user-select: none;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  &:active {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
 `;
 
 const OK = styled(Button)`
