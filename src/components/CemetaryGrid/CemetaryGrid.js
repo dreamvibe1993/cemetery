@@ -13,7 +13,7 @@ export const CemetaryGrid = () => {
   const { users } = useSelector((state) => state.user);
   const [redirect, setRedirect] = React.useState(null);
   const [cells, setCells] = React.useState([]);
-  const [isNewGrvDiagOpen, setNewGrvDiagOpen] = React.useState(false);
+  const [cellNumChosen, setCellNumChosen] = React.useState(false);
 
   React.useEffect(() => {
     if (!users) return;
@@ -29,16 +29,15 @@ export const CemetaryGrid = () => {
     setRedirect("/tomb?userId=" + user.id);
   };
 
-  const askNewGrave = () => {
-    setNewGrvDiagOpen(true);
+  const askNewGrave = (i) => {
+    setCellNumChosen(i);
   };
 
   if (redirect) return <Navigate to={redirect} />;
 
   return (
     <>
-      {" "}
-      {isNewGrvDiagOpen && <NewGraveModal />}
+      {cellNumChosen && <NewGraveModal cellN={cellNumChosen} />}
       <CemetaryGridContainer>
         {cells.map((cell, i) =>
           cell ? (
@@ -52,7 +51,10 @@ export const CemetaryGrid = () => {
               </Cell>
             </Tooltip>
           ) : (
-            <Cell key={i + new Date().getTime()} onClick={askNewGrave}></Cell>
+            <Cell
+              key={i + new Date().getTime()}
+              onClick={() => askNewGrave(i)}
+            ></Cell>
           )
         )}
       </CemetaryGridContainer>
