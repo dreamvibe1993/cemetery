@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/cemetary/static/css/main.14618208.css",
-    "main.js": "/cemetary/static/js/main.f49563cb.js",
+    "main.js": "/cemetary/static/js/main.c128d7a1.js",
     "static/js/787.6015fe73.chunk.js": "/cemetary/static/js/787.6015fe73.chunk.js",
     "static/media/zemfira-pmml.mp3": "/cemetary/static/media/zemfira-pmml.c51903561541b0b4d72d.mp3",
     "static/media/candy.svg": "/cemetary/static/media/candy.5ca8feda38cff3999b9c8acd52db0198.svg",
@@ -15,11 +15,11 @@
     "index.html": "/cemetary/index.html",
     "static/media/chevrone.svg": "/cemetary/static/media/chevrone.1c769e6bf0e40dfa8c065a88cbccd9a7.svg",
     "main.14618208.css.map": "/cemetary/static/css/main.14618208.css.map",
-    "main.f49563cb.js.map": "/cemetary/static/js/main.f49563cb.js.map",
+    "main.c128d7a1.js.map": "/cemetary/static/js/main.c128d7a1.js.map",
     "787.6015fe73.chunk.js.map": "/cemetary/static/js/787.6015fe73.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.14618208.css",
-    "static/js/main.f49563cb.js"
+    "static/js/main.c128d7a1.js"
   ]
 }
