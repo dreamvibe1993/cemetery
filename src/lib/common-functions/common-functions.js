@@ -1,9 +1,42 @@
 import imageCompression from "browser-image-compression";
+import { v4 as uuidv4 } from 'uuid';
+import { backModel } from "../../models/backModel";
 
-export const userToModel = (userData) => {
+export const convertToFrontModel = (userData) => {
+  for (let key in backModel) {
+    if (!userData[key]) {
+      userData[key] = backModel[key]
+    }
+  }
+
   userData.born = returnDDMMYYYY(userData?.born);
   userData.died = returnDDMMYYYY(userData?.died);
   return userData;
+};
+
+export const convertToBackModel = ({ data, photoLinks }) => {
+  const converted = {
+    born: data.dateB,
+    died: data.dateD,
+    gifts: {
+      candies: [],
+      btc: [],
+      vodka: [],
+    },
+    chatLogs: [],
+    graveCellNum: data.cellN,
+    id: uuidv4(),
+    lastWords: data.lWords,
+    photos: photoLinks,
+    name: data.name,
+    songs: [data.song]
+  };
+  for (let key in converted) {
+    if(!converted[key]) {
+      throw new Error(`Back model is not consistent! No ${key} value provided! JSON: ` + JSON.stringify(converted, null, 1));
+    }
+  }
+  return converted;
 };
 
 export const returnDDMMYYYY = (date) => {
@@ -33,7 +66,7 @@ export const compressPhotos = async (e) => {
   } catch (e) {
     alert("35: " + e);
     console.error(e);
-    console.trace(e)
+    console.trace(e);
   }
   if (!files.length) {
     alert("No photos been compressed");

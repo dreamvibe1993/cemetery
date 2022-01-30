@@ -1,5 +1,5 @@
 import { database, storage } from "../App";
-import { ref, onValue } from "firebase/database";
+import { ref, onValue, set } from "firebase/database";
 import store from "../redux/store";
 import { setUsers } from "../redux/user/userReducer";
 import {
@@ -7,25 +7,34 @@ import {
   ref as storageRef,
   uploadBytesResumable,
 } from "firebase/storage";
-import { userToModel } from "../lib/common-functions/common-functions";
-
-// const analytics = getAnalytics(app);
+import {
+  convertToBackModel,
+  convertToFrontModel,
+} from "../lib/common-functions/common-functions";
 
 export const loadUsers = () => {
   const starCountRef = ref(database, "users");
   onValue(starCountRef, async (snapshot) => {
     const data = await snapshot.val();
-    /*
-    const arr = await Promise.all(
-      data.map(async (user) => {
-        user.photos = await Promise.all(
-          user.photos.map(async (photo) => await asyncThing(photo, storage))
-        );
-        return user;
-      })
-    );*/
-    store.dispatch(setUsers(data.map((user) => userToModel(user))));
+    store.dispatch(setUsers(data.map((user) => convertToFrontModel(user))));
   });
+};
+
+export const addNewBurial = async (data) => {
+  const photoLinks = await Promise.all(
+    data.pics.map(async (ph) => {
+      return getPhotosUrls(ph);
+    })
+  );
+  try {
+    const readyToPost = convertToBackModel({ data, photoLinks });
+    const t = store.getState();
+    set(ref(database, "users/" + t.user.users.length), readyToPost);
+    console.log(t);
+  } catch (e) {
+    console.error(e);
+    console.trace(e);
+  }
 };
 
 // eslint-disable-next-line no-unused-vars
@@ -71,3 +80,13 @@ export const getPhotosUrls = async (file) => {
     );
   });
 };
+
+/*
+    const arr = await Promise.all(
+      data.map(async (user) => {
+        user.photos = await Promise.all(
+          user.photos.map(async (photo) => await asyncThing(photo, storage))
+        );
+        return user;
+      })
+    );*/

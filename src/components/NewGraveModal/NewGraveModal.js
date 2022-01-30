@@ -6,7 +6,7 @@ import { setLocale } from "yup";
 
 import { ReactComponent as Cross } from "../../media/svg/cross.svg";
 import { compressPhotos } from "../../lib/common-functions/common-functions";
-import { getPhotosUrls } from "../../api/user";
+import { addNewBurial } from "../../api/user";
 
 setLocale({
   string: {
@@ -24,20 +24,20 @@ let schema = yup.object().shape({
   song: yup.string().required("выбери песню а"),
   pics: yup
     .array()
-    .min(1, 'добавь фотку а')
+    .min(1, "добавь фотку а")
     .max(
       4,
       "воу паринь палехче у меня нет стока денек чтобы хранить всё это фотографическое искусство. удаляй пока не станет 4"
     ),
 });
 
-export const NewGraveModal = ({ cellN }) => {
+export const NewGraveModal = ({ cellN, onClose = () => {} }) => {
   const [l, setL] = React.useState(false);
   const [pics, setPics] = React.useState([]);
   const [name, setName] = React.useState("");
   const [dateB, setDateB] = React.useState("");
   const [dateD, setDateD] = React.useState("");
-  const [lWords, setLWords] = React.useState("");
+  const [lWords, setLWords] = React.useState(" ");
   const [song, setSong] = React.useState("");
 
   const [errThrown, setErrThrown] = React.useState("");
@@ -47,15 +47,6 @@ export const NewGraveModal = ({ cellN }) => {
       setL(true);
       const ph = await compressPhotos(e);
       setPics((prev) => [...prev, ...ph]);
-      /*
-      console.log(ph);
-      const test = await Promise.all(
-        ph.map(async (ph) => {
-          return getPhotosUrls(ph);
-        })
-      );
-      console.log(test);
-      */
       setL(false);
     } catch (e) {
       setL(false);
@@ -92,26 +83,24 @@ export const NewGraveModal = ({ cellN }) => {
 
   const submitData = () => {
     setErrThrown("");
-    /*
+    const dataToPost = {
+      name,
+      dateB,
+      dateD,
+      lWords,
+      song,
+      pics,
+    };
     schema
-      .isValid({
-        name,
-        dateB,
-        dateD,
-        lWords,
-        song,
+      .validate(dataToPost)
+      .then(async (value) => {
+        try {
+          await addNewBurial({...dataToPost, cellN, lWords});
+        } catch (e) {
+          console.error(e);
+          console.trace(e);
+        }
       })
-      .then((valid) => console.log(valid));*/
-    schema
-      .validate({
-        name,
-        dateB,
-        dateD,
-        lWords,
-        song,
-        pics,
-      })
-      .then((value) => console.log(value))
       .catch((err) => {
         if (err.params.path === "song" || err.params.path === "pics") {
           alert(err.errors[0]);
@@ -161,6 +150,7 @@ export const NewGraveModal = ({ cellN }) => {
               container: (provided) => ({
                 ...provided,
                 width: "100%",
+                zIndex: 999
               }),
               control: (provided) => ({
                 ...provided,
@@ -207,7 +197,7 @@ export const NewGraveModal = ({ cellN }) => {
               <InputName>CLICK TO UPLOAD</InputName>
             ) : (
               pics.map((blob) => (
-                <LilPicCont key={blob.id} >
+                <LilPicCont key={blob.id}>
                   <Cross onClick={() => deletePhoto(blob.id)} />
                   <LilPic src={blob.url} />
                 </LilPicCont>
@@ -223,7 +213,7 @@ export const NewGraveModal = ({ cellN }) => {
         </InputsContainer>
         <ButtonsCont>
           <OK onClick={submitData}>OK</OK>
-          <Cancel>Cancel</Cancel>
+          <Cancel onClick={onClose}>Cancel</Cancel>
         </ButtonsCont>
       </Diag>
     </NewGraveModalCont>

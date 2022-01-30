@@ -33,11 +33,17 @@ export const CemetaryGrid = () => {
     setCellNumChosen(i);
   };
 
+  const closeNewGraveDiag = () => {
+    setCellNumChosen(false);
+  };
+
   if (redirect) return <Navigate to={redirect} />;
 
   return (
     <>
-      {cellNumChosen && <NewGraveModal cellN={cellNumChosen} />}
+      {cellNumChosen && (
+        <NewGraveModal cellN={cellNumChosen} onClose={closeNewGraveDiag} />
+      )}
       <CemetaryGridContainer>
         {cells.map((cell, i) =>
           cell ? (
