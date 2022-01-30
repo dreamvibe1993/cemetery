@@ -86,7 +86,21 @@ export const convertToISO = (ddmmyyyy) => {
   return new Date(dateArr[2], dateArr[1] - 1, dateArr[0]).toISOString();
 };
 
-export const returnUpdatedGifts = (data, user) => {
+const returnPhrases = (id) => {
+  switch (id) {
+    case "candies":
+      return "a candy";
+    case "vodka":
+      return "a shot of vodka";
+    case "btc":
+      return "1 BTC";
+    default:
+      return "a message";
+  }
+};
+
+export const updateUserGifts = (data, user) => {
+  if (!data || !user) throw new Error('No data or user in updateUserGifts');
   user = JSON.stringify(user);
   let locUser = { ...JSON.parse(user) };
   if (!locUser.gifts[data.gift]) {
@@ -96,6 +110,16 @@ export const returnUpdatedGifts = (data, user) => {
     ...locUser.gifts[data.gift],
     { by: data.name, wish: data.wish },
   ];
+  locUser.chatLogs = [
+    ...locUser.chatLogs,
+    `${data?.name} left ${returnPhrases(data?.gift)} for ${locUser?.name}`,
+  ];
+  if (data?.wish?.length > 1) {
+    locUser.chatLogs = [
+      ...locUser.chatLogs,
+      `${data.name} left a message for ${locUser.name}: "${data.wish}"`,
+    ];
+  }
   locUser.born = convertToISO(locUser.born);
   locUser.died = convertToISO(locUser.died);
   return locUser;

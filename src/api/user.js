@@ -10,7 +10,7 @@ import {
 import {
   convertToBackModel,
   convertToFrontModel,
-  returnUpdatedGifts,
+  updateUserGifts,
 } from "../lib/common-functions/common-functions";
 
 export const loadUsers = () => {
@@ -92,12 +92,11 @@ export const getPhotosUrls = async (file) => {
 
 export const updateUser = (data, user) => {
   const dbRef = ref(database, "users");
-  returnUpdatedGifts(data, user);
   return new Promise((res, rej) => {
     get(dbRef).then((s) => {
       const db = s.val();
       const indexToUpd = db.findIndex((gr) => gr.id === user.id);
-      set(ref(database, "users/" + indexToUpd), returnUpdatedGifts(data, user))
+      set(ref(database, "users/" + indexToUpd), updateUserGifts(data, user))
         .then((v) => {
           res(v);
         })
