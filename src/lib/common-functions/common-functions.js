@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import { backModel } from "../../models/backModel";
 
 export const convertToFrontModel = (userData) => {
+  if (!userData) return null;
   for (let key in backModel) {
     if (!userData[key]) {
       userData[key] = backModel[key];

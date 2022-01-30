@@ -11,14 +11,10 @@ export const Home = () => {
   const [isLoading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    loadUsers();
-  }, []);
-
-  React.useEffect(() => {
-    if (users) {
+    loadUsers().then(() => {
       setLoading(false);
-    }
-  }, [users]);
+    });
+  }, []);
 
   if (isLoading)
     return (

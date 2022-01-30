@@ -16,9 +16,12 @@ export const CemetaryGrid = () => {
   const [cellNumChosen, setCellNumChosen] = React.useState(false);
 
   React.useEffect(() => {
-    if (!users) return;
-    if (users.length > 12) return;
     const cells = new Array(12).fill(null);
+    if (!users) {
+      setCells(cells);
+      return;
+    }
+    if (users.length > 12) return;
     users.forEach((user) => {
       cells[user?.graveCellNum] = user;
     });
@@ -41,7 +44,7 @@ export const CemetaryGrid = () => {
 
   return (
     <>
-      {cellNumChosen && (
+      {cellNumChosen !== false && (
         <NewGraveModal cellN={cellNumChosen} onClose={closeNewGraveDiag} />
       )}
       <CemetaryGridContainer>

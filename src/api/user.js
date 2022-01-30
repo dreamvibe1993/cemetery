@@ -15,9 +15,16 @@ import {
 
 export const loadUsers = () => {
   const starCountRef = ref(database, "users");
-  onValue(starCountRef, async (snapshot) => {
-    const data = await snapshot.val();
-    store.dispatch(setUsers(data.map((user) => convertToFrontModel(user))));
+  return new Promise((res, rej) => {
+    onValue(starCountRef, async (snapshot) => {
+      const data = await snapshot.val();
+      if (data) {
+        store.dispatch(
+          setUsers(data?.map((user) => convertToFrontModel(user)))
+        );
+      }
+      res();
+    });
   });
 };
 
