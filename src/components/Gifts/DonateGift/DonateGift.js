@@ -12,7 +12,10 @@ export const DonateGift = ({ onChoose = () => {}, onClose = () => {} }) => {
         <ChevroneLeft onClick={onClose} />
       </TopPanel>
       <ChooseGiftBlock>
-        <Header>Choose a gift you'd like to leave on the grave</Header>
+        <Header>
+          Type your name <NameInput /> and choose a gift you'd like to leave on
+          the grave
+        </Header>
         <GiftsRow>
           <Gift onClick={() => onChoose(1)}>
             <Vodka />
@@ -24,10 +27,39 @@ export const DonateGift = ({ onChoose = () => {}, onClose = () => {} }) => {
             <BTC />
           </Gift>
         </GiftsRow>
+        <LEAVE>LEAVE</LEAVE>
       </ChooseGiftBlock>
     </DonateGiftCont>
   );
 };
+
+const NameInput = styled.input`
+  border: 1px solid black;
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 20px;
+  margin: 0px 5px;
+  color: white;
+`;
+
+const LEAVE = styled.div`
+  width: 300px;
+  height: 40px;
+  background-color: #1a6e6b;
+  position: absolute;
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.1s linear;
+  &:hover {
+    background-color: #165c59;
+  }
+  &:active {
+    background-color: #114745;
+  }
+`;
 
 const TopPanel = styled.div`
   position: absolute;
@@ -82,6 +114,7 @@ const ChooseGiftBlock = styled.div`
   padding: 15px;
   display: flex;
   flex-direction: column;
+  position: relative;
 `;
 
 const DonateGiftCont = styled.div`
