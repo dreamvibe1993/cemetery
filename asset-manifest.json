@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/cemetary/static/css/main.14618208.css",
+    "main.js": "/cemetary/static/js/main.2e361af3.js",
+    "static/js/787.6015fe73.chunk.js": "/cemetary/static/js/787.6015fe73.chunk.js",
+    "static/media/zemfira-pmml.mp3": "/cemetary/static/media/zemfira-pmml.c51903561541b0b4d72d.mp3",
+    "static/media/candy.svg": "/cemetary/static/media/candy.5ca8feda38cff3999b9c8acd52db0198.svg",
+    "static/media/vodka.svg": "/cemetary/static/media/vodka.0355b2380f15e775213a356b735dbd4d.svg",
+    "static/media/eye.svg": "/cemetary/static/media/eye.183ccb6ca6361be00bd8e1729c95a740.svg",
+    "static/media/donate.svg": "/cemetary/static/media/donate.bd553e57411a8caf4e52a36d2bdda9b3.svg",
+    "static/media/pause.svg": "/cemetary/static/media/pause.0e7ab9269340f6e42b53e5da49823fc0.svg",
+    "static/media/play.svg": "/cemetary/static/media/play.fb2c449812236c2f713ffee14cbd2595.svg",
+    "static/media/btc.svg": "/cemetary/static/media/btc.e0d0541809a527e9b09d363e034dc667.svg",
+    "static/media/cross.svg": "/cemetary/static/media/cross.36131ace3415ace140cc14e9e002b76d.svg",
+    "index.html": "/cemetary/index.html",
+    "static/media/chevrone.svg": "/cemetary/static/media/chevrone.1c769e6bf0e40dfa8c065a88cbccd9a7.svg",
+    "main.14618208.css.map": "/cemetary/static/css/main.14618208.css.map",
+    "main.2e361af3.js.map": "/cemetary/static/js/main.2e361af3.js.map",
+    "787.6015fe73.chunk.js.map": "/cemetary/static/js/787.6015fe73.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.14618208.css",
+    "static/js/main.2e361af3.js"
+  ]
+}
