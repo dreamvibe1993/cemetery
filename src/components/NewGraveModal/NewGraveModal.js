@@ -137,6 +137,7 @@ export const NewGraveModal = ({ cellN, onClose = () => {} }) => {
             type="text"
             errThrown={errThrown === "name"}
             onChange={(e) => handleNameInput(e)}
+            maxLength={20}
             defaultValue={name}
           />
           <InputName>born:</InputName>
@@ -158,7 +159,8 @@ export const NewGraveModal = ({ cellN, onClose = () => {} }) => {
             type="text"
             errThrown={errThrown === "lWords"}
             onChange={(e) => handleLWordsInput(e)}
-            defaultValue={lWords}
+            maxLength={32}
+            defaultValue={lWords} 
           ></TextInput>
           <InputName>song to mourn:</InputName>
           <Select

@@ -58,6 +58,7 @@ export const DonateGift = ({ onClose = () => {} }) => {
             type="text"
             defaultValue={wish}
             onChange={handleWishInput}
+            maxLength={7}
             style={{ flex: 1, marginRight: 0 }}
           />
         </WishRow>
