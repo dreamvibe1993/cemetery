@@ -113,13 +113,3 @@ export const updateUser = (data, user) => {
     });
   });
 };
-
-/*
-    const arr = await Promise.all(
-      data.map(async (user) => {
-        user.photos = await Promise.all(
-          user.photos.map(async (photo) => await asyncThing(photo, storage))
-        );
-        return user;
-      })
-    );*/

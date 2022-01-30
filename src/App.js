@@ -4,16 +4,34 @@ import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./firebaseConfig";
 import { getDatabase } from "firebase/database";
 import { getStorage } from "firebase/storage";
+import React from "react";
+import { TutorialModal } from "./components/TutorialModal";
 
 export const app = initializeApp(firebaseConfig);
 export const database = getDatabase(app);
 export const storage = getStorage();
 
 function App() {
-  // alert(
-  //   "TODO: \n1. Добавить прелоудеры к фоткам. \n2. Добавить возможность похоронить. \n3. Добавить возможность подарить подарок. \n4. Добавить регистрацию и авторизацию. \n5. Отписки от вебсокета."
-  // );
-  return <Paths />;
+  const [isTutorialShown, setTutorialShown] = React.useState(false);
+
+  React.useEffect(() => {
+    const isFirstTime = localStorage.getItem("isLastResortFT");
+    if (!isFirstTime) {
+      setTutorialShown(true);
+    }
+  }, []);
+
+  const closeTutorial = () => {
+    localStorage.setItem("isLastResortFT", true);
+    setTutorialShown(false);
+  };
+
+  return (
+    <>
+      {isTutorialShown && <TutorialModal onClose={closeTutorial}/>}
+      <Paths />
+    </>
+  );
 }
 
 export default App;
