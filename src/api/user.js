@@ -38,7 +38,7 @@ export const addNewBurial = async (data) => {
     try {
       const readyToPost = convertToBackModel({ data, photoLinks });
       const t = store.getState();
-      set(ref(database, "users/" + t.user.users.length), readyToPost)
+      set(ref(database, "users/" + t?.user?.users?.length || "0"), readyToPost)
         .then((v) => {
           res(v);
         })

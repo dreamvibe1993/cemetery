@@ -53,16 +53,17 @@ export const Gifts = ({ onClose = () => {}, user }) => {
         style={{ width: "750px", height: "750px" }}
       >
         <GiftsGrid>
-          {cells.map((cell) =>
+          {cells.map((cell, i) =>
             cell ? (
               <Tooltip
                 direction="bottom"
                 content={`By ${cell?.by}. ${cell?.wish}`}
+                key={cell?.by}
               >
                 <Cell>{cell?.giftSvg}</Cell>
               </Tooltip>
             ) : (
-              <Cell />
+              <Cell key={i + new Date().getTime()} />
             )
           )}
         </GiftsGrid>

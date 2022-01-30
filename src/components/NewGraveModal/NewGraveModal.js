@@ -83,9 +83,11 @@ export const NewGraveModal = ({ cellN, onClose = () => {} }) => {
       .then(async () => {
         try {
           setL(true);
-          await addNewBurial({ ...dataToPost, cellN, lWords });
+          await addNewBurial({ ...dataToPost, cellN: cellN.toString(), lWords });
           onClose();
         } catch (e) {
+          alert('something went wrong. sorry')
+          onClose();
           console.error(e);
           console.trace(e);
         }
