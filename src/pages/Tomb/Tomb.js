@@ -120,7 +120,7 @@ export const Tomb = () => {
   return (
     <>
       {isDonateOpen && <DonateGift onClose={closeDonateGift} user={user} />}
-      {isGiftsOpen && <Gifts onClose={closeGifts} />}
+      {isGiftsOpen && <Gifts onClose={closeGifts} user={user} />}
       {isGalleryOpen && <Gallery src={isGalleryOpen} onClose={hidePhoto} />}
       <MainContainer>
         <TopPanel>

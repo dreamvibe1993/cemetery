@@ -7,7 +7,42 @@ import { ReactComponent as Candy } from "../../media/svg/candy.svg";
 import { ReactComponent as BTC } from "../../media/svg/btc.svg";
 import { Tooltip } from "../Tooltip";
 
-export const Gifts = ({ onClose = () => {} }) => {
+export const Gifts = ({ onClose = () => {}, user }) => {
+  const [cells, setCells] = React.useState([]);
+
+  const returnGiftSvg = (giftName) => {
+    switch (giftName) {
+      case "vodka":
+        return <Vodka />;
+      case "candies":
+        return <Candy />;
+      case "btc":
+        return <BTC />;
+      default:
+        return null;
+    }
+  };
+
+  React.useEffect(() => {
+    if (!user) return;
+    const gifts = Object.keys(user.gifts);
+    if (gifts.length > 16) return;
+    const cells = new Array(16).fill(null);
+    const giftsToShow = gifts
+      .map((g) =>
+        user.gifts[g].map((ug) => ({
+          ...ug,
+          giftType: g,
+          giftSvg: returnGiftSvg(g),
+        }))
+      )
+      .flat();
+    giftsToShow.forEach((gift, i) => {
+      cells[i] = gift;
+    });
+    setCells(cells);
+  }, [user]);
+
   return (
     <GiftsCont>
       <TopPanel>
@@ -18,40 +53,18 @@ export const Gifts = ({ onClose = () => {} }) => {
         style={{ width: "750px", height: "750px" }}
       >
         <GiftsGrid>
-          <Tooltip
-            direction="bottom"
-            content="By Lisa. We will always remember you."
-          >
-            <Cell>
-              <Vodka />
-            </Cell>
-          </Tooltip>
-          <Tooltip direction="bottom" content="By Mark. R.I.P. friend.">
-            <Cell>
-              <Candy />{" "}
-            </Cell>
-          </Tooltip>
-          <Tooltip
-            direction="bottom"
-            content="By Judith. I hope this sum will help."
-          >
-            <Cell>
-              <BTC />
-            </Cell>
-          </Tooltip>
-          <Cell></Cell>
-          <Cell></Cell>
-          <Cell></Cell>
-          <Cell></Cell>
-          <Cell></Cell>
-          <Cell></Cell>
-          <Cell></Cell>
-          <Cell></Cell>
-          <Cell></Cell>
-          <Cell></Cell>
-          <Cell></Cell>
-          <Cell></Cell>
-          <Cell></Cell>
+          {cells.map((cell) =>
+            cell ? (
+              <Tooltip
+                direction="bottom"
+                content={`By ${cell?.by}. ${cell?.wish}.`}
+              >
+                <Cell>{cell?.giftSvg}</Cell>
+              </Tooltip>
+            ) : (
+              <Cell />
+            )
+          )}
         </GiftsGrid>
       </MainContainer>
     </GiftsCont>
