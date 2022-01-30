@@ -145,7 +145,7 @@ const TopPanel = styled.div`
 `;
 
 const Gift = styled.div`
-  background-color: rgba(0, 0, 0, ${(p) => (p.chosen ? 0.2 : 0.3)});
+  background-color: rgba(0, 0, 0, ${(p) => (p.chosen ? 0.1 : 0.3)});
   transition: all 0.2s linear;
   align-items: stretch;
   padding: 10px;
@@ -156,7 +156,7 @@ const Gift = styled.div`
     height: 100%;
   }
   &:hover {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.1);
   }
 `;
 

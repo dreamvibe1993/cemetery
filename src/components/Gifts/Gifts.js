@@ -57,7 +57,7 @@ export const Gifts = ({ onClose = () => {}, user }) => {
             cell ? (
               <Tooltip
                 direction="bottom"
-                content={`By ${cell?.by}. ${cell?.wish}.`}
+                content={`By ${cell?.by}. ${cell?.wish}`}
               >
                 <Cell>{cell?.giftSvg}</Cell>
               </Tooltip>
