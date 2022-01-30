@@ -26,15 +26,23 @@ export const addNewBurial = async (data) => {
       return getPhotosUrls(ph);
     })
   );
-  try {
-    const readyToPost = convertToBackModel({ data, photoLinks });
-    const t = store.getState();
-    set(ref(database, "users/" + t.user.users.length), readyToPost);
-    console.log(t);
-  } catch (e) {
-    console.error(e);
-    console.trace(e);
-  }
+  return new Promise((res, rej) => {
+    try {
+      const readyToPost = convertToBackModel({ data, photoLinks });
+      const t = store.getState();
+      set(ref(database, "users/" + t.user.users.length), readyToPost)
+        .then((v) => {
+          res(v);
+        })
+        .catch((e) => {
+          rej(e);
+        });
+    } catch (e) {
+      console.error(e);
+      console.trace(e);
+      rej(e);
+    }
+  });
 };
 
 // eslint-disable-next-line no-unused-vars

@@ -16,8 +16,8 @@ export const convertToFrontModel = (userData) => {
 
 export const convertToBackModel = ({ data, photoLinks }) => {
   const converted = {
-    born: data.dateB,
-    died: data.dateD,
+    born: new Date(data.dateB).toISOString(),
+    died: new Date(data.dateD).toISOString(),
     gifts: {
       candies: [],
       btc: [],

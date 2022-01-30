@@ -7,6 +7,7 @@ import { setLocale } from "yup";
 import { ReactComponent as Cross } from "../../media/svg/cross.svg";
 import { compressPhotos } from "../../lib/common-functions/common-functions";
 import { addNewBurial } from "../../api/user";
+import { Preloader } from "../Preloader";
 
 setLocale({
   string: {
@@ -21,6 +22,7 @@ let schema = yup.object().shape({
   name: yup.string().required().min(2),
   dateB: yup.date().required(),
   dateD: yup.date().required(),
+  lWords: yup.string().max(32, "максимум 32 буквы. давай лаконичнее"),
   song: yup.string().required("выбери песню а"),
   pics: yup
     .array()
@@ -66,11 +68,11 @@ export const NewGraveModal = ({ cellN, onClose = () => {} }) => {
   };
   const handleDateBInput = (e) => {
     setErrThrown("");
-    setDateB(new Date(e.target.value).toISOString());
+    setDateB(e.target.value);
   };
   const handleDateDInput = (e) => {
     setErrThrown("");
-    setDateD(new Date(e.target.value).toISOString());
+    setDateD(e.target.value);
   };
   const handleLWordsInput = (e) => {
     setErrThrown("");
@@ -78,7 +80,7 @@ export const NewGraveModal = ({ cellN, onClose = () => {} }) => {
   };
   const handleLSongInput = (v) => {
     setErrThrown("");
-    setSong(v.value);
+    setSong(v);
   };
 
   const submitData = () => {
@@ -88,26 +90,38 @@ export const NewGraveModal = ({ cellN, onClose = () => {} }) => {
       dateB,
       dateD,
       lWords,
-      song,
+      song: song.value,
       pics,
     };
     schema
       .validate(dataToPost)
-      .then(async (value) => {
+      .then(async () => {
         try {
-          await addNewBurial({...dataToPost, cellN, lWords});
+          setL(true);
+          await addNewBurial({ ...dataToPost, cellN, lWords });
+          onClose();
         } catch (e) {
           console.error(e);
           console.trace(e);
         }
       })
       .catch((err) => {
-        if (err.params.path === "song" || err.params.path === "pics") {
+        const sErr = ['song', 'pics', 'lWords']
+        if (sErr.includes(err.params.path)) {
           alert(err.errors[0]);
         }
         setErrThrown(err.params.path);
       });
   };
+
+  if (l)
+    return (
+      <NewGraveModalCont>
+        <PreloaderCont>
+          <Preloader />
+        </PreloaderCont>
+      </NewGraveModalCont>
+    );
 
   return (
     <NewGraveModalCont>
@@ -123,34 +137,39 @@ export const NewGraveModal = ({ cellN, onClose = () => {} }) => {
             type="text"
             errThrown={errThrown === "name"}
             onChange={(e) => handleNameInput(e)}
+            defaultValue={name}
           />
           <InputName>born:</InputName>
           <TextInput
             type="date"
             errThrown={errThrown === "dateB"}
             onChange={(e) => handleDateBInput(e)}
+            defaultValue={dateB}
           />
           <InputName>died:</InputName>
           <TextInput
             type="date"
             errThrown={errThrown === "dateD"}
             onChange={(e) => handleDateDInput(e)}
+            defaultValue={dateD}
           ></TextInput>
           <InputName>last words:</InputName>
           <TextInput
             type="text"
             errThrown={errThrown === "lWords"}
             onChange={(e) => handleLWordsInput(e)}
+            defaultValue={lWords}
           ></TextInput>
           <InputName>song to mourn:</InputName>
           <Select
             onChange={(v) => handleLSongInput(v)}
             options={[{ value: "zemfira", label: "земфира - пммл" }]}
+            defaultInputValue={song.label}
             styles={{
               container: (provided) => ({
                 ...provided,
                 width: "100%",
-                zIndex: 999
+                zIndex: 999,
               }),
               control: (provided) => ({
                 ...provided,
@@ -347,6 +366,11 @@ const Diag = styled.div`
   text-align: center;
   display: flex;
   flex-direction: column;
+`;
+
+const PreloaderCont = styled(Diag)`
+  justify-content: center;
+  align-items: center;
 `;
 
 const NewGraveModalCont = styled.div`
