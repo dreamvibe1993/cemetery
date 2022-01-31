@@ -1,13 +1,11 @@
 import React from "react";
 import styled from "styled-components/macro";
-import { useSelector } from "react-redux";
 import { loadUsers } from "../../api/user";
 import { CemetaryGrid } from "../../components/CemetaryGrid";
 import { MainContainer } from "../../sc-components/ScComponents";
 import { Preloader } from "../../components/Preloader";
 
 export const Home = () => {
-  const { users } = useSelector((state) => state.user);
   const [isLoading, setLoading] = React.useState(true);
 
   React.useEffect(() => {

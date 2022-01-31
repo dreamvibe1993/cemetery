@@ -2,6 +2,7 @@
   "name": "cemetary",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://dreamvibe1993.github.io/cemetary",
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.1",
     "@testing-library/jest-dom": "^5.16.1",
@@ -23,6 +24,8 @@
     "yup": "^0.32.11"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -47,6 +50,7 @@
     ]
   },
   "devDependencies": {
-    "babel-plugin-styled-components": "^2.0.2"
+    "babel-plugin-styled-components": "^2.0.2",
+    "gh-pages": "^3.2.3"
   }
 }
