@@ -1,14 +1,18 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components/macro";
-import { createUser, logOutUser } from "../../api/user";
+import { createUser, logInUser, logOutUser } from "../../api/user";
+import { Preloader } from "../../components/Preloader";
 import { ReactComponent as Logo } from "../../media/svg/logo.svg";
-import { regSchema } from "../../models/yup/yup-schemas";
+import { loginSchema, regSchema } from "../../models/yup/yup-schemas";
+import { setUserAuth } from "../../redux/user/userReducer";
 
 export const UserAuth = () => {
   const { isAuth, user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const [isSignInOpen, setSignInOpen] = React.useState(false);
+  const [isLoading, setLoading] = React.useState(true);
 
   const [logEmail, setLogEmail] = React.useState("");
   const [logPass, setLogPass] = React.useState("");
@@ -72,16 +76,47 @@ export const UserAuth = () => {
         console.trace(err);
         setError(err.path);
         setErrorM(err.message);
-        console.log(JSON.stringify(err, null, 1));
       });
-    console.log("signin");
+  };
+
+  const logIn = () => {
+    const toValidate = {
+      loginPass: logPass,
+      loginEmail: logEmail,
+    };
+    loginSchema
+      .validate(toValidate)
+      .then((val) => {
+        dispatch(setUserAuth(null));
+        logInUser(logEmail, logPass);
+      })
+      .catch((err) => {
+        console.error(err);
+        console.trace(err);
+        setError(err.path);
+        setErrorM(err.message);
+      });
   };
 
   const logOut = () => {
+    dispatch(setUserAuth(null));
     logOutUser();
   };
 
-  if (isAuth)
+  if (isAuth === null) {
+    return (
+      <ContentContainer>
+        <UserAuthContainer>
+          <LogoWrapper>
+            <Logo />
+          </LogoWrapper>
+          <Preloader />
+        </UserAuthContainer>
+      </ContentContainer>
+    );
+  }
+
+  if (isAuth === true)
     return (
       <ContentContainer>
         <UserAuthContainer>
@@ -121,7 +156,7 @@ export const UserAuth = () => {
           ></PasswordInput>
           {error === "loginPass" && <ErrMessage>{errorM}</ErrMessage>}
         </RelativeWrap>
-        <LOGIN>LOGIN</LOGIN>
+        <LOGIN onClick={logIn}>LOGIN</LOGIN>
         <SignInSection open={isSignInOpen}>
           <RelativeWrap>
             <LoginInput

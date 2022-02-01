@@ -4,6 +4,7 @@ import {
   onAuthStateChanged,
   updateProfile,
   signOut,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 import store from "../redux/store";
 import { setUserAuth, setUser } from "../redux/user/userReducer";
@@ -34,16 +35,42 @@ export const createUser = (email, password, username) => {
   });
 };
 
-export const logInUser = () => {};
+export const logInUser = (email, password) => {
+  const auth = getAuth();
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in
+      const user = userCredential.user;
+      console.log("signed in");
+      store.dispatch(setUserAuth(true));
+      store.dispatch(
+        setUser({
+          email: user.email,
+          username: user.displayName,
+        })
+      );
+      // ...
+    })
+    .catch((error) => {
+      store.dispatch(setUserAuth(false));
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.error(errorCode);
+      console.trace(errorMessage);
+      alert(errorCode + errorMessage);
+    });
+};
 
 export const logOutUser = () => {
   const auth = getAuth();
   signOut(auth)
     .then(() => {
       console.log("user signed out");
+      store.dispatch(setUserAuth(false));
       // Sign-out successful.
     })
     .catch((error) => {
+      store.dispatch(setUserAuth(null));
       console.error(error);
       console.trace(error);
       // An error happened.
