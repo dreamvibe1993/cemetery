@@ -14,25 +14,31 @@ export const UserAuth = () => {
   const [regUName, setRegUName] = React.useState("");
 
   const [error, setError] = React.useState("");
+  const [errorM, setErrorM] = React.useState("");
 
   const handleLoginEmailInput = (e) => {
     console.log(e.target.value);
+    setError("");
     setLogEmail(e.target.value);
   };
   const handleLoginPasswordInput = (e) => {
     console.log(e.target.value);
+    setError("");
     setLogPass(e.target.value);
   };
   const handleRegUsernameInput = (e) => {
     console.log(e.target.value);
+    setError("");
     setRegUName(e.target.value);
   };
   const handleRegEmailInput = (e) => {
     console.log(e.target.value);
+    setError("");
     setRegEmail(e.target.value);
   };
   const handleRegPasswordInput = (e) => {
     console.log(e.target.value);
+    setError("");
     setRegPass(e.target.value);
   };
 
@@ -55,7 +61,8 @@ export const UserAuth = () => {
         console.error(err);
         console.trace(err);
         setError(err.path);
-        console.log(err.path);
+        setErrorM(err.message);
+        console.log(JSON.stringify(err, null, 1));
       });
     console.log("signin");
   };
@@ -67,43 +74,58 @@ export const UserAuth = () => {
           <Logo />
         </LogoWrapper>
         <Title>Not authorized yet?</Title>
-        <LoginInput
-          type="email"
-          placeholder="e-mail"
-          required
-          onChange={(e) => handleLoginEmailInput(e)}
-          err={error === "loginEmail"}
-        ></LoginInput>
-        <PasswordInput
-          type="password"
-          placeholder="password"
-          required
-          onChange={(e) => handleLoginPasswordInput(e)}
-          err={error === "loginPass"}
-        ></PasswordInput>
-        <LOGIN>LOGIN</LOGIN>
-        <SignInSection open={isSignInOpen}>
-          <LoginInput
-            type="text"
-            placeholder="username"
-            required
-            onChange={(e) => handleRegUsernameInput(e)}
-            err={error === "regUsername"}
-          ></LoginInput>
+        <RelativeWrap>
           <LoginInput
             type="email"
             placeholder="e-mail"
             required
-            onChange={(e) => handleRegEmailInput(e)}
-            err={error === "regEmail"}
+            onChange={(e) => handleLoginEmailInput(e)}
+            err={error === "loginEmail"}
           ></LoginInput>
+          {error === "loginEmail" && <ErrMessage>{errorM}</ErrMessage>}
+        </RelativeWrap>
+        <RelativeWrap>
           <PasswordInput
             type="password"
             placeholder="password"
             required
-            onChange={(e) => handleRegPasswordInput(e)}
-            err={error === "regPass"}
+            onChange={(e) => handleLoginPasswordInput(e)}
+            err={error === "loginPass"}
           ></PasswordInput>
+          {error === "loginPass" && <ErrMessage>{errorM}</ErrMessage>}
+        </RelativeWrap>
+        <LOGIN>LOGIN</LOGIN>
+        <SignInSection open={isSignInOpen}>
+          <RelativeWrap>
+            <LoginInput
+              type="text"
+              placeholder="username"
+              required
+              onChange={(e) => handleRegUsernameInput(e)}
+              err={error === "regUsername"}
+            ></LoginInput>
+            {error === "regUsername" && <ErrMessage>{errorM}</ErrMessage>}
+          </RelativeWrap>
+          <RelativeWrap>
+            <LoginInput
+              type="email"
+              placeholder="e-mail"
+              required
+              onChange={(e) => handleRegEmailInput(e)}
+              err={error === "regEmail"}
+            ></LoginInput>
+            {error === "regEmail" && <ErrMessage>{errorM}</ErrMessage>}
+          </RelativeWrap>
+          <RelativeWrap>
+            <PasswordInput
+              type="password"
+              placeholder="password"
+              required
+              onChange={(e) => handleRegPasswordInput(e)}
+              err={error === "regPass"}
+            ></PasswordInput>
+            {error === "regPass" && <ErrMessage>{errorM}</ErrMessage>}
+          </RelativeWrap>
         </SignInSection>
         <SIGNIN onClick={isSignInOpen ? signInUser : openSignInSection}>
           SIGN IN
@@ -112,6 +134,19 @@ export const UserAuth = () => {
     </ContentContainer>
   );
 };
+
+const RelativeWrap = styled.div`
+  position: relative;
+  width: auto;
+`;
+
+const ErrMessage = styled.span`
+  position: absolute;
+  bottom: 2px;
+  left: 10px;
+  font-size: 12px;
+  color: rgba(168, 50, 50, 1);
+`;
 
 const SignInSection = styled.div`
   transition: height 0.3s linear, padding-top 0.3s linear,
@@ -154,7 +189,7 @@ const SIGNIN = styled(Button)`
 `;
 
 const Input = styled.input`
-  width: 50%;
+  width: 430px;
   height: 40px;
   background-color: rgba(0, 0, 0, 0.2);
   border: none;
