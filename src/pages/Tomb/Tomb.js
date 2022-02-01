@@ -31,24 +31,38 @@ export const Tomb = () => {
   const [isLoading, setLoading] = React.useState(true);
   const [grave, setGrave] = React.useState(null);
 
+  const unsub = React.useRef(() => {});
   const photoContRef = React.useRef(null);
   const x = React.useRef(0);
   const song = React.useRef(new Audio(PMML));
 
   React.useEffect(() => {
+    loadGraves().then((unsubfn) => {
+      unsub.current = unsubfn;
+    });
+  }, []);
+
+  React.useEffect(() => {
     const urlSP = new URLSearchParams(window.location.search);
     const graveId = urlSP.get("graveId");
-    if (graves.length === 0) {
-      loadGraves();
-    }
     if (!graveId) {
       setRedirect("/");
     } else {
       const grave = graves.find((grave) => grave.id === graveId);
-      setGrave(grave);
-      setLoading(false);
+      if (grave) {
+        setGrave(grave);
+        setLoading(false);
+      }
     }
   }, [graves]);
+
+  React.useEffect(() => {
+    return () => {
+      console.log("unsub");
+      if (song.current) song.current.pause();
+      unsub.current();
+    };
+  }, []);
 
   const captureClick = (e) => {
     x.current = e.clientX + x.current;

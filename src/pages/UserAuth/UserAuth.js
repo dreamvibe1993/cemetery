@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components/macro";
+import { createUser } from "../../api/user";
 import { ReactComponent as Logo } from "../../media/svg/logo.svg";
 import { regSchema } from "../../models/yup/yup-schemas";
 
@@ -55,7 +56,7 @@ export const UserAuth = () => {
     regSchema
       .validate(toValidate)
       .then((val) => {
-        console.log(val);
+        createUser(regEmail, regPass);
       })
       .catch((err) => {
         console.error(err);

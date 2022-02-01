@@ -11,6 +11,7 @@ import { GreetingsScreen } from "./components/GreetingsScreen";
 import { ReactComponent as TriangleWD } from "./media/svg/triangle-down.svg";
 import { DropDown } from "./lib/css/animations";
 import { DetailsScreen } from "./components/DetailsScreen";
+import { checkUserAuth } from "./api/user";
 
 export const app = initializeApp(firebaseConfig);
 export const database = getDatabase(app);
@@ -21,6 +22,7 @@ function App() {
   const [isHelpRequested, setHelpRequested] = React.useState(false);
 
   React.useEffect(() => {
+    checkUserAuth();
     const isFirstTime = localStorage.getItem("isLastResortFT");
     if (!isFirstTime) {
       setGreetingsShown(true);
