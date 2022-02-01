@@ -1,34 +1,14 @@
 import React from "react";
 import styled from "styled-components/macro";
 
+import { ReactComponent as Logo } from "../../media/svg/logo.svg";
+
 export const TutorialModal = ({ onClose = () => {} }) => {
   return (
     <DonateGiftCont onClick={onClose}>
+      <Logo />
       <Announcement>
-        Всем привет дамы и господа! <strike>С вами Юрий Хованский</strike>
-        <br />В общем это мой небольшой проектик, который я сделал{" "}
-        <strike>по-пьяне</strike> за эти выходные.
-        <br />
-        <strike>Это НФТ кладбище.</strike>
-        <br />
-        Это "макет" (так сказать, blueprint) НФТ кладбища.
-        <br />
-        &nbsp;
-        <br />
-        Что тут можно делать:
-        <br />
-        1. Похоронить кого-нибудь.
-        <br />
-        2. Посмотреть его фотографии.
-        <br />
-        3. Послушать песню под которую "его отпевали".
-        <br />
-        4. Оставить что-нибудь на блокчейновой могилке: чарочку водки или
-        конфетку, или биткоин, а также оставить своё пожелание.
-        <br />
-        &nbsp;
-        <br />
-        Может быть я что-то забыл сказать, я не знаю.
+
         <br />
         &nbsp;
         <br />
@@ -54,6 +34,7 @@ const DonateGiftCont = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   text-align: center;
   padding: 40px;
 `;
