@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components/macro";
 import { loadUsers } from "../../api/user";
 import { CemetaryGrid } from "../../components/CemetaryGrid";
-import { MainContainer } from "../../sc-components/ScComponents";
+import { MainContainer } from "../../lib/css/sc-components/ScComponents";
 import { Preloader } from "../../components/Preloader";
 
 export const Home = () => {

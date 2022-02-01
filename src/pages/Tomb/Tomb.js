@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/macro";
-import { MainContainer } from "../../sc-components/ScComponents";
+import { MainContainer } from "../../lib/css/sc-components/ScComponents";
 
 import PMML from "../../media/audio/zemfira-pmml.mp3";
 
