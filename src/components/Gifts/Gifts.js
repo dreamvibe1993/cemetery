@@ -7,7 +7,7 @@ import { ReactComponent as Candy } from "../../media/svg/candy.svg";
 import { ReactComponent as BTC } from "../../media/svg/btc.svg";
 import { Tooltip } from "../Tooltip";
 
-export const Gifts = ({ onClose = () => {}, user }) => {
+export const Gifts = ({ onClose = () => {}, grave }) => {
   const [cells, setCells] = React.useState([]);
 
   const returnGiftSvg = (giftName) => {
@@ -24,13 +24,13 @@ export const Gifts = ({ onClose = () => {}, user }) => {
   };
 
   React.useEffect(() => {
-    if (!user) return;
-    const gifts = Object.keys(user.gifts);
+    if (!grave) return;
+    const gifts = Object.keys(grave.gifts);
     if (gifts.length > 16) return;
     const cells = new Array(16).fill(null);
     const giftsToShow = gifts
       .map((g) =>
-        user.gifts[g].map((ug) => ({
+        grave.gifts[g].map((ug) => ({
           ...ug,
           giftType: g,
           giftSvg: returnGiftSvg(g),
@@ -41,7 +41,7 @@ export const Gifts = ({ onClose = () => {}, user }) => {
       cells[i] = gift;
     });
     setCells(cells);
-  }, [user]);
+  }, [grave]);
 
   return (
     <GiftsCont>

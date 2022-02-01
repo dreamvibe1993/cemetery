@@ -22,8 +22,8 @@ export const CemetaryGrid = () => {
       return;
     }
     if (graves.length > 12) return;
-    graves.forEach((user) => {
-      cells[user?.graveCellNum] = user;
+    graves.forEach((grave) => {
+      cells[grave?.graveCellNum] = grave;
     });
     setCells(cells);
   }, [graves]);

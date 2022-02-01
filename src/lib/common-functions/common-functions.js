@@ -100,28 +100,28 @@ const returnPhrases = (id) => {
   }
 };
 
-export const updateUserGifts = (data, user) => {
-  if (!data || !user) throw new Error('No data or user in updateUserGifts');
-  user = JSON.stringify(user);
-  let locUser = { ...JSON.parse(user) };
-  if (!locUser.gifts[data.gift]) {
-    locUser.gifts[data.gift] = [];
+export const updateGiftsOnGrave = (data, grave) => {
+  if (!data || !grave) throw new Error('No data or user in updateUserGifts');
+  grave = JSON.stringify(grave);
+  let graveClone = { ...JSON.parse(grave) };
+  if (!graveClone.gifts[data.gift]) {
+    graveClone.gifts[data.gift] = [];
   }
-  locUser.gifts[data.gift] = [
-    ...locUser.gifts[data.gift],
+  graveClone.gifts[data.gift] = [
+    ...graveClone.gifts[data.gift],
     { by: data.name, wish: data.wish },
   ];
-  locUser.chatLogs = [
-    ...locUser.chatLogs,
-    `${data?.name} left ${returnPhrases(data?.gift)} for ${locUser?.name}`,
+  graveClone.chatLogs = [
+    ...graveClone.chatLogs,
+    `${data?.name} left ${returnPhrases(data?.gift)} for ${graveClone?.name}`,
   ];
   if (data?.wish?.length > 1) {
-    locUser.chatLogs = [
-      ...locUser.chatLogs,
-      `${data.name} left a message for ${locUser.name}: "${data.wish}"`,
+    graveClone.chatLogs = [
+      ...graveClone.chatLogs,
+      `${data.name} left a message for ${graveClone.name}: "${data.wish}"`,
     ];
   }
-  locUser.born = convertToISO(locUser.born);
-  locUser.died = convertToISO(locUser.died);
-  return locUser;
+  graveClone.born = convertToISO(graveClone.born);
+  graveClone.died = convertToISO(graveClone.died);
+  return graveClone;
 };

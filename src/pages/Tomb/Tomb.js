@@ -29,7 +29,7 @@ export const Tomb = () => {
   const [isSongPlaying, setSongPlaying] = React.useState(false);
   const [redirect, setRedirect] = React.useState(null);
   const [isLoading, setLoading] = React.useState(true);
-  const [user, setUser] = React.useState(null);
+  const [grave, setGrave] = React.useState(null);
 
   const photoContRef = React.useRef(null);
   const x = React.useRef(0);
@@ -48,7 +48,7 @@ export const Tomb = () => {
     if (!grave) {
       setRedirect("/");
     } else {
-      setUser(grave);
+      setGrave(grave);
     }
   }, [graves]);
 
@@ -119,8 +119,8 @@ export const Tomb = () => {
 
   return (
     <>
-      {isDonateOpen && <DonateGift onClose={closeDonateGift} user={user} />}
-      {isGiftsOpen && <Gifts onClose={closeGifts} user={user} />}
+      {isDonateOpen && <DonateGift onClose={closeDonateGift} grave={grave} />}
+      {isGiftsOpen && <Gifts onClose={closeGifts} grave={grave} />}
       {isGalleryOpen && <Gallery src={isGalleryOpen} onClose={hidePhoto} />}
       <MainContainer>
         <TopPanel>
@@ -137,7 +137,7 @@ export const Tomb = () => {
               >
                 <Donate onClick={openDonateGift} />
               </Tooltip>
-              <Name>{user?.name}</Name>
+              <Name>{grave?.name}</Name>
               <Tooltip
                 content={
                   "Listen to the song this person bequeathed to play at their funeral."
@@ -159,7 +159,7 @@ export const Tomb = () => {
                 onMouseLeave={releaseClick}
                 draggable={false}
               >
-                {user?.photos.map((src, i) => {
+                {grave?.photos.map((src, i) => {
                   return (
                     <Picture src={src} key={src + i} showPhoto={showPhoto} />
                   );
@@ -167,13 +167,13 @@ export const Tomb = () => {
               </PhotoContPhotosWrapper>
             </PhotoCont>
             <DateLiving>
-              {user?.born} - {user?.died}
+              {grave?.born} - {grave?.died}
             </DateLiving>
-            <LastWords>{user?.lastWords}</LastWords>
+            <LastWords>{grave?.lastWords}</LastWords>
           </MainInfoCont>
           <LogsCont>
             <Log>
-              {user?.chatLogs.map((entry, i) => {
+              {grave?.chatLogs.map((entry, i) => {
                 return <LogEntry key={entry + i}>&gt; {entry}</LogEntry>;
               })}
             </Log>

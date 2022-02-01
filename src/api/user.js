@@ -10,7 +10,7 @@ import {
 import {
   convertToBackModel,
   convertToFrontModel,
-  updateUserGifts,
+  updateGiftsOnGrave,
 } from "../lib/common-functions/common-functions";
 
 const graves = 'graves';
@@ -100,13 +100,13 @@ export const getPhotosUrls = async (file) => {
   });
 };
 
-export const updateGrave = (data, user) => {
+export const updateGrave = (data, grave) => {
   const dbRef = ref(database, graves);
   return new Promise((res, rej) => {
     get(dbRef).then((s) => {
       const db = s.val();
-      const indexToUpd = db.findIndex((gr) => gr.id === user.id);
-      set(ref(database, graves + "/" + indexToUpd), updateUserGifts(data, user))
+      const indexToUpd = db.findIndex((gr) => gr.id === grave.id);
+      set(ref(database, graves + "/" + indexToUpd), updateGiftsOnGrave(data, grave))
         .then((v) => {
           res(v);
         })
