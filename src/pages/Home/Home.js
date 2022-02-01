@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/macro";
-import { loadGraves } from "../../api/user";
+import { loadGraves } from "../../api/graves";
 import { CemetaryGrid } from "../../components/CemetaryGrid";
 import { MainContainer } from "../../lib/css/sc-components/ScComponents";
 import { Preloader } from "../../components/Preloader";

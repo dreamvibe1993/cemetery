@@ -5,7 +5,7 @@ import { ReactComponent as Vodka } from "../../../media/svg/vodka.svg";
 import { ReactComponent as Candy } from "../../../media/svg/candy.svg";
 import { ReactComponent as BTC } from "../../../media/svg/btc.svg";
 import { giftSchema } from "../../../models/yup/yup-schemas";
-import { updateGrave } from "../../../api/user";
+import { updateGrave } from "../../../api/graves";
 
 export const DonateGift = ({ onClose = () => {}, grave }) => {
   const [gift, setGift] = React.useState(null);

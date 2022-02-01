@@ -17,7 +17,7 @@ import { Navigate } from "react-router-dom";
 import { Tooltip } from "../../components/Tooltip";
 import { useSelector } from "react-redux";
 import { Preloader } from "../../components/Preloader";
-import { loadGraves } from "../../api/user";
+import { loadGraves } from "../../api/graves";
 
 export const Tomb = () => {
   const { graves } = useSelector((state) => state.graves);
