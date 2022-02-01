@@ -2,17 +2,21 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components/macro";
 import { createUser, logInUser, logOutUser } from "../../api/user";
-import { Preloader } from "../../components/Preloader";
+
 import { ReactComponent as Logo } from "../../media/svg/logo.svg";
+import { ReactComponent as Cross } from "../../media/svg/cross.svg";
+
+import { Preloader } from "../../components/Preloader";
+import { ServiceButton } from "../../lib/css/sc-components/ScComponents";
 import { loginSchema, regSchema } from "../../models/yup/yup-schemas";
 import { setUserAuth } from "../../redux/user/userReducer";
+import { Navigate } from "react-router-dom";
 
 export const UserAuth = () => {
   const { isAuth, user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const [isSignInOpen, setSignInOpen] = React.useState(false);
-  const [isLoading, setLoading] = React.useState(true);
 
   const [logEmail, setLogEmail] = React.useState("");
   const [logPass, setLogPass] = React.useState("");
@@ -24,28 +28,25 @@ export const UserAuth = () => {
   const [error, setError] = React.useState("");
   const [errorM, setErrorM] = React.useState("");
 
+  const [redirect, setRedirect] = React.useState("");
+
   const handleLoginEmailInput = (e) => {
-    console.log(e.target.value);
     setError("");
     setLogEmail(e.target.value);
   };
   const handleLoginPasswordInput = (e) => {
-    console.log(e.target.value);
     setError("");
     setLogPass(e.target.value);
   };
   const handleRegUsernameInput = (e) => {
-    console.log(e.target.value);
     setError("");
     setRegUName(e.target.value);
   };
   const handleRegEmailInput = (e) => {
-    console.log(e.target.value);
     setError("");
     setRegEmail(e.target.value);
   };
   const handleRegPasswordInput = (e) => {
-    console.log(e.target.value);
     setError("");
     setRegPass(e.target.value);
   };
@@ -103,10 +104,19 @@ export const UserAuth = () => {
     logOutUser();
   };
 
+  const redirectToHome = () => {
+    setRedirect("/");
+  };
+
+  if (redirect) return <Navigate to={redirect} />;
+
   if (isAuth === null) {
     return (
       <ContentContainer>
         <UserAuthContainer>
+          <CrossSVGWrapper>
+            <Cross onClick={redirectToHome} />
+          </CrossSVGWrapper>
           <LogoWrapper>
             <Logo />
           </LogoWrapper>
@@ -120,6 +130,9 @@ export const UserAuth = () => {
     return (
       <ContentContainer>
         <UserAuthContainer>
+          <CrossSVGWrapper>
+            <Cross onClick={redirectToHome} />
+          </CrossSVGWrapper>
           <LogoWrapper>
             <Logo />
           </LogoWrapper>
@@ -132,6 +145,9 @@ export const UserAuth = () => {
   return (
     <ContentContainer>
       <UserAuthContainer>
+        <CrossSVGWrapper>
+          <Cross onClick={redirectToHome} />
+        </CrossSVGWrapper>
         <LogoWrapper>
           <Logo />
         </LogoWrapper>
@@ -197,6 +213,17 @@ export const UserAuth = () => {
   );
 };
 
+const CrossSVGWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 20px;
+  cursor: pointer;
+  svg {
+    width: 14px;
+  }
+`;
+
 const RelativeWrap = styled.div`
   position: relative;
   width: auto;
@@ -231,30 +258,13 @@ const ContentContainer = styled.div`
   align-items: center;
 `;
 
-const Button = styled.button`
-  width: 33%;
-  height: 40px;
-  background-color: #23a0b0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  user-select: none;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  &:active {
-    background-color: #1d8491;
-  }
-`;
-
-const LOGIN = styled(Button)`
+const LOGIN = styled(ServiceButton)`
   margin-top: 20px;
 `;
-const SIGNIN = styled(Button)`
+const SIGNIN = styled(ServiceButton)`
   margin-top: 20px;
 `;
-
-const LOGOUT = styled(Button)`
+const LOGOUT = styled(ServiceButton)`
   margin-top: 20px;
 `;
 
@@ -297,4 +307,5 @@ const UserAuthContainer = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
+  position: relative;
 `;
