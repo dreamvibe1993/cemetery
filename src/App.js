@@ -10,6 +10,7 @@ import { GreetingsScreen } from "./components/GreetingsScreen";
 
 import { ReactComponent as TriangleWD } from "./media/svg/triangle-down.svg";
 import { DropDown } from "./lib/css/animations";
+import { DetailsScreen } from "./components/DetailsScreen";
 
 export const app = initializeApp(firebaseConfig);
 export const database = getDatabase(app);
@@ -17,6 +18,7 @@ export const storage = getStorage();
 
 function App() {
   const [isGreetingsShown, setGreetingsShown] = React.useState(false);
+  const [isHelpRequested, setHelpRequested] = React.useState(false);
 
   React.useEffect(() => {
     const isFirstTime = localStorage.getItem("isLastResortFT");
@@ -30,10 +32,19 @@ function App() {
     setGreetingsShown(false);
   };
 
+  const showDetailsScreen = () => {
+    setHelpRequested(true);
+  }
+
+  const hideDetailsScreen = () => {
+    setHelpRequested(false);
+  }
+
   return (
     <>
       {isGreetingsShown && <GreetingsScreen onClose={closeGreetings} />}
-      <TipButton>
+      {isHelpRequested && <DetailsScreen onClose={hideDetailsScreen} />}
+      <TipButton onClick={showDetailsScreen}>
         <TriangleWD />
       </TipButton>
       <Paths />
