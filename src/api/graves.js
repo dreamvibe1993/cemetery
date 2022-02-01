@@ -22,11 +22,14 @@ export const loadGraves = () => {
     const unsub = onValue(starCountRef, async (snapshot) => {
       const data = await snapshot.val();
       if (data) {
+        const gravesConverted = data?.map((grave) => convertToFrontModel(grave))
         store.dispatch(
-          setGraves(data?.map((grave) => convertToFrontModel(grave)))
+          setGraves(gravesConverted)
         );
+        res(unsub);
+      } else {
+        rej(unsub)
       }
-      res(unsub);
     });
   });
 };

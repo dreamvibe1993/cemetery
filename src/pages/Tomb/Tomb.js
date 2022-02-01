@@ -36,19 +36,17 @@ export const Tomb = () => {
   const song = React.useRef(new Audio(PMML));
 
   React.useEffect(() => {
-    if (!graves) {
-      loadGraves();
-      return;
-    } else {
-      setLoading(false);
-    }
     const urlSP = new URLSearchParams(window.location.search);
     const graveId = urlSP.get("graveId");
-    const grave = graves.find((grave) => grave.id === graveId);
-    if (!grave) {
+    if (graves.length === 0) {
+      loadGraves();
+    }
+    if (!graveId) {
       setRedirect("/");
     } else {
+      const grave = graves.find((grave) => grave.id === graveId);
       setGrave(grave);
+      setLoading(false);
     }
   }, [graves]);
 
