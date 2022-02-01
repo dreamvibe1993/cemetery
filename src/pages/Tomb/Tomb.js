@@ -17,10 +17,10 @@ import { Navigate } from "react-router-dom";
 import { Tooltip } from "../../components/Tooltip";
 import { useSelector } from "react-redux";
 import { Preloader } from "../../components/Preloader";
-import { loadUsers } from "../../api/user";
+import { loadGraves } from "../../api/user";
 
 export const Tomb = () => {
-  const { users } = useSelector((state) => state.user);
+  const { graves } = useSelector((state) => state.graves);
 
   const [isClicked, setClicked] = React.useState(false);
   const [isGalleryOpen, setGalleryOpen] = React.useState(false);
@@ -36,21 +36,21 @@ export const Tomb = () => {
   const song = React.useRef(new Audio(PMML));
 
   React.useEffect(() => {
-    if (!users) {
-      loadUsers();
+    if (!graves) {
+      loadGraves();
       return;
     } else {
       setLoading(false);
     }
     const urlSP = new URLSearchParams(window.location.search);
-    const userId = urlSP.get("userId");
-    const user = users.find((user) => user.id === userId);
-    if (!user) {
+    const graveId = urlSP.get("graveId");
+    const grave = graves.find((grave) => grave.id === graveId);
+    if (!grave) {
       setRedirect("/");
     } else {
-      setUser(user);
+      setUser(grave);
     }
-  }, [users]);
+  }, [graves]);
 
   const captureClick = (e) => {
     x.current = e.clientX + x.current;

@@ -10,26 +10,26 @@ import { NewGraveModal } from "../NewGraveModal/NewGraveModal";
 import { Tooltip } from "../Tooltip";
 
 export const CemetaryGrid = () => {
-  const { users } = useSelector((state) => state.user);
+  const { graves } = useSelector((state) => state.graves);
   const [redirect, setRedirect] = React.useState(null);
   const [cells, setCells] = React.useState([]);
   const [cellNumChosen, setCellNumChosen] = React.useState(false);
 
   React.useEffect(() => {
     const cells = new Array(12).fill(null);
-    if (!users) {
+    if (!graves) {
       setCells(cells);
       return;
     }
-    if (users.length > 12) return;
-    users.forEach((user) => {
+    if (graves.length > 12) return;
+    graves.forEach((user) => {
       cells[user?.graveCellNum] = user;
     });
     setCells(cells);
-  }, [users]);
+  }, [graves]);
 
-  const visitTomb = (user) => {
-    setRedirect("/tomb?userId=" + user.id);
+  const visitTomb = (grave) => {
+    setRedirect("/tomb?graveId=" + grave.id);
   };
 
   const askNewGrave = (i) => {

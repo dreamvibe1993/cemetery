@@ -66,6 +66,7 @@ const TipButton = styled.div`
   align-items: center;
   justify-content: center;
   animation: ${DropDown} .7s ease-in-out;
+  z-index: 10;
   svg {
     width: 50%;
     height: 50%;

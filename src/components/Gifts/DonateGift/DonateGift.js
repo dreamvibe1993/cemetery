@@ -5,7 +5,7 @@ import { ReactComponent as Vodka } from "../../../media/svg/vodka.svg";
 import { ReactComponent as Candy } from "../../../media/svg/candy.svg";
 import { ReactComponent as BTC } from "../../../media/svg/btc.svg";
 import { giftSchema } from "../../../models/yup/yup-schemas";
-import { updateUser } from "../../../api/user";
+import { updateGrave } from "../../../api/user";
 
 export const DonateGift = ({ onClose = () => {}, user }) => {
   const [gift, setGift] = React.useState(null);
@@ -32,7 +32,7 @@ export const DonateGift = ({ onClose = () => {}, user }) => {
     giftSchema
       .validate(dataToValidate)
       .then((val) => {
-        updateUser(dataToValidate, user).then(() => onClose());
+        updateGrave(dataToValidate, user).then(() => onClose());
       })
       .catch((err) => {
         console.error(err);

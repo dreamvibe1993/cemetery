@@ -1,7 +1,7 @@
 import { database, storage } from "../App";
 import { ref, onValue, set, get } from "firebase/database";
 import store from "../redux/store";
-import { setUsers } from "../redux/user/userReducer";
+import { setGraves } from "../redux/graves/gravesReducer";
 import {
   getDownloadURL,
   ref as storageRef,
@@ -13,17 +13,20 @@ import {
   updateUserGifts,
 } from "../lib/common-functions/common-functions";
 
-export const loadUsers = () => {
-  const starCountRef = ref(database, "users");
+const graves = 'graves';
+const users = 'users';
+
+export const loadGraves = () => {
+  const starCountRef = ref(database, graves);
   return new Promise((res, rej) => {
-    onValue(starCountRef, async (snapshot) => {
+    const unsub = onValue(starCountRef, async (snapshot) => {
       const data = await snapshot.val();
       if (data) {
         store.dispatch(
-          setUsers(data?.map((user) => convertToFrontModel(user)))
+          setGraves(data?.map((grave) => convertToFrontModel(grave)))
         );
       }
-      res();
+      res(unsub);
     });
   });
 };
@@ -38,7 +41,7 @@ export const addNewBurial = async (data) => {
     try {
       const readyToPost = convertToBackModel({ data, photoLinks });
       const t = store.getState();
-      set(ref(database, "users/" + t?.user?.users?.length || "0"), readyToPost)
+      set(ref(database, graves + "/" + t?.graves?.graves?.length || "0"), readyToPost)
         .then((v) => {
           res(v);
         })
@@ -97,13 +100,13 @@ export const getPhotosUrls = async (file) => {
   });
 };
 
-export const updateUser = (data, user) => {
-  const dbRef = ref(database, "users");
+export const updateGrave = (data, user) => {
+  const dbRef = ref(database, graves);
   return new Promise((res, rej) => {
     get(dbRef).then((s) => {
       const db = s.val();
       const indexToUpd = db.findIndex((gr) => gr.id === user.id);
-      set(ref(database, "users/" + indexToUpd), updateUserGifts(data, user))
+      set(ref(database, graves + "/" + indexToUpd), updateUserGifts(data, user))
         .then((v) => {
           res(v);
         })

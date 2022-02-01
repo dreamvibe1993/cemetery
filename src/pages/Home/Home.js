@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/macro";
-import { loadUsers } from "../../api/user";
+import { loadGraves } from "../../api/user";
 import { CemetaryGrid } from "../../components/CemetaryGrid";
 import { MainContainer } from "../../lib/css/sc-components/ScComponents";
 import { Preloader } from "../../components/Preloader";
@@ -8,10 +8,16 @@ import { Preloader } from "../../components/Preloader";
 export const Home = () => {
   const [isLoading, setLoading] = React.useState(true);
 
+  const unsub = React.useRef(() => {});
+
   React.useEffect(() => {
-    loadUsers().then(() => {
+    loadGraves().then((unsubFn) => {
+      unsub.current = unsubFn;
       setLoading(false);
     });
+    return () => {
+      // unsub.current();
+    };
   }, []);
 
   if (isLoading)
