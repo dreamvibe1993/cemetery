@@ -58,7 +58,6 @@ export const Tomb = () => {
 
   React.useEffect(() => {
     return () => {
-      console.log("unsub");
       if (song.current) song.current.pause();
       unsub.current();
     };

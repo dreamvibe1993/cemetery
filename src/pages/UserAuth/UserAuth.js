@@ -1,10 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components/macro";
-import { createUser } from "../../api/user";
+import { createUser, logOutUser } from "../../api/user";
 import { ReactComponent as Logo } from "../../media/svg/logo.svg";
 import { regSchema } from "../../models/yup/yup-schemas";
 
 export const UserAuth = () => {
+  const { isAuth, user } = useSelector((state) => state.user);
+
   const [isSignInOpen, setSignInOpen] = React.useState(false);
 
   const [logEmail, setLogEmail] = React.useState("");
@@ -47,7 +50,11 @@ export const UserAuth = () => {
     setSignInOpen(true);
   };
 
-  const signInUser = () => {
+  const closeSignInSection = () => {
+    setSignInOpen(true);
+  };
+
+  const createUserAcc = () => {
     const toValidate = {
       regPass: regPass,
       regUsername: regUName,
@@ -56,7 +63,9 @@ export const UserAuth = () => {
     regSchema
       .validate(toValidate)
       .then((val) => {
-        createUser(regEmail, regPass);
+        createUser(regEmail, regPass, regUName).then(() => {
+          closeSignInSection();
+        });
       })
       .catch((err) => {
         console.error(err);
@@ -67,6 +76,23 @@ export const UserAuth = () => {
       });
     console.log("signin");
   };
+
+  const logOut = () => {
+    logOutUser();
+  };
+
+  if (isAuth)
+    return (
+      <ContentContainer>
+        <UserAuthContainer>
+          <LogoWrapper>
+            <Logo />
+          </LogoWrapper>
+          <Title>Hey {user.username}!</Title>
+          <LOGOUT onClick={logOut}>LOGOUT</LOGOUT>
+        </UserAuthContainer>
+      </ContentContainer>
+    );
 
   return (
     <ContentContainer>
@@ -128,8 +154,8 @@ export const UserAuth = () => {
             {error === "regPass" && <ErrMessage>{errorM}</ErrMessage>}
           </RelativeWrap>
         </SignInSection>
-        <SIGNIN onClick={isSignInOpen ? signInUser : openSignInSection}>
-          SIGN IN
+        <SIGNIN onClick={isSignInOpen ? createUserAcc : openSignInSection}>
+          CREATE AN ACCOUNT
         </SIGNIN>
       </UserAuthContainer>
     </ContentContainer>
@@ -180,12 +206,20 @@ const Button = styled.button`
   user-select: none;
   color: #fff;
   border: none;
+  cursor: pointer;
+  &:active {
+    background-color: #1d8491;
+  }
 `;
 
 const LOGIN = styled(Button)`
   margin-top: 20px;
 `;
 const SIGNIN = styled(Button)`
+  margin-top: 20px;
+`;
+
+const LOGOUT = styled(Button)`
   margin-top: 20px;
 `;
 

@@ -16,7 +16,6 @@ export const Home = () => {
       setLoading(false);
     });
     return () => {
-      console.log('unsub')
       unsub.current();
     };
   }, []);
