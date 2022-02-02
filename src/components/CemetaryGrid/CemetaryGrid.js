@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import styled from "styled-components/macro";
+import { ServiceButton } from "../../lib/css/sc-components/ScComponents";
 
 import GrassPattern from "../../media/img/grave/grass-p-2.png";
 
@@ -11,6 +12,7 @@ import { Tooltip } from "../Tooltip";
 
 export const CemetaryGrid = () => {
   const { graves } = useSelector((state) => state.graves);
+  const { isAdmin } = useSelector((state) => state.user);
   const [redirect, setRedirect] = React.useState(null);
   const [cells, setCells] = React.useState([]);
   const [cellNumChosen, setCellNumChosen] = React.useState(false);
@@ -57,6 +59,14 @@ export const CemetaryGrid = () => {
             >
               <Cell onClick={() => visitTomb(cell)}>
                 <Grave />
+                {isAdmin && (
+                  <ServiceButton
+                    id="sbut"
+                    style={{ position: "absolute", bottom: "15px" }}
+                  >
+                    DELETE
+                  </ServiceButton>
+                )}
               </Cell>
             </Tooltip>
           ) : (
@@ -89,6 +99,9 @@ const Cell = styled.div`
       transition: all 0.2s linear;
       background-color: rgba(255, 255, 255, 0.1);
     }
+    #sbut {
+      opacity: 1;
+    }
   }
   &::after {
     position: absolute;
@@ -98,6 +111,9 @@ const Cell = styled.div`
     width: 100%;
     height: 100%;
     background-color: transparent;
+  }
+  #sbut {
+    opacity: 0;
   }
 `;
 

@@ -17,7 +17,7 @@ export const createUser = (email, password, username) => {
         // Signed in
         const user = userCredential;
         updateProfile(auth.currentUser, {
-          displayName: username
+          displayName: username,
         });
         console.log("signed in: ", user);
         res(user);
@@ -47,12 +47,14 @@ export const logInUser = (email, password) => {
         setUser({
           email: user.email,
           username: user.displayName,
+          uid: user.uid,
         })
       );
       // ...
     })
     .catch((error) => {
       store.dispatch(setUserAuth(false));
+      store.dispatch(setUser({}));
       const errorCode = error.code;
       const errorMessage = error.message;
       console.error(errorCode);
@@ -67,10 +69,12 @@ export const logOutUser = () => {
     .then(() => {
       console.log("user signed out");
       store.dispatch(setUserAuth(false));
+      store.dispatch(setUser({}));
       // Sign-out successful.
     })
     .catch((error) => {
       store.dispatch(setUserAuth(null));
+      store.dispatch(setUser({}));
       console.error(error);
       console.trace(error);
       // An error happened.
@@ -89,7 +93,7 @@ export const checkUserAuth = () => {
         setUser({
           email: user.email,
           username: user.displayName,
-          uid: user.uid
+          uid: user.uid,
         })
       );
       // ...
@@ -97,6 +101,7 @@ export const checkUserAuth = () => {
       // User is signed out
       console.log("signed out");
       store.dispatch(setUserAuth(false));
+      store.dispatch(setUser({}));
       // ...
     }
   });

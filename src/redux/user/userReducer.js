@@ -12,6 +12,8 @@ export const user = createSlice({
     setUser(state, action) {
       if (action.payload.uid === process.env.REACT_APP_A_UID) {
         state.isAdmin = true;
+      } else {
+        state.isAdmin = false;
       }
       action.payload.uid = undefined;
       state.user = action.payload;
