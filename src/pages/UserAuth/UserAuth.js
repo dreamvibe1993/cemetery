@@ -108,6 +108,16 @@ export const UserAuth = () => {
     setRedirect("/");
   };
 
+  // function KeyPress(e) {
+  //   var evtobj = window.event || e;
+  //   if (evtobj.keyCode == 90 && evtobj.ctrlKey) alert("Ctrl+z");
+  // }
+  // document.onkeydown = KeyPress;
+  const handleLoginEmailKeyPress = (e) => {
+    var evtobj = window.event || e;
+    if (evtobj.keyCode == 90 && evtobj.ctrlKey) alert("Ctrl+z");
+  };
+
   if (redirect) return <Navigate to={redirect} />;
 
   if (isAuth === null) {
@@ -158,6 +168,7 @@ export const UserAuth = () => {
             placeholder="e-mail"
             required
             onChange={(e) => handleLoginEmailInput(e)}
+            onKeyDown={(e) => handleLoginEmailKeyPress(e)}
             err={error === "loginEmail"}
           ></LoginInput>
           {error === "loginEmail" && <ErrMessage>{errorM}</ErrMessage>}

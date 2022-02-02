@@ -17,7 +17,7 @@ export const createUser = (email, password, username) => {
         // Signed in
         const user = userCredential;
         updateProfile(auth.currentUser, {
-          displayName: username,
+          displayName: username
         });
         console.log("signed in: ", user);
         res(user);
@@ -89,6 +89,7 @@ export const checkUserAuth = () => {
         setUser({
           email: user.email,
           username: user.displayName,
+          uid: user.uid
         })
       );
       // ...

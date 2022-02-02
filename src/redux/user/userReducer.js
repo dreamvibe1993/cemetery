@@ -4,11 +4,16 @@ export const user = createSlice({
   name: "user",
   initialState: {
     isAuth: null,
-    authError: '',
+    authError: "",
     user: {},
+    isAdmin: false,
   },
   reducers: {
     setUser(state, action) {
+      if (action.payload.uid === process.env.REACT_APP_A_UID) {
+        state.isAdmin = true;
+      }
+      action.payload.uid = undefined;
       state.user = action.payload;
     },
     setUserAuth(state, action) {
