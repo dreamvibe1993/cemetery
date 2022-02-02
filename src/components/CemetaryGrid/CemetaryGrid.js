@@ -62,7 +62,7 @@ export const CemetaryGrid = () => {
                 {isAdmin && (
                   <ServiceButton
                     id="sbut"
-                    style={{ position: "absolute", bottom: "15px" }}
+                    style={{ position: "absolute", bottom: "15px", zIndex: 99999 }}
                   >
                     DELETE
                   </ServiceButton>

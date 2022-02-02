@@ -48,7 +48,7 @@ export const Tomb = () => {
     if (!graveId) {
       setRedirect("/");
     } else {
-      const grave = graves.find((grave) => grave.id === graveId);
+      const grave = graves.find((grave) => grave?.id === graveId);
       if (grave) {
         setGrave(grave);
         setLoading(false);

@@ -22,7 +22,7 @@ export const loadGraves = () => {
     const unsub = onValue(starCountRef, async (snapshot) => {
       const data = await snapshot.val();
       if (data) {
-        const gravesConverted = data?.map((grave) => convertToFrontModel(grave))
+        const gravesConverted = data?.filter(item => item !== undefined).map((grave) => convertToFrontModel(grave))
         store.dispatch(
           setGraves(gravesConverted)
         );
@@ -108,7 +108,7 @@ export const updateGrave = (data, grave) => {
   return new Promise((res, rej) => {
     get(dbRef).then((s) => {
       const db = s.val();
-      const indexToUpd = db.findIndex((gr) => gr.id === grave.id);
+      const indexToUpd = db.findIndex((gr) => gr?.id === grave.id);
       set(ref(database, graves + "/" + indexToUpd), updateGiftsOnGrave(data, grave))
         .then((v) => {
           res(v);
