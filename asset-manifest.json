@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/cemetery/static/css/main.14618208.css",
-    "main.js": "/cemetery/static/js/main.8deedcab.js",
+    "main.js": "/cemetery/static/js/main.e6600cbc.js",
     "static/js/787.1194fe80.chunk.js": "/cemetery/static/js/787.1194fe80.chunk.js",
     "static/media/zemfira-pmml.mp3": "/cemetery/static/media/zemfira-pmml.c51903561541b0b4d72d.mp3",
     "static/media/logo.svg": "/cemetery/static/media/logo.c88c0ac333fd59261b5f5318fcc15823.svg",
@@ -17,11 +17,11 @@
     "static/media/chevrone.svg": "/cemetery/static/media/chevrone.1c769e6bf0e40dfa8c065a88cbccd9a7.svg",
     "static/media/triangle-down.svg": "/cemetery/static/media/triangle-down.e5ff7e7d97b04ff0fe95abc801ca5ac5.svg",
     "main.14618208.css.map": "/cemetery/static/css/main.14618208.css.map",
-    "main.8deedcab.js.map": "/cemetery/static/js/main.8deedcab.js.map",
+    "main.e6600cbc.js.map": "/cemetery/static/js/main.e6600cbc.js.map",
     "787.1194fe80.chunk.js.map": "/cemetery/static/js/787.1194fe80.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.14618208.css",
-    "static/js/main.8deedcab.js"
+    "static/js/main.e6600cbc.js"
   ]
 }
