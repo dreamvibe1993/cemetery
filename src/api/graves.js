@@ -21,7 +21,6 @@ export const loadGraves = () => {
   return new Promise((res, rej) => {
     const unsub = onValue(starCountRef, async (snapshot) => {
       const data = await snapshot.val();
-      console.log(data)
       if (data) {
         const gravesConverted = data
           ?.filter((item) => item !== undefined)
@@ -66,14 +65,13 @@ export const addNewBurial = async (data) => {
 export const deleteGrave = async (grave) => {
   const t = store.getState();
   if (!t?.user?.isAdmin) return;
-  const dbRef = ref(database, graves);
   return new Promise((res, rej) => {
+    const dbRef = ref(database, graves);
     try {
       get(dbRef).then((s) => {
         const db = s.val();
         const indexToDel = db.findIndex((gr) => gr?.id === grave.id);
-        console.log(db, indexToDel, graves + "/" + indexToDel)
-        remove(graves + "/" + indexToDel).then(() => {
+        set(ref(database, graves + "/" + indexToDel), null).then(() => {
           console.log("grave " + indexToDel + " is deleted");
           res();
         });
