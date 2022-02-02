@@ -19,7 +19,6 @@ export const createUser = (email, password, username) => {
         updateProfile(auth.currentUser, {
           displayName: username,
         });
-        console.log("signed in: ", user);
         res(user);
         // ...
       })
