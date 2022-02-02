@@ -1,8 +1,8 @@
 {
-  "name": "cemetary",
+  "name": "cemetery",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://dreamvibe1993.github.io/cemetary",
+  "homepage": "https://dreamvibe1993.github.io/cemetery",
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.1",
     "@testing-library/jest-dom": "^5.16.1",
