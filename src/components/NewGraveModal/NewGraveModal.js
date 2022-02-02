@@ -83,17 +83,21 @@ export const NewGraveModal = ({ cellN, onClose = () => {} }) => {
       .then(async () => {
         try {
           setL(true);
-          await addNewBurial({ ...dataToPost, cellN: cellN.toString(), lWords });
+          await addNewBurial({
+            ...dataToPost,
+            cellN: cellN.toString(),
+            lWords,
+          });
           onClose();
         } catch (e) {
-          alert('something went wrong. sorry')
+          alert("something went wrong. sorry");
           onClose();
           console.error(e);
           console.trace(e);
         }
       })
       .catch((err) => {
-        const sErr = ['song', 'pics', 'lWords']
+        const sErr = ["song", "pics", "lWords"];
         if (sErr.includes(err.params.path)) {
           alert(err.errors[0]);
         }
@@ -147,7 +151,7 @@ export const NewGraveModal = ({ cellN, onClose = () => {} }) => {
             errThrown={errThrown === "lWords"}
             onChange={(e) => handleLWordsInput(e)}
             maxLength={32}
-            defaultValue={lWords} 
+            defaultValue={lWords}
           ></TextInput>
           <InputName>song to mourn:</InputName>
           <Select
@@ -348,6 +352,7 @@ const InputName = styled(Title)`
 `;
 
 const Diag = styled.div`
+  margin-top: 50px;
   height: 750px;
   width: 450px;
   background-color: #591740;
@@ -372,5 +377,6 @@ const NewGraveModalCont = styled.div`
   background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  overflow-y: auto;
 `;
