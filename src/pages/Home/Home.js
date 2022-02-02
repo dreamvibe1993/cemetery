@@ -11,10 +11,15 @@ export const Home = () => {
   const unsub = React.useRef(() => {});
 
   React.useEffect(() => {
-    loadGraves().then((unsubFn) => {
-      unsub.current = unsubFn;
-      setLoading(false);
-    });
+    loadGraves()
+      .then((unsubFn) => {
+        unsub.current = unsubFn;
+        setLoading(false);
+      })
+      .catch((unsubFn) => {
+        unsub.current = unsubFn;
+        setLoading(false);
+      });
     return () => {
       unsub.current();
     };

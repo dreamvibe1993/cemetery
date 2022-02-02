@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import styled from "styled-components/macro";
+import { deleteGrave } from "../../api/graves";
 import { ServiceButton } from "../../lib/css/sc-components/ScComponents";
 
 import GrassPattern from "../../media/img/grave/grass-p-2.png";
@@ -34,6 +35,16 @@ export const CemetaryGrid = () => {
     setRedirect("/tomb?graveId=" + grave.id);
   };
 
+  const deleteTomb = (e, grave) => {
+    e.stopPropagation();
+    const conf = window.confirm(
+      "are you sure you want to delete the grave of " + grave.name
+    );
+    if (conf) {
+      deleteGrave(grave);
+    }
+  };
+
   const askNewGrave = (i) => {
     setCellNumChosen(i);
   };
@@ -62,7 +73,12 @@ export const CemetaryGrid = () => {
                 {isAdmin && (
                   <ServiceButton
                     id="sbut"
-                    style={{ position: "absolute", bottom: "15px", zIndex: 99999 }}
+                    style={{
+                      position: "absolute",
+                      bottom: "15px",
+                      zIndex: 99999,
+                    }}
+                    onClick={(e) => deleteTomb(e, cell)}
                   >
                     DELETE
                   </ServiceButton>

@@ -37,9 +37,13 @@ export const Tomb = () => {
   const song = React.useRef(new Audio(PMML));
 
   React.useEffect(() => {
-    loadGraves().then((unsubfn) => {
-      unsub.current = unsubfn;
-    });
+    loadGraves()
+      .then((unsubfn) => {
+        unsub.current = unsubfn;
+      })
+      .catch((unsubFn) => {
+        unsub.current = unsubFn;
+      });
   }, []);
 
   React.useEffect(() => {
