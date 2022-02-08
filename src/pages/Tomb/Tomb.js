@@ -38,12 +38,6 @@ export const Tomb = () => {
 
   React.useEffect(() => {
     loadGraves()
-      .then((unsubfn) => {
-        unsub.current = unsubfn;
-      })
-      .catch((unsubFn) => {
-        unsub.current = unsubFn;
-      });
   }, []);
 
   React.useEffect(() => {

@@ -1,3 +1,4 @@
+import axios from "axios";
 import { database, storage } from "../App";
 import { ref, onValue, set, get, remove } from "firebase/database";
 import store from "../redux/store";
@@ -16,21 +17,24 @@ import {
 const graves = "graves";
 const users = "users";
 
+const GRAVES_API_URL = "/api/v1/graves";
+
 export const loadGraves = () => {
-  const starCountRef = ref(database, graves);
-  return new Promise((res, rej) => {
-    const unsub = onValue(starCountRef, async (snapshot) => {
-      const data = await snapshot.val();
-      if (data) {
-        const gravesConverted = data
-          ?.filter((item) => item !== undefined)
-          .map((grave) => convertToFrontModel(grave));
-        store.dispatch(setGraves(gravesConverted));
-        res(unsub);
-      } else {
-        rej(unsub);
-      }
-    });
+  return new Promise(async (res, rej) => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8888" + GRAVES_API_URL
+      );
+      const gravesConverted = response.data
+        ?.filter((item) => item !== undefined)
+        .map((grave) => convertToFrontModel(grave));
+      store.dispatch(setGraves(gravesConverted));
+      res(gravesConverted);
+    } catch (e) {
+      console.error(e);
+      console.trace(e);
+      rej(e);
+    }
   });
 };
 

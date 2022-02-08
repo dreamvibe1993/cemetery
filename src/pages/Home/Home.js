@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components/macro";
+
 import { loadGraves } from "../../api/graves";
 import { CemetaryGrid } from "../../components/CemetaryGrid";
 import { MainContainer } from "../../lib/css/sc-components/ScComponents";
@@ -8,21 +9,10 @@ import { Preloader } from "../../components/Preloader";
 export const Home = () => {
   const [isLoading, setLoading] = React.useState(true);
 
-  const unsub = React.useRef(() => {});
-
   React.useEffect(() => {
-    loadGraves()
-      .then((unsubFn) => {
-        unsub.current = unsubFn;
-        setLoading(false);
-      })
-      .catch((unsubFn) => {
-        unsub.current = unsubFn;
-        setLoading(false);
-      });
-    return () => {
-      unsub.current();
-    };
+    loadGraves().then(() => {
+      setLoading(false);
+    });
   }, []);
 
   if (isLoading)
