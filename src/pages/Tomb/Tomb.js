@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/macro";
-import { MainContainer } from "../../lib/css/sc-components/ScComponents";
+import { MainContainer } from "../../components/css/sc-components/ScComponents";
 
 import PMML from "../../media/audio/zemfira-pmml.mp3";
 
@@ -37,7 +37,9 @@ export const Tomb = () => {
   const song = React.useRef(new Audio(PMML));
 
   React.useEffect(() => {
-    loadGraves()
+    loadGraves().then(() => {
+      setLoading(false);
+    });
   }, []);
 
   React.useEffect(() => {

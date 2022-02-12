@@ -12,7 +12,7 @@ import {
   convertToBackModel,
   convertToFrontModel,
   updateGiftsOnGrave,
-} from "../lib/common-functions/common-functions";
+} from "../services/converting";
 
 const graves = "graves";
 const users = "users";
@@ -38,26 +38,51 @@ export const loadGraves = () => {
   });
 };
 
+function blobToBase64(blob) {
+  return new Promise((resolve, _) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result);
+    reader.readAsDataURL(blob);
+  });
+}
+
 export const addNewBurial = async (data) => {
-  const photoLinks = await Promise.all(
-    data.pics.map(async (ph) => {
-      return getPhotosUrls(ph);
-    })
-  );
-  return new Promise((res, rej) => {
+  // const photoLinks = await Promise.all(
+  //   data.pics.map(async (ph) => {
+  //     return await blobToBase64(ph.file);
+  //   })
+  // );
+  // console.log(photoLinks);
+  const formData = new FormData();
+  data.pics.forEach((file) => {
+    console.log(file)
+    formData.append('multi-files', file.file, file.file.name);
+  });
+
+  return new Promise(async (res, rej) => {
     try {
-      const readyToPost = convertToBackModel({ data, photoLinks });
-      const t = store.getState();
-      set(
-        ref(database, graves + "/" + t?.graves?.graves?.length || "0"),
+      const readyToPost = convertToBackModel({ data, photoLinks: formData });
+      console.log(readyToPost, "wewewew");
+      const response = await axios.post(
+        "http://localhost:8888" + GRAVES_API_URL,
         readyToPost
-      )
-        .then((v) => {
-          res(v);
-        })
-        .catch((e) => {
-          rej(e);
-        });
+      );
+      // const gravesConverted = response.data
+      //   ?.filter((item) => item !== undefined)
+      //   .map((grave) => convertToFrontModel(grave));
+      // store.dispatch(setGraves(gravesConverted));
+      res(response);
+      // const t = store.getState();
+      // set(
+      //   ref(database, graves + "/" + t?.graves?.graves?.length || "0"),
+      //   readyToPost
+      // )
+      //   .then((v) => {
+      //     res(v);
+      //   })
+      //   .catch((e) => {
+      //     rej(e);
+      //   });
     } catch (e) {
       console.error(e);
       console.trace(e);

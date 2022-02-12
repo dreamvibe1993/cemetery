@@ -1,6 +1,6 @@
 import imageCompression from "browser-image-compression";
 import { v4 as uuidv4 } from "uuid";
-import { backModel } from "../../models/backModel";
+import { backModel } from "../models/backModel";
 
 export const convertToFrontModel = (userData) => {
   if (!userData) return null;
@@ -75,6 +75,7 @@ export const compressPhotos = async (e) => {
     alert("No photos been compressed");
     return;
   }
+  console.log(files)
   return files.map((file) => ({
     file,
     url: URL.createObjectURL(file),

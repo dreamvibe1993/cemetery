@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import styled from "styled-components/macro";
 import { deleteGrave } from "../../api/graves";
-import { ServiceButton } from "../../lib/css/sc-components/ScComponents";
+import { ServiceButton } from "../css/sc-components/ScComponents";
 
 import GrassPattern from "../../media/img/grave/grass-p-2.png";
 

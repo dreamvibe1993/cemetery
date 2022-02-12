@@ -7,7 +7,7 @@ import { ReactComponent as Logo } from "../../media/svg/logo.svg";
 import { ReactComponent as Cross } from "../../media/svg/cross.svg";
 
 import { Preloader } from "../../components/Preloader";
-import { ServiceButton } from "../../lib/css/sc-components/ScComponents";
+import { ServiceButton } from "../../components/css/sc-components/ScComponents";
 import { loginSchema, regSchema } from "../../models/yup/yup-schemas";
 import { setUserAuth } from "../../redux/user/userReducer";
 import { Navigate } from "react-router-dom";

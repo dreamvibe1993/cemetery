@@ -9,7 +9,7 @@ import { getStorage } from "firebase/storage";
 import { GreetingsScreen } from "./components/GreetingsScreen";
 
 import { ReactComponent as TriangleWD } from "./media/svg/triangle-down.svg";
-import { DropDown } from "./lib/css/animations";
+import { DropDown } from "./components/css/animations";
 import { DetailsScreen } from "./components/DetailsScreen";
 import { checkUserAuth } from "./api/user";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/macro";
-import { MainContainer } from "../../lib/css/sc-components/ScComponents";
+import { MainContainer } from "../css/sc-components/ScComponents";
 import { ReactComponent as ChevroneLeft } from "../../media/svg/chevrone.svg";
 import { ReactComponent as Vodka } from "../../media/svg/vodka.svg";
 import { ReactComponent as Candy } from "../../media/svg/candy.svg";
