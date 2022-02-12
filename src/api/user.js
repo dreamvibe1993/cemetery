@@ -23,14 +23,15 @@ export const logInUser = async (email, password) => {
       email,
       password,
     });
+    const userData = {
+      email: response.data.email,
+      username: response.data.username,
+    };
+    if (response?.data?.isAdmin) {
+      userData.isAdmin = true;
+    }
     store.dispatch(setUserAuth(true));
-    store.dispatch(
-      setUser({
-        email: response.data.email,
-        username: response.data.username,
-        uid: 777,
-      })
-    );
+    store.dispatch(setUser(userData));
   } catch (error) {
     store.dispatch(setUserAuth(false));
     store.dispatch(setUser({}));
