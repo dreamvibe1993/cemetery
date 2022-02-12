@@ -48,22 +48,18 @@ const getPhotosURLs = async (photos) => {
 
 export const postNewGrave = async (data) => {
   const photosURLs = await getPhotosURLs(data.photos);
-  return new Promise(async (res, rej) => {
-    try {
-      data.photos = photosURLs;
-      const readyToPost = convertToBackModel({ data });
-      console.log(readyToPost, "wewewew");
-      const response = await axios.post(
-        "http://localhost:8888" + GRAVES_API_URL,
-        readyToPost
-      );
-      res(response);
-    } catch (e) {
-      console.error(e);
-      console.trace(e);
-      rej(e);
-    }
-  });
+  try {
+    data.photos = photosURLs;
+    const readyToPost = convertToBackModel({ data });
+    const response = await axios.post(
+      "http://localhost:8888" + GRAVES_API_URL,
+      readyToPost
+    );
+    return response;
+  } catch (e) {
+    console.error(e);
+    console.trace(e);
+  }
 };
 
 export const deleteGrave = async (grave) => {
@@ -85,16 +81,6 @@ export const deleteGrave = async (grave) => {
       console.trace(e);
       rej(e);
     }
-  });
-};
-
-// eslint-disable-next-line no-unused-vars
-const getFirebaseDownloadURL = (photo, storage) => {
-  return new Promise((resolve, reject) => {
-    const ref = storageRef(storage, photo);
-    getDownloadURL(ref).then((link) => {
-      resolve(link);
-    });
   });
 };
 

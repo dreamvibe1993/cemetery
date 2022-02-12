@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import styled from "styled-components/macro";
-import { deleteGrave } from "../../api/graves";
+import { deleteGrave, loadGraves } from "../../api/graves";
 import { ServiceButton } from "../css/sc-components/ScComponents";
 
 import GrassPattern from "../../media/img/grave/grass-p-2.png";
@@ -35,13 +35,14 @@ export const CemetaryGrid = () => {
     setRedirect("/tomb?graveId=" + grave.id);
   };
 
-  const deleteTomb = (e, grave) => {
+  const deleteTomb = async (e, grave) => {
     e.stopPropagation();
     const conf = window.confirm(
       "are you sure you want to delete the grave of " + grave.name
     );
     if (conf) {
-      deleteGrave(grave);
+      await deleteGrave(grave);
+      loadGraves();
     }
   };
 

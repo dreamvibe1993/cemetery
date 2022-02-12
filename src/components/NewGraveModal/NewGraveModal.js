@@ -5,7 +5,7 @@ import { setLocale } from "yup";
 
 import { ReactComponent as Cross } from "../../media/svg/cross.svg";
 import { compressPhotos } from "../../services/converting";
-import { postNewGrave } from "../../api/graves";
+import { loadGraves, postNewGrave } from "../../api/graves";
 import { Preloader } from "../Preloader";
 import { graveSchema } from "../../models/yup/yup-schemas";
 
@@ -92,6 +92,7 @@ export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
             graveCellNum: graveCellNum.toString(),
             lastWords,
           });
+          loadGraves();
           onClose();
         } catch (e) {
           alert("something went wrong. sorry");
