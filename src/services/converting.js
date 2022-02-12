@@ -75,7 +75,6 @@ export const compressPhotos = async (e) => {
     alert("No photos been compressed");
     return;
   }
-  console.log(files)
   return files.map((file) => ({
     file,
     url: URL.createObjectURL(file),

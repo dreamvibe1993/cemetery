@@ -5,7 +5,7 @@ import { setLocale } from "yup";
 
 import { ReactComponent as Cross } from "../../media/svg/cross.svg";
 import { compressPhotos } from "../../services/converting";
-import { addNewBurial } from "../../api/graves";
+import { postNewGrave } from "../../api/graves";
 import { Preloader } from "../Preloader";
 import { graveSchema } from "../../models/yup/yup-schemas";
 
@@ -87,7 +87,7 @@ export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
       .then(async () => {
         try {
           setL(true);
-          await addNewBurial({
+          await postNewGrave({
             ...dataToPost,
             graveCellNum: graveCellNum.toString(),
             lastWords,

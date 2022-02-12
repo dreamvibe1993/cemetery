@@ -1,13 +1,9 @@
 import axios from "axios";
-import { database, storage } from "../App";
-import { ref, onValue, set, get, remove } from "firebase/database";
+import { database } from "../App";
+import { ref, set, get } from "firebase/database";
 import store from "../redux/store";
 import { setGraves } from "../redux/graves/gravesReducer";
-import {
-  getDownloadURL,
-  ref as storageRef,
-  uploadBytesResumable,
-} from "firebase/storage";
+import { getDownloadURL, ref as storageRef } from "firebase/storage";
 import {
   convertToBackModel,
   convertToFrontModel,
@@ -15,9 +11,9 @@ import {
 } from "../services/converting";
 
 const graves = "graves";
-const users = "users";
 
 const GRAVES_API_URL = "/api/v1/graves";
+const PHOTOS_API_URL = "/api/v1/photos";
 
 export const loadGraves = () => {
   return new Promise(async (res, rej) => {
@@ -38,51 +34,30 @@ export const loadGraves = () => {
   });
 };
 
-function blobToBase64(blob) {
-  return new Promise((resolve, _) => {
-    const reader = new FileReader();
-    reader.onloadend = () => resolve(reader.result);
-    reader.readAsDataURL(blob);
+const getPhotosURLs = async (photos) => {
+  const formData = new FormData();
+  photos.forEach((file) => {
+    formData.append("multi-files", file.file, file.file.name);
   });
-}
+  const response = await axios.post(
+    "http://localhost:8888" + PHOTOS_API_URL,
+    formData
+  );
+  return response.data;
+};
 
-export const addNewBurial = async (data) => {
-  // const photoLinks = await Promise.all(
-  //   data.pics.map(async (ph) => {
-  //     return await blobToBase64(ph.file);
-  //   })
-  // );
-  // console.log(photoLinks);
-  // const formData = new FormData();
-  // data.pics.forEach((file) => {
-  //   console.log(file)
-  //   formData.append('multi-files', file.file, file.file.name);
-  // });
-
+export const postNewGrave = async (data) => {
+  const photosURLs = await getPhotosURLs(data.photos);
   return new Promise(async (res, rej) => {
     try {
+      data.photos = photosURLs;
       const readyToPost = convertToBackModel({ data });
       console.log(readyToPost, "wewewew");
       const response = await axios.post(
         "http://localhost:8888" + GRAVES_API_URL,
         readyToPost
       );
-      // const gravesConverted = response.data
-      //   ?.filter((item) => item !== undefined)
-      //   .map((grave) => convertToFrontModel(grave));
-      // store.dispatch(setGraves(gravesConverted));
       res(response);
-      // const t = store.getState();
-      // set(
-      //   ref(database, graves + "/" + t?.graves?.graves?.length || "0"),
-      //   readyToPost
-      // )
-      //   .then((v) => {
-      //     res(v);
-      //   })
-      //   .catch((e) => {
-      //     rej(e);
-      //   });
     } catch (e) {
       console.error(e);
       console.trace(e);
@@ -120,40 +95,6 @@ const getFirebaseDownloadURL = (photo, storage) => {
     getDownloadURL(ref).then((link) => {
       resolve(link);
     });
-  });
-};
-
-export const getPhotosUrls = async (file) => {
-  return new Promise((resolve, reject) => {
-    const storageRefLoc = storageRef(storage, file.file.name);
-    const uploadTask = uploadBytesResumable(storageRefLoc, file.file);
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log("Upload is " + progress + "% done");
-        // eslint-disable-next-line default-case
-        switch (snapshot.state) {
-          case "paused":
-            console.log("Upload is paused");
-            break;
-          case "running":
-            console.log("Upload is running");
-            break;
-        }
-      },
-      (error) => {
-        console.error(error);
-        console.trace(error);
-        reject(error);
-      },
-      async () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          resolve(downloadURL);
-        });
-      }
-    );
   });
 };
 
