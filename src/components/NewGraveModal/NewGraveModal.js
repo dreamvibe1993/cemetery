@@ -81,7 +81,6 @@ export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
       songs,
       photos,
     };
-    console.log(dataToPost);
     graveSchema
       .validate(dataToPost)
       .then(async () => {

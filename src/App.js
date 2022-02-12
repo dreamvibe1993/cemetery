@@ -2,20 +2,12 @@ import "./App.css";
 import React from "react";
 import styled from "styled-components/macro";
 import { Paths } from "./Paths";
-import { initializeApp } from "firebase/app";
-import { firebaseConfig } from "./firebaseConfig";
-import { getDatabase } from "firebase/database";
-import { getStorage } from "firebase/storage";
 import { GreetingsScreen } from "./components/GreetingsScreen";
 
 import { ReactComponent as TriangleWD } from "./media/svg/triangle-down.svg";
 import { DropDown } from "./components/css/animations";
 import { DetailsScreen } from "./components/DetailsScreen";
 import { checkUserAuth } from "./api/user";
-
-export const app = initializeApp(firebaseConfig);
-export const database = getDatabase(app);
-export const storage = getStorage();
 
 function App() {
   const [isGreetingsShown, setGreetingsShown] = React.useState(false);
