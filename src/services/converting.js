@@ -14,20 +14,20 @@ export const convertToFrontModel = (userData) => {
   return userData;
 };
 
-export const convertToBackModel = ({ data, photoLinks }) => {
+export const convertToBackModel = ({ data }) => {
   const converted = {
-    born: new Date(data.dateB).toISOString(),
-    died: new Date(data.dateD).toISOString(),
+    born: new Date(data.born).toISOString(),
+    died: new Date(data.died).toISOString(),
     gifts: {
       candies: [],
       btc: [],
       vodka: [],
     },
     chatLogs: [],
-    graveCellNum: data.cellN,
+    graveCellNum: data.graveCellNum,
     id: uuidv4(),
-    lastWords: data.lWords,
-    photos: photoLinks,
+    lastWords: data.lastWords,
+    photos: data.photos,
     name: data.name,
     songs: [data.song],
   };

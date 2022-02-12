@@ -58,7 +58,7 @@ export const CemetaryGrid = () => {
   return (
     <>
       {cellNumChosen !== false && (
-        <NewGraveModal cellN={cellNumChosen} onClose={closeNewGraveDiag} />
+        <NewGraveModal graveCellNum={cellNumChosen} onClose={closeNewGraveDiag} />
       )}
       <CemetaryGridContainer>
         {cells.map((cell, i) =>

@@ -18,14 +18,17 @@ setLocale({
   },
 });
 
-export const NewGraveModal = ({ cellN, onClose = () => {} }) => {
+export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
   const [l, setL] = React.useState(false);
-  const [pics, setPics] = React.useState([]);
+  const [photos, setPhotos] = React.useState([]);
   const [name, setName] = React.useState("");
-  const [dateB, setDateB] = React.useState("");
-  const [dateD, setDateD] = React.useState("");
-  const [lWords, setLWords] = React.useState(" ");
-  const [song, setSong] = React.useState("");
+  const [born, setBorn] = React.useState("");
+  const [died, setDied] = React.useState("");
+  const [lastWords, setLastWords] = React.useState(" ");
+  const [songs, setSongs] = React.useState({
+    label: "земфира - пммл",
+    value: "zemfira",
+  });
 
   const [errThrown, setErrThrown] = React.useState("");
 
@@ -33,7 +36,7 @@ export const NewGraveModal = ({ cellN, onClose = () => {} }) => {
     try {
       setL(true);
       const ph = await compressPhotos(e);
-      setPics((prev) => [...prev, ...ph]);
+      setPhotos((prev) => [...prev, ...ph]);
       setL(false);
     } catch (e) {
       setL(false);
@@ -44,7 +47,7 @@ export const NewGraveModal = ({ cellN, onClose = () => {} }) => {
   };
 
   const deletePhoto = (id) => {
-    setPics((prev) => prev.filter((blob) => blob.id !== id));
+    setPhotos((prev) => prev.filter((blob) => blob.id !== id));
   };
 
   const handleNameInput = (e) => {
@@ -53,31 +56,32 @@ export const NewGraveModal = ({ cellN, onClose = () => {} }) => {
   };
   const handleDateBInput = (e) => {
     setErrThrown("");
-    setDateB(e.target.value);
+    setBorn(e.target.value);
   };
   const handleDateDInput = (e) => {
     setErrThrown("");
-    setDateD(e.target.value);
+    setDied(e.target.value);
   };
   const handleLWordsInput = (e) => {
     setErrThrown("");
-    setLWords(e.target.value);
+    setLastWords(e.target.value);
   };
   const handleLSongInput = (v) => {
     setErrThrown("");
-    setSong(v);
+    setSongs(v);
   };
 
   const submitData = () => {
     setErrThrown("");
     const dataToPost = {
       name,
-      dateB,
-      dateD,
-      lWords,
-      song: song.value,
-      pics,
+      born,
+      died,
+      lastWords,
+      songs,
+      photos,
     };
+    console.log(dataToPost);
     graveSchema
       .validate(dataToPost)
       .then(async () => {
@@ -85,8 +89,8 @@ export const NewGraveModal = ({ cellN, onClose = () => {} }) => {
           setL(true);
           await addNewBurial({
             ...dataToPost,
-            cellN: cellN.toString(),
-            lWords,
+            graveCellNum: graveCellNum.toString(),
+            lastWords,
           });
           onClose();
         } catch (e) {
@@ -97,7 +101,7 @@ export const NewGraveModal = ({ cellN, onClose = () => {} }) => {
         }
       })
       .catch((err) => {
-        const sErr = ["song", "pics", "lWords"];
+        const sErr = ["photos", "lastWords"];
         if (sErr.includes(err.params.path)) {
           alert(err.errors[0]);
         }
@@ -134,30 +138,30 @@ export const NewGraveModal = ({ cellN, onClose = () => {} }) => {
           <InputName>born:</InputName>
           <TextInput
             type="date"
-            errThrown={errThrown === "dateB"}
+            errThrown={errThrown === "born"}
             onChange={(e) => handleDateBInput(e)}
-            defaultValue={dateB}
+            defaultValue={born}
           />
           <InputName>died:</InputName>
           <TextInput
             type="date"
-            errThrown={errThrown === "dateD"}
+            errThrown={errThrown === "died"}
             onChange={(e) => handleDateDInput(e)}
-            defaultValue={dateD}
+            defaultValue={died}
           ></TextInput>
           <InputName>last words:</InputName>
           <TextInput
             type="text"
-            errThrown={errThrown === "lWords"}
+            errThrown={errThrown === "lastWords"}
             onChange={(e) => handleLWordsInput(e)}
             maxLength={32}
-            defaultValue={lWords}
+            defaultValue={lastWords}
           ></TextInput>
           <InputName>song to mourn:</InputName>
           <Select
             onChange={(v) => handleLSongInput(v)}
             options={[{ value: "zemfira", label: "земфира - пммл" }]}
-            defaultInputValue={song.label}
+            defaultInputValue={songs.label}
             styles={{
               container: (provided) => ({
                 ...provided,
@@ -202,13 +206,13 @@ export const NewGraveModal = ({ cellN, onClose = () => {} }) => {
             }}
           />
           <InputName>
-            {pics.length < 1 ? "photos" : "click to add more"}
+            {photos.length < 1 ? "photos" : "click to add more"}
           </InputName>
-          <FileInput errThrown={errThrown === "pics"}>
-            {pics.length < 1 ? (
+          <FileInput errThrown={errThrown === "photos"}>
+            {photos.length < 1 ? (
               <InputName>CLICK TO UPLOAD</InputName>
             ) : (
-              pics.map((blob) => (
+              photos.map((blob) => (
                 <LilPicCont key={blob.id}>
                   <Cross onClick={() => deletePhoto(blob.id)} />
                   <LilPic src={blob.url} />

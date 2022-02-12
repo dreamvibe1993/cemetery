@@ -53,15 +53,15 @@ export const addNewBurial = async (data) => {
   //   })
   // );
   // console.log(photoLinks);
-  const formData = new FormData();
-  data.pics.forEach((file) => {
-    console.log(file)
-    formData.append('multi-files', file.file, file.file.name);
-  });
+  // const formData = new FormData();
+  // data.pics.forEach((file) => {
+  //   console.log(file)
+  //   formData.append('multi-files', file.file, file.file.name);
+  // });
 
   return new Promise(async (res, rej) => {
     try {
-      const readyToPost = convertToBackModel({ data, photoLinks: formData });
+      const readyToPost = convertToBackModel({ data });
       console.log(readyToPost, "wewewew");
       const response = await axios.post(
         "http://localhost:8888" + GRAVES_API_URL,

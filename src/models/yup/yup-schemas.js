@@ -4,11 +4,10 @@ import * as yup from "yup";
 
 export const graveSchema = yup.object().shape({
   name: yup.string().required().min(2),
-  dateB: yup.date().required(),
-  dateD: yup.date().required(),
-  lWords: yup.string().max(32, "максимум 32 буквы. давай лаконичнее"),
-  song: yup.string().required("выбери песню а"),
-  pics: yup
+  born: yup.date().required(),
+  died: yup.date().required(),
+  lastWords: yup.string().max(32, "максимум 32 буквы. давай лаконичнее"),
+  photos: yup
     .array()
     .min(1, "добавь фотку а")
     .max(
