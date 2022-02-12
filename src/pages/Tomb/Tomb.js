@@ -31,15 +31,18 @@ export const Tomb = () => {
   const [isLoading, setLoading] = React.useState(true);
   const [grave, setGrave] = React.useState(null);
 
-  const unsub = React.useRef(() => {});
   const photoContRef = React.useRef(null);
   const x = React.useRef(0);
   const song = React.useRef(new Audio(PMML));
 
-  React.useEffect(() => {
+  const reloadGraves = () => {
     loadGraves().then(() => {
       setLoading(false);
     });
+  };
+
+  React.useEffect(() => {
+    reloadGraves();
   }, []);
 
   React.useEffect(() => {
@@ -59,7 +62,6 @@ export const Tomb = () => {
   React.useEffect(() => {
     return () => {
       if (song.current) song.current.pause();
-      unsub.current();
     };
   }, []);
 
@@ -92,6 +94,7 @@ export const Tomb = () => {
 
   const closeGifts = () => {
     setGiftsOpen(false);
+    reloadGraves();
   };
 
   const openDonateGift = () => {
@@ -100,6 +103,7 @@ export const Tomb = () => {
 
   const closeDonateGift = () => {
     setDonateOpen(false);
+    reloadGraves();
   };
 
   const backToGYard = () => {
