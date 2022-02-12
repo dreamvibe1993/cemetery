@@ -1,107 +1,84 @@
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  updateProfile,
-  signOut,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import axios from "axios";
 import store from "../redux/store";
 import { setUserAuth, setUser } from "../redux/user/userReducer";
 
-export const createUser = (email, password, username) => {
-  const auth = getAuth();
-  return new Promise((res, rej) => {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential;
-        updateProfile(auth.currentUser, {
-          displayName: username,
-        });
-        res(user);
-        // ...
+const LOCALHOST = "http://localhost:8888";
+const USER_API_URL = "/api/v1/users";
+
+export const createUser = async (email, password, username) => {
+  try {
+    const response = await axios.post(LOCALHOST + USER_API_URL, {
+      email,
+      password,
+      username,
+    });
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const logInUser = async (email, password) => {
+  try {
+    const response = await axios.post(LOCALHOST + USER_API_URL + "/auth", {
+      email,
+      password,
+    });
+    store.dispatch(setUserAuth(true));
+    store.dispatch(
+      setUser({
+        email: response.data.email,
+        username: response.data.username,
+        uid: 777,
       })
-      .catch((error) => {
-        console.error(error);
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log("errorCode: ", errorCode);
-        console.log("errorMessage: ", errorMessage);
-        alert(errorCode + "" + errorMessage);
-        rej(error);
-      });
-  });
+    );
+  } catch (error) {
+    store.dispatch(setUserAuth(false));
+    store.dispatch(setUser({}));
+    console.error(error);
+    console.trace(error);
+    alert(error);
+  }
 };
 
-export const logInUser = (email, password) => {
-  const auth = getAuth();
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in
-      const user = userCredential.user;
+export const logOutUser = async () => {
+  try {
+    await axios.post(LOCALHOST + USER_API_URL + "/sign-out");
+    console.log("user signed out");
+    store.dispatch(setUserAuth(false));
+    store.dispatch(setUser({}));
+  } catch (error) {
+    store.dispatch(setUserAuth(null));
+    store.dispatch(setUser({}));
+    console.error(error);
+    console.trace(error);
+    alert(error);
+  }
+};
+
+export const checkUserAuth = async () => {
+  try {
+    const response = await axios.get(LOCALHOST + USER_API_URL + "/auth");
+    if (response.data.creds) {
       console.log("signed in");
+      const { email, username } = response.data.creds;
       store.dispatch(setUserAuth(true));
       store.dispatch(
         setUser({
-          email: user.email,
-          username: user.displayName,
-          uid: user.uid,
+          email,
+          username,
+          uid: 777,
         })
       );
-      // ...
-    })
-    .catch((error) => {
-      store.dispatch(setUserAuth(false));
-      store.dispatch(setUser({}));
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.error(errorCode);
-      console.trace(errorMessage);
-      alert(errorCode + errorMessage);
-    });
-};
-
-export const logOutUser = () => {
-  const auth = getAuth();
-  signOut(auth)
-    .then(() => {
-      console.log("user signed out");
-      store.dispatch(setUserAuth(false));
-      store.dispatch(setUser({}));
-      // Sign-out successful.
-    })
-    .catch((error) => {
-      store.dispatch(setUserAuth(null));
-      store.dispatch(setUser({}));
-      console.error(error);
-      console.trace(error);
-      // An error happened.
-    });
-};
-
-export const checkUserAuth = () => {
-  const auth = getAuth();
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-      console.log("signed in");
-      store.dispatch(setUserAuth(true));
-      store.dispatch(
-        setUser({
-          email: user.email,
-          username: user.displayName,
-          uid: user.uid,
-        })
-      );
-      // ...
     } else {
-      // User is signed out
       console.log("signed out");
       store.dispatch(setUserAuth(false));
       store.dispatch(setUser({}));
-      // ...
     }
-  });
+  } catch (error) {
+    store.dispatch(setUserAuth(null));
+    store.dispatch(setUser({}));
+    console.error(error);
+    console.trace(error);
+    alert(error);
+  }
 };
