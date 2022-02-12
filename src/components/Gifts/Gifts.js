@@ -29,11 +29,11 @@ export const Gifts = ({ onClose = () => {}, grave }) => {
     if (gifts.length > 16) return;
     const cells = new Array(16).fill(null);
     const giftsToShow = gifts
-      .map((g) =>
-        grave.gifts[g].map((ug) => ({
-          ...ug,
-          giftType: g,
-          giftSvg: returnGiftSvg(g),
+      .map((gift) =>
+        grave.gifts[gift].map((giftOnTheGrave) => ({
+          ...giftOnTheGrave,
+          giftType: gift,
+          giftSvg: returnGiftSvg(gift),
         }))
       )
       .flat();
