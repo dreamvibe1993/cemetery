@@ -6,15 +6,15 @@ export const user = createSlice({
     isAuth: null,
     authError: "",
     user: {},
-    isAdmin: false,
+    isAdmin: true,
   },
   reducers: {
     setUser(state, action) {
-      if (action?.payload?.isAdmin) {
+     /* if (action?.payload?.isAdmin) {
         state.isAdmin = true;
       } else {
         state.isAdmin = false;
-      }
+      } */
       state.user = action.payload;
     },
     setUserAuth(state, action) {

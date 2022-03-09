@@ -24,7 +24,7 @@ export const convertToBackModel = ({ data }) => {
       vodka: [],
     },
     chatLogs: [],
-    graveCellNum: data.graveCellNum,
+    graveCellNum: Number(data.graveCellNum),
     id: uuidv4(),
     lastWords: data.lastWords,
     photos: data.photos,

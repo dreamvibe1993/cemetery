@@ -14,16 +14,18 @@ const PHOTOS_API_URL = "/api/v1/photos";
 export const loadGraves = async () => {
   try {
     const response = await axios.get(LOCALHOST + GRAVES_API_URL);
-    const gravesConverted = response.data
+    const gravesConverted = response.data.graves
       ?.filter((item) => item !== undefined)
       .map((grave) => convertToFrontModel(grave));
     store.dispatch(setGraves(gravesConverted));
+    console.log(gravesConverted);
   } catch (e) {
     console.error(e);
     console.trace(e);
   }
 };
 
+/*
 const getPhotosURLs = async (photos) => {
   try {
     const formData = new FormData();
@@ -37,11 +39,13 @@ const getPhotosURLs = async (photos) => {
     console.trace(e);
   }
 };
+*/
 
 export const postNewGrave = async (data) => {
-  const photosURLs = await getPhotosURLs(data.photos);
+  // const photosURLs = await getPhotosURLs(data.photos);
+  console.log(data);
   try {
-    data.photos = photosURLs;
+    data.photos = [];
     const readyToPost = convertToBackModel({ data });
     const response = await axios.post(LOCALHOST + GRAVES_API_URL, readyToPost);
     return response;
@@ -54,13 +58,13 @@ export const postNewGrave = async (data) => {
 export const deleteGrave = async (grave) => {
   const t = store.getState();
   if (!t?.user?.isAdmin) return;
-  return axios.delete(LOCALHOST + GRAVES_API_URL + "/" + grave.id);
+  return axios.delete(LOCALHOST + GRAVES_API_URL + "/" + grave._id);
 };
 
 export const updateGrave = (data, grave) => {
   try {
     return axios.patch(
-      LOCALHOST + GRAVES_API_URL,
+      LOCALHOST + GRAVES_API_URL + "/" + grave._id,
       updateGiftsOnGrave(data, grave)
     );
   } catch (e) {

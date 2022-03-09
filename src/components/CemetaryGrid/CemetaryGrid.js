@@ -32,7 +32,7 @@ export const CemetaryGrid = () => {
   }, [graves]);
 
   const visitTomb = (grave) => {
-    setRedirect("/tomb?graveId=" + grave.id);
+    setRedirect("/tomb?graveId=" + grave._id);
   };
 
   const deleteTomb = async (e, grave) => {

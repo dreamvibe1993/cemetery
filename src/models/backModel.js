@@ -8,7 +8,7 @@ export const backModel = {
   },
   chatLogs: [],
   graveCellNum: 0,
-  id: 'string',
+  _id: '',
   lastWords: ' ',
   photos: [],
   name: 'No name provided',
