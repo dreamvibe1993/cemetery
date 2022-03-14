@@ -23,23 +23,26 @@ export const giftSchema = yup.object().shape({
 });
 
 export const loginSchema = yup.object().shape({
-  loginEmail: yup.string().email().required("email is strongly required"),
-  loginPass: yup
+  email: yup.string().email().required("Email is strongly required"),
+  password: yup
     .string()
-    .required("password is strongly required")
-    .min(5, "need a longer password")
-    .max(10, "easy. 5-15 symbols is enough"),
+    .required("Password is strongly required!")
+    .min(8, "Minimum length is 8 symbols."),
 });
 
 export const regSchema = yup.object().shape({
-  regPass: yup
+  passwordConfirm: yup
     .string()
-    .required("password is strongly required")
-    .min(5, "need a longer password")
-    .max(15, "easy. 5-15 symbols is enough"),
-  regUsername: yup
+    .required("Please confirm your password")
+    .min(8, "Minimum length is 8 symbols.")
+    .oneOf([yup.ref("password"), null], "Passwords must match"),
+  password: yup
     .string()
-    .required("please let us know how to address you")
-    .max(10, "easy. 0-10 symbols is enough"),
-  regEmail: yup.string().email().required("email is strongly required"),
+    .required("Password is strongly required!")
+    .min(8, "Minimum length is 8 symbols."),
+  email: yup.string().email().required("Email is strongly required"),
+  name: yup
+    .string()
+    .required("Please provide us your name.")
+    .max(10, "10 symbols is maximum."),
 });

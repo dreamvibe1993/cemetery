@@ -4,7 +4,7 @@ import Select from "react-select";
 import { setLocale } from "yup";
 
 import { ReactComponent as Cross } from "../../media/svg/cross.svg";
-import { compressPhotos } from "../../services/converting";
+import { compressPhotos } from "../../services/data-transformation/converting";
 import { loadGraves, postNewGrave } from "../../api/graves";
 import { Preloader } from "../Preloader";
 import { graveSchema } from "../../models/yup/yup-schemas";

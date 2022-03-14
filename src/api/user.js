@@ -1,25 +1,26 @@
 import axios from "axios";
+import { USER_API_URL } from "../configs/urls/api/api-urls";
+import { ORIGIN } from "../configs/urls/app/app-urls";
 import store from "../redux/store";
 import { setUserAuth, setUser } from "../redux/user/userReducer";
 
-const LOCALHOST = "http://localhost:8888";
-const USER_API_URL = "/api/v1/users";
-
-export const createUser = async (email, password, username) => {
+export const createUser = async (name, email, password, passwordConfirm) => {
   try {
-    const response = await axios.post(LOCALHOST + USER_API_URL, {
+    await axios.post(ORIGIN + USER_API_URL + "/signup", {
+      name,
       email,
       password,
-      username,
+      passwordConfirm,
     });
   } catch (e) {
     console.error(e);
   }
+  console.log(name, email, password, passwordConfirm);
 };
 
 export const logInUser = async (email, password) => {
   try {
-    const response = await axios.post(LOCALHOST + USER_API_URL + "/auth", {
+    const response = await axios.post(ORIGIN + USER_API_URL + "/login", {
       email,
       password,
     });
@@ -43,7 +44,7 @@ export const logInUser = async (email, password) => {
 
 export const logOutUser = async () => {
   try {
-    await axios.post(LOCALHOST + USER_API_URL + "/sign-out");
+    await axios.post(ORIGIN + USER_API_URL + "/sign-out");
     console.log("user signed out");
     store.dispatch(setUserAuth(false));
     store.dispatch(setUser({}));
@@ -56,30 +57,4 @@ export const logOutUser = async () => {
   }
 };
 
-export const checkUserAuth = async () => {
-  try {
-    const response = await axios.get(LOCALHOST + USER_API_URL + "/auth");
-    if (response.data.creds) {
-      console.log("signed in");
-      const { email, username } = response.data.creds;
-      store.dispatch(setUserAuth(true));
-      store.dispatch(
-        setUser({
-          email,
-          username,
-          uid: 777,
-        })
-      );
-    } else {
-      console.log("signed out");
-      store.dispatch(setUserAuth(false));
-      store.dispatch(setUser({}));
-    }
-  } catch (error) {
-    store.dispatch(setUserAuth(null));
-    store.dispatch(setUser({}));
-    console.error(error);
-    console.trace(error);
-    alert(error);
-  }
-};
+export const checkUserAuth = async () => {};
