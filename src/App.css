@@ -1,11 +1,8 @@
 body {
   display: flex;
   justify-content: center;
-  height: 100vh;
   background-color: rgb(41, 35, 73);
   position: relative;
-  width: 900px;
-  margin: 0 auto;
   padding-top: 10px;
   color: #fff;
   font-family: Overpass;

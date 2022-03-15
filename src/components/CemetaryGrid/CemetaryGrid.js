@@ -10,6 +10,7 @@ import GrassPattern from "../../media/img/grave/grass-p-2.png";
 import { Grave } from "../Grave";
 import { NewGraveModal } from "../NewGraveModal/NewGraveModal";
 import { Tooltip } from "../Tooltip";
+import { pxToVh, pxToVw } from "../../services/css-sizing/css-sizing";
 
 export const CemetaryGrid = () => {
   const { graves } = useSelector((state) => state.graves);
@@ -59,7 +60,10 @@ export const CemetaryGrid = () => {
   return (
     <>
       {cellNumChosen !== false && (
-        <NewGraveModal graveCellNum={cellNumChosen} onClose={closeNewGraveDiag} />
+        <NewGraveModal
+          graveCellNum={cellNumChosen}
+          onClose={closeNewGraveDiag}
+        />
       )}
       <CemetaryGridContainer>
         {cells.map((cell, i) =>
@@ -99,15 +103,17 @@ export const CemetaryGrid = () => {
 };
 
 const Cell = styled.div`
-  width: 100%;
-  height: 100%;
+  width: ${pxToVw(190, window.innerWidth)};
+  min-width: 190px;
+  height: ${pxToVh(250, window.innerWidth)};
+  min-height: 250px;
   transition: all 0.2s linear;
   background-color: #183516;
   padding: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url(${GrassPattern}) repeat;
+  /* background: url(${GrassPattern}) repeat; */
   background-size: 50%;
   position: relative;
   cursor: pointer;
@@ -135,11 +141,11 @@ const Cell = styled.div`
 `;
 
 const CemetaryGridContainer = styled.div`
-  height: 100%;
-  width: 100%;
+  margin-top: 90px;
   background-color: #1c3c1a;
   display: grid;
-  grid-template-columns: 210px 210px 210px 210px;
-  grid-template-rows: 280px 280px 280px;
+  grid-template-columns: repeat(4, auto);
+  grid-template-rows: repeat(3, auto);
+  min-width: 770px;
   padding: 10px;
 `;

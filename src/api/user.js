@@ -20,17 +20,20 @@ export const createUser = async (name, email, password, passwordConfirm) => {
 
 export const logInUser = async (email, password) => {
   try {
-    const response = await axios.post(ORIGIN + USER_API_URL + "/login", {
-      email,
-      password,
-    });
+    const response = await axios.post(
+      ORIGIN + USER_API_URL + "/login",
+      {
+        email,
+        password,
+      },
+      {
+        withCredentials: true,
+      }
+    );
     const userData = {
-      email: response.data.email,
-      username: response.data.username,
+      email: response.data.user.email,
+      username: response.data.user.name,
     };
-    if (response?.data?.isAdmin) {
-      userData.isAdmin = true;
-    }
     store.dispatch(setUserAuth(true));
     store.dispatch(setUser(userData));
   } catch (error) {

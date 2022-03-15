@@ -21,7 +21,7 @@ export const DetailsScreen = ({ onClose = () => {} }) => {
         &nbsp;
         <br />
         <Announcement>
-          Не знаешь как создать/купить/посрать? Найдешь ответ здесь.
+          Не знаешь как? Найдешь ответ здесь.
         </Announcement>
         <br />
         &nbsp;

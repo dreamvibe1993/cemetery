@@ -1,17 +1,13 @@
 import "./App.css";
 import React from "react";
-import styled from "styled-components/macro";
 import { Paths } from "./Paths";
 import { GreetingsScreen } from "./components/GreetingsScreen";
 
-import { ReactComponent as TriangleWD } from "./media/svg/triangle-down.svg";
-import { DropDown } from "./components/css/animations";
-import { DetailsScreen } from "./components/DetailsScreen";
 import { checkUserAuth } from "./api/user";
+import { TopNavBar } from "./components/NavBar/NavBar";
 
 function App() {
   const [isGreetingsShown, setGreetingsShown] = React.useState(false);
-  const [isHelpRequested, setHelpRequested] = React.useState(false);
 
   React.useEffect(() => {
     checkUserAuth();
@@ -26,21 +22,10 @@ function App() {
     setGreetingsShown(false);
   };
 
-  const showDetailsScreen = () => {
-    setHelpRequested(true);
-  }
-
-  const hideDetailsScreen = () => {
-    setHelpRequested(false);
-  }
-
   return (
     <>
       {isGreetingsShown && <GreetingsScreen onClose={closeGreetings} />}
-      {isHelpRequested && <DetailsScreen onClose={hideDetailsScreen} />}
-      <TipButton onClick={showDetailsScreen}>
-        <TriangleWD />
-      </TipButton>
+      <TopNavBar />
       <Paths />
     </>
   );
@@ -48,21 +33,3 @@ function App() {
 
 export default App;
 
-const TipButton = styled.div`
-  position: fixed;
-  right: 60px;
-  top: 20px;
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 40px;
-  height: 40px;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: ${DropDown} .7s ease-in-out;
-  z-index: 10;
-  svg {
-    width: 50%;
-    height: 50%;
-  }
-`;

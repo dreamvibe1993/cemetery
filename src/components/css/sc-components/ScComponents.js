@@ -1,18 +1,15 @@
 import styled from "styled-components/macro";
 
 export const MainContainer = styled.div`
-  width: 900px;
-  height: 900px;
   background-color: ${(p) => p.bgCol || "rgb(49, 46, 68)"};
   box-shadow: 0px 10px 100px 10px rgba(0, 0, 0, 0.2);
   padding: 20px;
 `;
 
-
 export const ServiceButton = styled.button`
-  width: 33%;
-  height: 40px;
-  background-color: #23a0b0;
+  transition: background-color 0.2s linear;
+  padding: 10px;
+  background-color: #11535c;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,6 +18,10 @@ export const ServiceButton = styled.button`
   border: none;
   cursor: pointer;
   &:active {
-    background-color: #1d8491;
+    background-color: #0b353b;
   }
+`;
+
+export const NavButton = styled(ServiceButton)`
+  height: 100%;
 `;

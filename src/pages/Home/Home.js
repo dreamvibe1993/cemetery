@@ -24,11 +24,7 @@ export const Home = () => {
       </MainContainer>
     );
 
-  return (
-    <MainContainer bgCol="rgb(49, 46, 68)">
-      <CemetaryGrid />
-    </MainContainer>
-  );
+  return <CemetaryGrid />;
 };
 
 const LoadingContainer = styled.div`
