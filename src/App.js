@@ -1,10 +1,10 @@
-import "./App.css";
 import React from "react";
 import { Paths } from "./Paths";
 import { GreetingsScreen } from "./components/GreetingsScreen";
 
 import { checkUserAuth } from "./api/user";
 import { TopNavBar } from "./components/NavBar/NavBar";
+import { GlobalStyles } from "./GlobalStyles";
 
 function App() {
   const [isGreetingsShown, setGreetingsShown] = React.useState(false);
@@ -24,6 +24,7 @@ function App() {
 
   return (
     <>
+      <GlobalStyles />
       {isGreetingsShown && <GreetingsScreen onClose={closeGreetings} />}
       <TopNavBar />
       <Paths />

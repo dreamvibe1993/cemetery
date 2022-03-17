@@ -3,6 +3,7 @@ import styled from "styled-components/macro";
 
 import { NavButton } from "../css/sc-components/ScComponents";
 import { ReactComponent as Logo } from "../../media/svg/logo.svg";
+import { colors } from "../../configs/css/colors";
 
 export const TopNavBar = () => {
   return (
@@ -15,7 +16,7 @@ export const TopNavBar = () => {
 
 const NavBar = styled.div`
   position: fixed;
-  background-color: rgb(32, 20, 56);
+  background-color: ${colors.primary.rgba(0.6)};
   z-index: 999;
   height: 75px;
   width: 100%;

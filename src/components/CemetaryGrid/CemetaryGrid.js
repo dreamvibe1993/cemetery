@@ -10,7 +10,8 @@ import GrassPattern from "../../media/img/grave/grass-p-2.png";
 import { Grave } from "../Grave";
 import { NewGraveModal } from "../NewGraveModal/NewGraveModal";
 import { Tooltip } from "../Tooltip";
-import { pxToVh, pxToVw } from "../../services/css-sizing/css-sizing";
+import { pxToVh, pxToVw } from "../../services/css/convertion/sizes";
+import { colors } from "../../configs/css/colors";
 
 export const CemetaryGrid = () => {
   const { graves } = useSelector((state) => state.graves);
@@ -108,7 +109,7 @@ const Cell = styled.div`
   height: ${pxToVh(250, window.innerWidth)};
   min-height: 250px;
   transition: all 0.2s linear;
-  background-color: #183516;
+  background-color: ${colors.primary.rgba(1)};
   padding: 5px;
   display: flex;
   justify-content: center;
@@ -142,10 +143,12 @@ const Cell = styled.div`
 
 const CemetaryGridContainer = styled.div`
   margin-top: 90px;
-  background-color: #1c3c1a;
+  background-color: ${colors.primary.rgba(.4)};
+  border-radius: 5px;
   display: grid;
   grid-template-columns: repeat(4, auto);
   grid-template-rows: repeat(3, auto);
+  gap: 5px;
   min-width: 770px;
   padding: 10px;
 `;
