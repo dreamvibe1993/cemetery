@@ -4,11 +4,18 @@ import styled from "styled-components/macro";
 import { NavButton } from "../css/sc-components/ScComponents";
 import { ReactComponent as Logo } from "../../media/svg/logo.svg";
 import { colors } from "../../configs/css/colors";
+import { useNavigate } from "react-router-dom";
 
 export const TopNavBar = () => {
+  const navigate = useNavigate();
+
+  const goHome = () => {
+    navigate("/");
+  };
+
   return (
     <NavBar>
-      <Logo />
+      <Logo onClick={goHome} />
       <NavButton>auth</NavButton>
     </NavBar>
   );
@@ -34,5 +41,6 @@ const NavBar = styled.div`
     height: 100%;
     width: 100px;
     fill: ${colors.secondaryB.hex};
+    cursor: pointer;
   }
 `;

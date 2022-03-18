@@ -1,0 +1,1 @@
+export { TombPhotos } from "./TombPhotos";

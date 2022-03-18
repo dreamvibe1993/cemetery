@@ -1,0 +1,1 @@
+export { TombChatLogs } from "./TombChatLogs";
