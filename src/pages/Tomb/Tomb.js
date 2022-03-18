@@ -18,6 +18,7 @@ import { Tooltip } from "../../components/Tooltip";
 import { useSelector } from "react-redux";
 import { Preloader } from "../../components/Preloader";
 import { loadGraves } from "../../api/graves";
+import { colors } from "../../configs/css/colors";
 
 export const Tomb = () => {
   const { graves } = useSelector((state) => state.graves);
@@ -137,72 +138,72 @@ export const Tomb = () => {
       {isDonateOpen && <DonateGift onClose={closeDonateGift} grave={grave} />}
       {isGiftsOpen && <Gifts onClose={closeGifts} grave={grave} />}
       {isGalleryOpen && <Gallery src={isGalleryOpen} onClose={hidePhoto} />}
-      <MainContainer>
-        <TopPanel>
-          <ChevroneLeft onClick={backToGYard} />
-        </TopPanel>
-        <Monument>
-          <MainInfoCont>
-            <TopBar>
-              <Tooltip
-                content={
-                  "Leave something on the grave \nto honor the deceased."
-                }
-                direction="left"
-              >
-                <Donate onClick={openDonateGift} />
-              </Tooltip>
-              <Name>{grave?.name}</Name>
-              <Tooltip
-                content={
-                  "Listen to the song this person bequeathed to play at their funeral."
-                }
-                direction="right"
-              >
-                {isSongPlaying ? (
-                  <Pause onClick={playSong} />
-                ) : (
-                  <Play onClick={playSong} />
-                )}
-              </Tooltip>
-            </TopBar>
-            <PhotoCont ref={photoContRef}>
-              <PhotoContPhotosWrapper
-                onMouseMove={(e) => move(e)}
-                onMouseDown={(e) => captureClick(e)}
-                onMouseUp={releaseClick}
-                onMouseLeave={releaseClick}
-                draggable={false}
-              >
-                {grave?.photos.map((src, i) => {
-                  return (
-                    <Picture src={src} key={src + i} showPhoto={showPhoto} />
-                  );
-                })}
-              </PhotoContPhotosWrapper>
-            </PhotoCont>
-            <DateLiving>
-              {grave?.born} - {grave?.died}
-            </DateLiving>
-            <LastWords>{grave?.lastWords}</LastWords>
-          </MainInfoCont>
-          <LogsCont>
-            <Log>
-              {grave?.chatLogs.map((entry, i) => {
-                return <LogEntry key={entry + i}>&gt; {entry}</LogEntry>;
+      <TopPanel>
+        <ChevroneLeft onClick={backToGYard} />
+      </TopPanel>
+      <Monument>
+        <MainInfoCont>
+          <TopBar>
+            <Tooltip
+              content={"Leave something on the grave \nto honor the deceased."}
+              direction="left"
+            >
+              <Donate onClick={openDonateGift} />
+            </Tooltip>
+            <Name>{grave?.name}</Name>
+            <Tooltip
+              content={
+                "Listen to the song this person bequeathed to play at their funeral."
+              }
+              direction="right"
+            >
+              {isSongPlaying ? (
+                <Pause onClick={playSong} />
+              ) : (
+                <Play onClick={playSong} />
+              )}
+            </Tooltip>
+          </TopBar>
+          <PhotoCont ref={photoContRef}>
+            <PhotoContPhotosWrapper
+              onMouseMove={(e) => move(e)}
+              onMouseDown={(e) => captureClick(e)}
+              onMouseUp={releaseClick}
+              onMouseLeave={releaseClick}
+              draggable={false}
+            >
+              {grave?.photos.map((src, i) => {
+                return (
+                  <Picture src={src} key={src + i} showPhoto={showPhoto} />
+                );
               })}
-            </Log>
-          </LogsCont>
-          <Tooltip
-            content={"Gifts people left to honor the person laying here."}
-            direction="top"
-          >
-            <OpenGiftsButton onClick={openGifts}>
-              <span>Gifts</span>
-            </OpenGiftsButton>
-          </Tooltip>
-        </Monument>
-      </MainContainer>
+            </PhotoContPhotosWrapper>
+          </PhotoCont>
+          <DateLiving>
+            {grave?.born} - {grave?.died}
+          </DateLiving>
+          <LastWords>{grave?.lastWords}</LastWords>
+        </MainInfoCont>
+        <LogsCont>
+          <Log>
+            {grave?.chatLogs.map((entry, i) => {
+              return (
+                <LogEntry key={entry + i}>
+                  <LogDiagSign>&gt;</LogDiagSign> {entry}
+                </LogEntry>
+              );
+            })}
+          </Log>
+        </LogsCont>
+        <Tooltip
+          content={"Gifts people left to honor the person laying here."}
+          direction="top"
+        >
+          <OpenGiftsButton onClick={openGifts}>
+            <span>Gifts</span>
+          </OpenGiftsButton>
+        </Tooltip>
+      </Monument>
     </>
   );
 };
@@ -225,6 +226,10 @@ const Picture = ({ src, showPhoto = () => {} }) => {
     </PhotoWrapper>
   );
 };
+
+const LogDiagSign = styled.span`
+  color: ${colors.secondaryB.hex};
+`;
 
 const PreloaderCont = styled.div`
   height: 100%;
@@ -322,9 +327,9 @@ const OpenGiftsButton = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 5px;
-  height: 40px;
   background-color: rgba(0, 0, 0, 0.1);
   font-size: 24px;
+  padding: 15px;
   cursor: pointer;
   &:hover {
     background-color: rgba(0, 0, 0, 0.2);
@@ -408,12 +413,17 @@ const Name = styled(Text)`
 `;
 
 const Monument = styled.div`
-  width: 80%;
-  height: 100%;
+  width: 60vw;
+  height: 600px;
+  background-color: ${colors.primary.rgba(0.6)};
   margin: 0 auto;
-  background-color: gray;
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border-radius: 2px;
+  box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.2);
+  svg {
+    fill: ${colors.secondaryB.hex};
+  }
 `;

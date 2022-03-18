@@ -32,4 +32,10 @@ export const colors = {
       return hexToRgbA(this.hex, transparency);
     },
   },
+  contrastA: {
+    hex: "#429c06",
+    rgba: function (transparency) {
+      return hexToRgbA(this.hex, transparency);
+    },
+  },
 };

@@ -2,8 +2,6 @@ import styled from "styled-components/macro";
 import { colors } from "../../../configs/css/colors";
 
 export const MainContainer = styled.div`
-  background-color: ${(p) => p.bgCol || colors.secondaryA.rgba(1)};
-  box-shadow: 0px 10px 100px 10px rgba(0, 0, 0, 0.2);
   padding: 20px;
 `;
 

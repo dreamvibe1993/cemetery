@@ -9,7 +9,7 @@ export const TopNavBar = () => {
   return (
     <NavBar>
       <Logo />
-      <NavButton>Log in || Sign in</NavButton>
+      <NavButton>auth</NavButton>
     </NavBar>
   );
 };
@@ -33,5 +33,6 @@ const NavBar = styled.div`
   svg {
     height: 100%;
     width: 100px;
+    fill: ${colors.secondaryB.hex};
   }
 `;

@@ -109,7 +109,6 @@ const Cell = styled.div`
   height: ${pxToVh(250, window.innerWidth)};
   min-height: 250px;
   transition: all 0.2s linear;
-  background-color: ${colors.primary.rgba(1)};
   padding: 5px;
   display: flex;
   justify-content: center;
@@ -142,7 +141,6 @@ const Cell = styled.div`
 `;
 
 const CemetaryGridContainer = styled.div`
-  margin-top: 90px;
   background-color: ${colors.primary.rgba(.4)};
   border-radius: 5px;
   display: grid;

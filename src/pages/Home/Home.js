@@ -17,11 +17,9 @@ export const Home = () => {
 
   if (isLoading)
     return (
-      <MainContainer bgCol="rgb(49, 46, 68)">
-        <LoadingContainer>
-          <Preloader />
-        </LoadingContainer>
-      </MainContainer>
+      <LoadingContainer>
+        <Preloader />
+      </LoadingContainer>
     );
 
   return <CemetaryGrid />;
@@ -30,7 +28,6 @@ export const Home = () => {
 const LoadingContainer = styled.div`
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
