@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components/macro";
 
 import { loadGraves } from "../../api/graves";
@@ -7,15 +8,13 @@ import { MainContainer } from "../../components/css/sc-components/ScComponents";
 import { Preloader } from "../../components/Preloader";
 
 export const Home = () => {
-  const [isLoading, setLoading] = React.useState(true);
+  const { isGravesLoading } = useSelector((state) => state.graves);
 
   React.useEffect(() => {
-    loadGraves().then(() => {
-      setLoading(false);
-    });
+    loadGraves();
   }, []);
 
-  if (isLoading)
+  if (isGravesLoading)
     return (
       <LoadingContainer>
         <Preloader />
