@@ -40,10 +40,10 @@ export const reloadGraves = async () => {
 };
 
 export const postNewGrave = async (data) => {
-  console.log(data);
   try {
     data.photos = [];
     const readyToPost = convertToBackModel({ data });
+    console.log(data);
     const response = await axios.post(ORIGIN + GRAVES_API_URL, readyToPost);
     return response;
   } catch (e) {

@@ -38,4 +38,10 @@ export const colors = {
       return hexToRgbA(this.hex, transparency);
     },
   },
+  error: {
+    hex: "#e81313",
+    rgba: function (transparency) {
+      return hexToRgbA(this.hex, transparency);
+    },
+  }
 };

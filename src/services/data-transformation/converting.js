@@ -32,7 +32,7 @@ export const convertToBackModel = ({ data }) => {
     songs: [data.song],
   };
   for (let key in converted) {
-    if (!converted[key]) {
+    if (converted[key] === undefined) {
       throw new Error(
         `Back model is not consistent! No ${key} value provided! JSON: ` +
           JSON.stringify(converted, null, 1)

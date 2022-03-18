@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/macro";
-import Select from "react-select";
+// import Select from "react-select";
 import { setLocale } from "yup";
 
 import { ReactComponent as Cross } from "../../media/svg/cross.svg";
@@ -8,6 +8,7 @@ import { compressPhotos } from "../../services/data-transformation/converting";
 import { loadGraves, postNewGrave } from "../../api/graves";
 import { Preloader } from "../Preloader";
 import { graveSchema } from "../../models/yup/yup-schemas";
+import { colors } from "../../configs/css/colors";
 
 setLocale({
   string: {
@@ -25,10 +26,10 @@ export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
   const [born, setBorn] = React.useState("");
   const [died, setDied] = React.useState("");
   const [lastWords, setLastWords] = React.useState(" ");
-  const [songs, setSongs] = React.useState({
-    label: "земфира - пммл",
-    value: "zemfira",
-  });
+  // const [songs, setSongs] = React.useState({
+  //   label: "земфира - пммл",
+  //   value: "zemfira",
+  // });
 
   const [errThrown, setErrThrown] = React.useState("");
 
@@ -66,10 +67,10 @@ export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
     setErrThrown("");
     setLastWords(e.target.value);
   };
-  const handleLSongInput = (v) => {
-    setErrThrown("");
-    setSongs(v);
-  };
+  // const handleLSongInput = (v) => {
+  //   setErrThrown("");
+  //   setSongs(v);
+  // };
 
   const submitData = () => {
     setErrThrown("");
@@ -78,7 +79,7 @@ export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
       born,
       died,
       lastWords,
-      songs,
+      // songs,
       photos,
     };
     graveSchema
@@ -101,6 +102,7 @@ export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
         }
       })
       .catch((err) => {
+        console.log(JSON.stringify(err, false, 1));
         const sErr = ["photos", "lastWords"];
         if (sErr.includes(err.params.path)) {
           alert(err.errors[0]);
@@ -158,7 +160,7 @@ export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
             defaultValue={lastWords}
           ></TextInput>
           <InputName>song to mourn:</InputName>
-          <Select
+          {/* <Select
             onChange={(v) => handleLSongInput(v)}
             options={[{ value: "zemfira", label: "земфира - пммл" }]}
             defaultInputValue={songs.label}
@@ -171,8 +173,7 @@ export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
               control: (provided) => ({
                 ...provided,
                 backgroundColor: "rgba(0, 0, 0, 0.2)",
-                border:
-                  errThrown === "song" ? "1px solid red" : "1px solid black",
+                border: errThrown === "song" ? "1px solid red" : "none",
               }),
               valueContainer: (provided) => ({
                 ...provided,
@@ -204,7 +205,7 @@ export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
                 color: "#fff",
               }),
             }}
-          />
+          /> */}
           <InputName>
             {photos.length < 1 ? "photos" : "click to add more"}
           </InputName>
@@ -290,7 +291,7 @@ const Button = styled.div`
   flex: 1;
   height: 40px;
   background-color: rgba(0, 0, 0, 0.2);
-  border: 1px solid black;
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -313,18 +314,19 @@ const Cancel = styled(Button)`
 
 const ButtonsCont = styled.div`
   display: flex;
-  padding: 5px;
 `;
 
 const TextInput = styled.input`
   -webkit-appearance: none;
-  border: 1px solid ${(p) => (p.errThrown ? "rgba(245, 66, 66, .8)" : "black")};
+  border: ${(p) =>
+    p.errThrown ? "1px solid " + colors.error.hex : "none"};
   background-color: rgba(0, 0, 0, 0.2);
   width: 100%;
   height: 40px;
-  padding: 5px;
+  padding: 5px 10px;
   color: #fff;
   font-size: 20px;
+  border-radius: 2px;
 `;
 
 const InputsContainer = styled.div`
@@ -359,8 +361,8 @@ const Diag = styled.div`
   margin-top: 50px;
   height: 750px;
   width: 450px;
-  background-color: #591740;
-  padding: 20px 10px;
+  background-color: ${colors.primary.rgba(0.8)};
+  padding: 20px 20px;
   text-align: center;
   display: flex;
   flex-direction: column;

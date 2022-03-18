@@ -3,17 +3,16 @@ import * as yup from "yup";
 //сообщения писать в required
 
 export const graveSchema = yup.object().shape({
-  name: yup.string().required().min(2),
-  born: yup.date().required(),
-  died: yup.date().required(),
-  lastWords: yup.string().max(32, "максимум 32 буквы. давай лаконичнее"),
   photos: yup
     .array()
-    .min(1, "добавь фотку а")
-    .max(
-      4,
-      "воу паринь палехче у меня нет стока денек чтобы хранить всё это фотографическое искусство. удаляй пока не станет 4"
-    ),
+    .min(1, "Please add a photo.")
+    .max(4, "Please delete some pictures. Max number is 4."),
+  lastWords: yup
+    .string()
+    .max(32, "Maximum length is 32. Please be more brief."),
+  died: yup.date().required(),
+  born: yup.date().required(),
+  name: yup.string().required().min(2),
 });
 
 export const giftSchema = yup.object().shape({
