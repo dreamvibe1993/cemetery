@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import styled from "styled-components/macro";
 import { deleteGrave, loadGraves } from "../../api/graves";
@@ -12,8 +12,10 @@ import { NewGraveModal } from "../NewGraveModal/NewGraveModal";
 import { Tooltip } from "../Tooltip";
 import { pxToVh, pxToVw } from "../../services/css/convertion/sizes";
 import { colors } from "../../configs/css/colors";
+import { setNotification } from "../../redux/app/appReducer";
 
 export const CemetaryGrid = () => {
+  const dispatch = useDispatch();
   const { graves } = useSelector((state) => state.graves);
   const { isAdmin } = useSelector((state) => state.user);
   const [redirect, setRedirect] = React.useState(null);
@@ -39,13 +41,23 @@ export const CemetaryGrid = () => {
 
   const deleteTomb = async (e, grave) => {
     e.stopPropagation();
-    const conf = window.confirm(
-      "are you sure you want to delete the grave of " + grave.name
+    dispatch(
+      setNotification({
+        text: "Shite shite shite",
+        withOptions: true,
+        options: [
+          { text: "yes", meaning: true },
+          { text: "no", meaning: false },
+        ],
+      })
     );
-    if (conf) {
-      await deleteGrave(grave);
-      loadGraves();
-    }
+    // const conf = window.confirm(
+    //   "are you sure you want to delete the grave of " + grave.name
+    // );
+    // if (conf) {
+    //   await deleteGrave(grave);
+    //   loadGraves();
+    // }
   };
 
   const askNewGrave = (i) => {

@@ -5,6 +5,7 @@ import { GreetingsScreen } from "./components/GreetingsScreen";
 import { checkUserAuth } from "./api/user";
 import { TopNavBar } from "./components/NavBar/NavBar";
 import { GlobalStyles } from "./GlobalStyles";
+import { NotificationModal } from "./components/NotificationModal";
 
 function App() {
   const [isGreetingsShown, setGreetingsShown] = React.useState(false);
@@ -25,12 +26,13 @@ function App() {
   return (
     <>
       <GlobalStyles />
-      {isGreetingsShown && <GreetingsScreen onClose={closeGreetings} />}
-      <TopNavBar />
-      <Paths />
+      <NotificationModal>
+        {isGreetingsShown && <GreetingsScreen onClose={closeGreetings} />}
+        <TopNavBar />
+        <Paths />
+      </NotificationModal>
     </>
   );
 }
 
 export default App;
-

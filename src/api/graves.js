@@ -55,7 +55,9 @@ export const postNewGrave = async (data) => {
 export const deleteGrave = async (grave) => {
   const t = store.getState();
   if (!t?.user?.isAdmin) return;
-  return axios.delete(ORIGIN + GRAVES_API_URL + "/" + grave._id);
+  return axios.delete(ORIGIN + GRAVES_API_URL + "/" + grave._id, {
+    withCredentials: true,
+  });
 };
 
 export const updateGrave = (data, grave) => {

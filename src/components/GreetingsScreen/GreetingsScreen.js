@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components/macro";
-import { DropDown } from "../css/animations";
+import { DropDown } from "../../configs/css/animations";
 import { ServiceButton } from "../css/sc-components/ScComponents";
 
 import { ReactComponent as Logo } from "../../media/svg/logo.svg";
