@@ -12,11 +12,12 @@ import { Tooltip } from "../Tooltip";
 import { pxToVh, pxToVw } from "../../services/css/convertion/sizes";
 import { colors } from "../../configs/css/colors";
 import { useDeleteGrave } from "../../services/hooks/graves/useDeleteGrave";
+import { showError } from "../../services/errors/showError";
 
 export const CemetaryGrid = () => {
   const deleteGrave = useDeleteGrave();
   const { graves } = useSelector((state) => state.graves);
-  const { isAdmin } = useSelector((state) => state.user);
+  const { isAuth, user } = useSelector((state) => state.user);
   const [redirect, setRedirect] = React.useState(null);
   const [cells, setCells] = React.useState([]);
   const [cellNumChosen, setCellNumChosen] = React.useState(false);
@@ -39,6 +40,7 @@ export const CemetaryGrid = () => {
   };
 
   const askNewGrave = (i) => {
+    if (!isAuth) return showError({message: "Only logged in users can create graves. Please log in or create account!"})
     setCellNumChosen(i);
   };
 
@@ -66,7 +68,7 @@ export const CemetaryGrid = () => {
             >
               <Cell onClick={() => visitTomb(cell)}>
                 <Grave />
-                {isAdmin && (
+                {cell?.madeBy === user.id && (
                   <ServiceButton
                     id="sbut"
                     style={{

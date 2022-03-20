@@ -2,6 +2,7 @@ import store from "../../redux/store";
 import {
   setUser,
   setUserAsAdmin,
+  setUserAsNotAdmin,
   setUserAuth,
 } from "../../redux/user/userReducer";
 
@@ -11,6 +12,13 @@ export const authorizeUser = (user) => {
   const userData = {
     email: user.email,
     username: user.name,
+    id: user._id
   };
   store.dispatch(setUser(userData));
 };
+
+export const dropUserData = () => {
+  store.dispatch(setUserAsNotAdmin())
+  store.dispatch(setUserAuth(false));
+  store.dispatch(setUser({}));
+}

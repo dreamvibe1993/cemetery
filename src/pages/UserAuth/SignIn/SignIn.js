@@ -21,7 +21,11 @@ export const SignIn = () => {
   };
 
   const closeSignInSection = () => {
-    setSignInOpen(true);
+    setSignInOpen(false);
+    setName("");
+    setEmail("");
+    setPassword("");
+    setPasswordConfirm("");
   };
 
   const handleUsernameInput = (e) => {
@@ -61,7 +65,7 @@ export const SignIn = () => {
         console.trace(err);
         setError(err.path);
         setErrorMessage(err.message);
-        showError(err)
+        showError(err);
       });
   };
 
@@ -73,6 +77,7 @@ export const SignIn = () => {
             type="text"
             placeholder="username"
             required
+            value={name}
             onChange={(e) => handleUsernameInput(e)}
             err={error === "name"}
           ></LoginInput>
@@ -83,6 +88,7 @@ export const SignIn = () => {
             type="email"
             placeholder="e-mail"
             required
+            value={email}
             onChange={(e) => handleEmailInput(e)}
             err={error === "email"}
           ></LoginInput>
@@ -93,6 +99,7 @@ export const SignIn = () => {
             type="password"
             placeholder="password"
             required
+            value={password}
             onChange={(e) => handlePasswordInput(e)}
             err={error === "password"}
           ></PasswordInput>
@@ -103,6 +110,7 @@ export const SignIn = () => {
             type="password"
             placeholder="confirm your password"
             required
+            value={passwordConfirm}
             onChange={(e) => handlePasswordConfirmInput(e)}
             err={error === "passwordConfirm"}
           ></PasswordInput>
