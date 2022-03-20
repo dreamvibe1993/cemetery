@@ -1,8 +1,7 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import styled from "styled-components/macro";
-import { deleteGrave, loadGraves } from "../../api/graves";
 import { ServiceButton } from "../css/sc-components/ScComponents";
 
 import GrassPattern from "../../media/img/grave/grass-p-2.png";
@@ -12,10 +11,10 @@ import { NewGraveModal } from "../NewGraveModal/NewGraveModal";
 import { Tooltip } from "../Tooltip";
 import { pxToVh, pxToVw } from "../../services/css/convertion/sizes";
 import { colors } from "../../configs/css/colors";
-import { setNotification } from "../../redux/app/appReducer";
+import { useDeleteGrave } from "../../services/hooks/graves/useDeleteGrave";
 
 export const CemetaryGrid = () => {
-  const dispatch = useDispatch();
+  const deleteGrave = useDeleteGrave();
   const { graves } = useSelector((state) => state.graves);
   const { isAdmin } = useSelector((state) => state.user);
   const [redirect, setRedirect] = React.useState(null);
@@ -37,27 +36,6 @@ export const CemetaryGrid = () => {
 
   const visitTomb = (grave) => {
     setRedirect("/tomb?graveId=" + grave._id);
-  };
-
-  const deleteTomb = async (e, grave) => {
-    e.stopPropagation();
-    dispatch(
-      setNotification({
-        text: "Shite shite shite",
-        withOptions: true,
-        options: [
-          { text: "yes", meaning: true },
-          { text: "no", meaning: false },
-        ],
-      })
-    );
-    // const conf = window.confirm(
-    //   "are you sure you want to delete the grave of " + grave.name
-    // );
-    // if (conf) {
-    //   await deleteGrave(grave);
-    //   loadGraves();
-    // }
   };
 
   const askNewGrave = (i) => {
@@ -96,7 +74,7 @@ export const CemetaryGrid = () => {
                       bottom: "15px",
                       zIndex: 99999,
                     }}
-                    onClick={(e) => deleteTomb(e, cell)}
+                    onClick={(e) => deleteGrave(e, cell)}
                   >
                     DELETE
                   </ServiceButton>

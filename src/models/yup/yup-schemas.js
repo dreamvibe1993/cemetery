@@ -16,8 +16,8 @@ export const graveSchema = yup.object().shape({
 });
 
 export const giftSchema = yup.object().shape({
-  name: yup.string().required("name is requred").min(2).max(15),
-  gift: yup.string("choose a gift please").required("choose a gift please"),
+  name: yup.string().required("Please enter your name.").min(2).max(15),
+  gift: yup.string().required("You forgot to pick a gift!"),
   wish: yup.string().max(30),
 });
 

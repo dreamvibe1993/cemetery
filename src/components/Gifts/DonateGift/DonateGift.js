@@ -6,9 +6,10 @@ import { ReactComponent as Candy } from "../../../media/svg/candy.svg";
 import { ReactComponent as BTC } from "../../../media/svg/btc.svg";
 import { giftSchema } from "../../../models/yup/yup-schemas";
 import { updateGrave } from "../../../api/graves";
+import { showError } from "../../../services/errors/showError";
 
 export const DonateGift = ({ onClose = () => {}, grave }) => {
-  const [gift, setGift] = React.useState(null);
+  const [gift, setGift] = React.useState("");
   const [name, setName] = React.useState("");
   const [wish, setWish] = React.useState("");
   const [errThrown, setErrThrown] = React.useState("");
@@ -31,15 +32,13 @@ export const DonateGift = ({ onClose = () => {}, grave }) => {
     const dataToValidate = { gift, name, wish };
     giftSchema
       .validate(dataToValidate)
-      .then((val) => {
+      .then(() => {
         updateGrave(dataToValidate, grave).then(() => onClose());
       })
       .catch((err) => {
         console.error(err);
         console.trace(err);
-        if (err?.params?.path !== "gift" && err?.errors?.length > 0) {
-          alert(err.errors[0]);
-        }
+        showError({ message: err.errors[0] });
         setErrThrown(err?.params?.path);
       });
   };
@@ -193,7 +192,7 @@ const DonateGiftCont = styled.div`
   width: 100%;
   top: 0;
   left: 0;
-  z-index: 9999999999999 !important;
+  z-index: 999;
   background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;

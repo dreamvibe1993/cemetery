@@ -17,9 +17,18 @@ export const app = createSlice({
     setAnswerToNotif(state, action) {
       state.notificationConfirm = action.payload;
     },
+    setNotificationToDefault(state) {
+      state.notification = {
+        text: null,
+        withOptions: false,
+        options: ["yes", "no"],
+      };
+      state.notificationConfirm = null;
+    },
   },
 });
 
-export const { setNotification, setAnswerToNotif } = app.actions;
+export const { setNotification, setAnswerToNotif, setNotificationToDefault } =
+  app.actions;
 
 export default app.reducer;

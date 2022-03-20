@@ -95,7 +95,6 @@ export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
           loadGraves();
           onClose();
         } catch (e) {
-          alert("something went wrong. sorry");
           onClose();
           console.error(e);
           console.trace(e);

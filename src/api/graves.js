@@ -12,6 +12,7 @@ import {
 } from "../services/data-transformation/converting";
 import { ORIGIN } from "../configs/urls/app/app-urls";
 import { GRAVES_API_URL } from "../configs/urls/api/api-urls";
+import { handleError } from "../services/errors/handleError";
 
 export const loadGraves = async () => {
   try {
@@ -24,7 +25,7 @@ export const loadGraves = async () => {
     store.dispatch(setGravesLoadingOver());
     console.log(gravesConverted);
   } catch (e) {
-    console.error(e);
+    handleError(e);
   }
 };
 
@@ -35,7 +36,7 @@ export const reloadGraves = async () => {
     store.dispatch(setGravesLoadingOver());
   } catch (e) {
     store.dispatch(setGravesLoadingOver());
-    console.error(e);
+    handleError(e);
   }
 };
 
@@ -47,27 +48,27 @@ export const postNewGrave = async (data) => {
     const response = await axios.post(ORIGIN + GRAVES_API_URL, readyToPost);
     return response;
   } catch (e) {
-    console.error(e);
-    console.trace(e);
+    handleError(e);
   }
 };
 
 export const deleteGrave = async (grave) => {
-  const t = store.getState();
-  if (!t?.user?.isAdmin) return;
-  return axios.delete(ORIGIN + GRAVES_API_URL + "/" + grave._id, {
-    withCredentials: true,
-  });
+  return axios
+    .delete(ORIGIN + GRAVES_API_URL + "/" + grave._id, {
+      withCredentials: true,
+    })
+    .catch((e) => {
+      handleError(e);
+    });
 };
 
 export const updateGrave = (data, grave) => {
-  try {
-    return axios.patch(
+  return axios
+    .patch(
       ORIGIN + GRAVES_API_URL + "/" + grave._id,
       updateGiftsOnGrave(data, grave)
-    );
-  } catch (e) {
-    console.error(e);
-    console.trace(e);
-  }
+    )
+    .catch((e) => {
+      handleError(e);
+    });
 };

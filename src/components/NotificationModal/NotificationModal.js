@@ -5,19 +5,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { DropDown } from "../../configs/css/animations";
 import { colors } from "../../configs/css/colors";
 import { ServiceButton } from "../css/sc-components/ScComponents";
-import { setAnswerToNotif } from "../../redux/app/appReducer";
+import {
+  setAnswerToNotif,
+  setNotificationToDefault,
+} from "../../redux/app/appReducer";
 
 export const NotificationModal = ({ children }) => {
   const dispatch = useDispatch();
   const { notification } = useSelector((state) => state.app);
 
   const handleOptionClick = (meaning) => {
-    console.log('meaning: ', meaning)
     dispatch(setAnswerToNotif(meaning));
+  };
+
+  const handleBackdropClick = () => {
+    dispatch(setNotificationToDefault());
   };
 
   return (
     <>
+      <BackdropScreen
+        appear={notification.text}
+        onClick={handleBackdropClick}
+      />
       <Modal appear={notification.text}>
         {notification.text}
         {notification.withOptions && (
@@ -40,6 +50,19 @@ export const NotificationModal = ({ children }) => {
   );
 };
 
+const BackdropScreen = styled.div`
+  transition: opacity 0.4s 0.2s linear, display 0.4s 0.2s linear;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.4);
+  opacity: ${(p) => (p.appear ? 1 : 0)};
+  display: ${(p) => (p.appear ? "block" : "none")};
+`;
+
 const Buttons = styled.div`
   width: 100%;
   display: flex;
@@ -58,7 +81,7 @@ const Modal = styled.div`
   font-size: 20px;
   padding: 20px;
   position: fixed;
-  z-index: 1000;
+  z-index: 1001;
   top: -250px;
   left: 50%;
   transform: translateX(-50%);
