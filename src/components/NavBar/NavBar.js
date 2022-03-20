@@ -5,14 +5,16 @@ import { NavButton } from "../css/sc-components/ScComponents";
 import { ReactComponent as Logo } from "../../media/svg/logo.svg";
 import { colors } from "../../configs/css/colors";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export const TopNavBar = () => {
   const navigate = useNavigate();
+  const { user } = useSelector((state) => state.user);
 
   const goHome = () => {
     navigate("/");
   };
-  
+
   const goAuth = () => {
     navigate("/auth");
   };
@@ -20,10 +22,23 @@ export const TopNavBar = () => {
   return (
     <NavBar>
       <Logo onClick={goHome} />
+      <UserName>{user.username || "unauthorized"}</UserName>
       <NavButton onClick={goAuth}>auth</NavButton>
     </NavBar>
   );
 };
+
+const UserName = styled.span`
+  flex: 1;
+  padding-left: 40px;
+  user-select: none;
+  opacity: 0.5;
+  transition: opacity 0.2s linear;
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
+  }
+`;
 
 const NavBar = styled.div`
   position: fixed;
@@ -36,6 +51,7 @@ const NavBar = styled.div`
   box-shadow: 2px 0px 50px 2px rgba(0, 0, 0, 0.3);
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 10px 30px;
   * {
     text-transform: lowercase;
