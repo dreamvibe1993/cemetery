@@ -3,6 +3,8 @@ import { USER_API_URL } from "../configs/urls/api/api-urls";
 import { ORIGIN } from "../configs/urls/app/app-urls";
 import store from "../redux/store";
 import { setUserAuth, setUser } from "../redux/user/userReducer";
+import { authorizeUser } from "../services/auth/logInUser";
+import { handleError } from "../services/errors/handleError";
 
 export const createUser = async (name, email, password, passwordConfirm) => {
   try {
@@ -13,9 +15,8 @@ export const createUser = async (name, email, password, passwordConfirm) => {
       passwordConfirm,
     });
   } catch (e) {
-    console.error(e);
+    handleError(e.response.data);
   }
-  console.log(name, email, password, passwordConfirm);
 };
 
 export const logInUser = async (email, password) => {
@@ -30,34 +31,40 @@ export const logInUser = async (email, password) => {
         withCredentials: true,
       }
     );
-    const userData = {
-      email: response.data.user.email,
-      username: response.data.user.name,
-    };
-    store.dispatch(setUserAuth(true));
-    store.dispatch(setUser(userData));
-  } catch (error) {
+    authorizeUser(response.data.user);
+  } catch (e) {
     store.dispatch(setUserAuth(false));
     store.dispatch(setUser({}));
-    console.error(error);
-    console.trace(error);
-    alert(error);
+    handleError(e.response.data);
   }
 };
 
 export const logOutUser = async () => {
   try {
-    await axios.post(ORIGIN + USER_API_URL + "/sign-out");
-    console.log("user signed out");
+    await axios.post(
+      ORIGIN + USER_API_URL + "/logout",
+      {},
+      {
+        withCredentials: true,
+      }
+    );
     store.dispatch(setUserAuth(false));
     store.dispatch(setUser({}));
-  } catch (error) {
+  } catch (e) {
     store.dispatch(setUserAuth(null));
     store.dispatch(setUser({}));
-    console.error(error);
-    console.trace(error);
-    alert(error);
+    handleError(e.response.data);
   }
 };
 
-export const checkUserAuth = async () => {};
+export const getUser = async () => {
+  try {
+    const response = await axios.get(ORIGIN + USER_API_URL + "/user", {
+      withCredentials: true,
+    });
+    authorizeUser(response.data.user);
+    return response;
+  } catch (e) {
+    handleError(e.response.data);
+  }
+};

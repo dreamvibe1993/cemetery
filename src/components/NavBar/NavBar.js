@@ -12,11 +12,15 @@ export const TopNavBar = () => {
   const goHome = () => {
     navigate("/");
   };
+  
+  const goAuth = () => {
+    navigate("/auth");
+  };
 
   return (
     <NavBar>
       <Logo onClick={goHome} />
-      <NavButton>auth</NavButton>
+      <NavButton onClick={goAuth}>auth</NavButton>
     </NavBar>
   );
 };

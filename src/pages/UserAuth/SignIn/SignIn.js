@@ -4,6 +4,7 @@ import { createUser } from "../../../api/user";
 
 import { ServiceButton } from "../../../components/css/sc-components/ScComponents";
 import { regSchema } from "../../../models/yup/yup-schemas";
+import { showError } from "../../../services/errors/showError";
 
 export const SignIn = () => {
   const [name, setName] = React.useState("");
@@ -60,6 +61,7 @@ export const SignIn = () => {
         console.trace(err);
         setError(err.path);
         setErrorMessage(err.message);
+        showError(err)
       });
   };
 

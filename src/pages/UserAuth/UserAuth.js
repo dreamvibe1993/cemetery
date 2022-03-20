@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components/macro";
-import { logOutUser } from "../../api/user";
+import { getUser, logOutUser } from "../../api/user";
 
 import { ReactComponent as Logo } from "../../media/svg/logo.svg";
 import { ReactComponent as Cross } from "../../media/svg/cross.svg";
@@ -27,6 +27,10 @@ export const UserAuth = () => {
   const redirectToHome = () => {
     setRedirect("/");
   };
+
+  React.useEffect(() => {
+    getUser();
+  }, []);
 
   if (redirect) return <Navigate to={redirect} />;
 

@@ -9,7 +9,7 @@ export const graveSchema = yup.object().shape({
     .max(4, "Please delete some pictures. Max number is 4."),
   lastWords: yup
     .string()
-    .max(32, "Maximum length is 32. Please be more brief."),
+    .max(32, "Maximum length of the person's last words is 32. Please be more brief."),
   died: yup.date().required(),
   born: yup.date().required(),
   name: yup.string().required().min(2),
@@ -26,22 +26,22 @@ export const loginSchema = yup.object().shape({
   password: yup
     .string()
     .required("Password is strongly required!")
-    .min(8, "Minimum length is 8 symbols."),
+    .min(8, "Minimum password's length is 8 symbols."),
 });
 
 export const regSchema = yup.object().shape({
   passwordConfirm: yup
     .string()
     .required("Please confirm your password")
-    .min(8, "Minimum length is 8 symbols.")
+    .min(8, "Minimum password's length is 8 symbols.")
     .oneOf([yup.ref("password"), null], "Passwords must match"),
   password: yup
     .string()
     .required("Password is strongly required!")
-    .min(8, "Minimum length is 8 symbols."),
+    .min(8, "Minimum password's length is 8 symbols."),
   email: yup.string().email().required("Email is strongly required"),
   name: yup
     .string()
     .required("Please provide us your name.")
-    .max(10, "10 symbols is maximum."),
+    .max(10, "Maximum name's length is 10 symbols."),
 });

@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const user = createSlice({
   name: "user",
   initialState: {
+    isUserLoading: false,
     isAuth: false,
     authError: "",
     user: {},
@@ -10,7 +11,7 @@ export const user = createSlice({
   },
   reducers: {
     setUser(state, action) {
-     /* if (action?.payload?.isAdmin) {
+      /* if (action?.payload?.isAdmin) {
         state.isAdmin = true;
       } else {
         state.isAdmin = false;
@@ -20,10 +21,13 @@ export const user = createSlice({
     setUserAuth(state, action) {
       state.isAuth = action.payload;
     },
+    setUserAsAdmin(state) {
+      state.isAdmin = true;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setUser, setUserAuth } = user.actions;
+export const { setUser, setUserAuth, setUserAsAdmin } = user.actions;
 
 export default user.reducer;

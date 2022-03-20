@@ -6,6 +6,7 @@ import { logInUser } from "../../../api/user";
 import { ServiceButton } from "../../../components/css/sc-components/ScComponents";
 import { setUserAuth } from "../../../redux/user/userReducer";
 import { loginSchema } from "../../../models/yup/yup-schemas";
+import { showError } from "../../../services/errors/showError";
 
 export const LogIn = () => {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ export const LogIn = () => {
         console.trace(err);
         setError(err.path);
         setErrorM(err.message);
+        showError(err)
       });
   };
 
