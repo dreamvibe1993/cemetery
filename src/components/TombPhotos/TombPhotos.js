@@ -90,7 +90,7 @@ const PhotoWrapper = styled.div`
   width: 163px;
   height: 290px;
   overflow: hidden;
-  border-radius: 15px;
+  border-radius: 2px;
   display: flex;
   justify-content: center;
 `;

@@ -29,6 +29,7 @@ const LogEntry = styled.span`
 const Log = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
   height: 100%;
+  min-height: 100px;
   width: 100%;
   padding: 10px;
   max-height: 236px;

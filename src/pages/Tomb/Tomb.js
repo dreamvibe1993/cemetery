@@ -140,7 +140,6 @@ const OpenGiftsButton = styled.div`
 
 const Monument = styled.div`
   width: 60vw;
-  height: 600px;
   background-color: ${colors.primary.rgba(0.6)};
   margin: 0 auto;
   padding: 20px;

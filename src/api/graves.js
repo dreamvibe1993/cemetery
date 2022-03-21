@@ -11,7 +11,7 @@ import {
   updateGiftsOnGrave,
 } from "../services/data-transformation/converting";
 import { ORIGIN } from "../configs/urls/app/app-urls";
-import { GRAVES_API_URL } from "../configs/urls/api/api-urls";
+import { GRAVES_API_URL, PHOTOS_API_URL } from "../configs/urls/api/api-urls";
 import { handleError } from "../services/errors/handleError";
 
 export const loadGraves = async () => {
@@ -40,9 +40,26 @@ export const reloadGraves = async () => {
   }
 };
 
+const updatePhotos = async (photos) => {
+  const formData = new FormData();
+  photos.forEach((file) => {
+    formData.append("multi-files", file.file, file.file.name);
+  });
+  photos = formData;
+  return await axios
+    .post(ORIGIN + PHOTOS_API_URL, formData, {
+      withCredentials: true,
+      headers: { "Content-type": "multipart/form-data" },
+    })
+    .catch((e) => {
+      handleError(e);
+    });
+};
+
 export const postNewGrave = async (data) => {
   try {
-    data.photos = [];
+    const res = await updatePhotos(data.photos);
+    data.photos = res.data.photos;
     const readyToPost = convertToBackModel({ data });
     const response = await axios.post(ORIGIN + GRAVES_API_URL, readyToPost, {
       withCredentials: true,

@@ -12,6 +12,7 @@ import { AuthWrapper } from "./components/AuthWrapper";
   1) Photos in graves
   2) User profile
   3) Request forgotten password
+  4) Make admin delete all graves
 */
 
 function App() {
