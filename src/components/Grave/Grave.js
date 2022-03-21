@@ -1,13 +1,11 @@
 import React from "react";
 import styled from "styled-components/macro";
-import StonePattern from "../../media/img/grave/stone-p-2.png";
-import UserPic from "../../media/img/common/user_photo.png";
 import { colors } from "../../configs/css/colors";
 
-export const Grave = () => {
+export const Grave = ({grave}) => {
   return (
     <GraveCont>
-      <UserPhoto src={UserPic} />
+      <UserPhoto src={grave.photos[0]} />
     </GraveCont>
   );
 };
@@ -24,7 +22,6 @@ const GraveCont = styled.div`
   height: 100%;
   position: relative;
   padding: 20px;
-  /* background: url(${StonePattern}) repeat; */
   overflow: hidden;
   background-size: 60px 60px;
   box-shadow: 1px 1px 40px 5px rgba(0, 0, 0, 0.1);

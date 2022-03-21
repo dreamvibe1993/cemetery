@@ -1,15 +1,13 @@
 import React from "react";
 import styled from "styled-components/macro";
+import { Navigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import { MainContainer } from "../../components/css/sc-components/ScComponents";
 
 // import PMML from "../../media/audio/zemfira-pmml.mp3";
 
-import { ReactComponent as ChevroneLeft } from "../../media/svg/chevrone.svg";
-
-import { Gifts } from "../../components/Gifts";
-import { Navigate } from "react-router-dom";
 import { Tooltip } from "../../components/Tooltip";
-import { useDispatch, useSelector } from "react-redux";
 import { Preloader } from "../../components/Preloader";
 import { colors } from "../../configs/css/colors";
 import { TombChatLogs } from "../../components/TombChatLogs";
@@ -23,16 +21,6 @@ export const Tomb = () => {
 
   const [redirect, setRedirect] = React.useState(null);
   const [grave, setGrave] = React.useState(null);
-  const [isGiftsOpen, setGiftsOpen] = React.useState(false);
-
-  const closeGifts = () => {
-    setGiftsOpen(false);
-    reloadGraves();
-  };
-
-  const openGifts = () => {
-    setGiftsOpen(true);
-  };
 
   React.useEffect(() => {
     reloadGraves();
@@ -58,10 +46,6 @@ export const Tomb = () => {
   //   };
   // }, []);
 
-  const backToGYard = () => {
-    setRedirect("/");
-  };
-
   if (redirect) return <Navigate to={redirect} />;
 
   if (isGravesLoading)
@@ -75,22 +59,13 @@ export const Tomb = () => {
 
   return (
     <>
-      {isGiftsOpen && <Gifts onClose={closeGifts} grave={grave} />}
-
-      <TopPanel>
-        <ChevroneLeft onClick={backToGYard} />
-      </TopPanel>
       <Monument>
         <TombInfo grave={grave} />
         <TombChatLogs grave={grave} />
         <Tooltip
           content={"Gifts people left to honor the person laying here."}
           direction="top"
-        >
-          <OpenGiftsButton onClick={openGifts}>
-            <span>Gifts</span>
-          </OpenGiftsButton>
-        </Tooltip>
+        ></Tooltip>
       </Monument>
     </>
   );
@@ -105,39 +80,6 @@ const LoadingContainer = styled.div`
   justify-content: center;
 `;
 
-const TopPanel = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  z-index: 999;
-  padding: 40px 0px 0px 20px;
-  svg {
-    cursor: pointer;
-    transition: all 0.2s linear;
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.1);
-      box-shadow: 0px 0px 20px 20px rgba(0, 0, 0, 0.1);
-    }
-  }
-`;
-
-const OpenGiftsButton = styled.div`
-  transition: all 0.2s linear;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 5px;
-  background-color: rgba(0, 0, 0, 0.1);
-  font-size: 24px;
-  padding: 15px;
-  cursor: pointer;
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.2);
-  }
-`;
-
 const Monument = styled.div`
   width: 60vw;
   background-color: ${colors.primary.rgba(0.6)};
@@ -148,7 +90,8 @@ const Monument = styled.div`
   justify-content: space-between;
   border-radius: 2px;
   box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.2);
+  position: relative;
   svg {
-    fill: ${colors.secondaryB.hex};
+    /* fill: ${colors.secondaryB.hex}; */
   }
 `;

@@ -84,7 +84,8 @@ export const updateGrave = (data, grave) => {
   return axios
     .patch(
       ORIGIN + GRAVES_API_URL + "/" + grave._id,
-      updateGiftsOnGrave(data, grave)
+      updateGiftsOnGrave(data, grave),
+      { withCredentials: true }
     )
     .catch((e) => {
       handleError(e);

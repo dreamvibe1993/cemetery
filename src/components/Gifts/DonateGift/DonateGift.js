@@ -1,16 +1,19 @@
 import React from "react";
 import styled from "styled-components/macro";
-import { ReactComponent as ChevroneLeft } from "../../../media/svg/chevrone.svg";
+import { useSelector } from "react-redux";
+
 import { ReactComponent as Vodka } from "../../../media/svg/vodka.svg";
 import { ReactComponent as Candy } from "../../../media/svg/candy.svg";
 import { ReactComponent as BTC } from "../../../media/svg/btc.svg";
 import { giftSchema } from "../../../models/yup/yup-schemas";
 import { updateGrave } from "../../../api/graves";
 import { showError } from "../../../services/errors/showError";
+import { colors } from "../../../configs/css/colors";
+import { ServiceButton } from "../../css/sc-components/ScComponents";
 
 export const DonateGift = ({ onClose = () => {}, grave }) => {
+  const { user } = useSelector((state) => state.user);
   const [gift, setGift] = React.useState("");
-  const [name, setName] = React.useState("");
   const [wish, setWish] = React.useState("");
   const [errThrown, setErrThrown] = React.useState("");
 
@@ -19,17 +22,12 @@ export const DonateGift = ({ onClose = () => {}, grave }) => {
     setGift(giftName);
   };
 
-  const handleNameInput = (e) => {
-    setErrThrown("");
-    setName(e.target.value);
-  };
-
   const handleWishInput = (e) => {
     setWish(e.target.value);
   };
 
   const leaveGift = () => {
-    const dataToValidate = { gift, name, wish };
+    const dataToValidate = { gift, name: user.username, wish };
     giftSchema
       .validate(dataToValidate)
       .then(() => {
@@ -45,20 +43,11 @@ export const DonateGift = ({ onClose = () => {}, grave }) => {
 
   return (
     <DonateGiftCont>
-      <TopPanel>
-        <ChevroneLeft onClick={onClose} />
-      </TopPanel>
       <ChooseGiftBlock>
-        <Header>
-          Type your name{" "}
-          <Input
-            type="text"
-            defaultValue={name}
-            onChange={handleNameInput}
-            errThrown={errThrown === "name"}
-          />{" "}
-          and choose a gift you'd like to leave on the grave:
-        </Header>
+        <ButtonsRow>
+          <ServiceButton onClick={onClose}>BACK TO THE TOMB</ServiceButton>
+          <ServiceButton onClick={leaveGift}>LEAVE THE GIFT</ServiceButton>
+        </ButtonsRow>
         <GiftsRow errThrown={errThrown === "gift"}>
           <Gift onClick={() => chooseGift("vodka")} chosen={gift === "vodka"}>
             <Vodka />
@@ -74,73 +63,50 @@ export const DonateGift = ({ onClose = () => {}, grave }) => {
           </Gift>
         </GiftsRow>
         <WishRow>
-          Also you can leave some warm words for the donatee{" "}
           <Input
             type="text"
             defaultValue={wish}
             onChange={handleWishInput}
+            placeholder="LEAVE YOUR MESSAGE HERE"
             maxLength={30}
             style={{ flex: 1 }}
             errThrown={errThrown === "wish"}
-          />{" "}
-          <span style={{ fontSize: "10px" }}>(max 30)</span>
+          />
         </WishRow>
-        <LEAVE onClick={leaveGift}>LEAVE THE GIFT</LEAVE>
       </ChooseGiftBlock>
     </DonateGiftCont>
   );
 };
 
+const ButtonsRow = styled.div`
+  display: flex;
+  & > * {
+    &:not(:first-child) {
+      margin-left: 5px;
+    }
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+`;
+
 const WishRow = styled.div`
   display: flex;
-  justify-content: stretch;
   align-items: center;
-  margin-top: 10px;
+  justify-content: space-between;
+  margin: 10px 0px;
+  width: 100%;
 `;
 
 const Input = styled.input`
   transition: border 0.5s linear;
   border: ${(p) => (p.errThrown ? "1px solid red" : "none")};
   background-color: rgba(0, 0, 0, 0.2);
-  height: 20px;
-  margin: 0px 5px;
+  padding: 10px;
   color: white;
-`;
-
-const LEAVE = styled.div`
-  width: 300px;
-  height: 40px;
-  background-color: #1a6e6b;
-  position: absolute;
-  bottom: -60px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.1s linear;
-  user-select: none;
-  &:hover {
-    background-color: #165c59;
-  }
-  &:active {
-    background-color: #114745;
-  }
-`;
-
-const TopPanel = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  z-index: 99999999999;
-  padding: 40px 0px 0px 40px;
-  svg {
-    cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.2);
-    box-shadow: 0px 0px 20px 20px rgba(0, 0, 0, 0.2);
-  }
+  width: 100%;
+  flex: 1;
 `;
 
 const Gift = styled.div`
@@ -173,13 +139,9 @@ const GiftsRow = styled.div`
   }
 `;
 
-const Header = styled.span`
-  display: block;
-`;
-
 const ChooseGiftBlock = styled.div`
   width: 750px;
-  background-color: #4c593e;
+  background-color: ${colors.secondaryB.hex};
   padding: 15px;
   display: flex;
   flex-direction: column;
@@ -193,7 +155,7 @@ const DonateGiftCont = styled.div`
   top: 0;
   left: 0;
   z-index: 999;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.9);
   display: flex;
   justify-content: center;
   align-items: center;

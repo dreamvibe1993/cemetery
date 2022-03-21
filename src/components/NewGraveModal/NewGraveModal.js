@@ -90,7 +90,6 @@ export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
           await postNewGrave({
             ...dataToPost,
             graveCellNum: graveCellNum.toString(),
-            lastWords,
           });
           loadGraves();
           onClose();
@@ -158,7 +157,7 @@ export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
             maxLength={32}
             defaultValue={lastWords}
           ></TextInput>
-          <InputName>song to mourn:</InputName>
+          {/* <InputName>song to mourn:</InputName> */}
           {/* <Select
             onChange={(v) => handleLSongInput(v)}
             options={[{ value: "zemfira", label: "земфира - пммл" }]}

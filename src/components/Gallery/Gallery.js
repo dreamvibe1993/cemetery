@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components/macro";
-import { ReactComponent as ChevroneLeft } from "../../media/svg/chevrone.svg";
+import { colors } from "../../configs/css/colors";
+import { ServiceButton } from "../css/sc-components/ScComponents";
 
 export const Gallery = ({ src, onClose = () => {} }) => {
   const picRef = React.useRef(null);
@@ -50,7 +51,7 @@ export const Gallery = ({ src, onClose = () => {} }) => {
   return (
     <PictureGallery fixedHeight={window.innerHeight}>
       <TopPanel>
-        <ChevroneLeft onClick={onClose} />
+        <ServiceButton onClick={onClose}>CLOSE</ServiceButton>
       </TopPanel>
       <PreloaderContainer
         style={{ visibility: isLoading ? "visible" : "hidden" }}
@@ -77,12 +78,8 @@ export const Gallery = ({ src, onClose = () => {} }) => {
         />
       </PicContainer>
       <ButtonsPanel>
-        <ZoomIn onClick={zoomOut}>
-          <span>-</span>
-        </ZoomIn>
-        <ZoomOut onClick={zoomIn}>
-          <span>+</span>
-        </ZoomOut>
+        <ZoomIn onClick={zoomOut}>-</ZoomIn>
+        <ZoomOut onClick={zoomIn}>+</ZoomOut>
       </ButtonsPanel>
     </PictureGallery>
   );
@@ -115,7 +112,7 @@ const TopPanel = styled.div`
   display: flex;
   align-items: center;
   z-index: 99999999999;
-  padding: 40px 0px 0px 40px;
+  padding: 20px 0px 0px 20px;
   svg {
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.2);
@@ -126,11 +123,12 @@ const TopPanel = styled.div`
 const Button = styled.div`
   height: 60px;
   width: 60px;
-  background-color: #7c56f6;
+  background-color: ${colors.secondaryB.hex};
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   opacity: 0.5;
   transition: all 0.1s linear;
   user-select: none;
@@ -138,13 +136,12 @@ const Button = styled.div`
   -o-user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
+  cursor: pointer;
+  font-size: 36px;
+  font-weight: bolder;
+  padding-top: 5px;
   &:active {
     opacity: 1;
-  }
-  span {
-    font-size: 24px;
-    line-height: 10px;
-    display: block;
   }
 `;
 
@@ -180,5 +177,5 @@ const PictureGallery = styled.div`
   top: 0;
   left: 0;
   z-index: 9999999999999 !important;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.9);
 `;

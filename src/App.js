@@ -9,10 +9,10 @@ import { AuthWrapper } from "./components/AuthWrapper";
 
 /*
   TODO:
-  1) Photos in graves
   2) User profile
   3) Request forgotten password
   4) Make admin delete all graves
+  5) Cant create born date older then death date
 */
 
 function App() {

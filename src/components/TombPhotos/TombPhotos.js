@@ -5,6 +5,8 @@ import { ReactComponent as Eye } from "../../media/svg/eye.svg";
 
 import { Gallery } from "../../components/Gallery";
 import { Preloader } from "../../components/Preloader";
+import { ServiceButton } from "../css/sc-components/ScComponents";
+import { colors } from "../../configs/css/colors";
 
 export const TombPhotos = ({ grave }) => {
   const [isClicked, setClicked] = React.useState(false);
@@ -37,20 +39,22 @@ export const TombPhotos = ({ grave }) => {
   };
 
   return (
-    <PhotoCont ref={photoContRef}>
-      {isGalleryOpen && <Gallery src={isGalleryOpen} onClose={hidePhoto} />}
-      <PhotoContPhotosWrapper
-        onMouseMove={(e) => move(e)}
-        onMouseDown={(e) => captureClick(e)}
-        onMouseUp={releaseClick}
-        onMouseLeave={releaseClick}
-        draggable={false}
-      >
-        {grave?.photos.map((src, i) => {
-          return <Picture src={src} key={src + i} showPhoto={showPhoto} />;
-        })}
-      </PhotoContPhotosWrapper>
-    </PhotoCont>
+    <PaddingWrapper>
+      <PhotoCont ref={photoContRef}>
+        {isGalleryOpen && <Gallery src={isGalleryOpen} onClose={hidePhoto} />}
+        <PhotoContPhotosWrapper
+          onMouseMove={(e) => move(e)}
+          onMouseDown={(e) => captureClick(e)}
+          onMouseUp={releaseClick}
+          onMouseLeave={releaseClick}
+          draggable={false}
+        >
+          {grave?.photos.map((src, i) => {
+            return <Picture src={src} key={src + i} showPhoto={showPhoto} />;
+          })}
+        </PhotoContPhotosWrapper>
+      </PhotoCont>
+    </PaddingWrapper>
   );
 };
 
@@ -66,12 +70,19 @@ const Picture = ({ src, showPhoto = () => {} }) => {
         onClick={() => showPhoto(src)}
         style={{ visibility: isLoading ? "hidden" : "visible" }}
       >
-        <Eye />
+        <ServiceButton>
+          <Eye />
+        </ServiceButton>
       </PhotoButton>
       <Photo src={src} draggable={false} onLoad={() => setLoading(false)} />
     </PhotoWrapper>
   );
 };
+
+const PaddingWrapper = styled.div`
+  padding: 0px 20px;
+  background-color: rgba(0, 0, 0, 0.2);
+`;
 
 const PreloaderCont = styled.div`
   height: 100%;
@@ -97,20 +108,23 @@ const PhotoWrapper = styled.div`
 
 const PhotoButton = styled.div`
   position: absolute;
-  bottom: 5%;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 20%;
+  bottom: 10px;
+  left: 10px;
   background-color: rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.2);
   cursor: pointer;
-  opacity: 0;
   transition: opacity 0.2s linear;
-  &:hover {
-    opacity: 1;
+  z-index: 10;
+  border-radius: 5px;
+  button {
+    padding: 5px 5px;
+    background-color: ${colors.secondaryB.rgba(0.3)};
+    border-radius: 5px;
+    &:hover {
+      background-color: ${colors.secondaryB.rgba(1)};
+    }
   }
   svg {
-    height: 100%;
+    height: 30px;
   }
 `;
 

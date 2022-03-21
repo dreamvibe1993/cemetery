@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components/macro";
-import { MainContainer } from "../css/sc-components/ScComponents";
-import { ReactComponent as ChevroneLeft } from "../../media/svg/chevrone.svg";
+import { ServiceButton } from "../css/sc-components/ScComponents";
 import { ReactComponent as Vodka } from "../../media/svg/vodka.svg";
 import { ReactComponent as Candy } from "../../media/svg/candy.svg";
 import { ReactComponent as BTC } from "../../media/svg/btc.svg";
 import { Tooltip } from "../Tooltip";
+import { colors } from "../../configs/css/colors";
 
 export const Gifts = ({ onClose = () => {}, grave }) => {
   const [cells, setCells] = React.useState([]);
@@ -45,13 +45,8 @@ export const Gifts = ({ onClose = () => {}, grave }) => {
 
   return (
     <GiftsCont>
-      <TopPanel>
-        <ChevroneLeft onClick={onClose} />
-      </TopPanel>
-      <MainContainer
-        bgCol="#4c593e"
-        style={{ width: "750px", height: "750px" }}
-      >
+      <GiftsGridWrapper>
+        <ServiceButton onClick={onClose}>BACK</ServiceButton>
         <GiftsGrid>
           {cells.map((cell, i) =>
             cell ? (
@@ -67,25 +62,10 @@ export const Gifts = ({ onClose = () => {}, grave }) => {
             )
           )}
         </GiftsGrid>
-      </MainContainer>
+      </GiftsGridWrapper>
     </GiftsCont>
   );
 };
-
-const TopPanel = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  z-index: 99999999999;
-  padding: 40px 0px 0px 40px;
-  svg {
-    cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.2);
-    box-shadow: 0px 0px 20px 20px rgba(0, 0, 0, 0.2);
-  }
-`;
 
 const Cell = styled.div`
   height: 100%;
@@ -95,19 +75,30 @@ const Cell = styled.div`
   justify-content: center;
   align-items: center;
   padding: 15px;
+  cursor: pointer;
   svg {
     width: 100%;
     height: 100%;
   }
 `;
 
+const GiftsGridWrapper = styled.div`
+  padding: 20px;
+  background-color: ${colors.secondaryB.rgba(1)};
+  button {
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+`;
+
 const GiftsGrid = styled.div`
-  height: 100%;
-  width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 170px);
   grid-template-rows: repeat(4, 170px);
   grid-gap: 10px;
+  margin-top: 10px;
 `;
 
 const GiftsCont = styled.div`
@@ -116,8 +107,8 @@ const GiftsCont = styled.div`
   width: 100%;
   top: 0;
   left: 0;
-  z-index: 9999999999999 !important;
-  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.9);
   display: flex;
   justify-content: center;
   align-items: center;
