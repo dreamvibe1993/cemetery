@@ -23,7 +23,6 @@ export const loadGraves = async () => {
       .map((grave) => convertToFrontModel(grave));
     store.dispatch(setGraves(gravesConverted));
     store.dispatch(setGravesLoadingOver());
-    console.log(gravesConverted);
   } catch (e) {
     handleError(e);
   }
