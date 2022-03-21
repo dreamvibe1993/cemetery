@@ -10,6 +10,9 @@ export const user = createSlice({
     isAdmin: false,
   },
   reducers: {
+    setUserLoading(state, action) {
+      state.isUserLoading = action.payload;
+    },
     setUser(state, action) {
       state.user = action.payload;
     },
@@ -26,6 +29,12 @@ export const user = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setUser, setUserAuth, setUserAsAdmin, setUserAsNotAdmin } = user.actions;
+export const {
+  setUser,
+  setUserAuth,
+  setUserAsAdmin,
+  setUserAsNotAdmin,
+  setUserLoading,
+} = user.actions;
 
 export default user.reducer;

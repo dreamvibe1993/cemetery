@@ -8,4 +8,7 @@ export const routes = {
   auth: {
     origin: "/auth",
   },
+  profile: {
+    origin: "/profile"
+  }
 };

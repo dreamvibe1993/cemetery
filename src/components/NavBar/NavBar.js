@@ -6,30 +6,44 @@ import { ReactComponent as Logo } from "../../media/svg/logo.svg";
 import { colors } from "../../configs/css/colors";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { routes } from "../../configs/urls/app/app-urls";
 
 export const TopNavBar = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.user);
 
   const goHome = () => {
-    navigate("/");
+    navigate(routes.root);
   };
 
   const goAuth = () => {
-    navigate("/auth");
+    navigate(routes.auth.origin);
+  };
+
+  const goProfile = () => {
+    navigate(routes.profile.origin);
   };
 
   return (
     <NavBar>
+      <Buttons>
+        <NavButton onClick={goProfile}>profile</NavButton>
+        <NavButton onClick={goAuth}>auth</NavButton>
+      </Buttons>
       <Logo onClick={goHome} />
       <UserName>{user.username || "unauthorized"}</UserName>
-      <NavButton onClick={goAuth}>auth</NavButton>
     </NavBar>
   );
 };
 
+const Buttons = styled.div`
+  display: flex;
+  & > * {
+    margin-right: 10px;
+  }
+`;
+
 const UserName = styled.span`
-  flex: 1;
   padding-left: 40px;
   user-select: none;
   opacity: 0.5;

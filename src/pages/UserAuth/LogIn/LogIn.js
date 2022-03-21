@@ -3,7 +3,10 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components/macro";
 import { logInUser } from "../../../api/user";
 
-import { ServiceButton } from "../../../components/css/sc-components/ScComponents";
+import {
+  Input,
+  ServiceButton,
+} from "../../../components/css/sc-components/ScComponents";
 import { setUserAuth } from "../../../redux/user/userReducer";
 import { loginSchema } from "../../../models/yup/yup-schemas";
 import { showError } from "../../../services/errors/showError";
@@ -43,7 +46,7 @@ export const LogIn = () => {
         console.trace(err);
         setError(err.path);
         setErrorM(err.message);
-        showError(err)
+        showError(err);
       });
   };
 
@@ -78,6 +81,9 @@ export const LogIn = () => {
 const RelativeWrap = styled.div`
   position: relative;
   width: auto;
+  input {
+    margin-bottom: 20px;
+  }
 `;
 
 const ErrMessage = styled.span`
@@ -90,18 +96,6 @@ const ErrMessage = styled.span`
 
 const LOGIN = styled(ServiceButton)`
   margin-top: 20px;
-`;
-
-const Input = styled.input`
-  width: 430px;
-  height: 40px;
-  background-color: rgba(0, 0, 0, 0.2);
-  border: none;
-  margin-bottom: 20px;
-  padding: 5px 10px;
-  color: #fff;
-  font-size: 16px;
-  border: ${(p) => (p.err ? "1px solid rgba(168, 50, 50,.9)" : "none")};
 `;
 
 const PasswordInput = styled(Input)``;
