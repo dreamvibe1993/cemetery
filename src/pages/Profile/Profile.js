@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components/macro";
 
-import UserPhotoSrc from "../../media/img/common/user_photo-2.png";
+import PhotoPlaceholder from "../../media/img/common/user_photo_placeholder.jpg";
 
 import {
   Input,
@@ -38,7 +38,7 @@ export const Profile = () => {
       </Row>
       <Row>
         <PhotoWrapper>
-          <UserPhoto src={UserPhotoSrc} />
+          <UserPhoto src={(user?.photos && user?.photos[0]) || PhotoPlaceholder} />
         </PhotoWrapper>
       </Row>
       <Row>

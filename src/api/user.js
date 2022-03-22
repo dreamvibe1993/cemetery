@@ -1,10 +1,11 @@
 import axios from "axios";
-import { USER_API_URL } from "../configs/urls/api/api-urls";
+import { PHOTOS_API_URL, USER_API_URL } from "../configs/urls/api/api-urls";
 import { ORIGIN } from "../configs/urls/app/app-urls";
 import store from "../redux/store";
 import { setUserLoading } from "../redux/user/userReducer";
 import { authorizeUser, dropUserData } from "../services/auth/logInUser";
 import { handleError } from "../services/errors/handleError";
+import { updatePhotos } from "./photos";
 
 export const createUser = async (name, email, password, passwordConfirm) => {
   store.dispatch(setUserLoading(true));
@@ -64,6 +65,20 @@ export const getUser = async () => {
   store.dispatch(setUserLoading(true));
   return axios
     .get(ORIGIN + USER_API_URL + "/user", {
+      withCredentials: true,
+    })
+    .then((response) => authorizeUser(response.data.user));
+};
+
+export const updateUser = async (user) => {
+  store.dispatch(setUserLoading(true));
+  const res = await updatePhotos(
+    user.photos,
+    ORIGIN + PHOTOS_API_URL + "/user"
+  );
+  user.photos = res.data.photos;
+  return axios
+    .post(ORIGIN + USER_API_URL + "/updateMe", user, {
       withCredentials: true,
     })
     .then((response) => authorizeUser(response.data.user));

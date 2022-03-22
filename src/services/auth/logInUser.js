@@ -13,6 +13,7 @@ export const authorizeUser = (user) => {
   const userData = {
     email: user.email,
     username: user.name,
+    photos: user.photos,
     id: user._id
   };
   store.dispatch(setUser(userData));
