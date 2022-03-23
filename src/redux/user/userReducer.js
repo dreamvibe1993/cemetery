@@ -6,7 +6,12 @@ export const user = createSlice({
     isUserLoading: false,
     isAuth: false,
     authError: "",
-    user: {},
+    user: {
+      email: null,
+      username: null,
+      photos: [],
+      id: null,
+    },
     isAdmin: false,
   },
   reducers: {
@@ -25,6 +30,15 @@ export const user = createSlice({
     setUserAsNotAdmin(state) {
       state.isAdmin = false;
     },
+    updateUserPhotos(state, action) {
+      state.user.photos = action.payload;
+    },
+    updateUserEmail(state, action) {
+      state.user.email = action.payload;
+    },
+    updateUsername(state, action) {
+      state.user.username = action.payload;
+    },
   },
 });
 
@@ -35,6 +49,9 @@ export const {
   setUserAsAdmin,
   setUserAsNotAdmin,
   setUserLoading,
+  updateUserPhotos,
+  updateUserEmail,
+  updateUsername,
 } = user.actions;
 
 export default user.reducer;

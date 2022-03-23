@@ -45,3 +45,11 @@ export const regSchema = yup.object().shape({
     .required("Please provide us your name.")
     .max(10, "Maximum name's length is 10 symbols."),
 });
+
+export const profileSchema = yup.object().shape({
+  email: yup.string().email().required("Email is strongly required"),
+  name: yup
+    .string()
+    .required("Please provide us your name.")
+    .max(10, "Maximum name's length is 10 symbols."),
+});

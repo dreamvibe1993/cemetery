@@ -16,6 +16,7 @@ export const ServiceButton = styled.button`
   color: #fff;
   border: none;
   cursor: pointer;
+  position: relative;
   &:active {
     background-color: ${colors.secondaryB.rgba(1)};
   }
