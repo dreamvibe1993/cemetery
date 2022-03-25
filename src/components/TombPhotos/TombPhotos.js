@@ -1,12 +1,10 @@
 import React from "react";
 import styled from "styled-components/macro";
 
-import { ReactComponent as Eye } from "../../media/svg/eye.svg";
 
 import { Gallery } from "../../components/Gallery";
-import { Preloader } from "../../components/Preloader";
-import { ServiceButton } from "../css/sc-components/ScComponents";
-import { colors } from "../../configs/css/colors";
+import { Picture } from "../Picture/Picture";
+
 
 export const TombPhotos = ({ grave }) => {
   const [isClicked, setClicked] = React.useState(false);
@@ -58,86 +56,11 @@ export const TombPhotos = ({ grave }) => {
   );
 };
 
-const Picture = ({ src, showPhoto = () => {} }) => {
-  const [isLoading, setLoading] = React.useState(true);
-
-  return (
-    <PhotoWrapper>
-      <PreloaderCont style={{ visibility: isLoading ? "visible" : "hidden" }}>
-        <Preloader />
-      </PreloaderCont>
-      <PhotoButton
-        onClick={() => showPhoto(src)}
-        style={{ visibility: isLoading ? "hidden" : "visible" }}
-      >
-        <ServiceButton>
-          <Eye />
-        </ServiceButton>
-      </PhotoButton>
-      <Photo src={src} draggable={false} onLoad={() => setLoading(false)} />
-    </PhotoWrapper>
-  );
-};
-
 const PaddingWrapper = styled.div`
   padding: 0px 20px;
   background-color: rgba(0, 0, 0, 0.2);
 `;
 
-const PreloaderCont = styled.div`
-  height: 100%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.2);
-  position: absolute;
-  top: 0;
-  left: 0;
-`;
-
-const PhotoWrapper = styled.div`
-  position: relative;
-  width: 163px;
-  height: 290px;
-  overflow: hidden;
-  border-radius: 2px;
-  display: flex;
-  justify-content: center;
-`;
-
-const PhotoButton = styled.div`
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  background-color: rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  transition: opacity 0.2s linear;
-  z-index: 10;
-  border-radius: 5px;
-  button {
-    padding: 5px 5px;
-    background-color: ${colors.secondaryB.rgba(0.3)};
-    border-radius: 5px;
-    &:hover {
-      background-color: ${colors.secondaryB.rgba(1)};
-    }
-  }
-  svg {
-    height: 30px;
-  }
-`;
-
-const Photo = styled.img`
-  object-fit: cover;
-  height: 100%;
-  pointer-events: none;
-  user-select: none;
-  -khtml-user-select: none;
-  -o-user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-`;
 
 const PhotoContPhotosWrapper = styled.div`
   display: flex;

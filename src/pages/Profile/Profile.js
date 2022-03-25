@@ -20,6 +20,8 @@ import { profileSchema } from "../../models/yup/yup-schemas";
 import { updatePhotos } from "../../api/photos";
 import { PHOTOS_API_URL } from "../../configs/urls/api/api-urls";
 import { setUnsavedDataStatus } from "../../redux/app/appReducer";
+import { Picture } from "../../components/Picture/Picture";
+import { Gallery } from "../../components/Gallery";
 
 export const Profile = () => {
   const dispatch = useDispatch();
@@ -29,6 +31,7 @@ export const Profile = () => {
   const [picBlobArr, setPicBlobArr] = React.useState(null);
   const [name, setName] = React.useState(user.username);
   const [email, setEmail] = React.useState();
+  const [userPhotoSrc, setUserPhotoSrc] = React.useState(null);
 
   React.useEffect(() => {
     if (isAuth) return;
@@ -96,12 +99,22 @@ export const Profile = () => {
       });
   };
 
+  const showUserPhoto = (src) => {
+    if (!src) return;
+    setUserPhotoSrc(src);
+  };
+
+  const closeUserPhoto = () => {
+    setUserPhotoSrc(null);
+  };
+
   if (redirect) return <Navigate to={redirect} />;
 
   if (isUserLoading) return <Preloader />;
 
   return (
     <ProfileContainer>
+      {userPhotoSrc && <Gallery src={userPhotoSrc} onClose={closeUserPhoto} />}
       <Row>
         <MainUsername>{user.username}</MainUsername>
         <ServiceButton>
@@ -114,36 +127,53 @@ export const Profile = () => {
           />
         </ServiceButton>
       </Row>
-      <Row>
-        <PhotoWrapper>
-          <UserPhoto src={user?.photos[0] || PhotoPlaceholder} />
-        </PhotoWrapper>
-      </Row>
-      <Row>
-        <InputTitle>Your name</InputTitle>
-        <UsernameInput
-          type="text"
-          value={name}
-          placeholder="Type your name here"
-          onChange={changeUsername}
+      <Row style={{ alignItems: "flex-start", justifyContent: "flex-start" }}>
+        <Picture
+          src={user?.photos[0] || PhotoPlaceholder}
+          showPhoto={() => showUserPhoto(user?.photos[0])}
+          sizes={{ width: 130, height: 190 }}
         />
+        <CredsContainer>
+          <UserPersonalInfo>
+            <Row>
+              <UsernameInput
+                type="text"
+                value={name}
+                placeholder="Type your name here"
+                onChange={changeUsername}
+              />
+            </Row>
+            <Row>
+              <UsernameInput
+                type="email"
+                value={email}
+                placeholder="Type your name here"
+                onChange={changeUserEmail}
+              />
+            </Row>
+          </UserPersonalInfo>
+          <RowEnd>
+            <ServiceButton onClick={saveUserProfile}>
+              SAVE PROFILE
+            </ServiceButton>
+            <ServiceButton>CHANGE PASSWORD</ServiceButton>
+          </RowEnd>
+        </CredsContainer>
       </Row>
-      <Row>
-        <InputTitle>Your email</InputTitle>
-        <UsernameInput
-          type="email"
-          value={email}
-          placeholder="Type your name here"
-          onChange={changeUserEmail}
-        />
-      </Row>
-      <RowEnd>
-        <ServiceButton onClick={saveUserProfile}>SAVE PROFILE</ServiceButton>
-        <ServiceButton>CHANGE PASSWORD</ServiceButton>
-      </RowEnd>
     </ProfileContainer>
   );
 };
+
+const UserPersonalInfo = styled.div``;
+
+const CredsContainer = styled.div`
+  padding-left: 20px;
+  flex: 1;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
 
 const ChangePhotoInput = styled.input`
   position: absolute;
@@ -155,44 +185,35 @@ const ChangePhotoInput = styled.input`
   cursor: pointer;
 `;
 
-const PhotoWrapper = styled.div`
-  height: 150px;
-  width: 21%;
-  overflow: hidden;
-`;
-
-const UserPhoto = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`;
-
 const Row = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 `;
 
 const RowEnd = styled(Row)`
   justify-content: flex-end;
+  margin-bottom: 0px;
   & > * {
     margin-left: 10px;
   }
 `;
 
 const MainUsername = styled.span`
-  font-size: 36px;
+  font-size: 32px;
+  text-transform: uppercase;
+  line-height: 0;
+  font-weight: bolder;
 `;
 
-const InputTitle = styled.span`
-  font-weight: 1500;
+const UsernameInput = styled(Input)`
+  width: 100%;
 `;
-
-const UsernameInput = styled(Input)``;
 
 const ProfileContainer = styled.div`
   padding: 20px;
+  padding-bottom: 0px;
   width: 66vw;
   background-color: ${colors.primary.rgba(0.5)};
   display: flex;
