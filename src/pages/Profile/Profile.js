@@ -129,7 +129,9 @@ export const Profile = () => {
       </Row>
       <Row style={{ alignItems: "flex-start", justifyContent: "flex-start" }}>
         <Picture
-          src={user?.photos[0] || PhotoPlaceholder}
+          src={
+            (Array.isArray(user?.photos) && user?.photos[0]) || PhotoPlaceholder
+          }
           showPhoto={() => showUserPhoto(user?.photos[0])}
           sizes={{ width: 130, height: 190 }}
         />
