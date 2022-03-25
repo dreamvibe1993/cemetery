@@ -5,6 +5,7 @@ export const user = createSlice({
   initialState: {
     isUserLoading: false,
     isAuth: false,
+    isAdmin: false,
     authError: "",
     user: {
       email: null,
@@ -12,7 +13,6 @@ export const user = createSlice({
       photos: [],
       id: null,
     },
-    isAdmin: false,
   },
   reducers: {
     setUserLoading(state, action) {

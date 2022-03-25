@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components/macro";
+import { Navigate } from "react-router-dom";
 
 import PhotoPlaceholder from "../../media/img/common/user_photo_placeholder.jpg";
 
@@ -9,7 +10,6 @@ import {
   ServiceButton,
 } from "../../components/css/sc-components/ScComponents";
 import { colors } from "../../configs/css/colors";
-import { Navigate } from "react-router-dom";
 import { ORIGIN, routes } from "../../configs/urls/app/app-urls";
 import { getUser, updateUser } from "../../api/user";
 import { showError } from "../../services/errors/showError";
@@ -19,7 +19,7 @@ import { updateUserPhotos } from "../../redux/user/userReducer";
 import { profileSchema } from "../../models/yup/yup-schemas";
 import { updatePhotos } from "../../api/photos";
 import { PHOTOS_API_URL } from "../../configs/urls/api/api-urls";
-
+import { setUnsavedDataStatus } from "../../redux/app/appReducer";
 
 export const Profile = () => {
   const dispatch = useDispatch();
@@ -43,6 +43,14 @@ export const Profile = () => {
       setEmail(user.email);
     }
   }, [user]);
+
+  React.useEffect(() => {
+    if (user.username !== name || user.email !== email || picBlobArr !== null) {
+      dispatch(setUnsavedDataStatus(true));
+      return;
+    }
+    dispatch(setUnsavedDataStatus(false));
+  }, [dispatch, email, name, picBlobArr, user.email, user.username]);
 
   const changeUsername = (e) => {
     setName(e.target.value);
@@ -79,6 +87,7 @@ export const Profile = () => {
           );
           userPics = res.data.photos;
         }
+        dispatch(setUnsavedDataStatus(false));
         updateUser({ name, email, photos: userPics });
       })
       .catch((e) => {
@@ -185,4 +194,5 @@ const ProfileContainer = styled.div`
   background-color: ${colors.primary.rgba(0.5)};
   display: flex;
   flex-direction: column;
+  max-width: 600px;
 `;

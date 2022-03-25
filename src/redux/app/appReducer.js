@@ -7,6 +7,7 @@ export const app = createSlice({
       text: null,
       withOptions: false,
       options: ["yes", "no"],
+      isThereUnsavedData: false,
     },
     notificationConfirm: null,
   },
@@ -25,10 +26,17 @@ export const app = createSlice({
       };
       state.notificationConfirm = null;
     },
+    setUnsavedDataStatus(state, action) {
+      state.isThereUnsavedData = action.payload;
+    },
   },
 });
 
-export const { setNotification, setAnswerToNotif, setNotificationToDefault } =
-  app.actions;
+export const {
+  setNotification,
+  setAnswerToNotif,
+  setNotificationToDefault,
+  setUnsavedDataStatus,
+} = app.actions;
 
 export default app.reducer;

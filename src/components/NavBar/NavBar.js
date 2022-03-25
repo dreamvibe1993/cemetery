@@ -5,23 +5,58 @@ import { NavButton } from "../css/sc-components/ScComponents";
 import { ReactComponent as Logo } from "../../media/svg/logo.svg";
 import { colors } from "../../configs/css/colors";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { routes } from "../../configs/urls/app/app-urls";
+import { useConfirmRedir } from "../../services/hooks/app/useConfirmRedir";
+import { setUnsavedDataStatus } from "../../redux/app/appReducer";
 
 export const TopNavBar = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const askAndSubscribe = useConfirmRedir();
   const { user } = useSelector((state) => state.user);
+  const { isThereUnsavedData } = useSelector((state) => state.app);
+
+  const [unsavedData, setUnsavedData] = React.useState(false);
+
+  React.useEffect(() => {
+    setUnsavedData(isThereUnsavedData);
+  }, [isThereUnsavedData]);
+
+  const checkUnsavedData = (func) => {
+    if (unsavedData) {
+      askAndSubscribe(
+        "There are unsaved data. Are you sure you want to close this page?",
+        func
+      );
+    } else {
+      func();
+    }
+  };
+
+  const dropUnsaved = () => {
+    dispatch(setUnsavedDataStatus(false));
+  };
 
   const goHome = () => {
-    navigate(routes.root);
+    checkUnsavedData(() => {
+      dropUnsaved();
+      navigate(routes.root);
+    });
   };
 
   const goAuth = () => {
-    navigate(routes.auth.origin);
+    checkUnsavedData(() => {
+      dropUnsaved();
+      navigate(routes.auth.origin);
+    });
   };
 
   const goProfile = () => {
-    navigate(routes.profile.origin);
+    checkUnsavedData(() => {
+      dropUnsaved();
+      navigate(routes.profile.origin);
+    });
   };
 
   return (
