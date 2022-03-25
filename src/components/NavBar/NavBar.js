@@ -65,8 +65,10 @@ export const TopNavBar = () => {
         <NavButton onClick={goProfile}>profile</NavButton>
         <NavButton onClick={goAuth}>auth</NavButton>
       </Buttons>
-      <Logo onClick={goHome} />
-      <UserName>{user.username || "unauthorized"}</UserName>
+      <LogoWrapper>
+        <Logo onClick={goHome} />
+      </LogoWrapper>
+      <UserName onClick={goProfile}>{user.username || "unauthorized"}</UserName>
     </NavBar>
   );
 };
@@ -75,6 +77,20 @@ const Buttons = styled.div`
   display: flex;
   & > * {
     margin-right: 10px;
+  }
+`;
+
+const LogoWrapper = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  width: 80px;
+  cursor: pointer;
+  svg {
+    height: 100%;
+    width: 100%;
   }
 `;
 
@@ -97,7 +113,7 @@ const NavBar = styled.div`
   width: 100%;
   top: 0;
   left: 0;
-  box-shadow: 2px 0px 50px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 0px 10px 2px rgba(0, 0, 0, 0.3);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -105,11 +121,5 @@ const NavBar = styled.div`
   * {
     text-transform: lowercase;
     font-size: 25px;
-  }
-  svg {
-    height: 100%;
-    width: 100px;
-    fill: ${colors.secondaryB.hex};
-    cursor: pointer;
   }
 `;

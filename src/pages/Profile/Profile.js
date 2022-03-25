@@ -31,6 +31,7 @@ export const Profile = () => {
   const [email, setEmail] = React.useState();
 
   React.useEffect(() => {
+    if (isAuth) return;
     getUser().catch((e) => {
       showError(e.response.data);
       setRedirect(routes.auth.origin);
@@ -38,19 +39,19 @@ export const Profile = () => {
   }, [isAuth]);
 
   React.useEffect(() => {
-    if (user) {
-      setName(user.username);
-      setEmail(user.email);
-    }
-  }, [user]);
+    if (!isAuth) return;
+    setName(user.username);
+    setEmail(user.email);
+  }, [isAuth, user.email, user.username]);
 
   React.useEffect(() => {
+    if (!isAuth) return;
     if (user.username !== name || user.email !== email || picBlobArr !== null) {
       dispatch(setUnsavedDataStatus(true));
       return;
     }
     dispatch(setUnsavedDataStatus(false));
-  }, [dispatch, email, name, picBlobArr, user.email, user.username]);
+  }, [dispatch, email, name, picBlobArr, isAuth, user.email, user.username]);
 
   const changeUsername = (e) => {
     setName(e.target.value);
@@ -184,7 +185,9 @@ const MainUsername = styled.span`
   font-size: 36px;
 `;
 
-const InputTitle = styled.span``;
+const InputTitle = styled.span`
+  font-weight: 1500;
+`;
 
 const UsernameInput = styled(Input)``;
 
