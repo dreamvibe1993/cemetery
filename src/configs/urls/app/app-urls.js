@@ -10,5 +10,8 @@ export const routes = {
   },
   profile: {
     origin: "/profile"
+  },
+  passwordChange: {
+    origin: "/passwordChange"
   }
 };

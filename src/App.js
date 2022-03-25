@@ -9,9 +9,12 @@ import { AuthWrapper } from "./components/AuthWrapper";
 
 /*
   TODO:
-  2) User profile
-  3) Request forgotten password
+  3) Changing password
+  3.1) Make a mail notification
+  4) Make possible to check another user's profile
   5) Cant create born date older then death date
+  6) Waiting till db connected
+  7) Change design to a darker one
 */
 
 function App() {

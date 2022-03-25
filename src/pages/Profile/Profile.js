@@ -108,6 +108,10 @@ export const Profile = () => {
     setUserPhotoSrc(null);
   };
 
+  const goToPasswordChange = () => {
+    setRedirect(routes.passwordChange.origin);
+  };
+
   if (redirect) return <Navigate to={redirect} />;
 
   if (isUserLoading) return <Preloader />;
@@ -158,7 +162,9 @@ export const Profile = () => {
             <ServiceButton onClick={saveUserProfile}>
               SAVE PROFILE
             </ServiceButton>
-            <ServiceButton>CHANGE PASSWORD</ServiceButton>
+            <ServiceButton onClick={goToPasswordChange}>
+              CHANGE PASSWORD
+            </ServiceButton>
           </RowEnd>
         </CredsContainer>
       </Row>
