@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 
 // import PMML from "../../media/audio/zemfira-pmml.mp3";
 
-import { DonateGift } from "../../../components/Gifts/DonateGift";
+import { DonateGift } from "../DonateGift";
 import { reloadGraves } from "../../../api/graves";
 import { TombPhotos } from "../TombPhotos";
 import { ServiceButton } from "../../css/sc-components/ScComponents";

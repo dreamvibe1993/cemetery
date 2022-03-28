@@ -25,7 +25,6 @@ export const createUser = async (name, email, password, passwordConfirm) => {
     .finally(() => {
       store.dispatch(setUserLoading(false));
     });
-
 };
 
 export const logInUser = async (email, password) => {
@@ -90,4 +89,23 @@ export const updateUser = async (user) => {
     });
 };
 
-export const changeUserPassword = async (user) => {};
+export const sendChangePassEmail = async (email) => {
+  return axios
+    .post(
+      ORIGIN + USER_API_URL + "/forgotPassword",
+      { email },
+      {
+        withCredentials: true,
+      }
+    )
+    .catch((e) => {
+      handleError(e.response.data);
+    });
+};
+
+export const resetPassword = async ({ token, password, passwordConfirm }) => {
+  return axios.patch(ORIGIN + USER_API_URL + `/resetPassword/${token}`, {
+    password,
+    passwordConfirm,
+  });
+};

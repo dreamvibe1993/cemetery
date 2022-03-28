@@ -58,10 +58,6 @@ export const profileSchema = yup.object().shape({
 });
 
 export const passChangeSchema = yup.object().shape({
-  currentPassword: yup
-    .string()
-    .required("Current password is strongly required!")
-    .min(8, "Minimum password's length is 8 symbols."),
   newPassword: yup
     .string()
     .required("Password is strongly required!")

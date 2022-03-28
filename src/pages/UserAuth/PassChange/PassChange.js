@@ -1,23 +1,23 @@
 import React from "react";
+import { Navigate } from "react-router-dom";
 import styled from "styled-components/macro";
-import { createUser } from "../../../api/user";
+import { createUser, resetPassword } from "../../../api/user";
 
 import { ServiceButton } from "../../../components/css/sc-components/ScComponents";
+import { routes } from "../../../configs/urls/app/app-urls";
 import { passChangeSchema } from "../../../models/yup/yup-schemas";
 import { showError } from "../../../services/errors/showError";
 
 export const PassChange = () => {
-  const [currentPassword, setCurrentPassword] = React.useState("");
   const [newPassword, setNewPassword] = React.useState("");
   const [newPasswordConfirm, setNewPasswordConfirm] = React.useState("");
 
   const [error, setError] = React.useState("");
   const [errorMessage, setErrorMessage] = React.useState("");
 
-  const handleCurrentPasswordInput = (e) => {
-    setError("");
-    setCurrentPassword(e.target.value);
-  };
+  const [token, setToken] = React.useState(null);
+  const [redirect, setRedirect] = React.useState(null);
+
   const handleNewPasswordInput = (e) => {
     setError("");
     setNewPassword(e.target.value);
@@ -27,14 +27,25 @@ export const PassChange = () => {
     setNewPasswordConfirm(e.target.value);
   };
 
+  React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const resetToken = params.get("token");
+    if (resetToken) setToken(resetToken);
+    else setRedirect(routes.auth.origin);
+  }, []);
+
   const changeUserPassword = () => {
-    const toValidate = { currentPassword, newPassword, newPasswordConfirm };
+    const toValidate = { newPassword, newPasswordConfirm };
     passChangeSchema
       .validate(toValidate)
       .then((validated) => {
-        // createUser(validated).then(
-        //   () => {}
-        // );
+        resetPassword({
+          password: validated.newPassword,
+          passwordConfirm: validated.newPasswordConfirm,
+          token,
+        }).then(() => {
+          setRedirect("/auth");
+        });
       })
       .catch((err) => {
         console.log(JSON.parse(JSON.stringify(err)));
@@ -46,20 +57,11 @@ export const PassChange = () => {
       });
   };
 
+  if (redirect) return <Navigate to={redirect} />;
+
   return (
     <>
       <PassChangeSection open={true}>
-        <RelativeWrap>
-          <PasswordInput
-            type="password"
-            placeholder="current password"
-            required
-            value={currentPassword}
-            onChange={(e) => handleCurrentPasswordInput(e)}
-            err={error === "password"}
-          ></PasswordInput>
-          {error === "password" && <ErrMessage>{errorMessage}</ErrMessage>}
-        </RelativeWrap>
         <RelativeWrap>
           <PasswordInput
             type="password"

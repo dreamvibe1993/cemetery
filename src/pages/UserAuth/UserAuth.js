@@ -13,6 +13,7 @@ import { Navigate } from "react-router-dom";
 import { SignIn } from "./SignIn";
 import { LogIn } from "./LogIn/LogIn";
 import { FadeIn } from "../../configs/css/animations";
+import { FPassEmailModal } from "../../components/Modals/FPassEmailModal";
 
 export const UserAuth = () => {
   const { isAuth, user } = useSelector((state) => state.user);
@@ -20,6 +21,7 @@ export const UserAuth = () => {
 
   const [redirect, setRedirect] = React.useState("");
   const [isForgotPass, setForgotPass] = React.useState(false);
+  const [isEmailModalShown, setEmailModalShown] = React.useState(false);
 
   const logOut = () => {
     dispatch(setUserAuth(null));
@@ -38,8 +40,12 @@ export const UserAuth = () => {
     setForgotPass(true);
   };
 
-  const redirectToForgotPass = () => {
-    setRedirect("/passwordChange");
+  const summonEmailModal = () => {
+    setEmailModalShown(true);
+  };
+
+  const closeEmailModal = () => {
+    setEmailModalShown(false);
   };
 
   if (redirect) return <Navigate to={redirect} />;
@@ -78,13 +84,14 @@ export const UserAuth = () => {
 
   return (
     <ContentContainer>
+      {isEmailModalShown && <FPassEmailModal onClose={closeEmailModal} />}
       <UserAuthContainer>
         <CrossSVGWrapper>
           <Cross onClick={redirectToHome} />
         </CrossSVGWrapper>
         {isForgotPass && (
           <ForgotPassWrapper>
-            <ServiceButton onClick={redirectToForgotPass}>
+            <ServiceButton onClick={summonEmailModal}>
               I FORGOT MY PASSWORD
             </ServiceButton>
           </ForgotPassWrapper>

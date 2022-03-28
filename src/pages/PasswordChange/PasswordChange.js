@@ -1,14 +1,16 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 import styled from "styled-components/macro";
 import { Preloader } from "../../components/App/Preloader";
+import { routes } from "../../configs/urls/app/app-urls";
 
 import { ReactComponent as Cross } from "../../media/svg/cross.svg";
 import { PassChange } from "../UserAuth/PassChange/PassChange";
 
 export const PasswordChange = () => {
   const { isAuth, isUserLoading } = useSelector((state) => state.user);
-  
+
   if (isUserLoading) return <Preloader />;
 
   return (
