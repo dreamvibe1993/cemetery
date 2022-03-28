@@ -21,7 +21,11 @@ export const createUser = async (name, email, password, passwordConfirm) => {
     })
     .catch((e) => {
       handleError(e.response.data);
+    })
+    .finally(() => {
+      store.dispatch(setUserLoading(false));
     });
+
 };
 
 export const logInUser = async (email, password) => {
@@ -37,10 +41,12 @@ export const logInUser = async (email, password) => {
         withCredentials: true,
       }
     );
-    authorizeUser(response.data.user);
+    authorizeUser(response.data);
   } catch (e) {
     dropUserData();
     handleError(e.response.data);
+  } finally {
+    store.dispatch(setUserLoading(false));
   }
 };
 
@@ -66,7 +72,10 @@ export const getUser = async () => {
     .get(ORIGIN + USER_API_URL + "/user", {
       withCredentials: true,
     })
-    .then((response) => authorizeUser(response.data.user));
+    .then((response) => authorizeUser(response.data))
+    .finally(() => {
+      store.dispatch(setUserLoading(false));
+    });
 };
 
 export const updateUser = async (user) => {
@@ -75,5 +84,10 @@ export const updateUser = async (user) => {
     .patch(ORIGIN + USER_API_URL + "/updateMe", user, {
       withCredentials: true,
     })
-    .then((response) => authorizeUser(response.data.user));
+    .then((response) => authorizeUser(response.data))
+    .finally(() => {
+      store.dispatch(setUserLoading(false));
+    });
 };
+
+export const changeUserPassword = async (user) => {};

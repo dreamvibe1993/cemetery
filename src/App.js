@@ -1,11 +1,11 @@
 import React from "react";
 import { Paths } from "./Paths";
-import { GreetingsScreen } from "./components/GreetingsScreen";
+import { GreetingsScreen } from "./components/Modals/GreetingsScreen";
 
-import { TopNavBar } from "./components/NavBar/NavBar";
+import { TopNavBar } from "./components/App/NavBar/NavBar";
 import { GlobalStyles } from "./GlobalStyles";
-import { NotificationModal } from "./components/NotificationModal";
-import { AuthWrapper } from "./components/AuthWrapper";
+import { NotificationModal } from "./components/Modals/NotificationModal";
+import { AuthWrapper } from "./components/HOCs/AuthWrapper";
 
 /*
   TODO:
@@ -15,6 +15,9 @@ import { AuthWrapper } from "./components/AuthWrapper";
   5) Cant create born date older then death date
   6) Waiting till db connected
   7) Change design to a darker one
+  8) Mobile version
+  8.1) Implement forms?
+  9) Deploy
 */
 
 function App() {

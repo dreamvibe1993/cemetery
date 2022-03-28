@@ -3,12 +3,12 @@ import styled from "styled-components/macro";
 // import Select from "react-select";
 import { setLocale } from "yup";
 
-import { ReactComponent as Cross } from "../../media/svg/cross.svg";
-import { compressPhotos } from "../../services/data-transformation/converting";
-import { loadGraves, postNewGrave } from "../../api/graves";
-import { Preloader } from "../Preloader";
-import { graveSchema } from "../../models/yup/yup-schemas";
-import { colors } from "../../configs/css/colors";
+import { ReactComponent as Cross } from "../../../media/svg/cross.svg";
+import { compressPhotos } from "../../../services/data-transformation/converting";
+import { loadGraves, postNewGrave } from "../../../api/graves";
+import { Preloader } from "../../App/Preloader";
+import { graveSchema } from "../../../models/yup/yup-schemas";
+import { colors } from "../../../configs/css/colors";
 
 setLocale({
   string: {

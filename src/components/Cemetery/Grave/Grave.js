@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/macro";
-import { colors } from "../../configs/css/colors";
+import { colors } from "../../../configs/css/colors";
 
 export const Grave = ({grave}) => {
   return (

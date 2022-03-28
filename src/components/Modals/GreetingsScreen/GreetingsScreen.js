@@ -1,10 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components/macro";
-import { DropDown } from "../../configs/css/animations";
-import { ServiceButton } from "../css/sc-components/ScComponents";
+import { DropDown } from "../../../configs/css/animations";
+import { ServiceButton } from "../../css/sc-components/ScComponents";
 
-import { ReactComponent as Logo } from "../../media/svg/logo.svg";
+import { ReactComponent as Logo } from "../../../media/svg/logo.svg";
 
 export const GreetingsScreen = ({ onClose = () => {} }) => {
   let navigate = useNavigate();

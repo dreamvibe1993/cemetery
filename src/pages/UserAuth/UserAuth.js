@@ -6,18 +6,20 @@ import { getUser, logOutUser } from "../../api/user";
 import { ReactComponent as Logo } from "../../media/svg/logo.svg";
 import { ReactComponent as Cross } from "../../media/svg/cross.svg";
 
-import { Preloader } from "../../components/Preloader";
+import { Preloader } from "../../components/App/Preloader";
 import { ServiceButton } from "../../components/css/sc-components/ScComponents";
 import { setUserAuth } from "../../redux/user/userReducer";
 import { Navigate } from "react-router-dom";
 import { SignIn } from "./SignIn";
 import { LogIn } from "./LogIn/LogIn";
+import { FadeIn } from "../../configs/css/animations";
 
 export const UserAuth = () => {
   const { isAuth, user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const [redirect, setRedirect] = React.useState("");
+  const [isForgotPass, setForgotPass] = React.useState(false);
 
   const logOut = () => {
     dispatch(setUserAuth(null));
@@ -31,6 +33,14 @@ export const UserAuth = () => {
   React.useEffect(() => {
     getUser();
   }, []);
+
+  const showForgotPassButton = () => {
+    setForgotPass(true);
+  };
+
+  const redirectToForgotPass = () => {
+    setRedirect("/passwordChange");
+  };
 
   if (redirect) return <Navigate to={redirect} />;
 
@@ -72,16 +82,31 @@ export const UserAuth = () => {
         <CrossSVGWrapper>
           <Cross onClick={redirectToHome} />
         </CrossSVGWrapper>
+        {isForgotPass && (
+          <ForgotPassWrapper>
+            <ServiceButton onClick={redirectToForgotPass}>
+              I FORGOT MY PASSWORD
+            </ServiceButton>
+          </ForgotPassWrapper>
+        )}
         <LogoWrapper>
           <Logo />
         </LogoWrapper>
         <Title>Not authorized yet?</Title>
-        <LogIn />
+        <LogIn onForgotPassword={showForgotPassButton} />
         <SignIn />
       </UserAuthContainer>
     </ContentContainer>
   );
 };
+
+const ForgotPassWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 20px;
+  animation: ${FadeIn} 0.2s linear forwards;
+`;
 
 const CrossSVGWrapper = styled.div`
   position: absolute;

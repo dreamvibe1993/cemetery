@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components/macro";
-import { ServiceButton } from "../css/sc-components/ScComponents";
-import { ReactComponent as Vodka } from "../../media/svg/vodka.svg";
-import { ReactComponent as Candy } from "../../media/svg/candy.svg";
-import { ReactComponent as BTC } from "../../media/svg/btc.svg";
-import { Tooltip } from "../Tooltip";
-import { colors } from "../../configs/css/colors";
+import { ServiceButton } from "../../css/sc-components/ScComponents";
+import { ReactComponent as Vodka } from "../../../media/svg/vodka.svg";
+import { ReactComponent as Candy } from "../../../media/svg/candy.svg";
+import { ReactComponent as BTC } from "../../../media/svg/btc.svg";
+import { Tooltip } from "../../App/Tooltip";
+import { colors } from "../../../configs/css/colors";
 
 export const Gifts = ({ onClose = () => {}, grave }) => {
   const [cells, setCells] = React.useState([]);

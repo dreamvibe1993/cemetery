@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components/macro";
 
 
-import { Gallery } from "../../components/Gallery";
-import { Picture } from "../Picture/Picture";
+import { Gallery } from "../../App/Gallery";
+import { Picture } from "../../App/Picture/Picture";
 
 
 export const TombPhotos = ({ grave }) => {

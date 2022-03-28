@@ -2,17 +2,17 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import styled from "styled-components/macro";
-import { ServiceButton } from "../css/sc-components/ScComponents";
+import { ServiceButton } from "../../css/sc-components/ScComponents";
 
-import GrassPattern from "../../media/img/grave/grass-p-2.png";
+import GrassPattern from "../../../media/img/grave/grass-p-2.png";
 
+import { NewGraveModal } from "../../Modals/NewGraveModal/NewGraveModal";
+import { Tooltip } from "../../App/Tooltip";
+import { pxToVh, pxToVw } from "../../../services/css/convertion/sizes";
+import { colors } from "../../../configs/css/colors";
+import { useDeleteGrave } from "../../../services/hooks/graves/useDeleteGrave";
+import { showError } from "../../../services/errors/showError";
 import { Grave } from "../Grave";
-import { NewGraveModal } from "../NewGraveModal/NewGraveModal";
-import { Tooltip } from "../Tooltip";
-import { pxToVh, pxToVw } from "../../services/css/convertion/sizes";
-import { colors } from "../../configs/css/colors";
-import { useDeleteGrave } from "../../services/hooks/graves/useDeleteGrave";
-import { showError } from "../../services/errors/showError";
 
 export const CemetaryGrid = () => {
   const deleteGrave = useDeleteGrave();

@@ -1,5 +1,5 @@
 import React from "react";
-import { getUser } from "../../api/user";
+import { getUser } from "../../../api/user";
 
 export const AuthWrapper = ({ children }) => {
   

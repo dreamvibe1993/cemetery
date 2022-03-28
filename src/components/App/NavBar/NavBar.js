@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components/macro";
 
-import { NavButton } from "../css/sc-components/ScComponents";
-import { ReactComponent as Logo } from "../../media/svg/logo.svg";
-import { colors } from "../../configs/css/colors";
+import { NavButton } from "../../css/sc-components/ScComponents";
+import { ReactComponent as Logo } from "../../../media/svg/logo.svg";
+import { colors } from "../../../configs/css/colors";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { routes } from "../../configs/urls/app/app-urls";
-import { useConfirmRedir } from "../../services/hooks/app/useConfirmRedir";
-import { setUnsavedDataStatus } from "../../redux/app/appReducer";
+import { routes } from "../../../configs/urls/app/app-urls";
+import { useConfirmRedir } from "../../../services/hooks/app/useConfirmRedir";
+import { setUnsavedDataStatus } from "../../../redux/app/appReducer";
 
 export const TopNavBar = () => {
   const dispatch = useDispatch();

@@ -13,15 +13,15 @@ import { colors } from "../../configs/css/colors";
 import { ORIGIN, routes } from "../../configs/urls/app/app-urls";
 import { getUser, updateUser } from "../../api/user";
 import { showError } from "../../services/errors/showError";
-import { Preloader } from "../../components/Preloader";
+import { Preloader } from "../../components/App/Preloader";
 import { compressPhotos } from "../../services/data-transformation/converting";
 import { updateUserPhotos } from "../../redux/user/userReducer";
 import { profileSchema } from "../../models/yup/yup-schemas";
 import { updatePhotos } from "../../api/photos";
 import { PHOTOS_API_URL } from "../../configs/urls/api/api-urls";
 import { setUnsavedDataStatus } from "../../redux/app/appReducer";
-import { Picture } from "../../components/Picture/Picture";
-import { Gallery } from "../../components/Gallery";
+import { Picture } from "../../components/App/Picture/Picture";
+import { Gallery } from "../../components/App/Gallery";
 
 export const Profile = () => {
   const dispatch = useDispatch();
@@ -108,10 +108,6 @@ export const Profile = () => {
     setUserPhotoSrc(null);
   };
 
-  const goToPasswordChange = () => {
-    setRedirect(routes.passwordChange.origin);
-  };
-
   if (redirect) return <Navigate to={redirect} />;
 
   if (isUserLoading) return <Preloader />;
@@ -161,9 +157,6 @@ export const Profile = () => {
           <RowEnd>
             <ServiceButton onClick={saveUserProfile}>
               SAVE PROFILE
-            </ServiceButton>
-            <ServiceButton onClick={goToPasswordChange}>
-              CHANGE PASSWORD
             </ServiceButton>
           </RowEnd>
         </CredsContainer>

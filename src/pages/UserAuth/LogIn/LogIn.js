@@ -11,7 +11,7 @@ import { setUserAuth } from "../../../redux/user/userReducer";
 import { loginSchema } from "../../../models/yup/yup-schemas";
 import { showError } from "../../../services/errors/showError";
 
-export const LogIn = () => {
+export const LogIn = ({onForgotPassword = () => {}}) => {
   const dispatch = useDispatch();
 
   const [error, setError] = React.useState("");
@@ -42,6 +42,7 @@ export const LogIn = () => {
         logInUser(email, password);
       })
       .catch((err) => {
+        onForgotPassword();
         console.error(err);
         console.trace(err);
         setError(err.path);

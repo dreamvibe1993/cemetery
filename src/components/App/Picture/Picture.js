@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components/macro";
 
-import { ReactComponent as Eye } from "../../media/svg/eye.svg";
+import { ReactComponent as Eye } from "../../../media/svg/eye.svg";
 
-import { Preloader } from "../../components/Preloader";
-import { ServiceButton } from "../css/sc-components/ScComponents";
-import { colors } from "../../configs/css/colors";
+import { Preloader } from "../../../components/App/Preloader";
+import { ServiceButton } from "../../css/sc-components/ScComponents";
+import { colors } from "../../../configs/css/colors";
 
 export const Picture = ({
   src,

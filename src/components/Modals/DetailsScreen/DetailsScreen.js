@@ -1,8 +1,8 @@
 import React from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components/macro";
-import { ServiceButton } from "../css/sc-components/ScComponents";
-import { ReactComponent as Logo } from "../../media/svg/logo.svg";
+import { ServiceButton } from "../../css/sc-components/ScComponents";
+import { ReactComponent as Logo } from "../../../media/svg/logo.svg";
 
 export const DetailsScreen = ({ onClose = () => {} }) => {
   let navigate = useNavigate();

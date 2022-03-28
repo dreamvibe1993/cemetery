@@ -4,13 +4,13 @@ import { Navigate } from "react-router-dom";
 
 // import PMML from "../../media/audio/zemfira-pmml.mp3";
 
-import { DonateGift } from "../../components/Gifts/DonateGift";
-import { reloadGraves } from "../../api/graves";
+import { DonateGift } from "../../../components/Gifts/DonateGift";
+import { reloadGraves } from "../../../api/graves";
 import { TombPhotos } from "../TombPhotos";
-import { ServiceButton } from "../css/sc-components/ScComponents";
-import { showError } from "../../services/errors/showError";
+import { ServiceButton } from "../../css/sc-components/ScComponents";
+import { showError } from "../../../services/errors/showError";
 import { Gifts } from "../Gifts";
-import { colors } from "../../configs/css/colors";
+import { colors } from "../../../configs/css/colors";
 import { useSelector } from "react-redux";
 
 export const TombInfo = ({ grave }) => {

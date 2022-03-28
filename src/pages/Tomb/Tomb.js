@@ -7,11 +7,11 @@ import { MainContainer } from "../../components/css/sc-components/ScComponents";
 
 // import PMML from "../../media/audio/zemfira-pmml.mp3";
 
-import { Tooltip } from "../../components/Tooltip";
-import { Preloader } from "../../components/Preloader";
+import { Tooltip } from "../../components/App/Tooltip";
+import { Preloader } from "../../components/App/Preloader";
 import { colors } from "../../configs/css/colors";
-import { TombChatLogs } from "../../components/TombChatLogs";
-import { TombInfo } from "../../components/TombInfo";
+import { TombChatLogs } from "../../components/Tomb/TombChatLogs";
+import { TombInfo } from "../../components/Tomb/TombInfo";
 import { setGravesLoadingOver } from "../../redux/graves/gravesReducer";
 import { reloadGraves } from "../../api/graves";
 

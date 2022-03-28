@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/macro";
-import { colors } from "../../configs/css/colors";
-import { ServiceButton } from "../css/sc-components/ScComponents";
+import { colors } from "../../../configs/css/colors";
+import { ServiceButton } from "../../css/sc-components/ScComponents";
 
 export const Gallery = ({ src, onClose = () => {} }) => {
   const picRef = React.useRef(null);

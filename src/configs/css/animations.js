@@ -9,3 +9,12 @@ export const DropDown = (startTopCoords, finalTopCoords) => keyframes`
         /* transform: translateY(-${finalTopCoords}); */
     }
 `;
+
+export const FadeIn = keyframes`
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+`;

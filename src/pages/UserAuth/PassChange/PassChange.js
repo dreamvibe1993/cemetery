@@ -3,53 +3,38 @@ import styled from "styled-components/macro";
 import { createUser } from "../../../api/user";
 
 import { ServiceButton } from "../../../components/css/sc-components/ScComponents";
-import { regSchema } from "../../../models/yup/yup-schemas";
+import { passChangeSchema } from "../../../models/yup/yup-schemas";
 import { showError } from "../../../services/errors/showError";
 
 export const PassChange = () => {
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [passwordConfirm, setPasswordConfirm] = React.useState("");
+  const [currentPassword, setCurrentPassword] = React.useState("");
+  const [newPassword, setNewPassword] = React.useState("");
+  const [newPasswordConfirm, setNewPasswordConfirm] = React.useState("");
 
   const [error, setError] = React.useState("");
   const [errorMessage, setErrorMessage] = React.useState("");
-  const [isSignInOpen, setSignInOpen] = React.useState(false);
 
-  const openSignInSection = () => {
-    setSignInOpen(true);
-  };
-
-  const closeSignInSection = () => {
-    setSignInOpen(false);
-    setName("");
-    setEmail("");
-    setPassword("");
-    setPasswordConfirm("");
-  };
-
-  const handlePasswordInput = (e) => {
+  const handleCurrentPasswordInput = (e) => {
     setError("");
-    setPassword(e.target.value);
+    setCurrentPassword(e.target.value);
   };
-  const handlePasswordConfirmInput = (e) => {
+  const handleNewPasswordInput = (e) => {
     setError("");
-    setPasswordConfirm(e.target.value);
+    setNewPassword(e.target.value);
+  };
+  const handleNewPasswordConfirmInput = (e) => {
+    setError("");
+    setNewPasswordConfirm(e.target.value);
   };
 
-  const createUserAcc = () => {
-    const toValidate = {
-      name,
-      email,
-      password,
-      passwordConfirm,
-    };
-    regSchema
+  const changeUserPassword = () => {
+    const toValidate = { currentPassword, newPassword, newPasswordConfirm };
+    passChangeSchema
       .validate(toValidate)
-      .then(() => {
-        createUser(name, email, password, passwordConfirm).then(() => {
-          closeSignInSection();
-        });
+      .then((validated) => {
+        // createUser(validated).then(
+        //   () => {}
+        // );
       })
       .catch((err) => {
         console.log(JSON.parse(JSON.stringify(err)));
@@ -63,14 +48,14 @@ export const PassChange = () => {
 
   return (
     <>
-      <SignInSection open={true}>
+      <PassChangeSection open={true}>
         <RelativeWrap>
           <PasswordInput
             type="password"
             placeholder="current password"
             required
-            value={password}
-            onChange={(e) => handlePasswordInput(e)}
+            value={currentPassword}
+            onChange={(e) => handleCurrentPasswordInput(e)}
             err={error === "password"}
           ></PasswordInput>
           {error === "password" && <ErrMessage>{errorMessage}</ErrMessage>}
@@ -80,8 +65,8 @@ export const PassChange = () => {
             type="password"
             placeholder="new password"
             required
-            value={password}
-            onChange={(e) => handlePasswordInput(e)}
+            value={newPassword}
+            onChange={(e) => handleNewPasswordInput(e)}
             err={error === "password"}
           ></PasswordInput>
           {error === "password" && <ErrMessage>{errorMessage}</ErrMessage>}
@@ -91,23 +76,21 @@ export const PassChange = () => {
             type="password"
             placeholder="confirm your new password"
             required
-            value={passwordConfirm}
-            onChange={(e) => handlePasswordConfirmInput(e)}
+            value={newPasswordConfirm}
+            onChange={(e) => handleNewPasswordConfirmInput(e)}
             err={error === "passwordConfirm"}
           ></PasswordInput>
           {error === "passwordConfirm" && (
             <ErrMessage>{errorMessage}</ErrMessage>
           )}
         </RelativeWrap>
-      </SignInSection>
-      <SIGNIN onClick={isSignInOpen ? createUserAcc : openSignInSection}>
-        CHANGE
-      </SIGNIN>
+      </PassChangeSection>
+      <CHANGE onClick={changeUserPassword}>CHANGE</CHANGE>
     </>
   );
 };
 
-const SignInSection = styled.div`
+const PassChangeSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -130,7 +113,7 @@ const ErrMessage = styled.span`
   color: rgba(168, 50, 50, 1);
 `;
 
-const SIGNIN = styled(ServiceButton)`
+const CHANGE = styled(ServiceButton)`
   margin-top: 20px;
 `;
 
@@ -147,5 +130,3 @@ const Input = styled.input`
 `;
 
 const PasswordInput = styled(Input)``;
-
-const LoginInput = styled(Input)``;

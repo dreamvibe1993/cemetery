@@ -2,13 +2,13 @@ import React from "react";
 import styled, { css } from "styled-components/macro";
 
 import { useDispatch, useSelector } from "react-redux";
-import { DropDown } from "../../configs/css/animations";
-import { colors } from "../../configs/css/colors";
-import { ServiceButton } from "../css/sc-components/ScComponents";
+import { DropDown } from "../../../configs/css/animations";
+import { colors } from "../../../configs/css/colors";
+import { ServiceButton } from "../../css/sc-components/ScComponents";
 import {
   setAnswerToNotif,
   setNotificationToDefault,
-} from "../../redux/app/appReducer";
+} from "../../../redux/app/appReducer";
 
 export const NotificationModal = ({ children }) => {
   const dispatch = useDispatch();
