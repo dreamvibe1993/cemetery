@@ -17,6 +17,7 @@ import { AuthWrapper } from "./components/HOCs/AuthWrapper";
   7) Change design to a darker one
   8) Mobile version
   8.1) Implement forms?
+  8.2) CHANGE MY EMAIL!!!
   9) Deploy
 */
 

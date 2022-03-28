@@ -1,14 +1,17 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Navigate } from "react-router-dom";
 import styled from "styled-components/macro";
-import { createUser, resetPassword } from "../../../api/user";
+import { resetPassword } from "../../../api/user";
 
 import { ServiceButton } from "../../../components/css/sc-components/ScComponents";
 import { routes } from "../../../configs/urls/app/app-urls";
 import { passChangeSchema } from "../../../models/yup/yup-schemas";
+import { setNotification } from "../../../redux/app/appReducer";
 import { showError } from "../../../services/errors/showError";
 
 export const PassChange = () => {
+  const dispatch = useDispatch();
   const [newPassword, setNewPassword] = React.useState("");
   const [newPasswordConfirm, setNewPasswordConfirm] = React.useState("");
 
@@ -44,6 +47,12 @@ export const PassChange = () => {
           passwordConfirm: validated.newPasswordConfirm,
           token,
         }).then(() => {
+          dispatch(
+            setNotification({
+              text: "Password has been changed successfuly! Please log in!",
+              withOptions: false,
+            })
+          );
           setRedirect("/auth");
         });
       })
