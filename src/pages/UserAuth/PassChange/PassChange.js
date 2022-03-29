@@ -57,7 +57,6 @@ export const PassChange = () => {
         });
       })
       .catch((err) => {
-        console.log(JSON.parse(JSON.stringify(err)));
         console.error(err);
         console.trace(err);
         setError(err.path);

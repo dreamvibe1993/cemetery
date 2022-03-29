@@ -100,7 +100,6 @@ export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
         }
       })
       .catch((err) => {
-        console.log(JSON.stringify(err, false, 1));
         const sErr = ["photos", "lastWords"];
         if (sErr.includes(err.params.path)) {
           alert(err.errors[0]);

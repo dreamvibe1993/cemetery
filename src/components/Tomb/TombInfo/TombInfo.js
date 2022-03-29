@@ -65,6 +65,11 @@ export const TombInfo = ({ grave }) => {
     setRedirect("/");
   };
 
+  const showUserProfile = (userId) => {
+    if (!userId) return;
+    setRedirect("/profile?id=" + userId);
+  };
+
   if (redirect) return <Navigate to={redirect} />;
 
   return (
@@ -72,7 +77,12 @@ export const TombInfo = ({ grave }) => {
       {isGiftsOpen && <Gifts onClose={closeGifts} grave={grave} />}
       <MainInfoCont>
         {isDonateOpen && <DonateGift onClose={closeDonateGift} grave={grave} />}
-        <Name>{grave?.name}</Name>
+        <FirstRow>
+          <Name>{grave?.name}</Name>
+          <MadeByWrapper onClick={() => showUserProfile(grave?.madeBy?.id)}>
+            <UserPic src={grave?.madeBy?.picture} />
+          </MadeByWrapper>
+        </FirstRow>
         <TopBar>
           <DateLiving>
             {grave?.born} - {grave?.died}
@@ -96,6 +106,26 @@ export const TombInfo = ({ grave }) => {
     </>
   );
 };
+
+const FirstRow = styled.div`
+  max-height: 50px;
+  display: flex;
+`;
+
+const UserPic = styled.img`
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+`;
+
+const MadeByWrapper = styled.div`
+  height: 40px;
+  overflow: hidden;
+  width: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.2);
+`;
 
 const LogDiagSign = styled.span`
   color: ${colors.secondaryB.hex};

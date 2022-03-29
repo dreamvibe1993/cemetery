@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/macro";
-import { createUser } from "../../../api/user";
+import { createMyProfile } from "../../../api/user";
 
 import { ServiceButton } from "../../../components/css/sc-components/ScComponents";
 import { regSchema } from "../../../models/yup/yup-schemas";
@@ -55,12 +55,11 @@ export const SignIn = () => {
     regSchema
       .validate(toValidate)
       .then(() => {
-        createUser(name, email, password, passwordConfirm).then(() => {
+        createMyProfile(name, email, password, passwordConfirm).then(() => {
           closeSignInSection();
         });
       })
       .catch((err) => {
-        console.log(JSON.parse(JSON.stringify(err)));
         console.error(err);
         console.trace(err);
         setError(err.path);

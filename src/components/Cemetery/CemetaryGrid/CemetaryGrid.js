@@ -72,7 +72,7 @@ export const CemetaryGrid = () => {
             >
               <Cell onClick={() => visitTomb(cell)}>
                 <Grave grave={cell} />
-                {(cell?.madeBy === user.id || isAdmin) && (
+                {(cell?.madeBy?.id === user.id || isAdmin) && (
                   <ServiceButton
                     id="sbut"
                     style={{

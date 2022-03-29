@@ -9,8 +9,7 @@ import { AuthWrapper } from "./components/HOCs/AuthWrapper";
 
 /*
   TODO:
-  3) Changing password
-  3.1) Make a mail notification
+  3) Make forg pass button appear after failed login attempt
   4) Make possible to check another user's profile
   5) Cant create born date older then death date
   6) Waiting till db connected

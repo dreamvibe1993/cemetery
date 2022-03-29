@@ -6,7 +6,12 @@ import { setUserLoading } from "../redux/user/userReducer";
 import { authorizeUser, dropUserData } from "../services/auth/logInUser";
 import { handleError } from "../services/errors/handleError";
 
-export const createUser = async (name, email, password, passwordConfirm) => {
+export const createMyProfile = async (
+  name,
+  email,
+  password,
+  passwordConfirm
+) => {
   store.dispatch(setUserLoading(true));
   return axios
     .post(ORIGIN + USER_API_URL + "/signup", {
@@ -27,7 +32,7 @@ export const createUser = async (name, email, password, passwordConfirm) => {
     });
 };
 
-export const logInUser = async (email, password) => {
+export const logInMe = async (email, password) => {
   store.dispatch(setUserLoading(true));
   try {
     const response = await axios.post(
@@ -49,7 +54,7 @@ export const logInUser = async (email, password) => {
   }
 };
 
-export const logOutUser = async () => {
+export const logOutMe = async () => {
   store.dispatch(setUserLoading(true));
   try {
     await axios.post(
@@ -65,10 +70,10 @@ export const logOutUser = async () => {
   dropUserData();
 };
 
-export const getUser = async () => {
+export const getMe = async () => {
   store.dispatch(setUserLoading(true));
   return axios
-    .get(ORIGIN + USER_API_URL + "/user", {
+    .get(ORIGIN + USER_API_URL + "/getMe", {
       withCredentials: true,
     })
     .then((response) => authorizeUser(response.data))
@@ -77,7 +82,7 @@ export const getUser = async () => {
     });
 };
 
-export const updateUser = async (user) => {
+export const updateMe = async (user) => {
   store.dispatch(setUserLoading(true));
   return axios
     .patch(ORIGIN + USER_API_URL + "/updateMe", user, {
@@ -87,6 +92,13 @@ export const updateUser = async (user) => {
     .finally(() => {
       store.dispatch(setUserLoading(false));
     });
+};
+
+export const getUser = async (userId) => {
+  store.dispatch(setUserLoading(true));
+  return axios.get(ORIGIN + USER_API_URL + "/user/" + userId).finally(() => {
+    store.dispatch(setUserLoading(false));
+  });
 };
 
 export const sendChangePassEmail = async (email) => {

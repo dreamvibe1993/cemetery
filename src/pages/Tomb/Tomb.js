@@ -82,6 +82,7 @@ const LoadingContainer = styled.div`
 
 const Monument = styled.div`
   width: 60vw;
+  min-width: 650px;
   background-color: ${colors.primary.rgba(0.6)};
   margin: 0 auto;
   padding: 20px;

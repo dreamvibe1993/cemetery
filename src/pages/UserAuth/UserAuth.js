@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components/macro";
-import { getUser, logOutUser } from "../../api/user";
+import { getMe, logOutMe } from "../../api/user";
 
 import { ReactComponent as Logo } from "../../media/svg/logo.svg";
 import { ReactComponent as Cross } from "../../media/svg/cross.svg";
@@ -25,7 +25,7 @@ export const UserAuth = () => {
 
   const logOut = () => {
     dispatch(setUserAuth(null));
-    logOutUser();
+    logOutMe();
   };
 
   const redirectToHome = () => {
@@ -33,7 +33,7 @@ export const UserAuth = () => {
   };
 
   React.useEffect(() => {
-    getUser();
+    getMe();
   }, []);
 
   const showForgotPassButton = () => {

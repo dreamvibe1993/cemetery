@@ -1,7 +1,7 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components/macro";
-import { logInUser } from "../../../api/user";
+import { logInMe } from "../../../api/user";
 
 import {
   Input,
@@ -11,7 +11,8 @@ import { setUserAuth } from "../../../redux/user/userReducer";
 import { loginSchema } from "../../../models/yup/yup-schemas";
 import { showError } from "../../../services/errors/showError";
 
-export const LogIn = ({onForgotPassword = () => {}}) => {
+export const LogIn = ({ onForgotPassword = () => {} }) => {
+  const { notification } = useSelector((state) => state.app);
   const dispatch = useDispatch();
 
   const [error, setError] = React.useState("");
@@ -19,6 +20,11 @@ export const LogIn = ({onForgotPassword = () => {}}) => {
 
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+
+  React.useEffect(() => {
+    if (notification.text) onForgotPassword();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [notification]);
 
   const handleEmailInput = (e) => {
     setError("");
@@ -37,9 +43,9 @@ export const LogIn = ({onForgotPassword = () => {}}) => {
     };
     loginSchema
       .validate(toValidate)
-      .then((val) => {
+      .then(async (val) => {
         dispatch(setUserAuth(null));
-        logInUser(email, password);
+        logInMe(email, password);
       })
       .catch((err) => {
         onForgotPassword();

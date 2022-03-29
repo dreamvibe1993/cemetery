@@ -1,0 +1,1 @@
+export { NonEditableProfile } from "./NonEditableProfile";
