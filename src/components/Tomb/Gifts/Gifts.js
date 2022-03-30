@@ -6,6 +6,8 @@ import { ReactComponent as Candy } from "../../../media/svg/candy.svg";
 import { ReactComponent as BTC } from "../../../media/svg/btc.svg";
 import { Tooltip } from "../../App/Tooltip";
 import { colors } from "../../../configs/css/colors";
+import { FadeIn } from "../../../configs/css/animations";
+import { Backdrop } from "../../App/Backdrop";
 
 export const Gifts = ({ onClose = () => {}, grave }) => {
   const [cells, setCells] = React.useState([]);
@@ -44,7 +46,8 @@ export const Gifts = ({ onClose = () => {}, grave }) => {
   }, [grave]);
 
   return (
-    <GiftsCont>
+    <>
+      <Backdrop onClick={onClose}/>
       <GiftsGridWrapper>
         <ServiceButton onClick={onClose}>BACK</ServiceButton>
         <GiftsGrid>
@@ -63,7 +66,7 @@ export const Gifts = ({ onClose = () => {}, grave }) => {
           )}
         </GiftsGrid>
       </GiftsGridWrapper>
-    </GiftsCont>
+    </>
   );
 };
 
@@ -85,6 +88,12 @@ const Cell = styled.div`
 const GiftsGridWrapper = styled.div`
   padding: 20px;
   background-color: ${colors.secondaryB.rgba(1)};
+  position: absolute;
+  z-index: 1001;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: ${FadeIn} .2s linear forwards;
   button {
     &:hover {
       background-color: rgba(0, 0, 0, 0.4);
@@ -112,4 +121,5 @@ const GiftsCont = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: ${FadeIn} 0.2s linear forwards;
 `;

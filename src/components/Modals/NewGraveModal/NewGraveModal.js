@@ -9,6 +9,7 @@ import { graveSchema } from "../../../models/yup/yup-schemas";
 import { colors } from "../../../configs/css/colors";
 import { showError } from "../../../services/errors/showError";
 import { FadeIn } from "../../../configs/css/animations";
+import { Backdrop } from "../../App/Backdrop";
 
 export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
   const [l, setL] = React.useState(false);
@@ -108,7 +109,7 @@ export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
 
   return (
     <>
-      <Backdrop onClick={(e) => onClose(e)} />
+      <Backdrop onClick={onClose}/>
       <Diag onSubmit={(e) => submitData(e)}>
         <Title>This site is unoccupied.</Title>
         <Subtitle>
@@ -357,21 +358,6 @@ const Diag = styled.form`
 const PreloaderCont = styled(Diag)`
   justify-content: center;
   align-items: center;
-`;
-
-const Backdrop = styled.div`
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 999;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  overflow-y: auto;
-  animation: ${FadeIn} .2s linear forwards;
 `;
 
 /* <InputName>song to mourn:</InputName> */

@@ -2,17 +2,26 @@ import React from "react";
 import styled, { keyframes } from "styled-components/macro";
 
 export const Preloader = () => (
-  <PreloaderC>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </PreloaderC>
+  <Fixed>
+    <PreloaderC>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </PreloaderC>
+  </Fixed>
 );
+
+const Fixed = styled.div`
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
 
 const Roller = keyframes`
     0% {

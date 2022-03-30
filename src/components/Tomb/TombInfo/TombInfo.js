@@ -181,6 +181,7 @@ const DateLiving = styled(Text)`
   font-size: 20px;
   flex: 1;
   text-align: left;
+  padding-right: 10px;
 `;
 
 const Name = styled(Text)`

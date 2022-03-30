@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components/macro";
+import { FadeIn } from "../../../configs/css/animations";
 import { colors } from "../../../configs/css/colors";
 import { ServiceButton } from "../../css/sc-components/ScComponents";
 
@@ -176,6 +177,7 @@ const PictureGallery = styled.div`
   width: 100%;
   top: 0;
   left: 0;
-  z-index: 9999999999999 !important;
+  z-index: 1001;
   background-color: rgba(0, 0, 0, 0.9);
+  animation: ${FadeIn} .2s linear forwards;
 `;

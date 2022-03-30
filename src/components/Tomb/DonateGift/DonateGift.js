@@ -10,6 +10,8 @@ import { updateGrave } from "../../../api/graves";
 import { showError } from "../../../services/errors/showError";
 import { colors } from "../../../configs/css/colors";
 import { ServiceButton } from "../../css/sc-components/ScComponents";
+import { FadeIn } from "../../../configs/css/animations";
+import { Backdrop } from "../../App/Backdrop";
 
 export const DonateGift = ({ onClose = () => {}, grave }) => {
   const { user } = useSelector((state) => state.user);
@@ -42,7 +44,8 @@ export const DonateGift = ({ onClose = () => {}, grave }) => {
   };
 
   return (
-    <DonateGiftCont>
+    <>
+      <Backdrop onClick={onClose}/>
       <ChooseGiftBlock>
         <ButtonsRow>
           <ServiceButton onClick={onClose}>BACK TO THE TOMB</ServiceButton>
@@ -74,7 +77,7 @@ export const DonateGift = ({ onClose = () => {}, grave }) => {
           />
         </WishRow>
       </ChooseGiftBlock>
-    </DonateGiftCont>
+    </>
   );
 };
 
@@ -145,7 +148,11 @@ const ChooseGiftBlock = styled.div`
   padding: 15px;
   display: flex;
   flex-direction: column;
-  position: relative;
+  position: absolute;
+  z-index: 1001;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 const DonateGiftCont = styled.div`
@@ -159,4 +166,5 @@ const DonateGiftCont = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: ${FadeIn} 0.2s linear forwards;
 `;

@@ -9,7 +9,6 @@ import {
   Input,
   ServiceButton,
 } from "../../../components/css/sc-components/ScComponents";
-import { colors } from "../../../configs/css/colors";
 import { ORIGIN, routes } from "../../../configs/urls/app/app-urls";
 import { getMe, updateMe } from "../../../api/user";
 import { showError } from "../../../services/errors/showError";
@@ -22,6 +21,7 @@ import { PHOTOS_API_URL } from "../../../configs/urls/api/api-urls";
 import { setUnsavedDataStatus } from "../../../redux/app/appReducer";
 import { Picture } from "../../../components/App/Picture/Picture";
 import { Gallery } from "../../../components/App/Gallery";
+import { ProfileContainer } from "../Common/Common";
 
 export const EditableProfile = () => {
   const dispatch = useDispatch();
@@ -212,12 +212,3 @@ const UsernameInput = styled(Input)`
   width: 100%;
 `;
 
-const ProfileContainer = styled.div`
-  padding: 20px;
-  padding-bottom: 0px;
-  width: 66vw;
-  background-color: ${colors.primary.rgba(0.5)};
-  display: flex;
-  flex-direction: column;
-  max-width: 600px;
-`;

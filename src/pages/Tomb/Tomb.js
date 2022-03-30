@@ -14,6 +14,7 @@ import { TombChatLogs } from "../../components/Tomb/TombChatLogs";
 import { TombInfo } from "../../components/Tomb/TombInfo";
 import { setGravesLoadingOver } from "../../redux/graves/gravesReducer";
 import { reloadGraves } from "../../api/graves";
+import { FadeIn } from "../../configs/css/animations";
 
 export const Tomb = () => {
   const { graves, isGravesLoading } = useSelector((state) => state.graves);
@@ -48,14 +49,7 @@ export const Tomb = () => {
 
   if (redirect) return <Navigate to={redirect} />;
 
-  if (isGravesLoading)
-    return (
-      <MainContainer bgCol="rgb(49, 46, 68)">
-        <LoadingContainer>
-          <Preloader />
-        </LoadingContainer>
-      </MainContainer>
-    );
+  if (isGravesLoading) return <Preloader />;
 
   return (
     <>
@@ -71,15 +65,6 @@ export const Tomb = () => {
   );
 };
 
-const LoadingContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
 const Monument = styled.div`
   width: 60vw;
   min-width: 650px;
@@ -92,6 +77,7 @@ const Monument = styled.div`
   border-radius: 2px;
   box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.2);
   position: relative;
+  animation: ${FadeIn} .2s linear forwards;
   svg {
     /* fill: ${colors.secondaryB.hex}; */
   }

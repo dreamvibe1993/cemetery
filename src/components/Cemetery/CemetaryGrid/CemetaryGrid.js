@@ -13,6 +13,7 @@ import { colors } from "../../../configs/css/colors";
 import { useDeleteGrave } from "../../../services/hooks/graves/useDeleteGrave";
 import { showError } from "../../../services/errors/showError";
 import { Grave } from "../Grave";
+import { FadeIn } from "../../../configs/css/animations";
 
 export const CemetaryGrid = () => {
   const deleteGrave = useDeleteGrave();
@@ -145,4 +146,5 @@ const CemetaryGridContainer = styled.div`
   gap: 5px;
   min-width: 770px;
   padding: 10px;
+  animation: ${FadeIn} .2s linear forwards;
 `;
