@@ -8,7 +8,7 @@ export const MainContainer = styled.div`
 export const ServiceButton = styled.button`
   transition: background-color 0.2s linear;
   padding: 10px;
-  background-color: ${colors.secondaryB.rgba(0.8)};
+  background-color: ${colors.contrastA.rgba(0.8)};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,8 +17,12 @@ export const ServiceButton = styled.button`
   border: none;
   cursor: pointer;
   position: relative;
+  font-family: inherit;
   &:active {
-    background-color: ${colors.secondaryB.rgba(1)};
+    background-color: ${colors.contrastA.rgba(1)};
+  }
+  &:hover {
+    background-color: ${colors.contrastA.rgba(0.5)};
   }
 `;
 

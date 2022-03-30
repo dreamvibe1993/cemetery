@@ -87,10 +87,6 @@ const ButtonsRow = styled.div`
     &:not(:first-child) {
       margin-left: 5px;
     }
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.4);
-    }
-    background-color: rgba(0, 0, 0, 0.2);
   }
 `;
 
@@ -144,7 +140,7 @@ const GiftsRow = styled.div`
 
 const ChooseGiftBlock = styled.div`
   width: 750px;
-  background-color: ${colors.secondaryB.hex};
+  background-color: ${colors.primary.hex};
   padding: 15px;
   display: flex;
   flex-direction: column;
@@ -155,16 +151,3 @@ const ChooseGiftBlock = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-const DonateGiftCont = styled.div`
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 999;
-  background-color: rgba(0, 0, 0, 0.9);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: ${FadeIn} 0.2s linear forwards;
-`;

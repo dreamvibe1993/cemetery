@@ -24,5 +24,6 @@ const GraveCont = styled.div`
   padding: 20px;
   overflow: hidden;
   background-size: 60px 60px;
-  box-shadow: 1px 1px 40px 5px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 1px 1px 40px 5px rgba(0, 0, 0, 0.1); */
+  border: 1px solid #000;
 `;

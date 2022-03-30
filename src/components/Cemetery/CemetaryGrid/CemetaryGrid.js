@@ -138,7 +138,7 @@ const Cell = styled.div`
 `;
 
 const CemetaryGridContainer = styled.div`
-  background-color: ${colors.primary.rgba(0.4)};
+  background-color: ${colors.primary.rgba(1)};
   border-radius: 5px;
   display: grid;
   grid-template-columns: repeat(4, auto);

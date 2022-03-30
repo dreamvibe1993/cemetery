@@ -40,7 +40,7 @@ const TooltipTip = styled.div`
   padding: 16px;
   color: var(--tooltip-text-color);
   background: var(--tooltip-background-color);
-  font-size: 18px;
+  font-size: 15px;
   line-height: 1;
   z-index: 998;
   width: fit-content;

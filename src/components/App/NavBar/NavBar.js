@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components/macro";
 
 import { NavButton } from "../../css/sc-components/ScComponents";
-import { ReactComponent as Logo } from "../../../media/svg/logo.svg";
+import { ReactComponent as Logo } from "../../../media/svg/logo-2.svg";
 import { colors } from "../../../configs/css/colors";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -91,7 +91,7 @@ const LogoWrapper = styled.div`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  height: 100%;
+  height: 80%;
   width: 80px;
   cursor: pointer;
   svg {
@@ -113,7 +113,7 @@ const UserName = styled.span`
 
 const NavBar = styled.div`
   position: fixed;
-  background-color: ${colors.primary.rgba(0.6)};
+  background-color: ${colors.primary.rgba(1)};
   /* z-index: 999; */
   height: 75px;
   width: 100%;

@@ -4,7 +4,7 @@ import styled from "styled-components/macro";
 import { DropDown } from "../../../configs/css/animations";
 import { ServiceButton } from "../../css/sc-components/ScComponents";
 
-import { ReactComponent as Logo } from "../../../media/svg/logo.svg";
+import { ReactComponent as Logo } from "../../../media/svg/logo-2.svg";
 
 export const GreetingsScreen = ({ onClose = () => {} }) => {
   let navigate = useNavigate();

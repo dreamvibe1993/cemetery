@@ -6,12 +6,12 @@ export const GlobalStyles = createGlobalStyle`
   body {
     display: flex;
     justify-content: center;
-    background-color: ${colors.secondaryB.rgba(1)};
     position: relative;
     padding-top: 10px;
     color: #fff;
-    font-family: Overpass;
+    font-family: 'Courier New', Courier, monospace;
     margin-top: 90px;
+    background-color: ${colors.secondaryB.rgba(1)};
   }
   
   /* Custom properties */

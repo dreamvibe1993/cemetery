@@ -87,19 +87,13 @@ const Cell = styled.div`
 
 const GiftsGridWrapper = styled.div`
   padding: 20px;
-  background-color: ${colors.secondaryB.rgba(1)};
+  background-color: ${colors.primary.hex};
   position: absolute;
   z-index: 1001;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   animation: ${FadeIn} .2s linear forwards;
-  button {
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.4);
-    }
-    background-color: rgba(0, 0, 0, 0.2);
-  }
 `;
 
 const GiftsGrid = styled.div`
@@ -108,18 +102,4 @@ const GiftsGrid = styled.div`
   grid-template-rows: repeat(4, 170px);
   grid-gap: 10px;
   margin-top: 10px;
-`;
-
-const GiftsCont = styled.div`
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  background-color: rgba(0, 0, 0, 0.9);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: ${FadeIn} 0.2s linear forwards;
 `;

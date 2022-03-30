@@ -3,13 +3,13 @@ import { hexToRgbA } from "../../services/css/convertion/colors";
 //https://colorscheme.ru/#4852kw0w0w0w0
 export const colors = {
   primary: {
-    hex: "#3B2E84",
+    hex: "#37b394",
     rgba: function (transparency) {
       return hexToRgbA(this.hex, transparency);
     },
   },
   primaryDark: {
-    hex: "#180773",
+    hex: "#030a17",
     rgba: function (transparency) {
       return hexToRgbA(this.hex, transparency);
     },
@@ -27,13 +27,13 @@ export const colors = {
     },
   },
   secondaryB: {
-    hex: "#1E786C",
+    hex: "#37b394",
     rgba: function (transparency) {
       return hexToRgbA(this.hex, transparency);
     },
   },
   contrastA: {
-    hex: "#429c06",
+    hex: "#37b394",
     rgba: function (transparency) {
       return hexToRgbA(this.hex, transparency);
     },

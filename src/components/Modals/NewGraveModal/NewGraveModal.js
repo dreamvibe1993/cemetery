@@ -10,8 +10,10 @@ import { colors } from "../../../configs/css/colors";
 import { showError } from "../../../services/errors/showError";
 import { FadeIn } from "../../../configs/css/animations";
 import { Backdrop } from "../../App/Backdrop";
+import { useSelector } from "react-redux";
 
 export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
+  const { user, isAuth } = useSelector((state) => state.user);
   const [l, setL] = React.useState(false);
   const [photos, setPhotos] = React.useState([]);
   const [name, setName] = React.useState("");
@@ -65,6 +67,7 @@ export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
   // };
 
   const submitData = (e) => {
+    if (!isAuth) return showError("Please authorize.")
     e.preventDefault();
     setErrThrown("");
     const dataToPost = {
@@ -109,7 +112,7 @@ export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
 
   return (
     <>
-      <Backdrop onClick={onClose}/>
+      <Backdrop onClick={onClose} />
       <Diag onSubmit={(e) => submitData(e)}>
         <Title>This site is unoccupied.</Title>
         <Subtitle>
@@ -346,13 +349,13 @@ const Diag = styled.form`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 450px;
-  background-color: ${colors.primary.rgba(0.8)};
+  background-color: ${colors.primary.rgba(1)};
   padding: 20px 20px;
   text-align: center;
   display: flex;
   flex-direction: column;
   z-index: 999;
-  animation: ${FadeIn} .2s linear forwards;
+  animation: ${FadeIn} 0.2s linear forwards;
 `;
 
 const PreloaderCont = styled(Diag)`
