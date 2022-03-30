@@ -1,31 +1,22 @@
 import React from "react";
 import styled from "styled-components/macro";
 // import Select from "react-select";
-import { setLocale } from "yup";
-
 import { ReactComponent as Cross } from "../../../media/svg/cross.svg";
 import { compressPhotos } from "../../../services/data-transformation/converting";
 import { loadGraves, postNewGrave } from "../../../api/graves";
 import { Preloader } from "../../App/Preloader";
 import { graveSchema } from "../../../models/yup/yup-schemas";
 import { colors } from "../../../configs/css/colors";
-
-setLocale({
-  string: {
-    min: "must be at least 2 chars",
-  },
-  date: {
-    typeError: "the field must not me empty",
-  },
-});
+import { showError } from "../../../services/errors/showError";
+import { FadeIn } from "../../../configs/css/animations";
 
 export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
   const [l, setL] = React.useState(false);
   const [photos, setPhotos] = React.useState([]);
   const [name, setName] = React.useState("");
-  const [born, setBorn] = React.useState("");
-  const [died, setDied] = React.useState("");
-  const [lastWords, setLastWords] = React.useState(" ");
+  const [born, setBorn] = React.useState("1991-03-02");
+  const [died, setDied] = React.useState("2022-02-24");
+  const [lastWords, setLastWords] = React.useState("");
   // const [songs, setSongs] = React.useState({
   //   label: "земфира - пммл",
   //   value: "zemfira",
@@ -72,7 +63,8 @@ export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
   //   setSongs(v);
   // };
 
-  const submitData = () => {
+  const submitData = (e) => {
+    e.preventDefault();
     setErrThrown("");
     const dataToPost = {
       name,
@@ -84,7 +76,7 @@ export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
     };
     graveSchema
       .validate(dataToPost)
-      .then(async () => {
+      .then(async (validated) => {
         try {
           setL(true);
           await postNewGrave({
@@ -100,139 +92,119 @@ export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
         }
       })
       .catch((err) => {
-        const sErr = ["photos", "lastWords"];
-        if (sErr.includes(err.params.path)) {
-          alert(err.errors[0]);
-        }
+        showError({ message: err.errors[0] });
         setErrThrown(err.params.path);
       });
   };
 
   if (l)
     return (
-      <NewGraveModalCont>
+      <Backdrop>
         <PreloaderCont>
           <Preloader />
         </PreloaderCont>
-      </NewGraveModalCont>
+      </Backdrop>
     );
 
   return (
-    <NewGraveModalCont>
-      <Diag>
+    <>
+      <Backdrop onClick={(e) => onClose(e)} />
+      <Diag onSubmit={(e) => submitData(e)}>
         <Title>This site is unoccupied.</Title>
         <Subtitle>
           Fill out the fields and click "OK" to create a burial or click
           "Cancel" to return to the graveyard.
         </Subtitle>
         <InputsContainer>
-          <InputName>name:</InputName>
-          <TextInput
-            type="text"
-            errThrown={errThrown === "name"}
-            onChange={(e) => handleNameInput(e)}
-            maxLength={20}
-            defaultValue={name}
-          />
-          <InputName>born:</InputName>
-          <TextInput
-            type="date"
-            errThrown={errThrown === "born"}
-            onChange={(e) => handleDateBInput(e)}
-            defaultValue={born}
-          />
-          <InputName>died:</InputName>
-          <TextInput
-            type="date"
-            errThrown={errThrown === "died"}
-            onChange={(e) => handleDateDInput(e)}
-            defaultValue={died}
-          ></TextInput>
-          <InputName>last words:</InputName>
-          <TextInput
-            type="text"
-            errThrown={errThrown === "lastWords"}
-            onChange={(e) => handleLWordsInput(e)}
-            maxLength={32}
-            defaultValue={lastWords}
-          ></TextInput>
-          {/* <InputName>song to mourn:</InputName> */}
-          {/* <Select
-            onChange={(v) => handleLSongInput(v)}
-            options={[{ value: "zemfira", label: "земфира - пммл" }]}
-            defaultInputValue={songs.label}
-            styles={{
-              container: (provided) => ({
-                ...provided,
-                width: "100%",
-                zIndex: 999,
-              }),
-              control: (provided) => ({
-                ...provided,
-                backgroundColor: "rgba(0, 0, 0, 0.2)",
-                border: errThrown === "song" ? "1px solid red" : "none",
-              }),
-              valueContainer: (provided) => ({
-                ...provided,
-              }),
-              placeholder: (provided) => ({
-                ...provided,
-                color: "#fff",
-                fontSize: "20px",
-                textTransform: "lowercase",
-              }),
-              input: (provided) => ({
-                ...provided,
-                color: "#fff",
-              }),
-              menu: (provided) => ({
-                ...provided,
-                backgroundColor: "rgba(74, 19, 53, 1)",
-                color: "#fff",
-              }),
-              option: (provided) => ({
-                ...provided,
-                backgroundColor: "rgba(74, 19, 53, 1)",
-                fontSize: "20px",
-                color: "#fff",
-              }),
-              singleValue: (provided) => ({
-                ...provided,
-                fontSize: "20px",
-                color: "#fff",
-              }),
-            }}
-          /> */}
-          <InputName>
-            {photos.length < 1 ? "photos" : "click to add more"}
-          </InputName>
-          <FileInput errThrown={errThrown === "photos"}>
-            {photos.length < 1 ? (
-              <InputName>CLICK TO UPLOAD</InputName>
-            ) : (
-              photos.map((blob) => (
-                <LilPicCont key={blob.id}>
-                  <Cross onClick={() => deletePhoto(blob.id)} />
-                  <LilPic src={blob.url} />
-                </LilPicCont>
-              ))
-            )}
-            <input
-              type="file"
-              accept="image/*"
-              multiple
-              onChange={(e) => createPhotosBlobs(e)}
-            ></input>
-          </FileInput>
+          <Row>
+            {/* <InputName>name:</InputName> */}
+            <TextInput
+              placeholder="name"
+              type="text"
+              errThrown={errThrown === "name"}
+              onChange={(e) => handleNameInput(e)}
+              maxLength={20}
+              defaultValue={name}
+              required
+            />
+          </Row>
+          <RowWithDate>
+            <InputDateName>born</InputDateName>
+            <TextInput
+              placeholder="born"
+              type="date"
+              errThrown={errThrown === "born"}
+              onChange={(e) => handleDateBInput(e)}
+              defaultValue={born}
+              required
+            />
+          </RowWithDate>
+          <RowWithDate>
+            <InputDateName>died</InputDateName>
+            <TextInput
+              placeholder="died"
+              type="date"
+              errThrown={errThrown === "died"}
+              onChange={(e) => handleDateDInput(e)}
+              defaultValue={died}
+              required
+            />
+          </RowWithDate>
+          <Row>
+            <TextInput
+              placeholder="last words"
+              type="text"
+              errThrown={errThrown === "lastWords"}
+              onChange={(e) => handleLWordsInput(e)}
+              maxLength={32}
+              defaultValue={lastWords}
+              required
+            />
+          </Row>
+          <Row>
+            <FileInput errThrown={errThrown === "photos"}>
+              {photos.length < 1 ? (
+                <InputName>CLICK TO UPLOAD PHOTOS</InputName>
+              ) : (
+                photos.map((blob) => (
+                  <LilPicCont key={blob.id}>
+                    <Cross onClick={() => deletePhoto(blob.id)} />
+                    <LilPic src={blob.url} />
+                  </LilPicCont>
+                ))
+              )}
+              <input
+                type="file"
+                accept="image/*"
+                multiple
+                onChange={(e) => createPhotosBlobs(e)}
+              ></input>
+            </FileInput>
+          </Row>
         </InputsContainer>
         <ButtonsCont>
-          <OK onClick={submitData}>OK</OK>
+          <OK type="submit">OK</OK>
           <Cancel onClick={onClose}>Cancel</Cancel>
         </ButtonsCont>
       </Diag>
-    </NewGraveModalCont>
+    </>
   );
 };
+
+const Row = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.2);
+`;
+
+const RowWithDate = styled(Row)`
+  padding-left: 10px;
+  input {
+    width: 85%;
+  }
+`;
 
 const LilPicCont = styled.div`
   position: relative;
@@ -284,7 +256,12 @@ const FileInput = styled.div`
   }
 `;
 
-const Button = styled.div`
+const Button = styled.button`
+  color: white;
+  font-family: inherit;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: inherit;
   flex: 1;
   height: 40px;
   background-color: rgba(0, 0, 0, 0.2);
@@ -311,19 +288,22 @@ const Cancel = styled(Button)`
 
 const ButtonsCont = styled.div`
   display: flex;
+  margin-top: 10px;
 `;
 
 const TextInput = styled.input`
   -webkit-appearance: none;
-  border: ${(p) =>
-    p.errThrown ? "1px solid " + colors.error.hex : "none"};
-  background-color: rgba(0, 0, 0, 0.2);
+  border: ${(p) => (p.errThrown ? "1px solid " + colors.error.hex : "none")};
   width: 100%;
   height: 40px;
   padding: 5px 10px;
   color: #fff;
   font-size: 20px;
   border-radius: 2px;
+  background-color: transparent;
+  ::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+  }
 `;
 
 const InputsContainer = styled.div`
@@ -354,15 +334,24 @@ const InputName = styled(Title)`
   font-size: 18px;
 `;
 
-const Diag = styled.div`
-  margin-top: 50px;
-  height: 750px;
+const InputDateName = styled(InputName)`
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.4);
+`;
+
+const Diag = styled.form`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 450px;
   background-color: ${colors.primary.rgba(0.8)};
   padding: 20px 20px;
   text-align: center;
   display: flex;
   flex-direction: column;
+  z-index: 999;
+  animation: ${FadeIn} .2s linear forwards;
 `;
 
 const PreloaderCont = styled(Diag)`
@@ -370,16 +359,65 @@ const PreloaderCont = styled(Diag)`
   align-items: center;
 `;
 
-const NewGraveModalCont = styled.div`
+const Backdrop = styled.div`
   position: fixed;
   height: 100%;
   width: 100%;
   top: 0;
   left: 0;
-  z-index: 9999999999999 !important;
+  z-index: 999;
   background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: flex-start;
   overflow-y: auto;
+  animation: ${FadeIn} .2s linear forwards;
 `;
+
+/* <InputName>song to mourn:</InputName> */
+/* <Select
+            onChange={(v) => handleLSongInput(v)}
+            options={[{ value: "zemfira", label: "земфира - пммл" }]}
+            defaultInputValue={songs.label}
+            styles={{
+              container: (provided) => ({
+                ...provided,
+                width: "100%",
+                zIndex: 999,
+              }),
+              control: (provided) => ({
+                ...provided,
+                backgroundColor: "rgba(0, 0, 0, 0.2)",
+                border: errThrown === "song" ? "1px solid red" : "none",
+              }),
+              valueContainer: (provided) => ({
+                ...provided,
+              }),
+              placeholder: (provided) => ({
+                ...provided,
+                color: "#fff",
+                fontSize: "20px",
+                textTransform: "lowercase",
+              }),
+              input: (provided) => ({
+                ...provided,
+                color: "#fff",
+              }),
+              menu: (provided) => ({
+                ...provided,
+                backgroundColor: "rgba(74, 19, 53, 1)",
+                color: "#fff",
+              }),
+              option: (provided) => ({
+                ...provided,
+                backgroundColor: "rgba(74, 19, 53, 1)",
+                fontSize: "20px",
+                color: "#fff",
+              }),
+              singleValue: (provided) => ({
+                ...provided,
+                fontSize: "20px",
+                color: "#fff",
+              }),
+            }}
+          /> */

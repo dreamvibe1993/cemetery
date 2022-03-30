@@ -13,8 +13,14 @@ export const graveSchema = yup.object().shape({
       32,
       "Maximum length of the person's last words is 32. Please be more brief."
     ),
-  died: yup.date().required(),
-  born: yup.date().required(),
+  died: yup
+    .date("Wrong date!")
+    .required("Please provide the date of death")
+    .min(yup.ref("born"), "Person can not die before they born."),
+  born: yup
+    .date("Wrong date!")
+    .required("Please provide the date of death")
+    .max(yup.ref("died"), "Person can not born after they die."),
   name: yup.string().required().min(2),
 });
 

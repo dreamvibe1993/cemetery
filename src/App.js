@@ -1,6 +1,5 @@
 import React from "react";
 import { Paths } from "./Paths";
-import { GreetingsScreen } from "./components/Modals/GreetingsScreen";
 
 import { TopNavBar } from "./components/App/NavBar/NavBar";
 import { GlobalStyles } from "./GlobalStyles";
@@ -9,10 +8,8 @@ import { AuthWrapper } from "./components/HOCs/AuthWrapper";
 
 /*
   TODO:
-  3) Make forg pass button appear after failed login attempt
-  4) Make possible to check another user's profile
-  5) Cant create born date older then death date
   6) Waiting till db connected
+  6.1) Unsubscribing from apis
   7) Change design to a darker one
   8) Mobile version
   8.1) Implement forms?
@@ -21,26 +18,11 @@ import { AuthWrapper } from "./components/HOCs/AuthWrapper";
 */
 
 function App() {
-  const [isGreetingsShown, setGreetingsShown] = React.useState(false);
-
-  React.useEffect(() => {
-    const isFirstTime = localStorage.getItem("isLastResortFT");
-    if (!isFirstTime) {
-      setGreetingsShown(true);
-    }
-  }, []);
-
-  const closeGreetings = () => {
-    localStorage.setItem("isLastResortFT", true);
-    setGreetingsShown(false);
-  };
-
   return (
     <>
       <GlobalStyles />
       <NotificationModal>
         <AuthWrapper>
-          {isGreetingsShown && <GreetingsScreen onClose={closeGreetings} />}
           <TopNavBar />
           <Paths />
         </AuthWrapper>

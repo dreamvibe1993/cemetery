@@ -3,9 +3,9 @@ import { getMe } from "../../../api/user";
 
 export const AuthWrapper = ({ children }) => {
   
-  // React.useEffect(() => {
-  //   getUser();
-  // }, []);
+  React.useEffect(() => {
+    getMe();
+  }, []);
 
   return children;
 };
