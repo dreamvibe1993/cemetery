@@ -12,6 +12,7 @@ import { showError } from "../../../services/errors/showError";
 import { Gifts } from "../Gifts";
 import { colors } from "../../../configs/css/colors";
 import { useSelector } from "react-redux";
+import { RoundUserPic } from "../../App/RoundUserPic/RoundUserPic";
 
 export const TombInfo = ({ grave }) => {
   const { isAuth } = useSelector((state) => state.user);
@@ -75,13 +76,11 @@ export const TombInfo = ({ grave }) => {
   return (
     <>
       {isGiftsOpen && <Gifts onClose={closeGifts} grave={grave} />}
+      {isDonateOpen && <DonateGift onClose={closeDonateGift} grave={grave} />}
       <MainInfoCont>
-        {isDonateOpen && <DonateGift onClose={closeDonateGift} grave={grave} />}
         <FirstRow>
           <Name>{grave?.name}</Name>
-          <MadeByWrapper onClick={() => showUserProfile(grave?.madeBy?.id)}>
-            <UserPic src={grave?.madeBy?.picture} />
-          </MadeByWrapper>
+          <RoundUserPic src={grave?.madeBy?.picture} onClick={() => showUserProfile(grave?.madeBy?.id)}/>
         </FirstRow>
         <TopBar>
           <DateLiving>
@@ -112,20 +111,7 @@ const FirstRow = styled.div`
   display: flex;
 `;
 
-const UserPic = styled.img`
-  object-fit: cover;
-  height: 100%;
-  width: 100%;
-`;
 
-const MadeByWrapper = styled.div`
-  height: 40px;
-  overflow: hidden;
-  width: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.2);
-`;
 
 const LogDiagSign = styled.span`
   color: ${colors.secondaryB.hex};

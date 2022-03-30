@@ -30,8 +30,8 @@ export const EditableProfile = () => {
   const [redirect, setRedirect] = React.useState(null);
   const [picBlobArr, setPicBlobArr] = React.useState(null);
   const [name, setName] = React.useState(user.username);
-  const [email, setEmail] = React.useState();
-  const [userPhotoSrc, setUserPhotoSrc] = React.useState(null);
+  const [email, setEmail] = React.useState('');
+  const [userPhotoSrc, setUserPhotoSrc] = React.useState('');
 
   React.useEffect(() => {
     if (isAuth) return;
@@ -123,6 +123,7 @@ export const EditableProfile = () => {
             type="file"
             accept="image/*"
             multiple
+            readOnly
             onChange={(e) => createPhotosBlobs(e)}
           />
         </ServiceButton>
@@ -140,7 +141,7 @@ export const EditableProfile = () => {
             <Row>
               <UsernameInput
                 type="text"
-                value={name}
+                value={name || ""}
                 placeholder="Type your name here"
                 onChange={changeUsername}
               />
@@ -148,7 +149,7 @@ export const EditableProfile = () => {
             <Row>
               <UsernameInput
                 type="email"
-                value={email}
+                value={email || ""}
                 placeholder="Type your name here"
                 onChange={changeUserEmail}
               />

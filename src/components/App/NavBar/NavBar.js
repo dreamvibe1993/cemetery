@@ -9,12 +9,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { routes } from "../../../configs/urls/app/app-urls";
 import { useConfirmRedir } from "../../../services/hooks/app/useConfirmRedir";
 import { setUnsavedDataStatus } from "../../../redux/app/appReducer";
+import { RoundUserPic } from "../RoundUserPic/RoundUserPic";
 
 export const TopNavBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const askAndSubscribe = useConfirmRedir();
-  const { user } = useSelector((state) => state.user);
+  const { user, isAuth } = useSelector((state) => state.user);
   const { isThereUnsavedData } = useSelector((state) => state.app);
 
   const [unsavedData, setUnsavedData] = React.useState(false);
@@ -68,7 +69,12 @@ export const TopNavBar = () => {
       <LogoWrapper>
         <Logo onClick={goHome} />
       </LogoWrapper>
-      <UserName onClick={goProfile}>{user.username || "unauthorized"}</UserName>
+      {isAuth && (
+        <RoundUserPic
+          src={Array.isArray(user.photos) && user.photos[0]}
+          onClick={goProfile}
+        />
+      )}
     </NavBar>
   );
 };

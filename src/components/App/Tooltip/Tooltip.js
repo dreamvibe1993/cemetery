@@ -2,25 +2,25 @@ import React, { useState } from "react";
 import styled from "styled-components/macro";
 
 export const Tooltip = ({ delay, direction, children, content }) => {
-  let timeout;
+  const timeoutId = React.useRef();
   const [active, setActive] = useState(false);
 
   const showTip = () => {
-    timeout = setTimeout(() => {
+    timeoutId.current = setTimeout(() => {
       setActive(true);
     }, delay || 400);
   };
 
   const hideTip = () => {
-    clearInterval(timeout);
+    clearInterval(timeoutId.current);
     setActive(false);
   };
 
   React.useEffect(() => {
     return () => {
-      clearInterval(timeout);
+      clearInterval(timeoutId.current);
     };
-  }, [timeout]);
+  }, []);
 
   return (
     <TooltipWrapper onMouseEnter={showTip} onMouseLeave={hideTip}>
