@@ -100,16 +100,16 @@ const LogoWrapper = styled.div`
   }
 `;
 
-const UserName = styled.span`
-  padding-left: 40px;
-  user-select: none;
-  opacity: 0.5;
-  transition: opacity 0.2s linear;
-  cursor: pointer;
-  &:hover {
-    opacity: 1;
-  }
-`;
+// const UserName = styled.span`
+//   padding-left: 40px;
+//   user-select: none;
+//   opacity: 0.5;
+//   transition: opacity 0.2s linear;
+//   cursor: pointer;
+//   &:hover {
+//     opacity: 1;
+//   }
+// `;
 
 const NavBar = styled.div`
   position: fixed;

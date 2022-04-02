@@ -2,8 +2,6 @@ import React from "react";
 import styled from "styled-components/macro";
 import { Navigate } from "react-router-dom";
 
-import PhotoPlaceholder from "../../../media/img/common/user_photo_placeholder.jpg";
-
 import { Input } from "../../../components/css/sc-components/ScComponents";
 import { Picture } from "../../../components/App/Picture/Picture";
 import { Gallery } from "../../../components/App/Gallery";
@@ -60,9 +58,7 @@ export const UserProfile = () => {
       </Row>
       <Row style={{ alignItems: "flex-start", justifyContent: "flex-start" }}>
         <Picture
-          src={
-            (Array.isArray(user?.photos) && user?.photos[0]) || PhotoPlaceholder
-          }
+          src={Array.isArray(user?.photos) && user?.photos[0]}
           showPhoto={() => showUserPhoto(user?.photos[0])}
           sizes={{ width: 130, height: 190 }}
         />

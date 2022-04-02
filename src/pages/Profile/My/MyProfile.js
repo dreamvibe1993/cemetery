@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components/macro";
 import { Navigate } from "react-router-dom";
 
-import PhotoPlaceholder from "../../../media/img/common/user_photo_placeholder.jpg";
-
 import {
   Input,
   ServiceButton,
