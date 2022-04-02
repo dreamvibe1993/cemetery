@@ -1,13 +1,11 @@
 import axios from "axios";
 import store from "../redux/store";
 import {
-  setGraves,
   setGravesLoadingOver,
   setGravesLoadingStart,
 } from "../redux/graves/gravesReducer";
 import {
   convertToBackModel,
-  convertToFrontModel,
   updateGiftsOnGrave,
 } from "../services/data-transformation/converting";
 import { ORIGIN } from "../configs/urls/app/app-urls";
