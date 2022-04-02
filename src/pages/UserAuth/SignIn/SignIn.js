@@ -45,7 +45,8 @@ export const SignIn = () => {
     setPasswordConfirm(e.target.value);
   };
 
-  const createUserAcc = () => {
+  const createUserAcc = (e) => {
+    e.preventDefault();
     const toValidate = {
       name,
       email,
@@ -69,7 +70,7 @@ export const SignIn = () => {
   };
 
   return (
-    <>
+    <Form onSubmit={(e) => createUserAcc(e)}>
       <SignInSection open={isSignInOpen}>
         <RelativeWrap>
           <LoginInput
@@ -118,12 +119,17 @@ export const SignIn = () => {
           )}
         </RelativeWrap>
       </SignInSection>
-      <SIGNIN onClick={isSignInOpen ? createUserAcc : openSignInSection}>
+      <SIGNIN
+        type={isSignInOpen ? "submit" : "button"}
+        onClick={openSignInSection}
+      >
         CREATE AN ACCOUNT
       </SIGNIN>
-    </>
+    </Form>
   );
 };
+
+const Form = styled.form``;
 
 const SignInSection = styled.div`
   transition: height 0.3s linear, padding-top 0.3s linear,
@@ -152,6 +158,7 @@ const ErrMessage = styled.span`
 `;
 
 const SIGNIN = styled(ServiceButton)`
+  margin: 0 auto;
   margin-top: 20px;
 `;
 

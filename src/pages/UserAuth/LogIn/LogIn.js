@@ -36,7 +36,8 @@ export const LogIn = ({ onForgotPassword = () => {} }) => {
     setPassword(e.target.value);
   };
 
-  const logIn = () => {
+  const logIn = (e) => {
+    e.preventDefault();
     const toValidate = {
       email,
       password,
@@ -58,7 +59,7 @@ export const LogIn = ({ onForgotPassword = () => {} }) => {
   };
 
   return (
-    <>
+    <Form onSubmit={(e) => logIn(e)}>
       <RelativeWrap>
         <LoginInput
           type="email"
@@ -80,10 +81,12 @@ export const LogIn = ({ onForgotPassword = () => {} }) => {
         {error === "password" && <ErrMessage>{errorM}</ErrMessage>}
       </RelativeWrap>
 
-      <LOGIN onClick={logIn}>LOGIN</LOGIN>
-    </>
+      <LOGIN type="submit">LOGIN</LOGIN>
+    </Form>
   );
 };
+
+const Form = styled.form``;
 
 const RelativeWrap = styled.div`
   position: relative;
@@ -102,6 +105,7 @@ const ErrMessage = styled.span`
 `;
 
 const LOGIN = styled(ServiceButton)`
+  margin: 0 auto;
   margin-top: 20px;
 `;
 

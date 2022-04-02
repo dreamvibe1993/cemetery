@@ -8,14 +8,15 @@ import { AuthWrapper } from "./components/HOCs/AuthWrapper";
 
 /*
   TODO:
-  5) Add my-profile and usual profile with id
-  6) Waiting till db connected (FAILED)
-  7) Add more ways to connect with user
-  3) Light and dark theme
-  8) Mobile version
-  8.1) Implement forms?
-  8.2) CHANGE MY EMAIL!!!
-  9) Deploy
+  *) If email exist show proper notif
+  *) Profile preview
+  *) Waiting till db connected (FAILED)
+  *) Add more ways to connect with user
+  *) Light and dark theme
+  *) Mobile version
+  *) Implement forms?
+  *) CHANGE MY EMAIL!!!
+  *) Deploy
 */
 
 function App() {
