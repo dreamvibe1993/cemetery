@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components/macro";
 
 import { ReactComponent as Eye } from "../../../media/svg/eye.svg";
+import QuestionMark from "../../../media/img/common/question-mark.png"
 
 import { Preloader } from "../../../components/App/Preloader";
 import { ServiceButton } from "../../css/sc-components/ScComponents";
@@ -27,7 +28,7 @@ export const Picture = ({
           <Eye />
         </ServiceButton>
       </PhotoButton>
-      <Photo src={src} draggable={false} onLoad={() => setLoading(false)} />
+      <Photo src={src || QuestionMark} draggable={false} onLoad={() => setLoading(false)} />
     </PhotoWrapper>
   );
 };
@@ -52,6 +53,7 @@ const PhotoWrapper = styled.div`
   border-radius: 2px;
   display: flex;
   justify-content: center;
+  border: 1px solid black;
 `;
 
 const PhotoButton = styled.div`

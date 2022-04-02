@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components/macro";
 
+import QuestionMark from "../../../media/img/common/question-mark.png"
+
 export const RoundUserPic = ({src, onClick = () => {}}) => {
   return (
     <UserPicWrappa onClick={onClick}>
-      <UserPic src={src} />
+      <UserPic src={src || QuestionMark} />
     </UserPicWrappa>
   );
 };
