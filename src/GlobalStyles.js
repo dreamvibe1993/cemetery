@@ -13,6 +13,12 @@ export const GlobalStyles = createGlobalStyle`
     margin-top: 90px;
     background-color: ${colors.secondaryB.rgba(1)};
   }
+
+  input {
+    ::placeholder {
+      color: rgba(255,255,255, 0.4);
+    }
+  }
   
   /* Custom properties */
   :root {
@@ -29,8 +35,8 @@ export const GlobalStyles = createGlobalStyle`
   }
   
   *::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
+    width: 10px;
+    height: 10px;
     background-color: rgba(255, 255, 255, 0.3);
     border-radius: 10px;
   }

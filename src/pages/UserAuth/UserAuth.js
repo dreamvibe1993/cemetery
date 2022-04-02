@@ -53,17 +53,12 @@ export const UserAuth = () => {
 
   if (isAuth === null) {
     return (
-      <ContentContainer>
-        <UserAuthContainer>
-          <CrossSVGWrapper>
-            <Cross onClick={redirectToHome} />
-          </CrossSVGWrapper>
-          <LogoWrapper>
-            <Logo />
-          </LogoWrapper>
-          <Preloader />
-        </UserAuthContainer>
-      </ContentContainer>
+      <>
+        <CrossSVGWrapper>
+          <Cross onClick={redirectToHome} />
+        </CrossSVGWrapper>
+        <Preloader />
+      </>
     );
   }
 
@@ -133,6 +128,7 @@ const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  animation: ${FadeIn} 0.2s linear forwards;
 `;
 
 const LOGOUT = styled(ServiceButton)`

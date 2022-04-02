@@ -5,9 +5,11 @@ import {
   setNotification,
   setNotificationToDefault,
 } from "../../../redux/app/appReducer";
-import { deleteGrave, loadGraves } from "../../../api/graves";
+import { deleteGrave } from "../../../api/graves";
+import { useLoadGraves } from "../api/graves/useLoadGraves";
 
 export const useDeleteGrave = () => {
+  const [getGraves] = useLoadGraves();
   const dispatch = useDispatch();
   const { notificationConfirm } = useSelector((state) => state.app);
 
@@ -36,7 +38,7 @@ export const useDeleteGrave = () => {
     }
     deleteGrave(graveToDel).then(() => {
       dispatch(setNotificationToDefault());
-      loadGraves();
+      getGraves();
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, notificationConfirm]);

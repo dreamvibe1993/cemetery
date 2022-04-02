@@ -3,7 +3,7 @@ import styled from "styled-components/macro";
 // import Select from "react-select";
 import { ReactComponent as Cross } from "../../../media/svg/cross.svg";
 import { compressPhotos } from "../../../services/data-transformation/converting";
-import { loadGraves, postNewGrave } from "../../../api/graves";
+import { postNewGrave } from "../../../api/graves";
 import { Preloader } from "../../App/Preloader";
 import { graveSchema } from "../../../models/yup/yup-schemas";
 import { colors } from "../../../configs/css/colors";
@@ -11,8 +11,11 @@ import { showError } from "../../../services/errors/showError";
 import { FadeIn } from "../../../configs/css/animations";
 import { Backdrop } from "../../App/Backdrop";
 import { useSelector } from "react-redux";
+import { useLoadGraves } from "../../../services/hooks/api/graves/useLoadGraves";
 
 export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
+  const [getGraves] = useLoadGraves();
+
   const { user, isAuth } = useSelector((state) => state.user);
   const [l, setL] = React.useState(false);
   const [photos, setPhotos] = React.useState([]);
@@ -67,7 +70,7 @@ export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
   // };
 
   const submitData = (e) => {
-    if (!isAuth) return showError("Please authorize.")
+    if (!isAuth) return showError("Please authorize.");
     e.preventDefault();
     setErrThrown("");
     const dataToPost = {
@@ -87,7 +90,7 @@ export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
             ...dataToPost,
             graveCellNum: graveCellNum.toString(),
           });
-          loadGraves();
+          getGraves();
           onClose();
         } catch (e) {
           onClose();

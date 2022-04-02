@@ -5,7 +5,6 @@ import { Navigate } from "react-router-dom";
 // import PMML from "../../media/audio/zemfira-pmml.mp3";
 
 import { DonateGift } from "../DonateGift";
-import { reloadGraves } from "../../../api/graves";
 import { TombPhotos } from "../TombPhotos";
 import { ServiceButton } from "../../css/sc-components/ScComponents";
 import { showError } from "../../../services/errors/showError";
@@ -13,8 +12,10 @@ import { Gifts } from "../Gifts";
 import { colors } from "../../../configs/css/colors";
 import { useSelector } from "react-redux";
 import { RoundUserPic } from "../../App/RoundUserPic/RoundUserPic";
+import { useLoadGraves } from "../../../services/hooks/api/graves/useLoadGraves";
 
 export const TombInfo = ({ grave }) => {
+  const [updateGraves] = useLoadGraves();
   const { isAuth } = useSelector((state) => state.user);
   const [isDonateOpen, setDonateOpen] = React.useState(false);
   // const [isSongPlaying, setSongPlaying] = React.useState(false);
@@ -33,7 +34,7 @@ export const TombInfo = ({ grave }) => {
 
   const closeDonateGift = () => {
     setDonateOpen(false);
-    reloadGraves();
+    updateGraves();
   };
 
   const openGifts = () => {
@@ -42,7 +43,7 @@ export const TombInfo = ({ grave }) => {
 
   const closeGifts = () => {
     setGiftsOpen(false);
-    reloadGraves();
+    updateGraves();
   };
 
   /*
@@ -80,7 +81,10 @@ export const TombInfo = ({ grave }) => {
       <MainInfoCont>
         <FirstRow>
           <Name>{grave?.name}</Name>
-          <RoundUserPic src={grave?.madeBy?.picture} onClick={() => showUserProfile(grave?.madeBy?.id)}/>
+          <RoundUserPic
+            src={grave?.madeBy?.picture}
+            onClick={() => showUserProfile(grave?.madeBy?.id)}
+          />
         </FirstRow>
         <TopBar>
           <DateLiving>
@@ -110,8 +114,6 @@ const FirstRow = styled.div`
   max-height: 50px;
   display: flex;
 `;
-
-
 
 const LogDiagSign = styled.span`
   color: ${colors.secondaryB.hex};

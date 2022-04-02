@@ -15,6 +15,10 @@ import { GRAVES_API_URL, PHOTOS_API_URL } from "../configs/urls/api/api-urls";
 import { handleError } from "../services/errors/handleError";
 import { updatePhotos } from "./photos";
 
+export const loadGraves = () => {
+  return axios.get(ORIGIN + GRAVES_API_URL);
+};
+/*
 export const loadGraves = async () => {
   try {
     store.dispatch(setGravesLoadingStart());
@@ -28,7 +32,7 @@ export const loadGraves = async () => {
     handleError(e);
   }
 };
-
+*/
 export const reloadGraves = async () => {
   try {
     store.dispatch(setGravesLoadingStart());

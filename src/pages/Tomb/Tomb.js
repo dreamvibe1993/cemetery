@@ -3,8 +3,6 @@ import styled from "styled-components/macro";
 import { Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { MainContainer } from "../../components/css/sc-components/ScComponents";
-
 // import PMML from "../../media/audio/zemfira-pmml.mp3";
 
 import { Tooltip } from "../../components/App/Tooltip";
@@ -13,10 +11,11 @@ import { colors } from "../../configs/css/colors";
 import { TombChatLogs } from "../../components/Tomb/TombChatLogs";
 import { TombInfo } from "../../components/Tomb/TombInfo";
 import { setGravesLoadingOver } from "../../redux/graves/gravesReducer";
-import { reloadGraves } from "../../api/graves";
 import { FadeIn } from "../../configs/css/animations";
+import { useLoadGraves } from "../../services/hooks/api/graves/useLoadGraves";
 
 export const Tomb = () => {
+  const [updateGraves] = useLoadGraves();
   const { graves, isGravesLoading } = useSelector((state) => state.graves);
   const dispatch = useDispatch();
 
@@ -24,7 +23,8 @@ export const Tomb = () => {
   const [grave, setGrave] = React.useState(null);
 
   React.useEffect(() => {
-    reloadGraves();
+    updateGraves();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   React.useEffect(() => {
@@ -77,6 +77,7 @@ const Monument = styled.div`
   border-radius: 2px;
   box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.2);
   position: relative;
+  z-index: 999;
   animation: ${FadeIn} .2s linear forwards;
   svg {
     /* fill: ${colors.secondaryB.hex}; */

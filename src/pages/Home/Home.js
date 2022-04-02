@@ -2,15 +2,17 @@ import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components/macro";
 
-import { loadGraves } from "../../api/graves";
 import { CemetaryGrid } from "../../components/Cemetery/CemetaryGrid";
 import { Preloader } from "../../components/App/Preloader";
+import { useLoadGraves } from "../../services/hooks/api/graves/useLoadGraves";
 
 export const Home = () => {
+  const [getGraves] = useLoadGraves();
   const { isGravesLoading } = useSelector((state) => state.graves);
 
   React.useEffect(() => {
-    loadGraves();
+    getGraves();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (isGravesLoading)

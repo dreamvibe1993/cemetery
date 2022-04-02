@@ -114,7 +114,7 @@ const UserName = styled.span`
 const NavBar = styled.div`
   position: fixed;
   background-color: ${colors.primary.rgba(1)};
-  /* z-index: 999; */
+  z-index: 1;
   height: 75px;
   width: 100%;
   top: 0;

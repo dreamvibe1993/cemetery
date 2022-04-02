@@ -30,8 +30,8 @@ export const EditableProfile = () => {
   const [redirect, setRedirect] = React.useState(null);
   const [picBlobArr, setPicBlobArr] = React.useState(null);
   const [name, setName] = React.useState(user.username);
-  const [email, setEmail] = React.useState('');
-  const [userPhotoSrc, setUserPhotoSrc] = React.useState('');
+  const [email, setEmail] = React.useState("");
+  const [userPhotoSrc, setUserPhotoSrc] = React.useState("");
 
   React.useEffect(() => {
     if (isAuth) return;
@@ -113,56 +113,60 @@ export const EditableProfile = () => {
   if (isUserLoading) return <Preloader />;
 
   return (
-    <ProfileContainer>
+    <>
+      {" "}
       {userPhotoSrc && <Gallery src={userPhotoSrc} onClose={closeUserPhoto} />}
-      <Row>
-        <MainUsername>{user.username}</MainUsername>
-        <ServiceButton>
-          CHANGE PHOTO
-          <ChangePhotoInput
-            type="file"
-            accept="image/*"
-            multiple
-            readOnly
-            onChange={(e) => createPhotosBlobs(e)}
+      <ProfileContainer>
+        <Row>
+          <MainUsername>{user.username}</MainUsername>
+          <ServiceButton>
+            CHANGE PHOTO
+            <ChangePhotoInput
+              type="file"
+              accept="image/*"
+              multiple
+              readOnly
+              onChange={(e) => createPhotosBlobs(e)}
+            />
+          </ServiceButton>
+        </Row>
+        <Row style={{ alignItems: "flex-start", justifyContent: "flex-start" }}>
+          <Picture
+            src={
+              (Array.isArray(user?.photos) && user?.photos[0]) ||
+              PhotoPlaceholder
+            }
+            showPhoto={() => showUserPhoto(user?.photos[0])}
+            sizes={{ width: 130, height: 190 }}
           />
-        </ServiceButton>
-      </Row>
-      <Row style={{ alignItems: "flex-start", justifyContent: "flex-start" }}>
-        <Picture
-          src={
-            (Array.isArray(user?.photos) && user?.photos[0]) || PhotoPlaceholder
-          }
-          showPhoto={() => showUserPhoto(user?.photos[0])}
-          sizes={{ width: 130, height: 190 }}
-        />
-        <CredsContainer>
-          <UserPersonalInfo>
-            <Row>
-              <UsernameInput
-                type="text"
-                value={name || ""}
-                placeholder="Type your name here"
-                onChange={changeUsername}
-              />
-            </Row>
-            <Row>
-              <UsernameInput
-                type="email"
-                value={email || ""}
-                placeholder="Type your name here"
-                onChange={changeUserEmail}
-              />
-            </Row>
-          </UserPersonalInfo>
-          <RowEnd>
-            <ServiceButton onClick={saveUserProfile}>
-              SAVE PROFILE
-            </ServiceButton>
-          </RowEnd>
-        </CredsContainer>
-      </Row>
-    </ProfileContainer>
+          <CredsContainer>
+            <UserPersonalInfo>
+              <Row>
+                <UsernameInput
+                  type="text"
+                  value={name || ""}
+                  placeholder="Type your name here"
+                  onChange={changeUsername}
+                />
+              </Row>
+              <Row>
+                <UsernameInput
+                  type="email"
+                  value={email || ""}
+                  placeholder="Type your name here"
+                  onChange={changeUserEmail}
+                />
+              </Row>
+            </UserPersonalInfo>
+            <RowEnd>
+              <ServiceButton onClick={saveUserProfile}>
+                SAVE PROFILE
+              </ServiceButton>
+            </RowEnd>
+          </CredsContainer>
+        </Row>
+      </ProfileContainer>
+    </>
   );
 };
 
@@ -212,4 +216,3 @@ const MainUsername = styled.span`
 const UsernameInput = styled(Input)`
   width: 100%;
 `;
-
