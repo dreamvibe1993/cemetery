@@ -10,13 +10,13 @@ import { NewGraveModal } from "../../Modals/NewGraveModal/NewGraveModal";
 import { Tooltip } from "../../App/Tooltip";
 import { pxToVh, pxToVw } from "../../../services/css/convertion/sizes";
 import { colors } from "../../../configs/css/colors";
-import { useDeleteGrave } from "../../../services/hooks/graves/useDeleteGrave";
+import { useDeleteGrave } from "../../../services/hooks/api/graves/useDeleteGrave";
 import { showError } from "../../../services/errors/showError";
 import { Grave } from "../Grave";
 import { FadeIn } from "../../../configs/css/animations";
 
 export const CemetaryGrid = () => {
-  const deleteGrave = useDeleteGrave();
+  const [deleteGrave] = useDeleteGrave();
   const { graves } = useSelector((state) => state.graves);
   const { isAuth, user, isAdmin } = useSelector((state) => state.user);
   const [redirect, setRedirect] = React.useState(null);
@@ -146,5 +146,5 @@ const CemetaryGridContainer = styled.div`
   gap: 5px;
   min-width: 770px;
   padding: 10px;
-  animation: ${FadeIn} .2s linear forwards;
+  animation: ${FadeIn} 0.2s linear forwards;
 `;

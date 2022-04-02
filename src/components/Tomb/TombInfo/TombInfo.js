@@ -15,7 +15,7 @@ import { RoundUserPic } from "../../App/RoundUserPic/RoundUserPic";
 import { useLoadGraves } from "../../../services/hooks/api/graves/useLoadGraves";
 
 export const TombInfo = ({ grave }) => {
-  const [updateGraves] = useLoadGraves();
+  const [getGraves] = useLoadGraves();
   const { isAuth } = useSelector((state) => state.user);
   const [isDonateOpen, setDonateOpen] = React.useState(false);
   // const [isSongPlaying, setSongPlaying] = React.useState(false);
@@ -34,7 +34,7 @@ export const TombInfo = ({ grave }) => {
 
   const closeDonateGift = () => {
     setDonateOpen(false);
-    updateGraves();
+    getGraves();
   };
 
   const openGifts = () => {
@@ -43,7 +43,7 @@ export const TombInfo = ({ grave }) => {
 
   const closeGifts = () => {
     setGiftsOpen(false);
-    updateGraves();
+    getGraves();
   };
 
   /*

@@ -7,13 +7,13 @@ import { Preloader } from "../../components/App/Preloader";
 import { useLoadGraves } from "../../services/hooks/api/graves/useLoadGraves";
 
 export const Home = () => {
-  const [getGraves, cancelRequest] = useLoadGraves();
+  const [getGraves, cancelGetGravesRequest] = useLoadGraves();
   const { isGravesLoading } = useSelector((state) => state.graves);
 
   React.useEffect(() => {
     getGraves();
     return () => {
-      cancelRequest();
+      cancelGetGravesRequest();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

@@ -6,14 +6,14 @@ import { ReactComponent as Vodka } from "../../../media/svg/vodka.svg";
 import { ReactComponent as Candy } from "../../../media/svg/candy.svg";
 import { ReactComponent as BTC } from "../../../media/svg/btc.svg";
 import { giftSchema } from "../../../models/yup/yup-schemas";
-import { updateGrave } from "../../../api/graves";
 import { showError } from "../../../services/errors/showError";
 import { colors } from "../../../configs/css/colors";
 import { ServiceButton } from "../../css/sc-components/ScComponents";
-import { FadeIn } from "../../../configs/css/animations";
 import { Backdrop } from "../../App/Backdrop";
+import { useUpdateGrave } from "../../../services/hooks/api/graves/useUpdateGrave";
 
 export const DonateGift = ({ onClose = () => {}, grave }) => {
+  const [updateGrave] = useUpdateGrave();
   const { user } = useSelector((state) => state.user);
   const [gift, setGift] = React.useState("");
   const [wish, setWish] = React.useState("");

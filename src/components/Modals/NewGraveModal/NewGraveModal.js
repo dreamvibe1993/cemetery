@@ -3,7 +3,6 @@ import styled from "styled-components/macro";
 // import Select from "react-select";
 import { ReactComponent as Cross } from "../../../media/svg/cross.svg";
 import { compressPhotos } from "../../../services/data-transformation/converting";
-import { postNewGrave } from "../../../api/graves";
 import { Preloader } from "../../App/Preloader";
 import { graveSchema } from "../../../models/yup/yup-schemas";
 import { colors } from "../../../configs/css/colors";
@@ -12,11 +11,13 @@ import { FadeIn } from "../../../configs/css/animations";
 import { Backdrop } from "../../App/Backdrop";
 import { useSelector } from "react-redux";
 import { useLoadGraves } from "../../../services/hooks/api/graves/useLoadGraves";
+import { usePostGrave } from "../../../services/hooks/api/graves/usePostGrave";
 
 export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
   const [getGraves] = useLoadGraves();
+  const [postNewGrave] = usePostGrave();
 
-  const { user, isAuth } = useSelector((state) => state.user);
+  const { isAuth } = useSelector((state) => state.user);
   const [l, setL] = React.useState(false);
   const [photos, setPhotos] = React.useState([]);
   const [name, setName] = React.useState("");
@@ -90,13 +91,14 @@ export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
             ...dataToPost,
             graveCellNum: graveCellNum.toString(),
           });
-          getGraves();
-          onClose();
         } catch (e) {
           onClose();
           console.error(e);
           console.trace(e);
         }
+      })
+      .then(() => {
+        getGraves();
       })
       .catch((err) => {
         showError({ message: err.errors[0] });

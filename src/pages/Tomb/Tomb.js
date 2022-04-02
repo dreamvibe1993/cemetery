@@ -15,7 +15,7 @@ import { FadeIn } from "../../configs/css/animations";
 import { useLoadGraves } from "../../services/hooks/api/graves/useLoadGraves";
 
 export const Tomb = () => {
-  const [updateGraves, cancelRequest] = useLoadGraves();
+  const [getGraves, cancelGetGravesRequest] = useLoadGraves();
   const { graves, isGravesLoading } = useSelector((state) => state.graves);
   const dispatch = useDispatch();
 
@@ -23,9 +23,9 @@ export const Tomb = () => {
   const [grave, setGrave] = React.useState(null);
 
   React.useEffect(() => {
-    updateGraves();
+    getGraves();
     return () => {
-      cancelRequest();
+      cancelGetGravesRequest();
     }  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

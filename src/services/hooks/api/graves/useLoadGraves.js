@@ -18,7 +18,7 @@ export const useLoadGraves = () => {
 
   const cancelFnRef = React.useRef(null);
 
-  const cancelRequest = () => {
+  const cancelGetGravesRequest = () => {
     if (typeof cancelFnRef.current === "function")
       cancelFnRef.current("499: Request to get graves was cancelled!");
   };
@@ -36,28 +36,12 @@ export const useLoadGraves = () => {
         .map((grave) => convertToFrontModel(grave));
       dispatch(setGraves(gravesConverted));
       dispatch(setGravesLoadingOver());
+      return response
     } catch (e) {
       if (e.message.startsWith("499")) return console.error(e);
       handleError(e);
     }
   };
 
-  const updateGraves = async () => {
-    try {
-      dispatch(setGravesLoadingStart());
-      await getGraves();
-      dispatch(setGravesLoadingOver());
-    } catch (e) {
-      dispatch(setGravesLoadingOver());
-      handleError(e);
-    }
-  };
-
-//   React.useEffect(() => {
-//     return () => {
-//       cancelRequest();
-//     };
-//   }, []);
-
-  return [getGraves, updateGraves, cancelRequest];
+  return [getGraves, cancelGetGravesRequest];
 };
