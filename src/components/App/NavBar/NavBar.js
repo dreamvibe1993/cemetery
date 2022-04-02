@@ -56,7 +56,7 @@ export const TopNavBar = () => {
   const goProfile = () => {
     checkUnsavedData(() => {
       dropUnsaved();
-      navigate(routes.profile.origin);
+      navigate(routes.myProfile.origin);
     });
   };
 

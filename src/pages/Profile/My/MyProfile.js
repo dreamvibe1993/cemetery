@@ -23,7 +23,7 @@ import { Picture } from "../../../components/App/Picture/Picture";
 import { Gallery } from "../../../components/App/Gallery";
 import { ProfileContainer } from "../Common/Common";
 
-export const EditableProfile = () => {
+export const MyProfile = () => {
   const dispatch = useDispatch();
   const { user, isAuth, isUserLoading } = useSelector((state) => state.user);
 

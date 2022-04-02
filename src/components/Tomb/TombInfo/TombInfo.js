@@ -13,6 +13,7 @@ import { colors } from "../../../configs/css/colors";
 import { useSelector } from "react-redux";
 import { RoundUserPic } from "../../App/RoundUserPic/RoundUserPic";
 import { useLoadGraves } from "../../../services/hooks/api/graves/useLoadGraves";
+import { routes } from "../../../configs/urls/app/app-urls";
 
 export const TombInfo = ({ grave }) => {
   const [getGraves] = useLoadGraves();
@@ -69,7 +70,7 @@ export const TombInfo = ({ grave }) => {
 
   const showUserProfile = (userId) => {
     if (!userId) return;
-    setRedirect("/profile?id=" + userId);
+    setRedirect(routes.profile.origin + "/?id=" + userId);
   };
 
   if (redirect) return <Navigate to={redirect} />;

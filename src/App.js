@@ -8,10 +8,8 @@ import { AuthWrapper } from "./components/HOCs/AuthWrapper";
 
 /*
   TODO:
-  1) Hookification?
-  2) Finish design
+  5) Add my-profile and usual profile with id
   6) Waiting till db connected (FAILED)
-  6.1) Unsubscribing from apis
   7) Add more ways to connect with user
   3) Light and dark theme
   8) Mobile version

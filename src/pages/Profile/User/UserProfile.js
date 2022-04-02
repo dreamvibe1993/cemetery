@@ -4,17 +4,40 @@ import { Navigate } from "react-router-dom";
 
 import PhotoPlaceholder from "../../../media/img/common/user_photo_placeholder.jpg";
 
-import {
-  Input,
-} from "../../../components/css/sc-components/ScComponents";
-import { colors } from "../../../configs/css/colors";
+import { Input } from "../../../components/css/sc-components/ScComponents";
 import { Picture } from "../../../components/App/Picture/Picture";
 import { Gallery } from "../../../components/App/Gallery";
 import { ProfileContainer } from "../Common/Common";
+import { getUser } from "../../../api/user";
+import { showError } from "../../../services/errors/showError";
+import { Preloader } from "../../../components/App/Preloader";
 
-export const NonEditableProfile = ({user}) => {
+export const UserProfile = () => {
   const [redirect, setRedirect] = React.useState(null);
   const [userPhotoSrc, setUserPhotoSrc] = React.useState(null);
+  const [user, setUser] = React.useState(null);
+
+  React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    // if (user?.id === id) {
+    //   return setRedirect("/")
+    // }
+    if (id) {
+      getUser(id)
+        .then((res) => {
+          setUser(res.data.user);
+        })
+        .catch((e) => {
+          showError(e.response.data);
+          setRedirect("/");
+        });
+    } else {
+      showError({ message: "User not found" });
+      setRedirect("/");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const showUserPhoto = (src) => {
     if (!src) return;
@@ -24,6 +47,8 @@ export const NonEditableProfile = ({user}) => {
   const closeUserPhoto = () => {
     setUserPhotoSrc(null);
   };
+
+  if (!user) return <Preloader />;
 
   if (redirect) return <Navigate to={redirect} />;
 
@@ -76,7 +101,6 @@ const Row = styled.div`
   margin-bottom: 20px;
 `;
 
-
 const MainUsername = styled.span`
   font-size: 32px;
   text-transform: uppercase;
@@ -87,4 +111,3 @@ const MainUsername = styled.span`
 const UsernameInput = styled(Input)`
   width: 100%;
 `;
-

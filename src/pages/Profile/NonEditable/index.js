@@ -1,1 +1,0 @@
-export { NonEditableProfile } from "./NonEditableProfile";

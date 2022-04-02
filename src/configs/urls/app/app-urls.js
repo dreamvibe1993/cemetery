@@ -11,6 +11,9 @@ export const routes = {
   profile: {
     origin: "/profile"
   },
+  myProfile: {
+    origin: "/my-profile"
+  },
   passwordChange: {
     origin: "/passwordChange"
   }
