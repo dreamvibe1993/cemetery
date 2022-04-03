@@ -101,7 +101,7 @@ const returnPhrases = (id) => {
 };
 
 export const updateGiftsOnGrave = (data, grave) => {
-  if (!data || !grave) throw new Error('No data or user in updateUserGifts');
+  if (!data || !grave) throw new Error("No data or user in updateUserGifts");
   grave = JSON.stringify(grave);
   let graveClone = { ...JSON.parse(grave) };
   if (!graveClone.gifts[data.gift]) {
@@ -124,4 +124,25 @@ export const updateGiftsOnGrave = (data, grave) => {
   graveClone.born = convertToISO(graveClone.born);
   graveClone.died = convertToISO(graveClone.died);
   return graveClone;
+};
+
+export const contactsFromF2B = (contacts) => {
+  let set = new Set();
+  for (let contact in contacts) {
+    if (contact && contacts[contact]) set.add(contact);
+  }
+  const array = [];
+  set.forEach((contact) => {
+    array.push({ platform: contact, link: contacts[contact], active: true });
+  });
+  return array;
+};
+
+export const contactsFromB2F = (contacts) => {
+  if (!contacts) return {};
+  let obj = {};
+  contacts.forEach((contact) => {
+    obj[contact.platform] = contact.link;
+  });
+  return obj;
 };

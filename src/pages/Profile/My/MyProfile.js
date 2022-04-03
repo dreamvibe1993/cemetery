@@ -11,7 +11,11 @@ import { ORIGIN, routes } from "../../../configs/urls/app/app-urls";
 import { getMe, updateMe } from "../../../api/user";
 import { showError } from "../../../services/errors/showError";
 import { Preloader } from "../../../components/App/Preloader";
-import { compressPhotos } from "../../../services/data-transformation/converting";
+import {
+  compressPhotos,
+  contactsFromB2F,
+  contactsFromF2B,
+} from "../../../services/data-transformation/converting";
 import { updateUserPhotos } from "../../../redux/user/userReducer";
 import { profileSchema } from "../../../models/yup/yup-schemas";
 import { updatePhotos } from "../../../api/photos";
@@ -20,16 +24,21 @@ import { setUnsavedDataStatus } from "../../../redux/app/appReducer";
 import { Picture } from "../../../components/App/Picture/Picture";
 import { Gallery } from "../../../components/App/Gallery";
 import { ProfileContainer } from "../Common/Common";
+import { defaultPlatforms } from "../../../configs/profile/defaultPlarforms";
 
 export const MyProfile = () => {
   const dispatch = useDispatch();
   const { user, isAuth, isUserLoading } = useSelector((state) => state.user);
 
+  const [isAdditInpShow, setAdditInpShow] = React.useState(false);
   const [redirect, setRedirect] = React.useState(null);
   const [picBlobArr, setPicBlobArr] = React.useState(null);
   const [name, setName] = React.useState(user.username);
   const [email, setEmail] = React.useState("");
   const [userPhotoSrc, setUserPhotoSrc] = React.useState("");
+  const [contacts, setContacts] = React.useState({});
+  const [extraPlatform, setExtraPlatform] = React.useState(null);
+  const [extraLink, setExtraLink] = React.useState(null);
 
   React.useEffect(() => {
     if (isAuth) return;
@@ -43,7 +52,22 @@ export const MyProfile = () => {
     if (!isAuth) return;
     setName(user.username);
     setEmail(user.email);
-  }, [isAuth, user.email, user.username]);
+    setContacts(contactsFromB2F(user.contacts));
+  }, [isAuth, user.contacts, user.email, user.username]);
+
+  React.useEffect(() => {
+    for (let contact in contacts) {
+      if (!defaultPlatforms.includes(contact)) {
+        setExtraLink(contacts[contact]);
+        setExtraPlatform(contact);
+        setAdditInpShow(true);
+        setContacts((prev) => {
+          prev[contact] = undefined;
+          return prev;
+        });
+      }
+    }
+  }, [contacts]);
 
   React.useEffect(() => {
     if (!isAuth) return;
@@ -62,6 +86,31 @@ export const MyProfile = () => {
     setEmail(e.target.value);
   };
 
+  const setUserContacts = (e) => {
+    if (!e.target.id) return;
+    const id = e.target.id;
+    const value = e.target.value;
+    setContacts((prev) => {
+      prev = { ...prev };
+      prev[id] = value;
+      return prev;
+    });
+  };
+
+  const handleAdditInput = () => {
+    setAdditInpShow((prev) => !prev);
+  };
+
+  const addAditionalContactLink = (e) => {
+    if (!isAdditInpShow) return;
+    setExtraLink(e.target.value);
+  };
+
+  const addAditionalContactPlatform = (e) => {
+    if (!isAdditInpShow) return;
+    setExtraPlatform(e.target.value);
+  };
+
   const createPhotosBlobs = async (e) => {
     try {
       const ph = await compressPhotos(e);
@@ -74,7 +123,8 @@ export const MyProfile = () => {
     }
   };
 
-  const saveUserProfile = async () => {
+  const saveUserProfile = async (e) => {
+    e.preventDefault();
     profileSchema
       .validate({
         name,
@@ -89,8 +139,17 @@ export const MyProfile = () => {
           );
           userPics = res.data.photos;
         }
+        const extra = {
+          [extraPlatform]: extraLink,
+        };
+        let contactsUpdated = contactsFromF2B({ ...contacts, ...extra });
         dispatch(setUnsavedDataStatus(false));
-        updateMe({ name, email, photos: userPics });
+        updateMe({
+          name,
+          email,
+          photos: userPics,
+          contacts: [...new Set(contactsUpdated)],
+        });
       })
       .catch((e) => {
         showError(e);
@@ -106,6 +165,10 @@ export const MyProfile = () => {
     setUserPhotoSrc(null);
   };
 
+  const goToMyProfilePreview = () => {
+    setRedirect(routes.profile.origin + `?id=${user.id}&preview=true`);
+  };
+
   if (redirect) return <Navigate to={redirect} />;
 
   if (isUserLoading) return <Preloader />;
@@ -114,7 +177,7 @@ export const MyProfile = () => {
     <>
       {" "}
       {userPhotoSrc && <Gallery src={userPhotoSrc} onClose={closeUserPhoto} />}
-      <ProfileContainer>
+      <ProfileContainer onSubmit={(e) => saveUserProfile(e)}>
         <Row>
           <MainUsername>{user.username}</MainUsername>
           <ServiceButton>
@@ -137,7 +200,7 @@ export const MyProfile = () => {
           <CredsContainer>
             <UserPersonalInfo>
               <Row>
-                <UsernameInput
+                <UserInput
                   type="text"
                   value={name || ""}
                   placeholder="Type your name here"
@@ -145,18 +208,57 @@ export const MyProfile = () => {
                 />
               </Row>
               <Row>
-                <UsernameInput
+                <UserInput
                   type="email"
                   value={email || ""}
                   placeholder="Type your name here"
                   onChange={changeUserEmail}
                 />
               </Row>
+              <Row>ways to keep in touch with you: </Row>
+              <Row>
+                <UserInput
+                  type="text"
+                  placeholder="telegram"
+                  id="telegram"
+                  value={contacts.telegram || ""}
+                  onChange={setUserContacts}
+                />
+              </Row>
+              <Row>
+                <UserInput
+                  type="text"
+                  placeholder="discord"
+                  id="discord"
+                  value={contacts.discord || ""}
+                  onChange={setUserContacts}
+                />
+              </Row>
+              <Row hidden={!isAdditInpShow}>
+                <UserPlatformInput
+                  disabled={!isAdditInpShow}
+                  type="text"
+                  placeholder="platform"
+                  value={extraPlatform || ""}
+                  onChange={addAditionalContactPlatform}
+                />
+                <UserInput
+                  disabled={!isAdditInpShow}
+                  type="text"
+                  placeholder="link"
+                  value={extraLink || ""}
+                  onChange={addAditionalContactLink}
+                />
+              </Row>
+              <ServiceButton onClick={handleAdditInput} type="button">
+                {isAdditInpShow ? "HIDE" : "+ ANOTHER"}
+              </ServiceButton>
             </UserPersonalInfo>
             <RowEnd>
-              <ServiceButton onClick={saveUserProfile}>
-                SAVE PROFILE
+              <ServiceButton type="button" onClick={goToMyProfilePreview}>
+                PREVIEW
               </ServiceButton>
+              <ServiceButton type="submit">SAVE PROFILE</ServiceButton>
             </RowEnd>
           </CredsContainer>
         </Row>
@@ -164,6 +266,11 @@ export const MyProfile = () => {
     </>
   );
 };
+
+const UserPlatformInput = styled(Input)`
+  width: 40%;
+  margin-right: 5px;
+`;
 
 const UserPersonalInfo = styled.div``;
 
@@ -190,7 +297,9 @@ const Row = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: ${(p) => (p.hidden ? "0px" : "20px")};
+  height: ${(p) => (p.hidden ? "0px" : "auto")};
+  overflow: hidden;
 `;
 
 const RowEnd = styled(Row)`
@@ -208,6 +317,6 @@ const MainUsername = styled.span`
   font-weight: bolder;
 `;
 
-const UsernameInput = styled(Input)`
+const UserInput = styled(Input)`
   width: 100%;
 `;

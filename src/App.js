@@ -9,9 +9,10 @@ import { AuthWrapper } from "./components/HOCs/AuthWrapper";
 /*
   TODO:
   *) If email exist show proper notif
-  *) Profile preview
   *) Waiting till db connected (FAILED)
   *) Add more ways to connect with user
+  *) Ban
+  *) Delete account
   *) Light and dark theme
   *) Mobile version
   *) Implement forms?

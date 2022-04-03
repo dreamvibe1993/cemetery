@@ -20,6 +20,8 @@ export const authorizeUser = (data) => {
     username: data.user.name,
     photos: data.user.photos,
     id: data.user._id,
+    contacts: data.user.contacts,
+    gender: data.user.gender
   };
   store.dispatch(setUser(userData));
 };

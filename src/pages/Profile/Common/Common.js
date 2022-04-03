@@ -2,7 +2,7 @@ import styled from "styled-components/macro";
 import { FadeIn } from "../../../configs/css/animations";
 import { colors } from "../../../configs/css/colors";
 
-export const ProfileContainer = styled.div`
+export const ProfileContainer = styled.form`
   padding: 20px;
   padding-bottom: 0px;
   width: 66vw;

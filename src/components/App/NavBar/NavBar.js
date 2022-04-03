@@ -63,7 +63,7 @@ export const TopNavBar = () => {
   return (
     <NavBar>
       <Buttons>
-        <NavButton onClick={goProfile}>profile</NavButton>
+        <NavButton onClick={goProfile}>my-profile</NavButton>
         <NavButton onClick={goAuth}>auth</NavButton>
       </Buttons>
       <LogoWrapper>
