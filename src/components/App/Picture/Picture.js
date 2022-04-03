@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components/macro";
 
 import { ReactComponent as Eye } from "../../../media/svg/eye.svg";
-import QuestionMark from "../../../media/img/common/question-mark.png"
+import QuestionMark from "../../../media/img/common/question-mark.png";
 
 import { Preloader } from "../../../components/App/Preloader";
 import { ServiceButton } from "../../css/sc-components/ScComponents";
@@ -21,14 +21,21 @@ export const Picture = ({
         <Preloader />
       </PreloaderCont>
       <PhotoButton
-        onClick={() => showPhoto(src)}
+        onClick={(e) => {
+          e.preventDefault();
+          showPhoto(src);
+        }}
         style={{ visibility: isLoading ? "hidden" : "visible" }}
       >
         <ServiceButton>
           <Eye />
         </ServiceButton>
       </PhotoButton>
-      <Photo src={src || QuestionMark} draggable={false} onLoad={() => setLoading(false)} />
+      <Photo
+        src={src || QuestionMark}
+        draggable={false}
+        onLoad={() => setLoading(false)}
+      />
     </PhotoWrapper>
   );
 };

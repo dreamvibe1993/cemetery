@@ -129,7 +129,7 @@ export const updateGiftsOnGrave = (data, grave) => {
 export const contactsFromF2B = (contacts) => {
   let set = new Set();
   for (let contact in contacts) {
-    if (contact && contacts[contact]) set.add(contact);
+    if (!!contact && !!contacts[contact]) set.add(contact);
   }
   const array = [];
   set.forEach((contact) => {
@@ -142,6 +142,7 @@ export const contactsFromB2F = (contacts) => {
   if (!contacts) return {};
   let obj = {};
   contacts.forEach((contact) => {
+    if (!contact.platform || !contact.link) return;
     obj[contact.platform] = contact.link;
   });
   return obj;

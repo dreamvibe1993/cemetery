@@ -37,8 +37,8 @@ export const MyProfile = () => {
   const [email, setEmail] = React.useState("");
   const [userPhotoSrc, setUserPhotoSrc] = React.useState("");
   const [contacts, setContacts] = React.useState({});
-  const [extraPlatform, setExtraPlatform] = React.useState(null);
-  const [extraLink, setExtraLink] = React.useState(null);
+  const [extraPlatform, setExtraPlatform] = React.useState(undefined);
+  const [extraLink, setExtraLink] = React.useState(undefined);
 
   React.useEffect(() => {
     if (isAuth) return;
@@ -52,13 +52,15 @@ export const MyProfile = () => {
     if (!isAuth) return;
     setName(user.username);
     setEmail(user.email);
-    setContacts(contactsFromB2F(user.contacts));
   }, [isAuth, user.contacts, user.email, user.username]);
 
   React.useEffect(() => {
-    for (let contact in contacts) {
+    if (!isAuth) return;
+    const ucontacts = contactsFromB2F(user.contacts);
+    setContacts(ucontacts);
+    for (let contact in ucontacts) {
       if (!defaultPlatforms.includes(contact)) {
-        setExtraLink(contacts[contact]);
+        setExtraLink(ucontacts[contact]);
         setExtraPlatform(contact);
         setAdditInpShow(true);
         setContacts((prev) => {
@@ -67,7 +69,7 @@ export const MyProfile = () => {
         });
       }
     }
-  }, [contacts]);
+  }, [isAuth, user.contacts]);
 
   React.useEffect(() => {
     if (!isAuth) return;
@@ -89,7 +91,7 @@ export const MyProfile = () => {
   const setUserContacts = (e) => {
     if (!e.target.id) return;
     const id = e.target.id;
-    const value = e.target.value;
+    const value = e.target.value.trim();
     setContacts((prev) => {
       prev = { ...prev };
       prev[id] = value;
@@ -103,12 +105,12 @@ export const MyProfile = () => {
 
   const addAditionalContactLink = (e) => {
     if (!isAdditInpShow) return;
-    setExtraLink(e.target.value);
+    setExtraLink(e.target.value.trim());
   };
 
   const addAditionalContactPlatform = (e) => {
     if (!isAdditInpShow) return;
-    setExtraPlatform(e.target.value);
+    setExtraPlatform(e.target.value.trim());
   };
 
   const createPhotosBlobs = async (e) => {
@@ -139,16 +141,15 @@ export const MyProfile = () => {
           );
           userPics = res.data.photos;
         }
-        const extra = {
-          [extraPlatform]: extraLink,
-        };
+        const extra = {};
+        if (extraPlatform && extraLink) extra[extraPlatform] = extraLink;
         let contactsUpdated = contactsFromF2B({ ...contacts, ...extra });
         dispatch(setUnsavedDataStatus(false));
         updateMe({
           name,
           email,
           photos: userPics,
-          contacts: [...new Set(contactsUpdated)],
+          contacts: contactsUpdated,
         });
       })
       .catch((e) => {
