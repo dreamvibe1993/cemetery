@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "styled-components/macro";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 import {
-  Input,
   ServiceButton,
 } from "../../../components/css/sc-components/ScComponents";
 import { Picture } from "../../../components/App/Picture/Picture";
@@ -15,7 +14,6 @@ import { Preloader } from "../../../components/App/Preloader";
 import { routes } from "../../../configs/urls/app/app-urls";
 
 export const UserProfile = () => {
-  const navigate = useNavigate();
   const [redirect, setRedirect] = React.useState(null);
   const [userPhotoSrc, setUserPhotoSrc] = React.useState(null);
   const [user, setUser] = React.useState(null);
@@ -25,9 +23,6 @@ export const UserProfile = () => {
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
     const isPreview = params.get("preview");
-    // if (user?.id === id) {
-    //   return setRedirect("/")
-    // }
     if (id) {
       getUser(id)
         .then((res) => {

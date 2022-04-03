@@ -82,10 +82,13 @@ export const TombInfo = ({ grave }) => {
       <MainInfoCont>
         <FirstRow>
           <Name>{grave?.name}</Name>
-          <RoundUserPic
-            src={grave?.madeBy?.picture}
-            onClick={() => showUserProfile(grave?.madeBy?.id)}
-          />
+          <CreatorCredsContainer>
+            <BuriedBy>is buried by:</BuriedBy>
+            <RoundUserPic
+              src={grave?.madeBy?.picture}
+              onClick={() => showUserProfile(grave?.madeBy?.id)}
+            />
+          </CreatorCredsContainer>
         </FirstRow>
         <TopBar>
           <DateLiving>
@@ -111,9 +114,20 @@ export const TombInfo = ({ grave }) => {
   );
 };
 
+const BuriedBy = styled.span`
+  margin-right: 10px;
+  opacity: 0.8;
+`;
+
+const CreatorCredsContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const FirstRow = styled.div`
   max-height: 50px;
   display: flex;
+  margin-bottom: 10px;
 `;
 
 const LogDiagSign = styled.span`

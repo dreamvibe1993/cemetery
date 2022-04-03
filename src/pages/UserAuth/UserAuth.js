@@ -8,7 +8,7 @@ import { ReactComponent as Cross } from "../../media/svg/cross.svg";
 
 import { Preloader } from "../../components/App/Preloader";
 import { ServiceButton } from "../../components/css/sc-components/ScComponents";
-import { setUserAuth, setUserLoading } from "../../redux/user/userReducer";
+import { setUserAuth } from "../../redux/user/userReducer";
 import { Navigate } from "react-router-dom";
 import { SignIn } from "./SignIn";
 import { LogIn } from "./LogIn/LogIn";

@@ -8,7 +8,7 @@ import {
   ServiceButton,
 } from "../../../components/css/sc-components/ScComponents";
 import { ORIGIN, routes } from "../../../configs/urls/app/app-urls";
-import { deleteMe, getMe, updateMe } from "../../../api/user";
+import { getMe, updateMe } from "../../../api/user";
 import { showError } from "../../../services/errors/showError";
 import { Preloader } from "../../../components/App/Preloader";
 import {
