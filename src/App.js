@@ -10,7 +10,6 @@ import { AuthWrapper } from "./components/HOCs/AuthWrapper";
   TODO:
   *) If email exist show proper notif
   *) Waiting till db connected (FAILED)
-  *) Add more ways to connect with user
   *) Ban
   *) Delete account
   *) Light and dark theme
@@ -18,6 +17,7 @@ import { AuthWrapper } from "./components/HOCs/AuthWrapper";
   *) Implement forms?
   *) CHANGE MY EMAIL!!!
   *) Deploy
+  *) Different clusters of different colors
 */
 
 function App() {

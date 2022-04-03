@@ -4,7 +4,7 @@ export const user = createSlice({
   name: "user",
   initialState: {
     isUserLoading: false,
-    isAuth: false,
+    isAuth: null,
     isAdmin: false,
     authError: "",
     user: {

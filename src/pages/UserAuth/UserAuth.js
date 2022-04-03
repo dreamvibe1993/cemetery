@@ -8,7 +8,7 @@ import { ReactComponent as Cross } from "../../media/svg/cross.svg";
 
 import { Preloader } from "../../components/App/Preloader";
 import { ServiceButton } from "../../components/css/sc-components/ScComponents";
-import { setUserAuth } from "../../redux/user/userReducer";
+import { setUserAuth, setUserLoading } from "../../redux/user/userReducer";
 import { Navigate } from "react-router-dom";
 import { SignIn } from "./SignIn";
 import { LogIn } from "./LogIn/LogIn";
@@ -35,7 +35,7 @@ export const UserAuth = () => {
 
   React.useEffect(() => {
     getMe();
-  }, []);
+  }, [dispatch]);
 
   const showForgotPassButton = () => {
     setForgotPass(true);
@@ -52,14 +52,7 @@ export const UserAuth = () => {
   if (redirect) return <Navigate to={redirect} />;
 
   if (isAuth === null) {
-    return (
-      <>
-        <CrossSVGWrapper>
-          <Cross onClick={redirectToHome} />
-        </CrossSVGWrapper>
-        <Preloader />
-      </>
-    );
+    return <Preloader />;
   }
 
   if (isAuth === true)

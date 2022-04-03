@@ -8,7 +8,7 @@ import {
   ServiceButton,
 } from "../../../components/css/sc-components/ScComponents";
 import { ORIGIN, routes } from "../../../configs/urls/app/app-urls";
-import { getMe, updateMe } from "../../../api/user";
+import { deleteMe, getMe, updateMe } from "../../../api/user";
 import { showError } from "../../../services/errors/showError";
 import { Preloader } from "../../../components/App/Preloader";
 import {
@@ -25,8 +25,10 @@ import { Picture } from "../../../components/App/Picture/Picture";
 import { Gallery } from "../../../components/App/Gallery";
 import { ProfileContainer } from "../Common/Common";
 import { defaultPlatforms } from "../../../configs/profile/defaultPlarforms";
+import { useDeleteMe } from "../../../services/hooks/api/user/useDeleteMe";
 
 export const MyProfile = () => {
+  const [deleteMyProfile] = useDeleteMe();
   const dispatch = useDispatch();
   const { user, isAuth, isUserLoading } = useSelector((state) => state.user);
 
@@ -42,7 +44,7 @@ export const MyProfile = () => {
 
   React.useEffect(() => {
     if (isAuth) return;
-    getMe().catch((e) => {
+    getMe(function (e) {
       showError(e.response.data);
       setRedirect(routes.auth.origin);
     });
@@ -176,7 +178,6 @@ export const MyProfile = () => {
 
   return (
     <>
-      {" "}
       {userPhotoSrc && <Gallery src={userPhotoSrc} onClose={closeUserPhoto} />}
       <ProfileContainer onSubmit={(e) => saveUserProfile(e)}>
         <Row>
@@ -260,6 +261,9 @@ export const MyProfile = () => {
                 PREVIEW
               </ServiceButton>
               <ServiceButton type="submit">SAVE PROFILE</ServiceButton>
+              <ServiceButton type="button" onClick={deleteMyProfile}>
+                DELETE PROFILE
+              </ServiceButton>
             </RowEnd>
           </CredsContainer>
         </Row>

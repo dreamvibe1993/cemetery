@@ -2,7 +2,7 @@ import axios from "axios";
 import { USER_API_URL } from "../configs/urls/api/api-urls";
 import { ORIGIN } from "../configs/urls/app/app-urls";
 import store from "../redux/store";
-import { setUserLoading } from "../redux/user/userReducer";
+import { setUserAuth, setUserLoading } from "../redux/user/userReducer";
 import { authorizeUser, dropUserData } from "../services/auth/logInUser";
 import { handleError } from "../services/errors/handleError";
 
@@ -70,13 +70,17 @@ export const logOutMe = async () => {
   dropUserData();
 };
 
-export const getMe = async () => {
+export const getMe = async (errHandleFn) => {
   store.dispatch(setUserLoading(true));
   return axios
     .get(ORIGIN + USER_API_URL + "/getMe", {
       withCredentials: true,
     })
     .then((response) => authorizeUser(response.data))
+    .catch((e) => {
+      if (errHandleFn) errHandleFn(e);
+      store.dispatch(setUserAuth(false));
+    })
     .finally(() => {
       store.dispatch(setUserLoading(false));
     });
@@ -92,6 +96,13 @@ export const updateMe = async (user) => {
     .finally(() => {
       store.dispatch(setUserLoading(false));
     });
+};
+
+export const deleteMe = async () => {
+  store.dispatch(setUserLoading(true));
+  return axios.delete(ORIGIN + USER_API_URL + "/deleteMe", {
+    withCredentials: true,
+  });
 };
 
 export const getUser = async (userId) => {

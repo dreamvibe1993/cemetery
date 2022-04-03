@@ -38,7 +38,7 @@ export const UserProfile = () => {
           setRedirect("/");
         });
     } else {
-      showError({ message: "User not found" });
+      showError({ message: "User not found." });
       setRedirect("/");
     }
     if (isPreview) {
@@ -56,49 +56,53 @@ export const UserProfile = () => {
     setUserPhotoSrc(null);
   };
 
-  if (!user) return <Preloader />;
-
   if (redirect) return <Navigate to={redirect} />;
 
+  if (!user) return <Preloader />;
+
   return (
-    <ProfileContainer>
+    <>
       {userPhotoSrc && <Gallery src={userPhotoSrc} onClose={closeUserPhoto} />}
-      <Row>
-        <MainUsername>{user.name}</MainUsername>
-        <ServiceButton></ServiceButton>
-      </Row>
-      <Row style={{ alignItems: "flex-start", justifyContent: "flex-start" }}>
-        <Picture
-          src={Array.isArray(user?.photos) && user?.photos[0]}
-          showPhoto={() => showUserPhoto(user?.photos[0])}
-          sizes={{ width: 130, height: 190 }}
-        />
-        <CredsContainer>
-          <UserPersonalInfo>
-            {Array.isArray(user.contacts) && user.contacts.length < 1 ? (
-              <NoContactsText>
-                This user preffered not to share his contacts and remain
-                anonymous.
-              </NoContactsText>
-            ) : (
-              user.contacts.map((contact) => (
-                <UserContactsRow key={contact.link}>
-                  <UserContactSource>{contact.platform}</UserContactSource>
-                  <UserContact href={contact.link}>{contact.link}</UserContact>
-                </UserContactsRow>
-              ))
-            )}
-          </UserPersonalInfo>
-        </CredsContainer>
-      </Row>
-      {showGoBackButton && (
+      <ProfileContainer>
         <Row>
-          <ServiceButton onClick={() => setRedirect(routes.myProfile.origin)}>
-            BACK
-          </ServiceButton>
+          <MainUsername>{user.name}</MainUsername>
+          <ServiceButton></ServiceButton>
         </Row>
-      )}
-    </ProfileContainer>
+        <Row style={{ alignItems: "flex-start", justifyContent: "flex-start" }}>
+          <Picture
+            src={Array.isArray(user?.photos) && user?.photos[0]}
+            showPhoto={() => showUserPhoto(user?.photos[0])}
+            sizes={{ width: 130, height: 190 }}
+          />
+          <CredsContainer>
+            <UserPersonalInfo>
+              {Array.isArray(user.contacts) && user.contacts.length < 1 ? (
+                <NoContactsText>
+                  This user preffered not to share his contacts and remain
+                  anonymous.
+                </NoContactsText>
+              ) : (
+                user.contacts.map((contact) => (
+                  <UserContactsRow key={contact.link}>
+                    <UserContactSource>{contact.platform}</UserContactSource>
+                    <UserContact href={contact.link}>
+                      {contact.link}
+                    </UserContact>
+                  </UserContactsRow>
+                ))
+              )}
+            </UserPersonalInfo>
+          </CredsContainer>
+        </Row>
+        {showGoBackButton && (
+          <Row>
+            <ServiceButton onClick={() => setRedirect(routes.myProfile.origin)}>
+              BACK
+            </ServiceButton>
+          </Row>
+        )}
+      </ProfileContainer>
+    </>
   );
 };
 
