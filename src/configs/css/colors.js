@@ -5,6 +5,7 @@ function getRgba(transparency) {
 }
 
 export const colorsGreen = {
+  id: "green",
   primary: {
     hex: "#37b394",
     rgba: getRgba,
@@ -48,6 +49,7 @@ export const colorsGreen = {
 };
 
 export const colorsBlack = {
+  id: "black",
   primary: {
     hex: "#040117",
     rgba: getRgba,
@@ -85,12 +87,13 @@ export const colorsBlack = {
     rgba: getRgba,
   },
   error: {
-    hex: "#100a40",
+    hex: "#4f0303",
     rgba: getRgba,
   },
 };
 
 export const colorsWeird = {
+  id: "weird",
   primary: {
     hex: "#3241a6",
     rgba: getRgba,
@@ -129,6 +132,51 @@ export const colorsWeird = {
   },
   error: {
     hex: "#100a40",
+    rgba: getRgba,
+  },
+};
+
+
+export const colorsWhite = {
+  id: "white",
+  primary: {
+    hex: "#FCFCFC",
+    rgba: getRgba,
+  },
+  primaryDark: {
+    hex: "#030a17",
+    rgba: getRgba,
+  },
+  primaryLight: {
+    hex: "#604BD8",
+    rgba: getRgba,
+  },
+  secondaryA: {
+    hex: "#8D2373",
+    rgba: getRgba,
+  },
+  secondaryB: {
+    hex: "#FCFCFC",
+    rgba: getRgba,
+  },
+  contrastA: {
+    hex: "#FCFCFC",
+    rgba: getRgba,
+  },
+  contrastB: {
+    hex: "#0c034f",
+    rgba: getRgba,
+  },
+  textColor: {
+    hex: "#0c034f",
+    rgba: getRgba,
+  },
+  white: {
+    hex: "#0c034f",
+    rgba: getRgba,
+  },
+  error: {
+    hex: "#4f0303",
     rgba: getRgba,
   },
 };

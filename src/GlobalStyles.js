@@ -15,7 +15,7 @@ export const GlobalStyles = createGlobalStyle`
 
   input {
     ::placeholder {
-      color: rgba(255,255,255, 0.4);
+      color: ${(p) => p.theme.textColor.rgba(0.4)};
     }
   }
   

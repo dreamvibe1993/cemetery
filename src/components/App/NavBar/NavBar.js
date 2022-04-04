@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components/macro";
 
 import { NavButton, ServiceButton } from "../../css/sc-components/ScComponents";
-import { colorsBlack, colorsGreen } from "../../../configs/css/colors";
+import { colorsBlack, colorsGreen, colorsWeird, colorsWhite } from "../../../configs/css/colors";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { routes } from "../../../configs/urls/app/app-urls";
@@ -11,6 +11,7 @@ import { setUnsavedDataStatus } from "../../../redux/app/appReducer";
 import { RoundUserPic } from "../RoundUserPic/RoundUserPic";
 import { ColorTheme } from "../../../App";
 import { Logo } from "../Logo/Logo";
+import { FadeIn } from "../../../configs/css/animations";
 
 export const TopNavBar = () => {
   const { setColorSet } = React.useContext(ColorTheme);
@@ -20,7 +21,15 @@ export const TopNavBar = () => {
   const { user, isAuth } = useSelector((state) => state.user);
   const { isThereUnsavedData } = useSelector((state) => state.app);
 
+  const allColors = [
+    { id: colorsBlack.id, hex: colorsBlack.primary.hex, theme: colorsBlack },
+    { id: colorsGreen.id, hex: colorsGreen.primary.hex, theme: colorsGreen },
+    { id: colorsWhite.id, hex: colorsWhite.primary.hex, theme: colorsWhite },
+    { id: colorsWeird.id, hex: colorsWeird.primary.hex, theme: colorsWeird },
+  ];
+
   const [unsavedData, setUnsavedData] = React.useState(false);
+  const [isColorPickedOpen, setColorPickerOpen] = React.useState(false);
 
   React.useEffect(() => {
     setUnsavedData(isThereUnsavedData);
@@ -62,8 +71,12 @@ export const TopNavBar = () => {
     });
   };
 
-  const changeTheme = () => {
-    setColorSet(colorsGreen);
+  const changeTheme = (theme) => {
+    setColorSet(theme);
+  };
+
+  const toggleColorPicker = () => {
+    setColorPickerOpen((prev) => !prev);
   };
 
   return (
@@ -75,19 +88,54 @@ export const TopNavBar = () => {
       <LogoWrapper>
         <Logo onClick={goHome} />
       </LogoWrapper>
-      <ServiceButton onClick={changeTheme}>CHANGE THEME</ServiceButton>
-      {isAuth && (
-        <RoundUserPic
-          src={Array.isArray(user.photos) && user.photos[0]}
-          onClick={goProfile}
-        />
-      )}
+      <Buttons>
+        <ServiceButton onClick={toggleColorPicker}>
+          CHANGE THEME
+          {isColorPickedOpen && (
+            <ColorPicker>
+              {allColors.map((color) => (
+                <ColorTile
+                  onClick={() => changeTheme(color.theme)}
+                  key={color.hex + color.id}
+                  color={color.hex}
+                ></ColorTile>
+              ))}
+            </ColorPicker>
+          )}
+        </ServiceButton>
+        {isAuth && (
+          <RoundUserPic
+            src={Array.isArray(user.photos) && user.photos[0]}
+            onClick={goProfile}
+          />
+        )}
+      </Buttons>
     </NavBar>
   );
 };
 
+const ColorTile = styled.div`
+  height: 35px;
+  width: 35px;
+  background-color: ${(p) => p.color};
+`;
+
+const ColorPicker = styled.div`
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px;
+  background-color: ${(p) => p.theme.white.hex};
+  display: flex;
+  animation: ${FadeIn} 0.2s linear forwards;
+  /* box-shadow: 0px 10px 10px 5px ${(p) => p.theme.contrastB.rgba(0.1)}; */
+`;
+
 const Buttons = styled.div`
   display: flex;
+  align-items: center;
+  position: relative;
   & > * {
     margin-right: 10px;
   }
@@ -126,7 +174,7 @@ const NavBar = styled.div`
   width: 100%;
   top: 0;
   left: 0;
-  box-shadow: 2px 0px 10px 2px ${p => p.theme.contrastB.rgba(0.3)};
+  box-shadow: 2px 0px 10px 2px ${(p) => p.theme.contrastB.rgba(0.3)};
   display: flex;
   justify-content: space-between;
   align-items: center;
