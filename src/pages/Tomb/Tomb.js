@@ -73,7 +73,7 @@ const Monument = styled.div`
   border-radius: 2px;
   box-shadow: 0px 0px 20px 1px ${p => p.theme.contrastB.rgba(0.2)};
   position: relative;
-  z-index: 999;
+  /* z-index: 999; */
   animation: ${FadeIn} .2s linear forwards;
   svg {
     /* fill: ${p => p.theme.secondaryB.hex}; */

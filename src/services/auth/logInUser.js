@@ -1,3 +1,4 @@
+import { userModel } from "../../models/user/userModel";
 import store from "../../redux/store";
 import {
   setUser,
@@ -21,7 +22,8 @@ export const authorizeUser = (data) => {
     photos: data.user.photos,
     id: data.user._id,
     contacts: data.user.contacts,
-    gender: data.user.gender
+    gender: data.user.gender,
+    colorTheme: data.user.colorTheme
   };
   store.dispatch(setUser(userData));
 };
@@ -29,6 +31,6 @@ export const authorizeUser = (data) => {
 export const dropUserData = () => {
   store.dispatch(setUserAsNotAdmin());
   store.dispatch(setUserAuth(false));
-  store.dispatch(setUser({}));
+  store.dispatch(setUser(userModel));
   store.dispatch(setUserLoading(false));
 };

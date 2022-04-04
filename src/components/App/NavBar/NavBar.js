@@ -2,16 +2,18 @@ import React from "react";
 import styled from "styled-components/macro";
 
 import { NavButton, ServiceButton } from "../../css/sc-components/ScComponents";
-import { colorsBlack, colorsGreen, colorsWeird, colorsWhite } from "../../../configs/css/colors";
+import { allColors } from "../../../configs/css/colors";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { routes } from "../../../configs/urls/app/app-urls";
 import { useConfirmRedir } from "../../../services/hooks/app/useConfirmRedir";
 import { setUnsavedDataStatus } from "../../../redux/app/appReducer";
 import { RoundUserPic } from "../RoundUserPic/RoundUserPic";
-import { ColorTheme } from "../../../App";
 import { Logo } from "../Logo/Logo";
 import { FadeIn } from "../../../configs/css/animations";
+import { ColorTheme } from "../../HOCs/AuthWrapper/AuthWrapper";
+import { updateMe } from "../../../api/user";
+import { updateColorTheme } from "../../../redux/user/userReducer";
 
 export const TopNavBar = () => {
   const { setColorSet } = React.useContext(ColorTheme);
@@ -20,13 +22,6 @@ export const TopNavBar = () => {
   const askAndSubscribe = useConfirmRedir();
   const { user, isAuth } = useSelector((state) => state.user);
   const { isThereUnsavedData } = useSelector((state) => state.app);
-
-  const allColors = [
-    { id: colorsBlack.id, hex: colorsBlack.primary.hex, theme: colorsBlack },
-    { id: colorsGreen.id, hex: colorsGreen.primary.hex, theme: colorsGreen },
-    { id: colorsWhite.id, hex: colorsWhite.primary.hex, theme: colorsWhite },
-    { id: colorsWeird.id, hex: colorsWeird.primary.hex, theme: colorsWeird },
-  ];
 
   const [unsavedData, setUnsavedData] = React.useState(false);
   const [isColorPickedOpen, setColorPickerOpen] = React.useState(false);
@@ -73,6 +68,9 @@ export const TopNavBar = () => {
 
   const changeTheme = (theme) => {
     setColorSet(theme);
+    dispatch(updateColorTheme(theme.id));
+    if (!isAuth) return;
+    updateMe({ colorTheme: theme.id });
   };
 
   const toggleColorPicker = () => {
@@ -130,6 +128,7 @@ const ColorPicker = styled.div`
   display: flex;
   animation: ${FadeIn} 0.2s linear forwards;
   /* box-shadow: 0px 10px 10px 5px ${(p) => p.theme.contrastB.rgba(0.1)}; */
+  z-index: 1002;
 `;
 
 const Buttons = styled.div`

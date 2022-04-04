@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { userModel } from "../../models/user/userModel";
 
 export const user = createSlice({
   name: "user",
@@ -7,12 +8,7 @@ export const user = createSlice({
     isAuth: null,
     isAdmin: false,
     authError: "",
-    user: {
-      email: null,
-      username: null,
-      photos: [],
-      id: null,
-    },
+    user: userModel,
   },
   reducers: {
     setUserLoading(state, action) {
@@ -39,6 +35,9 @@ export const user = createSlice({
     updateUsername(state, action) {
       state.user.username = action.payload;
     },
+    updateColorTheme(state,action) {
+      state.user.colorTheme = action.payload;
+    }
   },
 });
 
@@ -52,6 +51,7 @@ export const {
   updateUserPhotos,
   updateUserEmail,
   updateUsername,
+  updateColorTheme
 } = user.actions;
 
 export default user.reducer;

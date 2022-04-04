@@ -1,5 +1,5 @@
 import React from "react";
-import { ColorTheme } from "../../../App";
+import { ColorTheme } from "../../HOCs/AuthWrapper/AuthWrapper";
 
 export const Logo = ({ onClick = () => {} }) => {
   const { colorSet } = React.useContext(ColorTheme);

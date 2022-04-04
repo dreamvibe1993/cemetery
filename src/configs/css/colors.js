@@ -180,3 +180,11 @@ export const colorsWhite = {
     rgba: getRgba,
   },
 };
+
+
+export const allColors = [
+  { id: colorsBlack.id, hex: colorsBlack.primary.hex, theme: colorsBlack },
+  { id: colorsGreen.id, hex: colorsGreen.primary.hex, theme: colorsGreen },
+  { id: colorsWhite.id, hex: colorsWhite.primary.hex, theme: colorsWhite },
+  { id: colorsWeird.id, hex: colorsWeird.primary.hex, theme: colorsWeird },
+];
