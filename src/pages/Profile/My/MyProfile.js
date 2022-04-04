@@ -252,9 +252,11 @@ export const MyProfile = () => {
                   onChange={addAditionalContactLink}
                 />
               </Row>
-              <ServiceButton onClick={handleAdditInput} type="button">
-                {isAdditInpShow ? "HIDE" : "+ ANOTHER"}
-              </ServiceButton>
+              <Row>
+                <ServiceButton onClick={handleAdditInput} type="button">
+                  {isAdditInpShow ? "HIDE" : "+ ANOTHER"}
+                </ServiceButton>
+              </Row>
             </UserPersonalInfo>
             <RowEnd>
               <ServiceButton type="button" onClick={goToMyProfilePreview}>
