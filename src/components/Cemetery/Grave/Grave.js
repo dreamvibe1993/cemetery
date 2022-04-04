@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/macro";
-import { colors } from "../../../configs/css/colors";
+import { colorsGreen } from "../../../configs/css/colors";
 
 export const Grave = ({grave}) => {
   return (
@@ -11,13 +11,13 @@ export const Grave = ({grave}) => {
 };
 
 const UserPhoto = styled.img`
-  object-fit: cover;
+  object-fit: cover;  
   width: 100%;
   height: 100%;
 `;
 
 const GraveCont = styled.div`
-  background-color: ${colors.secondaryB.rgba(.3)};
+  background-color: ${colorsGreen.secondaryB.rgba(.3)};
   width: 100%;
   height: 100%;
   position: relative;

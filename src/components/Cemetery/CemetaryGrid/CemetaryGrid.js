@@ -7,9 +7,9 @@ import { ServiceButton } from "../../css/sc-components/ScComponents";
 import GrassPattern from "../../../media/img/grave/grass-p-2.png";
 
 import { NewGraveModal } from "../../Modals/NewGraveModal/NewGraveModal";
-import { Tooltip } from "../../App/Tooltip";
+import { Tooltip } from "../../HOCs/Tooltip";
 import { pxToVh, pxToVw } from "../../../services/css/convertion/sizes";
-import { colors } from "../../../configs/css/colors";
+import { colorsGreen } from "../../../configs/css/colors";
 import { useDeleteGrave } from "../../../services/hooks/api/graves/useDeleteGrave";
 import { showError } from "../../../services/errors/showError";
 import { Grave } from "../Grave";
@@ -67,7 +67,7 @@ export const CemetaryGrid = () => {
         {cells.map((cell, i) =>
           cell ? (
             <Tooltip
-              content={`This grave belongs to ${cell?.name}. \nClick to visit.`}
+              content={`This is the tomb of ${cell?.name}. \nClick to visit.`}
               direction="bottom"
               key={cell?.name + i}
             >
@@ -138,7 +138,7 @@ const Cell = styled.div`
 `;
 
 const CemetaryGridContainer = styled.div`
-  background-color: ${colors.primary.rgba(1)};
+  background-color: ${colorsGreen.primary.rgba(1)};
   border-radius: 5px;
   display: grid;
   grid-template-columns: repeat(4, auto);

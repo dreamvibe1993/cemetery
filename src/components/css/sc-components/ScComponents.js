@@ -1,5 +1,5 @@
 import styled from "styled-components/macro";
-import { colors } from "../../../configs/css/colors";
+import { colorsGreen } from "../../../configs/css/colors";
 
 export const MainContainer = styled.div`
   padding: 20px;
@@ -8,7 +8,7 @@ export const MainContainer = styled.div`
 export const ServiceButton = styled.button`
   transition: background-color 0.2s linear;
   padding: 10px;
-  background-color: ${colors.contrastA.rgba(0.8)};
+  background-color: ${colorsGreen.contrastA.rgba(0.8)};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,10 +19,10 @@ export const ServiceButton = styled.button`
   position: relative;
   font-family: inherit;
   &:active {
-    background-color: ${colors.contrastA.rgba(1)};
+    background-color: ${colorsGreen.contrastA.rgba(1)};
   }
   &:hover {
-    background-color: ${colors.contrastA.rgba(0.5)};
+    background-color: ${colorsGreen.contrastA.rgba(0.5)};
   }
 `;
 

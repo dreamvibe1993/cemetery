@@ -9,7 +9,7 @@ import { TombPhotos } from "../TombPhotos";
 import { ServiceButton } from "../../css/sc-components/ScComponents";
 import { showError } from "../../../services/errors/showError";
 import { Gifts } from "../Gifts";
-import { colors } from "../../../configs/css/colors";
+import { colorsGreen } from "../../../configs/css/colors";
 import { useSelector } from "react-redux";
 import { RoundUserPic } from "../../App/RoundUserPic/RoundUserPic";
 import { useLoadGraves } from "../../../services/hooks/api/graves/useLoadGraves";
@@ -131,7 +131,7 @@ const FirstRow = styled.div`
 `;
 
 const LogDiagSign = styled.span`
-  color: ${colors.secondaryB.hex};
+  color: ${colorsGreen.secondaryB.hex};
 `;
 
 const LastWordsContainer = styled.div`

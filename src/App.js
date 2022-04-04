@@ -6,23 +6,23 @@ import { GlobalStyles } from "./GlobalStyles";
 import { NotificationModal } from "./components/Modals/NotificationModal";
 import { AuthWrapper } from "./components/HOCs/AuthWrapper";
 
+const ColorTheme = React.createContext();
+
 /*
   TODO:
-  *) If email exist show proper notif
   *) Waiting till db connected (FAILED)
-  *) Ban
-  *) Delete account
   *) Light and dark theme
   *) Mobile version
-  *) Implement forms?
   *) CHANGE MY EMAIL!!!
   *) Deploy
   *) Different clusters of different colors
 */
 
 function App() {
+  const [colorSet, setColorSet] = React.useState({});
+  
   return (
-    <>
+    <ColorTheme.Provider>
       <GlobalStyles />
       <NotificationModal>
         <AuthWrapper>
@@ -30,7 +30,7 @@ function App() {
           <Paths />
         </AuthWrapper>
       </NotificationModal>
-    </>
+    </ColorTheme.Provider>
   );
 }
 

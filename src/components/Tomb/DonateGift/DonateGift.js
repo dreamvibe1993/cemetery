@@ -7,7 +7,7 @@ import { ReactComponent as Candy } from "../../../media/svg/candy.svg";
 import { ReactComponent as BTC } from "../../../media/svg/btc.svg";
 import { giftSchema } from "../../../models/yup/yup-schemas";
 import { showError } from "../../../services/errors/showError";
-import { colors } from "../../../configs/css/colors";
+import { colorsGreen } from "../../../configs/css/colors";
 import { ServiceButton } from "../../css/sc-components/ScComponents";
 import { Backdrop } from "../../App/Backdrop";
 import { useUpdateGrave } from "../../../services/hooks/api/graves/useUpdateGrave";
@@ -140,7 +140,7 @@ const GiftsRow = styled.div`
 
 const ChooseGiftBlock = styled.div`
   width: 750px;
-  background-color: ${colors.primary.hex};
+  background-color: ${colorsGreen.primary.hex};
   padding: 15px;
   display: flex;
   flex-direction: column;

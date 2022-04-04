@@ -5,9 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 // import PMML from "../../media/audio/zemfira-pmml.mp3";
 
-import { Tooltip } from "../../components/App/Tooltip";
 import { Preloader } from "../../components/App/Preloader";
-import { colors } from "../../configs/css/colors";
+import { colorsGreen } from "../../configs/css/colors";
 import { TombChatLogs } from "../../components/Tomb/TombChatLogs";
 import { TombInfo } from "../../components/Tomb/TombInfo";
 import { setGravesLoadingOver } from "../../redux/graves/gravesReducer";
@@ -58,10 +57,6 @@ export const Tomb = () => {
       <Monument>
         <TombInfo grave={grave} />
         <TombChatLogs grave={grave} />
-        <Tooltip
-          content={"Gifts people left to honor the person laying here."}
-          direction="top"
-        ></Tooltip>
       </Monument>
     </>
   );
@@ -70,7 +65,7 @@ export const Tomb = () => {
 const Monument = styled.div`
   width: 60vw;
   min-width: 650px;
-  background-color: ${colors.primary.rgba(1)};
+  background-color: ${colorsGreen.primary.rgba(1)};
   margin: 0 auto;
   padding: 20px;
   display: flex;
@@ -82,6 +77,6 @@ const Monument = styled.div`
   z-index: 999;
   animation: ${FadeIn} .2s linear forwards;
   svg {
-    /* fill: ${colors.secondaryB.hex}; */
+    /* fill: ${colorsGreen.secondaryB.hex}; */
   }
 `;

@@ -3,7 +3,7 @@ import styled from "styled-components/macro";
 
 import { NavButton } from "../../css/sc-components/ScComponents";
 import { ReactComponent as Logo } from "../../../media/svg/logo-2.svg";
-import { colors } from "../../../configs/css/colors";
+import { colorsGreen } from "../../../configs/css/colors";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { routes } from "../../../configs/urls/app/app-urls";
@@ -113,7 +113,7 @@ const LogoWrapper = styled.div`
 
 const NavBar = styled.div`
   position: fixed;
-  background-color: ${colors.primary.rgba(1)};
+  background-color: ${colorsGreen.primary.rgba(1)};
   z-index: 1;
   height: 75px;
   width: 100%;

@@ -14,7 +14,7 @@ import { SignIn } from "./SignIn";
 import { LogIn } from "./LogIn/LogIn";
 import { FadeIn } from "../../configs/css/animations";
 import { FPassEmailModal } from "../../components/Modals/FPassEmailModal";
-import { colors } from "../../configs/css/colors";
+import { colorsGreen } from "../../configs/css/colors";
 
 export const UserAuth = () => {
   const { isAuth, user } = useSelector((state) => state.user);
@@ -146,7 +146,7 @@ const UserAuthContainer = styled.div`
   padding: 40px 20px;
   width: 900px;
   margin: 10px auto;
-  background-color: ${colors.primary.hex};
+  background-color: ${colorsGreen.primary.hex};
   display: flex;
   flex-direction: column;
   align-items: center;

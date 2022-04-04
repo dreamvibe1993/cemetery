@@ -5,7 +5,7 @@ import { ReactComponent as Cross } from "../../../media/svg/cross.svg";
 import { compressPhotos } from "../../../services/data-transformation/converting";
 import { Preloader } from "../../App/Preloader";
 import { graveSchema } from "../../../models/yup/yup-schemas";
-import { colors } from "../../../configs/css/colors";
+import { colorsGreen } from "../../../configs/css/colors";
 import { showError } from "../../../services/errors/showError";
 import { FadeIn } from "../../../configs/css/animations";
 import { Backdrop } from "../../App/Backdrop";
@@ -302,7 +302,7 @@ const ButtonsCont = styled.div`
 
 const TextInput = styled.input`
   -webkit-appearance: none;
-  border: ${(p) => (p.errThrown ? "1px solid " + colors.error.hex : "none")};
+  border: ${(p) => (p.errThrown ? "1px solid " + colorsGreen.error.hex : "none")};
   width: 100%;
   height: 40px;
   padding: 5px 10px;
@@ -354,7 +354,7 @@ const Diag = styled.form`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 450px;
-  background-color: ${colors.primary.rgba(1)};
+  background-color: ${colorsGreen.primary.rgba(1)};
   padding: 20px 20px;
   text-align: center;
   display: flex;

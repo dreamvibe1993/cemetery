@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import { colors } from "./configs/css/colors";
+import { colorsGreen } from "./configs/css/colors";
 
 export const GlobalStyles = createGlobalStyle`
   
@@ -11,7 +11,7 @@ export const GlobalStyles = createGlobalStyle`
     color: #fff;
     font-family: 'Courier New', Courier, monospace;
     margin-top: 90px;
-    background-color: ${colors.secondaryB.rgba(1)};
+    background-color: ${colorsGreen.secondaryB.rgba(1)};
   }
 
   input {

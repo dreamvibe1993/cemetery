@@ -3,7 +3,7 @@ import styled, { css } from "styled-components/macro";
 
 import { useDispatch, useSelector } from "react-redux";
 import { DropDown } from "../../../configs/css/animations";
-import { colors } from "../../../configs/css/colors";
+import { colorsGreen } from "../../../configs/css/colors";
 import { ServiceButton } from "../../css/sc-components/ScComponents";
 import {
   setAnswerToNotif,
@@ -85,7 +85,7 @@ const Modal = styled.div`
   top: -250px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: ${colors.contrastA.hex};
+  background-color: ${colorsGreen.contrastA.hex};
   box-shadow: 0px 2px 5px 5px rgba(0, 0, 0, 0.1);
   ${(p) => p.appear && DropDownAnim}
 `;

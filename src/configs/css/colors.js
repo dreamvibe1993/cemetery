@@ -1,47 +1,44 @@
 import { hexToRgbA } from "../../services/css/convertion/colors";
 
-//https://colorscheme.ru/#4852kw0w0w0w0
-export const colors = {
+function getRgba(transparency) {
+  return hexToRgbA(this.hex, transparency);
+}
+
+export const colorsGreen = {
   primary: {
     hex: "#37b394",
-    rgba: function (transparency) {
-      return hexToRgbA(this.hex, transparency);
-    },
+    rgba: getRgba,
   },
   primaryDark: {
     hex: "#030a17",
-    rgba: function (transparency) {
-      return hexToRgbA(this.hex, transparency);
-    },
+    rgba: getRgba,
   },
   primaryLight: {
     hex: "#604BD8",
-    rgba: function (transparency) {
-      return hexToRgbA(this.hex, transparency);
-    },
+    rgba: getRgba,
   },
   secondaryA: {
     hex: "#8D2373",
-    rgba: function (transparency) {
-      return hexToRgbA(this.hex, transparency);
-    },
+    rgba: getRgba,
   },
   secondaryB: {
     hex: "#37b394",
-    rgba: function (transparency) {
-      return hexToRgbA(this.hex, transparency);
-    },
+    rgba: getRgba,
   },
   contrastA: {
     hex: "#37b394",
-    rgba: function (transparency) {
-      return hexToRgbA(this.hex, transparency);
-    },
+    rgba: getRgba,
+  },
+  contrastB: {
+    hex: "#000000",
+    rgba: getRgba,
   },
   error: {
     hex: "#e81313",
-    rgba: function (transparency) {
-      return hexToRgbA(this.hex, transparency);
-    },
-  }
+    rgba: getRgba,
+  },
+  textColor: {
+    hex: "#ffffff",
+    rgba: getRgba,
+  },
 };

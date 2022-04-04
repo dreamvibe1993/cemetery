@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/macro";
 import { FadeIn } from "../../../configs/css/animations";
-import { colors } from "../../../configs/css/colors";
+import { colorsGreen } from "../../../configs/css/colors";
 import { ServiceButton } from "../../css/sc-components/ScComponents";
 
 export const Gallery = ({ src, onClose = () => {} }) => {
@@ -124,7 +124,7 @@ const TopPanel = styled.div`
 const Button = styled.div`
   height: 60px;
   width: 60px;
-  background-color: ${colors.secondaryB.hex};
+  background-color: ${colorsGreen.secondaryB.hex};
   border-radius: 50%;
   display: flex;
   align-items: center;

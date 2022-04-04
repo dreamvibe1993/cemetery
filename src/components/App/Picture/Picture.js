@@ -6,7 +6,7 @@ import QuestionMark from "../../../media/img/common/question-mark.png";
 
 import { Preloader } from "../../../components/App/Preloader";
 import { ServiceButton } from "../../css/sc-components/ScComponents";
-import { colors } from "../../../configs/css/colors";
+import { colorsGreen } from "../../../configs/css/colors";
 
 export const Picture = ({
   src,
@@ -74,10 +74,10 @@ const PhotoButton = styled.div`
   border-radius: 5px;
   button {
     padding: 5px 5px;
-    background-color: ${colors.secondaryB.rgba(0.3)};
+    background-color: ${colorsGreen.secondaryB.rgba(0.3)};
     border-radius: 5px;
     &:hover {
-      background-color: ${colors.secondaryB.rgba(1)};
+      background-color: ${colorsGreen.secondaryB.rgba(1)};
     }
   }
   svg {
