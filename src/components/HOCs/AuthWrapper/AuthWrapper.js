@@ -18,7 +18,7 @@ export const AuthWrapper = ({ children }) => {
 
   React.useEffect(() => {
     if (user) {
-      setColorSet(returnTheme(user?.colorTheme));
+      setColorSet(returnTheme(user?.colorTheme || colorsBlack));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
