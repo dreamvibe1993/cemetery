@@ -45,7 +45,7 @@ const PreloaderCont = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${p => p.theme.contrastB.rgba(0.2)};
+  background-color: ${(p) => p.theme.contrastB.rgba(0.2)};
   position: absolute;
   top: 0;
   left: 0;
@@ -59,24 +59,24 @@ const PhotoWrapper = styled.div`
   border-radius: 2px;
   display: flex;
   justify-content: center;
-  border: 1px solid black;
+  border: 1px solid ${(p) => p.theme.contrastB.hex};
 `;
 
 const PhotoButton = styled.div`
   position: absolute;
   bottom: 10px;
   left: 10px;
-  background-color: ${p => p.theme.contrastB.rgba(0.2)};
+  background-color: ${(p) => p.theme.contrastB.rgba(0.2)};
   cursor: pointer;
   transition: opacity 0.2s linear;
   z-index: 10;
   border-radius: 5px;
   button {
     padding: 5px 5px;
-    background-color: ${p => p.theme.secondaryB.rgba(0.3)};
+    background-color: ${(p) => p.theme.secondaryB.rgba(0.3)};
     border-radius: 5px;
     &:hover {
-      background-color: ${p => p.theme.secondaryB.rgba(1)};
+      background-color: ${(p) => p.theme.secondaryB.rgba(1)};
     }
   }
   svg {

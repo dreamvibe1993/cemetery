@@ -153,5 +153,5 @@ const UserAuthContainer = styled.div`
   align-items: center;
   text-align: center;
   position: relative;
-  border: 1px solid #000;
+  border: 1px solid ${p => p.theme.secondaryB.hex};
 `;
