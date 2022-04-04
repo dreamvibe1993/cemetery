@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components/macro";
-import { colorsGreen } from "../../../configs/css/colors";
 
 export const TombChatLogs = ({ grave }) => {
   return (
@@ -19,7 +18,7 @@ export const TombChatLogs = ({ grave }) => {
 };
 
 const LogDiagSign = styled.span`
-  color: ${colorsGreen.secondaryB.hex};
+  color: ${p => p.theme.secondaryB.hex};
 `;
 
 const LogEntry = styled.span`
@@ -27,7 +26,7 @@ const LogEntry = styled.span`
 `;
 
 const Log = styled.div`
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: ${p => p.theme.contrastB.rgba(0.3)};
   height: 100%;
   min-height: 100px;
   width: 100%;

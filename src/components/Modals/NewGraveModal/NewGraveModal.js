@@ -5,7 +5,6 @@ import { ReactComponent as Cross } from "../../../media/svg/cross.svg";
 import { compressPhotos } from "../../../services/data-transformation/converting";
 import { Preloader } from "../../App/Preloader";
 import { graveSchema } from "../../../models/yup/yup-schemas";
-import { colorsGreen } from "../../../configs/css/colors";
 import { showError } from "../../../services/errors/showError";
 import { FadeIn } from "../../../configs/css/animations";
 import { Backdrop } from "../../App/Backdrop";
@@ -205,7 +204,7 @@ const Row = styled.div`
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: ${(p) => p.theme.contrastB.rgba(0.2)};
 `;
 
 const RowWithDate = styled(Row)`
@@ -231,8 +230,8 @@ const LilPicCont = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.2);
-    box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.2);
+    background-color: ${(p) => p.theme.contrastB.rgba(0.2)};
+    box-shadow: 0px 0px 5px 5px ${(p) => p.theme.contrastB.rgba(0.2)};
     opacity: 0;
     cursor: pointer;
   }
@@ -246,7 +245,7 @@ const LilPic = styled.img`
 const FileInput = styled.div`
   width: 100%;
   height: 80px;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: ${(p) => p.theme.contrastB.rgba(0.2)};
   position: relative;
   padding: 10px;
   text-align: center;
@@ -273,7 +272,7 @@ const Button = styled.button`
   font-size: inherit;
   flex: 1;
   height: 40px;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: ${(p) => p.theme.contrastB.rgba(0.2)};
   border: none;
   display: flex;
   align-items: center;
@@ -281,10 +280,10 @@ const Button = styled.button`
   user-select: none;
   cursor: pointer;
   &:hover {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: ${(p) => p.theme.contrastB.rgba(0.3)};
   }
   &:active {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: ${(p) => p.theme.contrastB.rgba(0.5)};
   }
 `;
 
@@ -302,16 +301,16 @@ const ButtonsCont = styled.div`
 
 const TextInput = styled.input`
   -webkit-appearance: none;
-  border: ${(p) => (p.errThrown ? "1px solid " + colorsGreen.error.hex : "none")};
+  border: ${(p) => (p.errThrown ? "1px solid " + p.theme.error.hex : "none")};
   width: 100%;
   height: 40px;
   padding: 5px 10px;
-  color: #fff;
+  color: ${(p) => p.theme.textColor.hex};
   font-size: 20px;
   border-radius: 2px;
   background-color: transparent;
   ::placeholder {
-    color: rgba(255, 255, 255, 0.4);
+    color: ${(p) => p.theme.white.rgba(0.4)};
   }
 `;
 
@@ -345,7 +344,7 @@ const InputName = styled(Title)`
 
 const InputDateName = styled(InputName)`
   font-size: 20px;
-  color: rgba(255, 255, 255, 0.4);
+  color: ${(p) => p.theme.white.rgba(0.4)};
 `;
 
 const Diag = styled.form`
@@ -354,7 +353,7 @@ const Diag = styled.form`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 450px;
-  background-color: ${colorsGreen.primary.rgba(1)};
+  background-color: ${(p) => p.theme.primary.rgba(1)};
   padding: 20px 20px;
   text-align: center;
   display: flex;
@@ -381,7 +380,7 @@ const PreloaderCont = styled(Diag)`
               }),
               control: (provided) => ({
                 ...provided,
-                backgroundColor: "rgba(0, 0, 0, 0.2)",
+                backgroundColor: "${p => p.theme.contrastB.rgba(0.2)",
                 border: errThrown === "song" ? "1px solid red" : "none",
               }),
               valueContainer: (provided) => ({

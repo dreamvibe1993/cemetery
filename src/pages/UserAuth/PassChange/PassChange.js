@@ -120,7 +120,7 @@ const ErrMessage = styled.span`
   bottom: 2px;
   left: 10px;
   font-size: 12px;
-  color: rgba(168, 50, 50, 1);
+  color: ${p => p.theme.error.rgba(1)};;
 `;
 
 const CHANGE = styled(ServiceButton)`
@@ -130,11 +130,11 @@ const CHANGE = styled(ServiceButton)`
 const Input = styled.input`
   width: 430px;
   height: 40px;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: ${p => p.theme.contrastB.rgba(0.2)};
   border: none;
   margin-bottom: 20px;
   padding: 5px 10px;
-  color: #fff;
+  color: ${p => p.theme.textColor.hex};
   font-size: 16px;
   border: ${(p) => (p.err ? "1px solid rgba(168, 50, 50,.9)" : "none")};
 `;

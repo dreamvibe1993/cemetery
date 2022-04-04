@@ -48,7 +48,7 @@ const PreloaderC = styled.div`
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #fff;
+    background: ${p => p.theme.textColor.hex};
     margin: -4px 0 0 -4px;
   }
   & div:nth-child(1) {

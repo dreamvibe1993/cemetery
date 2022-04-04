@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components/macro";
 import { getMe, logOutMe } from "../../api/user";
 
-import { ReactComponent as Logo } from "../../media/svg/logo-2.svg";
 import { ReactComponent as Cross } from "../../media/svg/cross.svg";
 
 import { Preloader } from "../../components/App/Preloader";
@@ -14,9 +13,11 @@ import { SignIn } from "./SignIn";
 import { LogIn } from "./LogIn/LogIn";
 import { FadeIn } from "../../configs/css/animations";
 import { FPassEmailModal } from "../../components/Modals/FPassEmailModal";
-import { colorsGreen } from "../../configs/css/colors";
+import { Logo } from "../../components/App/Logo/Logo";
+import { ColorTheme } from "../../App";
 
 export const UserAuth = () => {
+  const { colorSet } = React.useContext(ColorTheme);
   const { isAuth, user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -63,7 +64,7 @@ export const UserAuth = () => {
             <Cross onClick={redirectToHome} />
           </CrossSVGWrapper>
           <LogoWrapper>
-            <Logo />
+            <Logo color={colorSet.contrastB.hex} />
           </LogoWrapper>
           <Title>Hey {user.username}!</Title>
           <LOGOUT onClick={logOut}>LOGOUT</LOGOUT>
@@ -86,7 +87,7 @@ export const UserAuth = () => {
           </ForgotPassWrapper>
         )}
         <LogoWrapper>
-          <Logo />
+          <Logo color={colorSet.contrastB.hex} />
         </LogoWrapper>
         <Title>Not authorized yet?</Title>
         <LogIn onForgotPassword={showForgotPassButton} />
@@ -146,7 +147,7 @@ const UserAuthContainer = styled.div`
   padding: 40px 20px;
   width: 900px;
   margin: 10px auto;
-  background-color: ${colorsGreen.primary.hex};
+  background-color: ${(p) => p.theme.primary.hex};
   display: flex;
   flex-direction: column;
   align-items: center;

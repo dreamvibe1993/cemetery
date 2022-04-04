@@ -9,7 +9,6 @@ import GrassPattern from "../../../media/img/grave/grass-p-2.png";
 import { NewGraveModal } from "../../Modals/NewGraveModal/NewGraveModal";
 import { Tooltip } from "../../HOCs/Tooltip";
 import { pxToVh, pxToVw } from "../../../services/css/convertion/sizes";
-import { colorsGreen } from "../../../configs/css/colors";
 import { useDeleteGrave } from "../../../services/hooks/api/graves/useDeleteGrave";
 import { showError } from "../../../services/errors/showError";
 import { Grave } from "../Grave";
@@ -117,7 +116,7 @@ const Cell = styled.div`
   &:hover {
     &::after {
       transition: all 0.2s linear;
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: ${(p) => p.theme.white.rgba(0.1)};
     }
     #sbut {
       opacity: 1;
@@ -138,7 +137,7 @@ const Cell = styled.div`
 `;
 
 const CemetaryGridContainer = styled.div`
-  background-color: ${colorsGreen.primary.rgba(1)};
+  background-color: ${(p) => p.theme.primary.rgba(1)};
   border-radius: 5px;
   display: grid;
   grid-template-columns: repeat(4, auto);

@@ -14,7 +14,7 @@ const BackdropItself = styled.div`
   top: 0;
   left: 0;
   z-index: 999;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: ${p => p.theme.contrastB.rgba(0.7)};
   display: flex;
   justify-content: center;
   align-items: flex-start;

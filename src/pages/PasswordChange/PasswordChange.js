@@ -46,7 +46,7 @@ const UserAuthContainer = styled.div`
   padding: 40px 20px;
   width: 900px;
   margin: 10px auto;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: ${p => p.theme.contrastB.rgba(0.2)};
   display: flex;
   flex-direction: column;
   align-items: center;

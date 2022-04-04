@@ -4,7 +4,6 @@ import styled from "styled-components/macro";
 
 import { sendChangePassEmail } from "../../../api/user";
 import { FadeIn } from "../../../configs/css/animations";
-import { colorsGreen } from "../../../configs/css/colors";
 import { setNotification } from "../../../redux/app/appReducer";
 import { Input, ServiceButton } from "../../css/sc-components/ScComponents";
 
@@ -53,7 +52,7 @@ const EmailInputBox = styled.div`
   max-width: 600px;
   min-width: 355px;
   padding: 20px;
-  background-color: ${colorsGreen.secondaryB.rgba(0.8)};
+  background-color: ${p => p.theme.secondaryB.rgba(0.8)};
   position: absolute;
   left: 50%;
   top: 50%;
@@ -69,6 +68,6 @@ const Container = styled.div`
   top: 0;
   left: 0;
   z-index: 1000;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: ${p => p.theme.contrastB.rgba(0.8)};
   animation: ${FadeIn} 0.2s linear forwards;
 `;

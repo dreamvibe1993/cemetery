@@ -24,5 +24,5 @@ const UserPicWrappa = styled.div`
   width: 40px;
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 0px 2px ${p => p.theme.contrastB.rgba(0.2)};
 `;

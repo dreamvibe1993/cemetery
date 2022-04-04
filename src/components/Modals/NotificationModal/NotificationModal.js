@@ -3,7 +3,6 @@ import styled, { css } from "styled-components/macro";
 
 import { useDispatch, useSelector } from "react-redux";
 import { DropDown } from "../../../configs/css/animations";
-import { colorsGreen } from "../../../configs/css/colors";
 import { ServiceButton } from "../../css/sc-components/ScComponents";
 import {
   setAnswerToNotif,
@@ -58,7 +57,7 @@ const BackdropScreen = styled.div`
   height: 100%;
   width: 100%;
   z-index: 1000;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: ${p => p.theme.contrastB.rgba(0.4)};
   opacity: ${(p) => (p.appear ? 1 : 0)};
   display: ${(p) => (p.appear ? "block" : "none")};
 `;
@@ -85,7 +84,7 @@ const Modal = styled.div`
   top: -250px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: ${colorsGreen.contrastA.hex};
-  box-shadow: 0px 2px 5px 5px rgba(0, 0, 0, 0.1);
+  background-color: ${p => p.theme.contrastA.hex};
+  box-shadow: 0px 2px 5px 5px ${p => p.theme.contrastB.rgba(0.1)};
   ${(p) => p.appear && DropDownAnim}
 `;

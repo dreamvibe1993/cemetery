@@ -101,7 +101,7 @@ const ErrMessage = styled.span`
   bottom: 2px;
   left: 10px;
   font-size: 12px;
-  color: rgba(168, 50, 50, 1);
+  color: ${p => p.theme.error.rgba(1)};;
 `;
 
 const LOGIN = styled(ServiceButton)`

@@ -1,5 +1,4 @@
 import { createGlobalStyle } from "styled-components";
-import { colorsGreen } from "./configs/css/colors";
 
 export const GlobalStyles = createGlobalStyle`
   
@@ -8,10 +7,10 @@ export const GlobalStyles = createGlobalStyle`
     justify-content: center;
     position: relative;
     padding-top: 10px;
-    color: #fff;
+    color: ${(p) => p.colorSet.textColor.hex};
     font-family: 'Courier New', Courier, monospace;
     margin-top: 90px;
-    background-color: ${colorsGreen.secondaryB.rgba(1)};
+    background-color: ${(p) => p.colorSet.secondaryB.rgba(1)};
   }
 
   input {
@@ -22,8 +21,8 @@ export const GlobalStyles = createGlobalStyle`
   
   /* Custom properties */
   :root {
-    --tooltip-text-color: white;
-    --tooltip-background-color: black;
+    --tooltip-text-color: ${(p) => p.colorSet.textColor.hex};
+    --tooltip-background-color: ${(p) => p.colorSet.contrastB.hex};
     --tooltip-margin: 60px;
     --tooltip-arrow-size: 6px;
   }

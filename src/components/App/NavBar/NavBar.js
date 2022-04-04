@@ -1,17 +1,19 @@
 import React from "react";
 import styled from "styled-components/macro";
 
-import { NavButton } from "../../css/sc-components/ScComponents";
-import { ReactComponent as Logo } from "../../../media/svg/logo-2.svg";
-import { colorsGreen } from "../../../configs/css/colors";
+import { NavButton, ServiceButton } from "../../css/sc-components/ScComponents";
+import { colorsBlack, colorsGreen } from "../../../configs/css/colors";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { routes } from "../../../configs/urls/app/app-urls";
 import { useConfirmRedir } from "../../../services/hooks/app/useConfirmRedir";
 import { setUnsavedDataStatus } from "../../../redux/app/appReducer";
 import { RoundUserPic } from "../RoundUserPic/RoundUserPic";
+import { ColorTheme } from "../../../App";
+import { Logo } from "../Logo/Logo";
 
 export const TopNavBar = () => {
+  const { setColorSet, colorSet } = React.useContext(ColorTheme);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const askAndSubscribe = useConfirmRedir();
@@ -60,6 +62,10 @@ export const TopNavBar = () => {
     });
   };
 
+  const changeTheme = () => {
+    setColorSet(colorsBlack);
+  };
+
   return (
     <NavBar>
       <Buttons>
@@ -67,8 +73,9 @@ export const TopNavBar = () => {
         <NavButton onClick={goAuth}>auth</NavButton>
       </Buttons>
       <LogoWrapper>
-        <Logo onClick={goHome} />
+        <Logo onClick={goHome} color={colorSet.contrastB.hex} />
       </LogoWrapper>
+      <ServiceButton onClick={changeTheme}>CHANGE THEME</ServiceButton>
       {isAuth && (
         <RoundUserPic
           src={Array.isArray(user.photos) && user.photos[0]}
@@ -113,13 +120,13 @@ const LogoWrapper = styled.div`
 
 const NavBar = styled.div`
   position: fixed;
-  background-color: ${colorsGreen.primary.rgba(1)};
+  background-color: ${(p) => p.theme.primary.rgba(1)};
   z-index: 1;
   height: 75px;
   width: 100%;
   top: 0;
   left: 0;
-  box-shadow: 2px 0px 10px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 0px 10px 2px ${p => p.theme.contrastB.rgba(0.3)};
   display: flex;
   justify-content: space-between;
   align-items: center;

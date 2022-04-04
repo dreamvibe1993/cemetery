@@ -5,8 +5,10 @@ import { TopNavBar } from "./components/App/NavBar/NavBar";
 import { GlobalStyles } from "./GlobalStyles";
 import { NotificationModal } from "./components/Modals/NotificationModal";
 import { AuthWrapper } from "./components/HOCs/AuthWrapper";
+import { colorsGreen } from "./configs/css/colors";
+import { ThemeProvider } from "styled-components";
 
-const ColorTheme = React.createContext();
+export const ColorTheme = React.createContext();
 
 /*
   TODO:
@@ -19,17 +21,19 @@ const ColorTheme = React.createContext();
 */
 
 function App() {
-  const [colorSet, setColorSet] = React.useState({});
-  
+  const [colorSet, setColorSet] = React.useState(colorsGreen);
+
   return (
-    <ColorTheme.Provider>
-      <GlobalStyles />
-      <NotificationModal>
-        <AuthWrapper>
-          <TopNavBar />
-          <Paths />
-        </AuthWrapper>
-      </NotificationModal>
+    <ColorTheme.Provider value={{ colorSet, setColorSet }}>
+      <ThemeProvider theme={colorSet}>
+        <GlobalStyles colorSet={colorSet} />
+        <NotificationModal>
+          <AuthWrapper>
+            <TopNavBar />
+            <Paths />
+          </AuthWrapper>
+        </NotificationModal>
+      </ThemeProvider>
     </ColorTheme.Provider>
   );
 }

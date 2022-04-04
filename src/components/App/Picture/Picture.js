@@ -6,7 +6,6 @@ import QuestionMark from "../../../media/img/common/question-mark.png";
 
 import { Preloader } from "../../../components/App/Preloader";
 import { ServiceButton } from "../../css/sc-components/ScComponents";
-import { colorsGreen } from "../../../configs/css/colors";
 
 export const Picture = ({
   src,
@@ -46,7 +45,7 @@ const PreloaderCont = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: ${p => p.theme.contrastB.rgba(0.2)};
   position: absolute;
   top: 0;
   left: 0;
@@ -67,17 +66,17 @@ const PhotoButton = styled.div`
   position: absolute;
   bottom: 10px;
   left: 10px;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: ${p => p.theme.contrastB.rgba(0.2)};
   cursor: pointer;
   transition: opacity 0.2s linear;
   z-index: 10;
   border-radius: 5px;
   button {
     padding: 5px 5px;
-    background-color: ${colorsGreen.secondaryB.rgba(0.3)};
+    background-color: ${p => p.theme.secondaryB.rgba(0.3)};
     border-radius: 5px;
     &:hover {
-      background-color: ${colorsGreen.secondaryB.rgba(1)};
+      background-color: ${p => p.theme.secondaryB.rgba(1)};
     }
   }
   svg {

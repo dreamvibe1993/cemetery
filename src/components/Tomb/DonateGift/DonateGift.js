@@ -7,7 +7,6 @@ import { ReactComponent as Candy } from "../../../media/svg/candy.svg";
 import { ReactComponent as BTC } from "../../../media/svg/btc.svg";
 import { giftSchema } from "../../../models/yup/yup-schemas";
 import { showError } from "../../../services/errors/showError";
-import { colorsGreen } from "../../../configs/css/colors";
 import { ServiceButton } from "../../css/sc-components/ScComponents";
 import { Backdrop } from "../../App/Backdrop";
 import { useUpdateGrave } from "../../../services/hooks/api/graves/useUpdateGrave";
@@ -101,7 +100,7 @@ const WishRow = styled.div`
 const Input = styled.input`
   transition: border 0.5s linear;
   border: ${(p) => (p.errThrown ? "1px solid red" : "none")};
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: ${p => p.theme.contrastB.rgba(0.2)};
   padding: 10px;
   color: white;
   width: 100%;
@@ -109,7 +108,7 @@ const Input = styled.input`
 `;
 
 const Gift = styled.div`
-  background-color: rgba(0, 0, 0, ${(p) => (p.chosen ? 0.1 : 0.3)});
+  background-color: ${p => p.theme.contrastB.rgba(p.chosen ? 0.1 : 0.3)};
   transition: all 0.2s linear;
   align-items: stretch;
   padding: 10px;
@@ -120,7 +119,7 @@ const Gift = styled.div`
     height: 100%;
   }
   &:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: ${p => p.theme.contrastB.rgba(0.1)};
   }
 `;
 
@@ -140,7 +139,7 @@ const GiftsRow = styled.div`
 
 const ChooseGiftBlock = styled.div`
   width: 750px;
-  background-color: ${colorsGreen.primary.hex};
+  background-color: ${p => p.theme.primary.hex};
   padding: 15px;
   display: flex;
   flex-direction: column;

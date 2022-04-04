@@ -58,7 +58,7 @@ export const TombPhotos = ({ grave }) => {
 
 const PaddingWrapper = styled.div`
   padding: 0px 20px;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: ${p => p.theme.contrastB.rgba(0.2)};
 `;
 
 

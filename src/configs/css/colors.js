@@ -33,12 +33,59 @@ export const colorsGreen = {
     hex: "#000000",
     rgba: getRgba,
   },
+  textColor: {
+    hex: "#ffffff",
+    rgba: getRgba,
+  },
+  white: {
+    hex: "#ffffff",
+    rgba: getRgba,
+  },
   error: {
-    hex: "#e81313",
+    hex: "#100a40",
+    rgba: getRgba,
+  },
+};
+
+export const colorsBlack = {
+  primary: {
+    hex: "#3241a6",
+    rgba: getRgba,
+  },
+  primaryDark: {
+    hex: "#347871",
+    rgba: getRgba,
+  },
+  primaryLight: {
+    hex: "#bf1776",
+    rgba: getRgba,
+  },
+  secondaryA: {
+    hex: "#db9d7b",
+    rgba: getRgba,
+  },
+  secondaryB: {
+    hex: "#db9d7b",
+    rgba: getRgba,
+  },
+  contrastA: {
+    hex: "#338bde",
+    rgba: getRgba,
+  },
+  contrastB: {
+    hex: "#d12dd6",
     rgba: getRgba,
   },
   textColor: {
+    hex: "#4c2f4d",
+    rgba: getRgba,
+  },
+  white: {
     hex: "#ffffff",
+    rgba: getRgba,
+  },
+  error: {
+    hex: "#100a40",
     rgba: getRgba,
   },
 };

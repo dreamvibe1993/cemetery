@@ -9,7 +9,6 @@ import { TombPhotos } from "../TombPhotos";
 import { ServiceButton } from "../../css/sc-components/ScComponents";
 import { showError } from "../../../services/errors/showError";
 import { Gifts } from "../Gifts";
-import { colorsGreen } from "../../../configs/css/colors";
 import { useSelector } from "react-redux";
 import { RoundUserPic } from "../../App/RoundUserPic/RoundUserPic";
 import { useLoadGraves } from "../../../services/hooks/api/graves/useLoadGraves";
@@ -131,7 +130,7 @@ const FirstRow = styled.div`
 `;
 
 const LogDiagSign = styled.span`
-  color: ${colorsGreen.secondaryB.hex};
+  color: ${p => p.theme.secondaryB.hex};
 `;
 
 const LastWordsContainer = styled.div`
@@ -164,14 +163,14 @@ const TopBar = styled.div`
     width: 60px;
     border-radius: 50%;
     &:hover {
-      background-color: rgba(0, 0, 0, 0.06);
-      box-shadow: 0px 0px 19px 5px rgba(0, 0, 0, 0.1);
+      background-color: ${p => p.theme.contrastB.rgba(0.06)};
+      box-shadow: 0px 0px 19px 5px ${p => p.theme.contrastB.rgba(0.1)};
     }
   }
 `;
 
 const MainInfoCont = styled.div`
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: ${p => p.theme.contrastB.rgba(0.1)};
   padding: 20px;
 `;
 

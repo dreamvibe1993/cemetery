@@ -5,7 +5,6 @@ import { ReactComponent as Vodka } from "../../../media/svg/vodka.svg";
 import { ReactComponent as Candy } from "../../../media/svg/candy.svg";
 import { ReactComponent as BTC } from "../../../media/svg/btc.svg";
 import { Tooltip } from "../../HOCs/Tooltip";
-import { colorsGreen } from "../../../configs/css/colors";
 import { FadeIn } from "../../../configs/css/animations";
 import { Backdrop } from "../../App/Backdrop";
 
@@ -73,7 +72,7 @@ export const Gifts = ({ onClose = () => {}, grave }) => {
 const Cell = styled.div`
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: ${p => p.theme.contrastB.rgba(0.1)};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,7 +86,7 @@ const Cell = styled.div`
 
 const GiftsGridWrapper = styled.div`
   padding: 20px;
-  background-color: ${colorsGreen.primary.hex};
+  background-color: ${p => p.theme.primary.hex};
   position: absolute;
   z-index: 1001;
   top: 50%;

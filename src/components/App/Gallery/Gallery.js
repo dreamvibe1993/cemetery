@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/macro";
+import { ColorTheme } from "../../../App";
 import { FadeIn } from "../../../configs/css/animations";
-import { colorsGreen } from "../../../configs/css/colors";
 import { ServiceButton } from "../../css/sc-components/ScComponents";
 
 export const Gallery = ({ src, onClose = () => {} }) => {
@@ -116,15 +116,14 @@ const TopPanel = styled.div`
   padding: 20px 0px 0px 20px;
   svg {
     cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.2);
-    box-shadow: 0px 0px 20px 20px rgba(0, 0, 0, 0.2);
+    background-color: ${(p) => p.theme.contrastB.rgba(0.2)};
+    box-shadow: 0px 0px 20px 20px ${(p) => p.theme.contrastB.rgba(0.2)};
   }
 `;
 
 const Button = styled.div`
   height: 60px;
   width: 60px;
-  background-color: ${colorsGreen.secondaryB.hex};
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -146,9 +145,13 @@ const Button = styled.div`
   }
 `;
 
-const ZoomIn = styled(Button)``;
+const ZoomIn = styled(Button)`
+  background-color: ${(p) => p.theme.secondaryB.hex};
+`;
 
-const ZoomOut = styled(Button)``;
+const ZoomOut = styled(Button)`
+  background-color: ${(p) => p.theme.secondaryB.hex};
+`;
 
 const ButtonsPanel = styled.div`
   position: absolute;
@@ -160,7 +163,7 @@ const ButtonsPanel = styled.div`
   justify-content: space-between;
   height: 160px;
   border-radius: 35px;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: ${(p) => p.theme.white.rgba(0.5)};
   padding: 5px 5px;
 `;
 
@@ -178,6 +181,6 @@ const PictureGallery = styled.div`
   top: 0;
   left: 0;
   z-index: 1001;
-  background-color: rgba(0, 0, 0, 0.9);
-  animation: ${FadeIn} .2s linear forwards;
+  background-color: ${(p) => p.theme.contrastB.rgba(0.9)};
+  animation: ${FadeIn} 0.2s linear forwards;
 `;
