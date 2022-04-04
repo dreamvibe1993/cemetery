@@ -14,10 +14,8 @@ import { LogIn } from "./LogIn/LogIn";
 import { FadeIn } from "../../configs/css/animations";
 import { FPassEmailModal } from "../../components/Modals/FPassEmailModal";
 import { Logo } from "../../components/App/Logo/Logo";
-import { ColorTheme } from "../../App";
 
 export const UserAuth = () => {
-  const { colorSet } = React.useContext(ColorTheme);
   const { isAuth, user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -64,7 +62,7 @@ export const UserAuth = () => {
             <Cross onClick={redirectToHome} />
           </CrossSVGWrapper>
           <LogoWrapper>
-            <Logo color={colorSet.contrastB.hex} />
+            <Logo />
           </LogoWrapper>
           <Title>Hey {user.username}!</Title>
           <LOGOUT onClick={logOut}>LOGOUT</LOGOUT>
@@ -87,7 +85,7 @@ export const UserAuth = () => {
           </ForgotPassWrapper>
         )}
         <LogoWrapper>
-          <Logo color={colorSet.contrastB.hex} />
+          <Logo />
         </LogoWrapper>
         <Title>Not authorized yet?</Title>
         <LogIn onForgotPassword={showForgotPassButton} />

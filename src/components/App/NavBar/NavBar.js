@@ -13,7 +13,7 @@ import { ColorTheme } from "../../../App";
 import { Logo } from "../Logo/Logo";
 
 export const TopNavBar = () => {
-  const { setColorSet, colorSet } = React.useContext(ColorTheme);
+  const { setColorSet } = React.useContext(ColorTheme);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const askAndSubscribe = useConfirmRedir();
@@ -73,7 +73,7 @@ export const TopNavBar = () => {
         <NavButton onClick={goAuth}>auth</NavButton>
       </Buttons>
       <LogoWrapper>
-        <Logo onClick={goHome} color={colorSet.contrastB.hex} />
+        <Logo onClick={goHome} />
       </LogoWrapper>
       <ServiceButton onClick={changeTheme}>CHANGE THEME</ServiceButton>
       {isAuth && (

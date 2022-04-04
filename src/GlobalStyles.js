@@ -7,10 +7,10 @@ export const GlobalStyles = createGlobalStyle`
     justify-content: center;
     position: relative;
     padding-top: 10px;
-    color: ${(p) => p.colorSet.textColor.hex};
+    color: ${(p) => p.theme.textColor.hex};
     font-family: 'Courier New', Courier, monospace;
     margin-top: 90px;
-    background-color: ${(p) => p.colorSet.secondaryB.rgba(1)};
+    background-color: ${(p) => p.theme.secondaryB.rgba(1)};
   }
 
   input {
@@ -21,8 +21,8 @@ export const GlobalStyles = createGlobalStyle`
   
   /* Custom properties */
   :root {
-    --tooltip-text-color: ${(p) => p.colorSet.textColor.hex};
-    --tooltip-background-color: ${(p) => p.colorSet.contrastB.hex};
+    --tooltip-text-color: ${(p) => p.theme.textColor.hex};
+    --tooltip-background-color: ${(p) => p.theme.contrastB.hex};
     --tooltip-margin: 60px;
     --tooltip-arrow-size: 6px;
   }
