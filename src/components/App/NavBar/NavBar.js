@@ -63,7 +63,7 @@ export const TopNavBar = () => {
   };
 
   const changeTheme = () => {
-    setColorSet(colorsBlack);
+    setColorSet(colorsGreen);
   };
 
   return (

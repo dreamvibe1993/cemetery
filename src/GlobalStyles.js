@@ -21,8 +21,8 @@ export const GlobalStyles = createGlobalStyle`
   
   /* Custom properties */
   :root {
-    --tooltip-text-color: ${(p) => p.theme.textColor.hex};
-    --tooltip-background-color: ${(p) => p.theme.contrastB.hex};
+    --tooltip-text-color: ${(p) => p.theme.contrastB.hex};
+    --tooltip-background-color: ${(p) => p.theme.textColor.hex};
     --tooltip-margin: 60px;
     --tooltip-arrow-size: 6px;
   }
@@ -31,6 +31,7 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
     scrollbar-color: rgba(255, 255, 255, 0.7) rgba(255, 255, 255, 0.3);
     scrollbar-width: thin;
+    transition: background-color .1s linear, color .1s linear; 
   }
   
   *::-webkit-scrollbar {

@@ -2,9 +2,7 @@ import React from "react";
 import styled from "styled-components/macro";
 import { Navigate } from "react-router-dom";
 
-import {
-  ServiceButton,
-} from "../../../components/css/sc-components/ScComponents";
+import { ServiceButton } from "../../../components/css/sc-components/ScComponents";
 import { Picture } from "../../../components/App/Picture/Picture";
 import { Gallery } from "../../../components/App/Gallery";
 import { ProfileContainer } from "../Common/Common";
@@ -59,10 +57,9 @@ export const UserProfile = () => {
     <>
       {userPhotoSrc && <Gallery src={userPhotoSrc} onClose={closeUserPhoto} />}
       <ProfileContainer>
-        <Row>
+        <UsernameRow>
           <MainUsername>{user.name}</MainUsername>
-          <ServiceButton></ServiceButton>
-        </Row>
+        </UsernameRow>
         <Row style={{ alignItems: "flex-start", justifyContent: "flex-start" }}>
           <Picture
             src={Array.isArray(user?.photos) && user?.photos[0]}
@@ -136,12 +133,15 @@ const Row = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+const UsernameRow = styled.div`
   margin-bottom: 20px;
 `;
 
 const MainUsername = styled.span`
   font-size: 32px;
   text-transform: uppercase;
-  line-height: 0;
+  line-height: 32px;
   font-weight: bolder;
 `;

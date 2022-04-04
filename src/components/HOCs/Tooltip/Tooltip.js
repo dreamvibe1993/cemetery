@@ -38,8 +38,8 @@ const TooltipTip = styled.div`
   left: 50%;
   transform: translateX(-50%);
   padding: 16px;
-  color: var(--tooltip-text-color);
-  background: var(--tooltip-background-color);
+  color: ${p => p.theme.primary.hex};
+  background: ${p => p.theme.contrastB.hex};
   font-size: 15px;
   line-height: 1;
   z-index: 998;
@@ -66,7 +66,7 @@ const TooltipTip = styled.div`
   /* CSS border triangles */
   &.top::before {
     top: 100%;
-    border-top-color: var(--tooltip-background-color);
+    border-top-color: ${p => p.theme.contrastB.hex};
   }
 
   /* Absolute positioning */
@@ -80,7 +80,7 @@ const TooltipTip = styled.div`
     left: calc(var(--tooltip-arrow-size) * -1);
     top: 50%;
     transform: translateX(0) translateY(-50%);
-    border-right-color: var(--tooltip-background-color);
+    border-right-color: ${p => p.theme.contrastB.hex};
   }
 
   /* Absolute positioning */
@@ -90,7 +90,7 @@ const TooltipTip = styled.div`
   /* CSS border triangles */
   &.bottom::before {
     bottom: 100%;
-    border-bottom-color: var(--tooltip-background-color);
+    border-bottom-color: ${p => p.theme.contrastB.hex};
   }
 
   /* Absolute positioning */
@@ -106,7 +106,7 @@ const TooltipTip = styled.div`
     right: calc(var(--tooltip-arrow-size) * -2);
     top: 50%;
     transform: translateX(0) translateY(-50%);
-    border-left-color: var(--tooltip-background-color);
+    border-left-color: ${p => p.theme.contrastB.hex};
   }
 `;
 

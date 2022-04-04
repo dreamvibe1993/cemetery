@@ -49,6 +49,49 @@ export const colorsGreen = {
 
 export const colorsBlack = {
   primary: {
+    hex: "#040117",
+    rgba: getRgba,
+  },
+  primaryDark: {
+    hex: "#030a17",
+    rgba: getRgba,
+  },
+  primaryLight: {
+    hex: "#604BD8",
+    rgba: getRgba,
+  },
+  secondaryA: {
+    hex: "#8D2373",
+    rgba: getRgba,
+  },
+  secondaryB: {
+    hex: "#040117",
+    rgba: getRgba,
+  },
+  contrastA: {
+    hex: "#040117",
+    rgba: getRgba,
+  },
+  contrastB: {
+    hex: "#ffffff",
+    rgba: getRgba,
+  },
+  textColor: {
+    hex: "#ffffff",
+    rgba: getRgba,
+  },
+  white: {
+    hex: "#ffffff",
+    rgba: getRgba,
+  },
+  error: {
+    hex: "#100a40",
+    rgba: getRgba,
+  },
+};
+
+export const colorsWeird = {
+  primary: {
     hex: "#3241a6",
     rgba: getRgba,
   },

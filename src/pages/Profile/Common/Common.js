@@ -10,5 +10,5 @@ export const ProfileContainer = styled.form`
   flex-direction: column;
   max-width: 600px;
   animation: ${FadeIn} 0.2s linear forwards;
-  border: 1px solid ${p => p.theme.secondaryB.hex};
+  border: 1px solid ${p => p.theme.contrastB.hex};
 `;
