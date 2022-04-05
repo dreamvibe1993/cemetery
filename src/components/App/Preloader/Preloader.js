@@ -1,8 +1,8 @@
 import React from "react";
 import styled, { keyframes } from "styled-components/macro";
 
-export const Preloader = () => (
-  <Fixed>
+export const Preloader = ({ notFixed }) =>
+  notFixed ? (
     <PreloaderC>
       <div></div>
       <div></div>
@@ -13,8 +13,20 @@ export const Preloader = () => (
       <div></div>
       <div></div>
     </PreloaderC>
-  </Fixed>
-);
+  ) : (
+    <Fixed>
+      <PreloaderC>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </PreloaderC>
+    </Fixed>
+  );
 
 const Fixed = styled.div`
   position: fixed;
@@ -48,7 +60,7 @@ const PreloaderC = styled.div`
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: ${p => p.theme.textColor.hex};
+    background: ${(p) => p.theme.textColor.hex};
     margin: -4px 0 0 -4px;
   }
   & div:nth-child(1) {

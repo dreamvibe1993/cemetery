@@ -13,6 +13,7 @@ import { useDeleteGrave } from "../../../services/hooks/api/graves/useDeleteGrav
 import { showError } from "../../../services/errors/showError";
 import { Grave } from "../Grave";
 import { FadeIn } from "../../../configs/css/animations";
+import { device } from "../../../configs/css/breakpoints";
 
 export const CemetaryGrid = () => {
   const [deleteGrave] = useDeleteGrave();
@@ -100,15 +101,14 @@ export const CemetaryGrid = () => {
 };
 
 const Cell = styled.div`
-  width: ${pxToVw(190, window.innerWidth)};
-  min-width: 190px;
-  height: ${pxToVh(250, window.innerWidth)};
-  min-height: 250px;
+  height: 100%;
+  width: 100%;
   transition: all 0.2s linear;
   padding: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 1px solid black;
   /* background: url(${GrassPattern}) repeat; */
   background-size: 50%;
   position: relative;
@@ -140,10 +140,17 @@ const CemetaryGridContainer = styled.div`
   background-color: ${(p) => p.theme.primary.rgba(1)};
   border-radius: 5px;
   display: grid;
-  grid-template-columns: repeat(4, auto);
-  grid-template-rows: repeat(3, auto);
+  grid-template-columns: repeat(4, 190px);
+  grid-template-rows: repeat(3, 250px);
   gap: 5px;
   min-width: 770px;
   padding: 10px;
   animation: ${FadeIn} 0.2s linear forwards;
+  @media ${device.mobileL} {
+    width: 100vw;
+    height:  ${window.innerHeight - 50 + "px"};
+    min-width: auto;
+    grid-template-columns: repeat(3, calc(100vw / 3 - 10px));
+    grid-template-rows: repeat(4, 22%);
+  }
 `;

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components/macro";
+import { device } from "../../../configs/css/breakpoints";
 
 export const Grave = ({grave}) => {
   return (
@@ -24,4 +25,7 @@ const GraveCont = styled.div`
   overflow: hidden;
   background-size: 60px 60px;
   border: 1px solid ${p => p.theme.contrastB.hex};
+  @media ${device.mobileL} {
+    padding: 0;
+  }
 `;

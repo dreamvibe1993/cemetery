@@ -11,6 +11,7 @@ import { TombInfo } from "../../components/Tomb/TombInfo";
 import { setGravesLoadingOver } from "../../redux/graves/gravesReducer";
 import { FadeIn } from "../../configs/css/animations";
 import { useLoadGraves } from "../../services/hooks/api/graves/useLoadGraves";
+import { device } from "../../configs/css/breakpoints";
 
 export const Tomb = () => {
   const [getGraves, cancelGetGravesRequest] = useLoadGraves();
@@ -75,7 +76,9 @@ const Monument = styled.div`
   position: relative;
   /* z-index: 999; */
   animation: ${FadeIn} .2s linear forwards;
-  svg {
-    /* fill: ${p => p.theme.secondaryB.hex}; */
+  @media ${device.mobileL} {
+    width: 100%;
+    min-width: auto;
+    padding: 10px;
   }
 `;

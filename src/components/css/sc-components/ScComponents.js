@@ -1,4 +1,5 @@
 import styled from "styled-components/macro";
+import { device } from "../../../configs/css/breakpoints";
 
 export const MainContainer = styled.div`
   padding: 20px;
@@ -27,6 +28,9 @@ export const ServiceButton = styled.button`
 
 export const NavButton = styled(ServiceButton)`
   height: 100%;
+  @media ${device.mobileL} {
+    font-size: 20px;
+  }
 `;
 
 export const Input = styled.input`

@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import { RoundUserPic } from "../../App/RoundUserPic/RoundUserPic";
 import { useLoadGraves } from "../../../services/hooks/api/graves/useLoadGraves";
 import { routes } from "../../../configs/urls/app/app-urls";
+import { device } from "../../../configs/css/breakpoints";
 
 export const TombInfo = ({ grave }) => {
   const [getGraves] = useLoadGraves();
@@ -95,7 +96,7 @@ export const TombInfo = ({ grave }) => {
           </DateLiving>
           <ServiceButtonsWrapper>
             <ServiceButton onClick={backToGYard}>
-              BACK TO CEMETERY
+              BACK
             </ServiceButton>
             <ServiceButton onClick={openDonateGift}>DONATE</ServiceButton>
             <ServiceButton onClick={openGifts}>GIFTS</ServiceButton>
@@ -130,7 +131,7 @@ const FirstRow = styled.div`
 `;
 
 const LogDiagSign = styled.span`
-  color: ${p => p.theme.secondaryB.hex};
+  color: ${(p) => p.theme.secondaryB.hex};
 `;
 
 const LastWordsContainer = styled.div`
@@ -142,6 +143,19 @@ const ServiceButtonsWrapper = styled.div`
   & > * {
     &:not(:last-child) {
       margin-right: 10px;
+    }
+  }
+  @media ${device.mobileL} {
+    padding: 0;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    & > * {
+      width: 45%;
+      margin-bottom: 5px;
+      margin-left: 5px;
+      &:not(:last-child) {
+        margin-right: 0px;
+      }
     }
   }
 `;
@@ -163,14 +177,14 @@ const TopBar = styled.div`
     width: 60px;
     border-radius: 50%;
     &:hover {
-      background-color: ${p => p.theme.contrastB.rgba(0.06)};
-      box-shadow: 0px 0px 19px 5px ${p => p.theme.contrastB.rgba(0.1)};
+      background-color: ${(p) => p.theme.contrastB.rgba(0.06)};
+      box-shadow: 0px 0px 19px 5px ${(p) => p.theme.contrastB.rgba(0.1)};
     }
   }
 `;
 
 const MainInfoCont = styled.div`
-  background-color: ${p => p.theme.contrastB.rgba(0.1)};
+  background-color: ${(p) => p.theme.contrastB.rgba(0.1)};
   padding: 20px;
 `;
 

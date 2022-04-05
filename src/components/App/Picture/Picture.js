@@ -17,7 +17,7 @@ export const Picture = ({
   return (
     <PhotoWrapper sizes={sizes}>
       <PreloaderCont style={{ visibility: isLoading ? "visible" : "hidden" }}>
-        <Preloader />
+        <Preloader notFixed={true}/>
       </PreloaderCont>
       <PhotoButton
         onClick={(e) => {

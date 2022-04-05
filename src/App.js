@@ -9,7 +9,6 @@ import { AuthWrapper } from "./components/HOCs/AuthWrapper";
 /*
   TODO:
   *) Waiting till db connected (FAILED)
-  *) Light and dark theme
   *) Mobile version
   *) CHANGE MY EMAIL!!!
   *) Deploy

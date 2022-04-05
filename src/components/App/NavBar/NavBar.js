@@ -14,6 +14,7 @@ import { FadeIn } from "../../../configs/css/animations";
 import { ColorTheme } from "../../HOCs/AuthWrapper/AuthWrapper";
 import { updateMe } from "../../../api/user";
 import { updateColorTheme } from "../../../redux/user/userReducer";
+import { device } from "../../../configs/css/breakpoints";
 
 export const TopNavBar = () => {
   const { setColorSet } = React.useContext(ColorTheme);
@@ -79,16 +80,16 @@ export const TopNavBar = () => {
 
   return (
     <NavBar>
-      <Buttons>
-        <NavButton onClick={goProfile}>my-profile</NavButton>
-        <NavButton onClick={goAuth}>auth</NavButton>
-      </Buttons>
       <LogoWrapper>
         <Logo onClick={goHome} />
       </LogoWrapper>
       <Buttons>
-        <ServiceButton onClick={toggleColorPicker}>
-          CHANGE THEME
+        <NavButton onClick={goProfile}>profile</NavButton>
+        <NavButton onClick={goAuth}>auth</NavButton>
+      </Buttons>
+      <Buttons>
+        <NavButton onClick={toggleColorPicker}>
+          THEME
           {isColorPickedOpen && (
             <ColorPicker>
               {allColors.map((color) => (
@@ -100,7 +101,7 @@ export const TopNavBar = () => {
               ))}
             </ColorPicker>
           )}
-        </ServiceButton>
+        </NavButton>
         {isAuth && (
           <RoundUserPic
             src={Array.isArray(user.photos) && user.photos[0]}
@@ -129,6 +130,11 @@ const ColorPicker = styled.div`
   animation: ${FadeIn} 0.2s linear forwards;
   /* box-shadow: 0px 10px 10px 5px ${(p) => p.theme.contrastB.rgba(0.1)}; */
   z-index: 1002;
+  @media ${device.mobileL} {
+    left: auto;
+    right: 0px;
+    transform: none;
+  }
 `;
 
 const Buttons = styled.div`
@@ -137,6 +143,12 @@ const Buttons = styled.div`
   position: relative;
   & > * {
     margin-right: 10px;
+  }
+  @media ${device.mobileL} {
+    position: initial;
+    & > * {
+      margin-right: 2px;
+    }
   }
 `;
 
@@ -151,6 +163,12 @@ const LogoWrapper = styled.div`
   svg {
     height: 100%;
     width: 100%;
+  }
+  @media ${device.mobileL} {
+    padding: 5px 0px;
+    position: unset;
+    transform: none;
+    height: 50px;
   }
 `;
 
@@ -181,5 +199,8 @@ const NavBar = styled.div`
   * {
     text-transform: lowercase;
     font-size: 25px;
+  }
+  @media ${device.mobileL} {
+    padding: 5px 0px;
   }
 `;
