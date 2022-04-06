@@ -5,12 +5,14 @@ export const GlobalStyles = createGlobalStyle`
   body {
     display: flex;
     justify-content: center;
-    position: relative;
     padding-top: 10px;
     color: ${(p) => p.theme.textColor.hex};
     font-family: 'Courier New', Courier, monospace;
-    margin-top: 90px;
     background-color: ${(p) => p.theme.secondaryB.rgba(1)};
+  }
+
+  #root {
+    margin-top: 90px;
   }
 
   input {

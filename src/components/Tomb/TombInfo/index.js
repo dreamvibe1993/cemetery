@@ -1,1 +1,0 @@
-export { TombInfo } from "./TombInfo";

@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components/macro";
 import { FadeIn } from "../../../configs/css/animations";
 
-export const Backdrop = ({onClick = () => {}}) => {
-    return <BackdropItself onClick={onClick}></BackdropItself>
+export const Backdrop = ({onClick = () => {}, children}) => {
+    return <BackdropItself onClick={onClick}>{children}</BackdropItself>
 }
 
 
