@@ -10,7 +10,7 @@ import { useConfirmRedir } from "../../../services/hooks/app/useConfirmRedir";
 import { setUnsavedDataStatus } from "../../../redux/app/appReducer";
 import { RoundUserPic } from "../RoundUserPic/RoundUserPic";
 import { Logo } from "../Logo/Logo";
-import { FadeIn } from "../../../configs/css/animations";
+import { FadeIn, Floating } from "../../../configs/css/animations";
 import { ColorTheme } from "../../HOCs/AuthWrapper/AuthWrapper";
 import { updateMe } from "../../../api/user";
 import { updateColorTheme } from "../../../redux/user/userReducer";
@@ -84,10 +84,10 @@ export const TopNavBar = () => {
         <Logo onClick={goHome} />
       </LogoWrapper>
       <Buttons>
-        <NavButton onClick={goProfile}>profile</NavButton>
-        <NavButton onClick={goAuth}>auth</NavButton>
+        {/* <NavButton onClick={goProfile}>profile</NavButton> */}
       </Buttons>
       <Buttons>
+        <NavButton onClick={goAuth}>auth</NavButton>
         <NavButton onClick={toggleColorPicker}>
           THEME
           {isColorPickedOpen && (
@@ -103,10 +103,12 @@ export const TopNavBar = () => {
           )}
         </NavButton>
         {isAuth && (
-          <RoundUserPic
-            src={Array.isArray(user.photos) && user.photos[0]}
-            onClick={goProfile}
-          />
+          <UserFixedWrapper>
+            <RoundUserPic
+              src={Array.isArray(user.photos) && user.photos[0]}
+              onClick={goProfile}
+            />
+          </UserFixedWrapper>
         )}
       </Buttons>
     </NavBar>
@@ -153,10 +155,10 @@ const Buttons = styled.div`
 `;
 
 const LogoWrapper = styled.div`
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  /* position: absolute; */
+  /* left: 50%; */
+  /* top: 50%; */
+  /* transform: translate(-50%, -50%); */
   height: 80%;
   width: 80px;
   cursor: pointer;
@@ -202,5 +204,20 @@ const NavBar = styled.div`
   }
   @media ${device.mobileL} {
     padding: 5px 0px;
+  }
+`;
+
+const UserFixedWrapper = styled.div`
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+  z-index: 1002;
+  border: 1px solid ${(p) => p.theme.contrastB.rgba(1)};
+  padding: 10px;
+  background-color: ${p => p.theme.primary.hex};
+  animation: ${Floating} 5s linear infinite;
+  div {
+    width: 60px;  
+    height: 60px;
   }
 `;

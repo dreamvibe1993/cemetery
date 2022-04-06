@@ -78,7 +78,6 @@ export const getMe = async (errHandleFn) => {
     })
     .then((response) => authorizeUser(response.data))
     .catch((e) => {
-      console.log(e)
       if (errHandleFn) errHandleFn(e);
       store.dispatch(setUserAuth(false));
     })

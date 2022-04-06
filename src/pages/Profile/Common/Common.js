@@ -1,5 +1,6 @@
 import styled from "styled-components/macro";
 import { FadeIn } from "../../../configs/css/animations";
+import { device } from "../../../configs/css/breakpoints";
 
 export const ProfileContainer = styled.form`
   padding: 20px;
@@ -11,4 +12,8 @@ export const ProfileContainer = styled.form`
   max-width: 600px;
   animation: ${FadeIn} 0.2s linear forwards;
   border: 1px solid ${p => p.theme.contrastB.hex};
+  @media ${device.mobileL} {
+    max-width: unset;
+    width: calc(100vw - 20px);
+  }
 `;

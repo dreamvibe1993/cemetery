@@ -18,3 +18,17 @@ export const FadeIn = keyframes`
         opacity: 1;
     }
 `;
+
+const c = 2; // x, y
+
+export const Floating = keyframes`
+    0% {
+        transform: translate(${c * 0}%, ${c * 0}%);
+    }
+    50% {
+        transform: translate(${c * 0}%, ${c * 1}%);
+    }
+    100% {
+        transform: translate(${c * 0}%, ${c * 0}%);
+    }
+`;

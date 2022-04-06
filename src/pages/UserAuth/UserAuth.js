@@ -14,9 +14,10 @@ import { LogIn } from "./LogIn/LogIn";
 import { FadeIn } from "../../configs/css/animations";
 import { FPassEmailModal } from "../../components/Modals/FPassEmailModal";
 import { Logo } from "../../components/App/Logo/Logo";
+import { device } from "../../configs/css/breakpoints";
 
 export const UserAuth = () => {
-  const { isAuth, user } = useSelector((state) => state.user);
+  const { isAuth, user, isUserLoading } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const [redirect, setRedirect] = React.useState("");
@@ -101,6 +102,13 @@ const ForgotPassWrapper = styled.div`
   right: 0;
   padding: 20px;
   animation: ${FadeIn} 0.2s linear forwards;
+  @media ${device.mobileL} {
+    left: unset;
+    button {
+      width: 70px;
+      padding: 0px;
+    }
+  }
 `;
 
 const CrossSVGWrapper = styled.div`
@@ -139,6 +147,9 @@ const LogoWrapper = styled.div`
 const Title = styled.span`
   font-size: 36px;
   margin-bottom: 20px;
+  @media ${device.mobileL} {
+    font-size: 24px;
+  }
 `;
 
 const UserAuthContainer = styled.div`
@@ -152,4 +163,8 @@ const UserAuthContainer = styled.div`
   text-align: center;
   position: relative;
   border: 1px solid ${p => p.theme.contrastB.hex};
+  @media ${device.mobileL} {
+    width: calc(100vw - 20px);
+    padding: 20px 0px;
+  }
 `;

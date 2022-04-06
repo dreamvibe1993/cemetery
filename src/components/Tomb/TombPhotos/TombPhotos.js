@@ -1,10 +1,8 @@
 import React from "react";
 import styled from "styled-components/macro";
 
-
 import { Gallery } from "../../App/Gallery";
 import { Picture } from "../../App/Picture/Picture";
-
 
 export const TombPhotos = ({ grave }) => {
   const [isClicked, setClicked] = React.useState(false);
@@ -37,30 +35,31 @@ export const TombPhotos = ({ grave }) => {
   };
 
   return (
-    <PaddingWrapper>
-      <PhotoCont ref={photoContRef}>
-        {isGalleryOpen && <Gallery src={isGalleryOpen} onClose={hidePhoto} />}
-        <PhotoContPhotosWrapper
-          onMouseMove={(e) => move(e)}
-          onMouseDown={(e) => captureClick(e)}
-          onMouseUp={releaseClick}
-          onMouseLeave={releaseClick}
-          draggable={false}
-        >
-          {grave?.photos.map((src, i) => {
-            return <Picture src={src} key={src + i} showPhoto={showPhoto} />;
-          })}
-        </PhotoContPhotosWrapper>
-      </PhotoCont>
-    </PaddingWrapper>
+    <>
+      {isGalleryOpen && <Gallery src={isGalleryOpen} onClose={hidePhoto} />}
+      <PaddingWrapper>
+        <PhotoCont ref={photoContRef}>
+          <PhotoContPhotosWrapper
+            onMouseMove={(e) => move(e)}
+            onMouseDown={(e) => captureClick(e)}
+            onMouseUp={releaseClick}
+            onMouseLeave={releaseClick}
+            draggable={false}
+          >
+            {grave?.photos.map((src, i) => {
+              return <Picture src={src} key={src + i} showPhoto={showPhoto} />;
+            })}
+          </PhotoContPhotosWrapper>
+        </PhotoCont>
+      </PaddingWrapper>
+    </>
   );
 };
 
 const PaddingWrapper = styled.div`
   padding: 0px 20px;
-  background-color: ${p => p.theme.contrastB.rgba(0.2)};
+  background-color: ${(p) => p.theme.contrastB.rgba(0.2)};
 `;
-
 
 const PhotoContPhotosWrapper = styled.div`
   display: flex;

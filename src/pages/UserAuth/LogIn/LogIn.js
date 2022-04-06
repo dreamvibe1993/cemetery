@@ -10,6 +10,7 @@ import {
 import { setUserAuth } from "../../../redux/user/userReducer";
 import { loginSchema } from "../../../models/yup/yup-schemas";
 import { showError } from "../../../services/errors/showError";
+import { device } from "../../../configs/css/breakpoints";
 
 export const LogIn = ({ onForgotPassword = () => {} }) => {
   const { notification } = useSelector((state) => state.app);
@@ -101,7 +102,12 @@ const ErrMessage = styled.span`
   bottom: 2px;
   left: 10px;
   font-size: 12px;
-  color: ${p => p.theme.error.rgba(1)};;
+  color: ${p => p.theme.error.rgba(1)};
+  @media ${device.mobileL} {
+    width: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 `;
 
 const LOGIN = styled(ServiceButton)`

@@ -42,4 +42,7 @@ export const Input = styled.input`
   color: ${p => p.theme.textColor.hex};
   font-size: 16px;
   border: ${(p) => (p.err ? "1px solid rgba(168, 50, 50,.9)" : "none")};
+  @media ${device.mobileL} {
+    width: 100%;
+  }
 `;

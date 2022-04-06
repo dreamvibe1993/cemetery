@@ -26,6 +26,7 @@ import { Gallery } from "../../../components/App/Gallery";
 import { ProfileContainer } from "../Common/Common";
 import { defaultPlatforms } from "../../../configs/profile/defaultPlarforms";
 import { useDeleteMe } from "../../../services/hooks/api/user/useDeleteMe";
+import { device } from "../../../configs/css/breakpoints";
 
 export const MyProfile = () => {
   const [deleteMyProfile] = useDeleteMe();
@@ -288,6 +289,9 @@ const CredsContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  @media ${device.mobileL} {
+    width: 50%;
+  }
 `;
 
 const ChangePhotoInput = styled.input`

@@ -87,7 +87,7 @@ export const colorsBlack = {
     rgba: getRgba,
   },
   error: {
-    hex: "#4f0303",
+    hex: "#ff0000",
     rgba: getRgba,
   },
 };
