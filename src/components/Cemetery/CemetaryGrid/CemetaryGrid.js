@@ -8,7 +8,6 @@ import GrassPattern from "../../../media/img/grave/grass-p-2.png";
 
 import { NewGraveModal } from "../../Modals/NewGraveModal/NewGraveModal";
 import { Tooltip } from "../../HOCs/Tooltip";
-import { pxToVh, pxToVw } from "../../../services/css/convertion/sizes";
 import { useDeleteGrave } from "../../../services/hooks/api/graves/useDeleteGrave";
 import { showError } from "../../../services/errors/showError";
 import { Grave } from "../Grave";
@@ -108,8 +107,8 @@ const Cell = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
-  /* background: url(${GrassPattern}) repeat; */
+  border: 1px solid ${(p) => p.theme.contrastB.rgba(1)};
+  border-radius: 1px;
   background-size: 50%;
   position: relative;
   cursor: pointer;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/macro";
 
-import { NavButton, ServiceButton } from "../../css/sc-components/ScComponents";
+import { NavButton } from "../../css/sc-components/ScComponents";
 import { allColors } from "../../../configs/css/colors";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,6 +30,18 @@ export const TopNavBar = () => {
   React.useEffect(() => {
     setUnsavedData(isThereUnsavedData);
   }, [isThereUnsavedData]);
+
+  const closeIfMissedComponent = (e) => {
+    if (e.target.id !== "colorsPicker") closeColorPicker();
+  };
+
+  React.useEffect(() => {
+    window.addEventListener("click", (e) => closeIfMissedComponent(e));
+    return () => {
+      window.removeEventListener("click", (e) => closeIfMissedComponent(e));
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const checkUnsavedData = (func) => {
     if (unsavedData) {
@@ -78,6 +90,10 @@ export const TopNavBar = () => {
     setColorPickerOpen((prev) => !prev);
   };
 
+  function closeColorPicker() {
+    setColorPickerOpen(false);
+  }
+
   return (
     <NavBar>
       <LogoWrapper>
@@ -88,10 +104,10 @@ export const TopNavBar = () => {
       </Buttons>
       <Buttons>
         <NavButton onClick={goAuth}>auth</NavButton>
-        <NavButton onClick={toggleColorPicker}>
+        <NavButton onClick={toggleColorPicker} id="colorsPicker">
           THEME
           {isColorPickedOpen && (
-            <ColorPicker>
+            <ColorPicker id="colorsPicker">
               {allColors.map((color) => (
                 <ColorTile
                   onClick={() => changeTheme(color.theme)}

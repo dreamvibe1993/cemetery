@@ -259,17 +259,17 @@ export const MyProfile = () => {
                 </ServiceButton>
               </Row>
             </UserPersonalInfo>
-            <RowEnd>
-              <ServiceButton type="button" onClick={goToMyProfilePreview}>
-                PREVIEW
-              </ServiceButton>
-              <ServiceButton type="submit">SAVE PROFILE</ServiceButton>
-              <ServiceButton type="button" onClick={deleteMyProfile}>
-                DELETE PROFILE
-              </ServiceButton>
-            </RowEnd>
           </CredsContainer>
         </Row>
+        <RowEnd>
+          <ServiceButton type="button" onClick={goToMyProfilePreview}>
+            PREVIEW
+          </ServiceButton>
+          <ServiceButton type="submit">SAVE PROFILE</ServiceButton>
+          <ServiceButton type="button" onClick={deleteMyProfile}>
+            DELETE PROFILE
+          </ServiceButton>
+        </RowEnd>
       </ProfileContainer>
     </>
   );
@@ -315,9 +315,16 @@ const Row = styled.div`
 
 const RowEnd = styled(Row)`
   justify-content: flex-end;
-  margin-bottom: 0px;
+  margin-bottom: 20px;
   & > * {
     margin-left: 10px;
+  }
+  @media ${device.mobileL} {
+    -webkit-appearance: unset;
+    & > * {
+      font-weight: lighter;
+      margin-left: 0px;
+    }
   }
 `;
 
