@@ -4,7 +4,10 @@ import { Navigate } from "react-router-dom";
 import styled from "styled-components/macro";
 import { resetPassword } from "../../../api/user";
 
-import { ServiceButton } from "../../../components/css/sc-components/ScComponents";
+import {
+  Input,
+  ServiceButton,
+} from "../../../components/css/sc-components/ScComponents";
 import { routes } from "../../../configs/urls/app/app-urls";
 import { passChangeSchema } from "../../../models/yup/yup-schemas";
 import { setNotification } from "../../../redux/app/appReducer";
@@ -108,6 +111,11 @@ const PassChangeSection = styled.div`
   padding-top: ${(p) => (p.open ? "40px" : "0px")};
   opacity: ${(p) => (p.open ? "1" : "0")};
   overflow: hidden;
+  & > * {
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
 `;
 
 const RelativeWrap = styled.div`
@@ -120,23 +128,11 @@ const ErrMessage = styled.span`
   bottom: 2px;
   left: 10px;
   font-size: 12px;
-  color: ${p => p.theme.error.rgba(1)};;
+  color: ${(p) => p.theme.error.rgba(1)}; ;
 `;
 
 const CHANGE = styled(ServiceButton)`
   margin-top: 20px;
-`;
-
-const Input = styled.input`
-  width: 430px;
-  height: 40px;
-  background-color: ${p => p.theme.contrastB.rgba(0.2)};
-  border: none;
-  margin-bottom: 20px;
-  padding: 5px 10px;
-  color: ${p => p.theme.textColor.hex};
-  font-size: 16px;
-  border: ${(p) => (p.err ? "1px solid rgba(168, 50, 50,.9)" : "none")};
 `;
 
 const PasswordInput = styled(Input)``;

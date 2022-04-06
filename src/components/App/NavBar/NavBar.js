@@ -167,7 +167,7 @@ const LogoWrapper = styled.div`
     width: 100%;
   }
   @media ${device.mobileL} {
-    padding: 5px 0px;
+    /* padding: 5px 0px; */
     position: unset;
     transform: none;
     height: 50px;
@@ -203,21 +203,24 @@ const NavBar = styled.div`
     font-size: 25px;
   }
   @media ${device.mobileL} {
-    padding: 5px 0px;
+    padding: 5px 5px;
   }
 `;
 
 const UserFixedWrapper = styled.div`
-  position: fixed;
+  /* position: fixed;
   bottom: 10px;
   right: 20px;
-  z-index: 1002;
-  border: 1px solid ${(p) => p.theme.contrastB.rgba(1)};
-  padding: 10px;
-  background-color: ${p => p.theme.primary.hex};
+  z-index: 1002; */
+  /* border: 1px solid ${(p) => p.theme.contrastB.rgba(1)}; */
+  /* padding: 10px; */
+  background-color: ${(p) => p.theme.primary.hex};
   animation: ${Floating} 5s linear infinite;
-  div {
+  @media ${device.mobileL} {
+    /* margin-right: 20px; */
+  }
+  /* div {
     width: 60px;  
     height: 60px;
-  }
+  } */
 `;

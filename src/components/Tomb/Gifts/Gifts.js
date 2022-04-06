@@ -7,6 +7,7 @@ import { ReactComponent as BTC } from "../../../media/svg/btc.svg";
 import { Tooltip } from "../../HOCs/Tooltip";
 import { FadeIn } from "../../../configs/css/animations";
 import { Backdrop } from "../../App/Backdrop";
+import { device } from "../../../configs/css/breakpoints";
 
 export const Gifts = ({ onClose = () => {}, grave }) => {
   const [cells, setCells] = React.useState([]);
@@ -46,7 +47,7 @@ export const Gifts = ({ onClose = () => {}, grave }) => {
 
   return (
     <>
-      <Backdrop onClick={onClose}/>
+      <Backdrop onClick={onClose} />
       <GiftsGridWrapper>
         <ServiceButton onClick={onClose}>BACK</ServiceButton>
         <GiftsGrid>
@@ -72,11 +73,12 @@ export const Gifts = ({ onClose = () => {}, grave }) => {
 const Cell = styled.div`
   height: 100%;
   width: 100%;
-  background-color: ${p => p.theme.contrastB.rgba(0.1)};
+  background-color: ${(p) => p.theme.contrastB.rgba(0.1)};
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 15px;
+  overflow: hidden;
   cursor: pointer;
   svg {
     width: 100%;
@@ -86,13 +88,16 @@ const Cell = styled.div`
 
 const GiftsGridWrapper = styled.div`
   padding: 20px;
-  background-color: ${p => p.theme.primary.hex};
+  background-color: ${(p) => p.theme.primary.hex};
   position: absolute;
   z-index: 1001;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  animation: ${FadeIn} .2s linear forwards;
+  animation: ${FadeIn} 0.2s linear forwards;
+  @media ${device.mobileL} {
+    width: calc(100% - 20px);
+  }
 `;
 
 const GiftsGrid = styled.div`
@@ -101,4 +106,11 @@ const GiftsGrid = styled.div`
   grid-template-rows: repeat(4, 170px);
   grid-gap: 10px;
   margin-top: 10px;
+  @media ${device.mobileL} {
+    padding: 10px;
+    width: 100%;
+    grid-template-columns: repeat(4, calc(100% / 4));
+    grid-template-rows: repeat(4, calc(100vh / 6));
+    justify-content: space-around;
+  }
 `;
