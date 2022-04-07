@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/cemetery/static/css/main.20e30c71.css",
-    "main.js": "/cemetery/static/js/main.234c7d76.js",
+    "main.js": "/cemetery/static/js/main.c319f73a.js",
     "static/js/787.1194fe80.chunk.js": "/cemetery/static/js/787.1194fe80.chunk.js",
     "static/media/question-mark.png": "/cemetery/static/media/question-mark.6c5137324662e25527ea.png",
     "static/media/candy.svg": "/cemetery/static/media/candy.178f2f8b193fc807cc8355b158ec90e9.svg",
@@ -12,11 +12,11 @@
     "index.html": "/cemetery/index.html",
     "static/media/triangle-down.svg": "/cemetery/static/media/triangle-down.189b744cdb42b5501bc3dffdf0bc1bb8.svg",
     "main.20e30c71.css.map": "/cemetery/static/css/main.20e30c71.css.map",
-    "main.234c7d76.js.map": "/cemetery/static/js/main.234c7d76.js.map",
+    "main.c319f73a.js.map": "/cemetery/static/js/main.c319f73a.js.map",
     "787.1194fe80.chunk.js.map": "/cemetery/static/js/787.1194fe80.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.20e30c71.css",
-    "static/js/main.234c7d76.js"
+    "static/js/main.c319f73a.js"
   ]
 }
