@@ -8,6 +8,7 @@ import { UserAuth } from "./pages/UserAuth/UserAuth";
 import { PasswordChange } from "./pages/PasswordChange";
 import { MyProfile } from "./pages/Profile/My";
 import { UserProfile } from "./pages/Profile/User";
+import { About } from "./pages/About";
 
 export const Paths = () => {
   return (
@@ -18,6 +19,7 @@ export const Paths = () => {
       <Route path={routes.profile.origin} exact={true} element={<UserProfile />} />
       <Route path={routes.myProfile.origin} exact={true} element={<MyProfile />} />
       <Route path={routes.passwordChange.origin} exact={true} element={<PasswordChange />} />
+      <Route path={routes.about.origin} exact={true} element={<About />} />
     </Routes>
   );
 };

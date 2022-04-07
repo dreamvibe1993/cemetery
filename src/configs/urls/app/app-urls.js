@@ -16,5 +16,8 @@ export const routes = {
   },
   passwordChange: {
     origin: "/passwordChange"
+  },
+  about: {
+    origin: "/about"
   }
 };

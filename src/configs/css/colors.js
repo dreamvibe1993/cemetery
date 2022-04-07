@@ -172,7 +172,7 @@ export const colorsWhite = {
     rgba: getRgba,
   },
   white: {
-    hex: "#0c034f",
+    hex: "#FFFFFF",
     rgba: getRgba,
   },
   error: {

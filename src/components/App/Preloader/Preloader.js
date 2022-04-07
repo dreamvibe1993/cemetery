@@ -60,7 +60,7 @@ const PreloaderC = styled.div`
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: ${(p) => p.theme.textColor.hex};
+    background: ${(p) => p.theme?.textColor?.hex || "#fff"};
     margin: -4px 0 0 -4px;
   }
   & div:nth-child(1) {

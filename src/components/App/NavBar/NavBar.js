@@ -11,13 +11,18 @@ import { setUnsavedDataStatus } from "../../../redux/app/appReducer";
 import { RoundUserPic } from "../RoundUserPic/RoundUserPic";
 import { Logo } from "../Logo/Logo";
 import { FadeIn } from "../../../configs/css/animations";
-import { ColorTheme } from "../../HOCs/AuthWrapper/AuthWrapper";
+import {
+  ColorTheme,
+  GreetingsScreenContext,
+} from "../../HOCs/AuthWrapper/AuthWrapper";
 import { updateMe } from "../../../api/user";
 import { updateColorTheme } from "../../../redux/user/userReducer";
 import { deviceMax } from "../../../configs/css/breakpoints";
+import { ReactComponent as TriangleDown } from "../../../media/svg/triangle-down.svg";
 
 export const TopNavBar = () => {
   const { setColorSet } = React.useContext(ColorTheme);
+  const { setGreetingsShow } = React.useContext(GreetingsScreenContext);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const askAndSubscribe = useConfirmRedir();
@@ -40,7 +45,7 @@ export const TopNavBar = () => {
     return () => {
       window.removeEventListener("click", (e) => closeIfMissedComponent(e));
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const checkUnsavedData = (func) => {
@@ -100,6 +105,9 @@ export const TopNavBar = () => {
         <Logo onClick={goHome} />
       </LogoWrapper>
       <Buttons>
+        <ShowStartingScreenButton onClick={() => setGreetingsShow(true)}>
+          <TriangleDown />
+        </ShowStartingScreenButton>
         <NavButton onClick={goAuth}>auth</NavButton>
         <NavButton onClick={toggleColorPicker} id="colorsPicker">
           THEME
@@ -127,6 +135,16 @@ export const TopNavBar = () => {
     </NavBar>
   );
 };
+
+const ShowStartingScreenButton = styled.div`
+  padding: 0px 10px;
+  cursor: pointer;
+  svg {
+    path {
+      fill: ${(p) => p.theme.contrastB.hex};
+    }
+  }
+`;
 
 const ColorTile = styled.div`
   height: 35px;
@@ -163,7 +181,7 @@ const Buttons = styled.div`
     & > * {
       &:not(:last-child) {
         margin-right: 15px;
-      } 
+      }
       margin-right: 0px;
       padding: 0px;
     }
