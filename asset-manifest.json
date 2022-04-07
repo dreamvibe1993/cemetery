@@ -1,27 +1,22 @@
 {
   "files": {
-    "main.css": "/cemetery/static/css/main.14618208.css",
-    "main.js": "/cemetery/static/js/main.e6600cbc.js",
+    "main.css": "/cemetery/static/css/main.20e30c71.css",
+    "main.js": "/cemetery/static/js/main.234c7d76.js",
     "static/js/787.1194fe80.chunk.js": "/cemetery/static/js/787.1194fe80.chunk.js",
-    "static/media/zemfira-pmml.mp3": "/cemetery/static/media/zemfira-pmml.c51903561541b0b4d72d.mp3",
-    "static/media/logo.svg": "/cemetery/static/media/logo.c88c0ac333fd59261b5f5318fcc15823.svg",
-    "static/media/candy.svg": "/cemetery/static/media/candy.5ca8feda38cff3999b9c8acd52db0198.svg",
-    "static/media/vodka.svg": "/cemetery/static/media/vodka.0355b2380f15e775213a356b735dbd4d.svg",
-    "static/media/eye.svg": "/cemetery/static/media/eye.183ccb6ca6361be00bd8e1729c95a740.svg",
-    "static/media/donate.svg": "/cemetery/static/media/donate.bd553e57411a8caf4e52a36d2bdda9b3.svg",
-    "static/media/pause.svg": "/cemetery/static/media/pause.0e7ab9269340f6e42b53e5da49823fc0.svg",
-    "static/media/play.svg": "/cemetery/static/media/play.fb2c449812236c2f713ffee14cbd2595.svg",
+    "static/media/question-mark.png": "/cemetery/static/media/question-mark.6c5137324662e25527ea.png",
+    "static/media/candy.svg": "/cemetery/static/media/candy.178f2f8b193fc807cc8355b158ec90e9.svg",
+    "static/media/eye.svg": "/cemetery/static/media/eye.228488cd4f0169a9ef345ad96ff2ff36.svg",
+    "static/media/vodka.svg": "/cemetery/static/media/vodka.8f466938014937b4cc8baa84c082f060.svg",
     "static/media/btc.svg": "/cemetery/static/media/btc.e0d0541809a527e9b09d363e034dc667.svg",
-    "static/media/cross.svg": "/cemetery/static/media/cross.36131ace3415ace140cc14e9e002b76d.svg",
+    "static/media/cross.svg": "/cemetery/static/media/cross.6e1de3fbaa33fcb96522579e8e3b6579.svg",
     "index.html": "/cemetery/index.html",
-    "static/media/chevrone.svg": "/cemetery/static/media/chevrone.1c769e6bf0e40dfa8c065a88cbccd9a7.svg",
-    "static/media/triangle-down.svg": "/cemetery/static/media/triangle-down.e5ff7e7d97b04ff0fe95abc801ca5ac5.svg",
-    "main.14618208.css.map": "/cemetery/static/css/main.14618208.css.map",
-    "main.e6600cbc.js.map": "/cemetery/static/js/main.e6600cbc.js.map",
+    "static/media/triangle-down.svg": "/cemetery/static/media/triangle-down.189b744cdb42b5501bc3dffdf0bc1bb8.svg",
+    "main.20e30c71.css.map": "/cemetery/static/css/main.20e30c71.css.map",
+    "main.234c7d76.js.map": "/cemetery/static/js/main.234c7d76.js.map",
     "787.1194fe80.chunk.js.map": "/cemetery/static/js/787.1194fe80.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.14618208.css",
-    "static/js/main.e6600cbc.js"
+    "static/css/main.20e30c71.css",
+    "static/js/main.234c7d76.js"
   ]
 }
