@@ -14,7 +14,7 @@ import { FadeIn } from "../../../configs/css/animations";
 import { ColorTheme } from "../../HOCs/AuthWrapper/AuthWrapper";
 import { updateMe } from "../../../api/user";
 import { updateColorTheme } from "../../../redux/user/userReducer";
-import { device } from "../../../configs/css/breakpoints";
+import { deviceMax } from "../../../configs/css/breakpoints";
 
 export const TopNavBar = () => {
   const { setColorSet } = React.useContext(ColorTheme);
@@ -144,7 +144,7 @@ const ColorPicker = styled.div`
   display: flex;
   animation: ${FadeIn} 0.2s linear forwards;
   z-index: 1002;
-  @media ${device.mobileL} {
+  @media ${deviceMax.mobileL} {
     left: auto;
     right: 0px;
     transform: none;
@@ -158,7 +158,7 @@ const Buttons = styled.div`
   & > * {
     margin-right: 10px;
   }
-  @media ${device.mobileL} {
+  @media ${deviceMax.mobileL} {
     position: initial;
     & > * {
       &:not(:last-child) {
@@ -178,7 +178,7 @@ const LogoWrapper = styled.div`
     height: 100%;
     width: 100%;
   }
-  @media ${device.mobileL} {
+  @media ${deviceMax.mobileL} {
     position: unset;
     transform: none;
     height: 50px;
@@ -214,7 +214,7 @@ const NavBar = styled.div`
     text-transform: lowercase;
     font-size: 25px;
   }
-  @media ${device.mobileL} {
+  @media ${deviceMax.mobileL} {
     padding: 5px 10px;
   }
 `;

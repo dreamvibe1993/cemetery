@@ -3,7 +3,7 @@ import styled from "styled-components/macro";
 import { createMyProfile } from "../../../api/user";
 
 import { Input, ServiceButton } from "../../../components/css/sc-components/ScComponents";
-import { device } from "../../../configs/css/breakpoints";
+import { deviceMax } from "../../../configs/css/breakpoints";
 import { regSchema } from "../../../models/yup/yup-schemas";
 import { showError } from "../../../services/errors/showError";
 
@@ -158,7 +158,7 @@ const ErrMessage = styled.span`
   left: 10px;
   font-size: 12px;
   color: ${p => p.theme.error.rgba(1)};
-  @media ${device.mobileL} {
+  @media ${deviceMax.mobileL} {
     width: 120%;
     left: 50%;
     transform: translateX(-50%);

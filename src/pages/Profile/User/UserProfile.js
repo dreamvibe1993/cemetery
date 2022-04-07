@@ -10,7 +10,7 @@ import { getUser } from "../../../api/user";
 import { showError } from "../../../services/errors/showError";
 import { Preloader } from "../../../components/App/Preloader";
 import { routes } from "../../../configs/urls/app/app-urls";
-import { device } from "../../../configs/css/breakpoints";
+import { deviceMax } from "../../../configs/css/breakpoints";
 
 export const UserProfile = () => {
   const [redirect, setRedirect] = React.useState(null);
@@ -128,7 +128,7 @@ const CredsContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  @media ${device.mobileL} {
+  @media ${deviceMax.mobileL} {
     width: 50%;
   }
 `;

@@ -1,5 +1,5 @@
 import styled from "styled-components/macro";
-import { device } from "../../../configs/css/breakpoints";
+import { deviceMax } from "../../../configs/css/breakpoints";
 
 export const MainContainer = styled.div`
   padding: 20px;
@@ -28,7 +28,7 @@ export const ServiceButton = styled.button`
 
 export const NavButton = styled(ServiceButton)`
   height: 100%;
-  @media ${device.mobileL} {
+  @media ${deviceMax.mobileL} {
     font-size: 20px;
   }
 `;
@@ -42,7 +42,7 @@ export const Input = styled.input`
   color: ${p => p.theme.textColor.hex};
   font-size: 16px;
   border: ${(p) => (p.err ? "1px solid rgba(168, 50, 50,.9)" : "none")};
-  @media ${device.mobileL} {
+  @media ${deviceMax.mobileL} {
     width: 100%;
   }
 `;

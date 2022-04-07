@@ -12,7 +12,7 @@ import { useDeleteGrave } from "../../../services/hooks/api/graves/useDeleteGrav
 import { showError } from "../../../services/errors/showError";
 import { Grave } from "../Grave";
 import { FadeIn } from "../../../configs/css/animations";
-import { device } from "../../../configs/css/breakpoints";
+import { deviceMax, deviceMin } from "../../../configs/css/breakpoints";
 
 export const CemetaryGrid = () => {
   const [deleteGrave] = useDeleteGrave();
@@ -139,7 +139,7 @@ const Cell = styled.div`
     display: none;
     opacity: 0;
   }
-  @media ${device.mobileL}, ${device.tablet} {
+  @media ${deviceMax.mobileL}, ${deviceMax.tablet} {
     #sbut {
       opacity: ${p => p.showDelButton ? 1 : 0};
       display: ${p => p.showDelButton ? "block" : "none"};
@@ -159,14 +159,14 @@ const CemetaryGridContainer = styled.div`
   min-width: 770px;
   padding: 10px;
   animation: ${FadeIn} 0.2s linear forwards;
-  @media ${device.mobileL} {
+  @media ${deviceMax.mobileL} {
     width: 100vw;
     height: ${window.innerHeight - 50 + "px"};
     min-width: auto;
     grid-template-columns: repeat(3, calc(100vw / 3 - 10px));
     grid-template-rows: repeat(4, 22%);
   }
-  @media ${device.tablet} {
+  @media ${deviceMax.tablet} and ${deviceMin.mobileL} {
     min-width: auto;
     grid-template-columns: repeat(4, calc(100vw / 5));
     grid-template-rows: repeat(3, 25vh);

@@ -7,7 +7,7 @@ import { ReactComponent as BTC } from "../../../media/svg/btc.svg";
 import { Tooltip } from "../../HOCs/Tooltip";
 import { FadeIn } from "../../../configs/css/animations";
 import { Backdrop } from "../../App/Backdrop";
-import { device } from "../../../configs/css/breakpoints";
+import { deviceMax, deviceMin } from "../../../configs/css/breakpoints";
 
 export const Gifts = ({ onClose = () => {}, grave }) => {
   const [cells, setCells] = React.useState([]);
@@ -95,10 +95,10 @@ const GiftsGridWrapper = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   animation: ${FadeIn} 0.2s linear forwards;
-  @media ${device.mobileL} {
+  @media ${deviceMax.mobileL} {
     width: calc(100% - 20px);
   }
-  @media ${device.tablet} {
+  @media ${deviceMax.tablet} and ${deviceMin.mobileL} {
     width: calc(100vw - 40px);
     padding: 10px;
     padding-bottom: 40px;
@@ -111,14 +111,14 @@ const GiftsGrid = styled.div`
   grid-template-rows: repeat(4, 170px);
   grid-gap: 10px;
   margin-top: 10px;
-  @media ${device.mobileL} {
+  @media ${deviceMax.mobileL} {
     padding: 10px;
     width: 100%;
     grid-template-columns: repeat(4, calc(100% / 4));
     grid-template-rows: repeat(4, calc(100vh / 6));
     justify-content: space-around;
   }
-  @media ${device.tablet} {
+  @media ${deviceMax.tablet} and ${deviceMin.mobileL} {
     grid-template-columns: repeat(4, calc(100vw / 5));
     grid-template-rows: repeat(4, calc(100vh / 5));
     justify-content: center;

@@ -26,7 +26,7 @@ import { Gallery } from "../../../components/App/Gallery";
 import { ProfileContainer } from "../Common/Common";
 import { defaultPlatforms } from "../../../configs/profile/defaultPlarforms";
 import { useDeleteMe } from "../../../services/hooks/api/user/useDeleteMe";
-import { device } from "../../../configs/css/breakpoints";
+import { deviceMax } from "../../../configs/css/breakpoints";
 
 export const MyProfile = () => {
   const [deleteMyProfile] = useDeleteMe();
@@ -289,7 +289,7 @@ const CredsContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  @media ${device.mobileL} {
+  @media ${deviceMax.mobileL} {
     width: 50%;
   }
 `;
@@ -319,7 +319,7 @@ const RowEnd = styled(Row)`
   & > * {
     margin-left: 10px;
   }
-  @media ${device.mobileL} {
+  @media ${deviceMax.mobileL} {
     & > * {
       font-weight: lighter;
       margin-left: 0px;

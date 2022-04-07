@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components/macro";
 import { Preloader } from "../../components/App/Preloader";
-import { device } from "../../configs/css/breakpoints";
+import { deviceMax, deviceMin } from "../../configs/css/breakpoints";
 
 import { ReactComponent as Cross } from "../../media/svg/cross.svg";
 import { PassChange } from "../UserAuth/PassChange/PassChange";
@@ -53,11 +53,11 @@ const UserAuthContainer = styled.div`
   align-items: center;
   text-align: center;
   position: relative;
-  @media ${device.mobileL} {
+  @media ${deviceMax.mobileL} {
     width: calc(100vw - 20px);
     padding: 10px;
   }
-  @media ${device.tablet} {
+  @media ${deviceMax.tablet} and ${deviceMin.mobileL} {
     width: calc(100vw - 40px);
     padding: 10px;
   }

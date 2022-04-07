@@ -10,7 +10,7 @@ import { showError } from "../../../services/errors/showError";
 import { ServiceButton } from "../../css/sc-components/ScComponents";
 import { Backdrop } from "../../App/Backdrop";
 import { useUpdateGrave } from "../../../services/hooks/api/graves/useUpdateGrave";
-import { device } from "../../../configs/css/breakpoints";
+import { deviceMax } from "../../../configs/css/breakpoints";
 
 export const DonateGift = ({ onClose = () => {}, grave }) => {
   const [updateGrave] = useUpdateGrave();
@@ -149,7 +149,7 @@ const ChooseGiftBlock = styled.div`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  @media ${device.mobileL} {
+  @media ${deviceMax.mobileL} {
     width: 100vw;
     position: fixed;
   }

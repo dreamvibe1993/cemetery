@@ -10,7 +10,7 @@ import { TombChatLogs } from "../../components/Tomb/TombChatLogs";
 import { setGravesLoadingOver } from "../../redux/graves/gravesReducer";
 import { FadeIn } from "../../configs/css/animations";
 import { useLoadGraves } from "../../services/hooks/api/graves/useLoadGraves";
-import { device } from "../../configs/css/breakpoints";
+import { deviceMax } from "../../configs/css/breakpoints";
 import { ServiceButton } from "../../components/css/sc-components/ScComponents";
 import { RoundUserPic } from "../../components/App/RoundUserPic/RoundUserPic";
 import { showError } from "../../services/errors/showError";
@@ -251,7 +251,7 @@ const ServiceButtonsWrapper = styled.div`
       margin-right: 10px;
     }
   }
-  @media ${device.mobileL} {
+  @media ${deviceMax.mobileL} {
     padding: 0;
     flex-wrap: wrap;
     justify-content: flex-end;
@@ -313,7 +313,7 @@ const Name = styled(Text)`
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  @media ${device.mobileL} {
+  @media ${deviceMax.mobileL} {
     font-size: 30px;
   }
 `;
@@ -332,7 +332,7 @@ const Monument = styled.div`
   /* position: relative; */
   /* z-index: 999; */
   animation: ${FadeIn} 0.2s linear forwards;
-  @media ${device.mobileL} {
+  @media ${deviceMax.mobileL} {
     width: 100%;
     min-width: auto;
     padding: 10px;

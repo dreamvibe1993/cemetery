@@ -14,7 +14,7 @@ import { LogIn } from "./LogIn/LogIn";
 import { FadeIn } from "../../configs/css/animations";
 import { FPassEmailModal } from "../../components/Modals/FPassEmailModal";
 import { Logo } from "../../components/App/Logo/Logo";
-import { device } from "../../configs/css/breakpoints";
+import { deviceMax } from "../../configs/css/breakpoints";
 
 export const UserAuth = () => {
   const { isAuth, user, isUserLoading } = useSelector((state) => state.user);
@@ -102,7 +102,7 @@ const ForgotPassWrapper = styled.div`
   right: 0;
   padding: 20px;
   animation: ${FadeIn} 0.2s linear forwards;
-  @media ${device.mobileL} {
+  @media ${deviceMax.mobileL} {
     left: unset;
     button {
       width: 70px;
@@ -142,7 +142,7 @@ const LogoWrapper = styled.div`
     height: 100%;
     width: 100%;
   }
-  @media ${device.tablet} {
+  @media ${deviceMax.tablet} {
     width: 22%;
   }
 `;
@@ -150,7 +150,7 @@ const LogoWrapper = styled.div`
 const Title = styled.span`
   font-size: 36px;
   margin-bottom: 20px;
-  @media ${device.mobileL} {
+  @media ${deviceMax.mobileL} {
     font-size: 24px;
   }
 `;
@@ -166,11 +166,11 @@ const UserAuthContainer = styled.div`
   text-align: center;
   position: relative;
   border: 1px solid ${p => p.theme.contrastB.hex};
-  @media ${device.mobileL} {
+  @media ${deviceMax.mobileL} {
     width: calc(100vw - 20px);
     padding: 20px 0px;
   }
-  @media ${device.tablet} {
+  @media ${deviceMax.tablet} {
     width: calc(100vw - 20px);
     padding: 20px 0px;
   }

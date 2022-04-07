@@ -11,7 +11,7 @@ import { Backdrop } from "../../App/Backdrop";
 import { useSelector } from "react-redux";
 import { useLoadGraves } from "../../../services/hooks/api/graves/useLoadGraves";
 import { usePostGrave } from "../../../services/hooks/api/graves/usePostGrave";
-import { device } from "../../../configs/css/breakpoints";
+import { deviceMax } from "../../../configs/css/breakpoints";
 
 export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
   const [getGraves] = useLoadGraves();
@@ -359,7 +359,7 @@ const Diag = styled.form`
   flex-direction: column;
   z-index: 999;
   animation: ${FadeIn} 0.2s linear forwards;
-  @media ${device.mobileL} {
+  @media ${deviceMax.mobileL} {
     position: fixed;
     top: 50%;
     left: 0;
