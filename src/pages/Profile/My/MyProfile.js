@@ -320,10 +320,11 @@ const RowEnd = styled(Row)`
     margin-left: 10px;
   }
   @media ${device.mobileL} {
-    -webkit-appearance: unset;
     & > * {
       font-weight: lighter;
       margin-left: 0px;
+      font-size: 13px;
+      width: 33.3%;
     }
   }
 `;

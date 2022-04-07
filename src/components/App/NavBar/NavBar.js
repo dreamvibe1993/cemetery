@@ -10,7 +10,7 @@ import { useConfirmRedir } from "../../../services/hooks/app/useConfirmRedir";
 import { setUnsavedDataStatus } from "../../../redux/app/appReducer";
 import { RoundUserPic } from "../RoundUserPic/RoundUserPic";
 import { Logo } from "../Logo/Logo";
-import { FadeIn, Floating } from "../../../configs/css/animations";
+import { FadeIn } from "../../../configs/css/animations";
 import { ColorTheme } from "../../HOCs/AuthWrapper/AuthWrapper";
 import { updateMe } from "../../../api/user";
 import { updateColorTheme } from "../../../redux/user/userReducer";
@@ -100,9 +100,6 @@ export const TopNavBar = () => {
         <Logo onClick={goHome} />
       </LogoWrapper>
       <Buttons>
-        {/* <NavButton onClick={goProfile}>profile</NavButton> */}
-      </Buttons>
-      <Buttons>
         <NavButton onClick={goAuth}>auth</NavButton>
         <NavButton onClick={toggleColorPicker} id="colorsPicker">
           THEME
@@ -146,7 +143,6 @@ const ColorPicker = styled.div`
   background-color: ${(p) => p.theme.white.hex};
   display: flex;
   animation: ${FadeIn} 0.2s linear forwards;
-  /* box-shadow: 0px 10px 10px 5px ${(p) => p.theme.contrastB.rgba(0.1)}; */
   z-index: 1002;
   @media ${device.mobileL} {
     left: auto;
@@ -165,16 +161,16 @@ const Buttons = styled.div`
   @media ${device.mobileL} {
     position: initial;
     & > * {
-      margin-right: 2px;
+      &:not(:last-child) {
+        margin-right: 15px;
+      } 
+      margin-right: 0px;
+      padding: 0px;
     }
   }
 `;
 
 const LogoWrapper = styled.div`
-  /* position: absolute; */
-  /* left: 50%; */
-  /* top: 50%; */
-  /* transform: translate(-50%, -50%); */
   height: 80%;
   width: 80px;
   cursor: pointer;
@@ -183,10 +179,10 @@ const LogoWrapper = styled.div`
     width: 100%;
   }
   @media ${device.mobileL} {
-    /* padding: 5px 0px; */
     position: unset;
     transform: none;
     height: 50px;
+    width: 50px;
   }
 `;
 
@@ -219,24 +215,10 @@ const NavBar = styled.div`
     font-size: 25px;
   }
   @media ${device.mobileL} {
-    padding: 5px 5px;
+    padding: 5px 10px;
   }
 `;
 
 const UserFixedWrapper = styled.div`
-  /* position: fixed;
-  bottom: 10px;
-  right: 20px;
-  z-index: 1002; */
-  /* border: 1px solid ${(p) => p.theme.contrastB.rgba(1)}; */
-  /* padding: 10px; */
   background-color: ${(p) => p.theme.primary.hex};
-  animation: ${Floating} 5s linear infinite;
-  @media ${device.mobileL} {
-    /* margin-right: 20px; */
-  }
-  /* div {
-    width: 60px;  
-    height: 60px;
-  } */
 `;

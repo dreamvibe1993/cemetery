@@ -1,13 +1,15 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
+
+  @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900&display=swap');
   
   body {
     display: flex;
     justify-content: center;
     padding-top: 10px;
     color: ${(p) => p.theme.textColor.hex};
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Inconsolata', monospace, 'Courier New', Courier, monospace;
     background-color: ${(p) => p.theme.secondaryB.rgba(1)};
   }
 

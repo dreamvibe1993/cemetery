@@ -116,6 +116,7 @@ const PassChangeSection = styled.div`
       margin-bottom: 10px;
     }
   }
+ 
 `;
 
 const RelativeWrap = styled.div`

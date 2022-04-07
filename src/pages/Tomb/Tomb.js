@@ -310,6 +310,12 @@ const Name = styled(Text)`
   font-size: 40px;
   flex: 1;
   text-align: left;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  @media ${device.mobileL} {
+    font-size: 30px;
+  }
 `;
 
 const Monument = styled.div`

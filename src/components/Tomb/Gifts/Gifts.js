@@ -98,6 +98,11 @@ const GiftsGridWrapper = styled.div`
   @media ${device.mobileL} {
     width: calc(100% - 20px);
   }
+  @media ${device.tablet} {
+    width: calc(100vw - 40px);
+    padding: 10px;
+    padding-bottom: 40px;
+  }
 `;
 
 const GiftsGrid = styled.div`
@@ -112,5 +117,10 @@ const GiftsGrid = styled.div`
     grid-template-columns: repeat(4, calc(100% / 4));
     grid-template-rows: repeat(4, calc(100vh / 6));
     justify-content: space-around;
+  }
+  @media ${device.tablet} {
+    grid-template-columns: repeat(4, calc(100vw / 5));
+    grid-template-rows: repeat(4, calc(100vh / 5));
+    justify-content: center;
   }
 `;

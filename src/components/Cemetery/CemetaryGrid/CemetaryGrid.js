@@ -70,21 +70,19 @@ export const CemetaryGrid = () => {
               direction="bottom"
               key={cell?.name + i}
             >
-              <Cell onClick={() => visitTomb(cell)}>
+              <Cell
+                onClick={() => visitTomb(cell)}
+                showDelButton={cell?.madeBy?.id === user.id || isAdmin}
+              >
                 <Grave grave={cell} />
-                {(cell?.madeBy?.id === user.id || isAdmin) && (
+                <DeleteButtonWrapper>
                   <ServiceButton
                     id="sbut"
-                    style={{
-                      position: "absolute",
-                      bottom: "15px",
-                      zIndex: 99999,
-                    }}
                     onClick={(e) => deleteGrave(e, cell)}
                   >
                     DELETE
                   </ServiceButton>
-                )}
+                </DeleteButtonWrapper>
               </Cell>
             </Tooltip>
           ) : (
@@ -98,6 +96,12 @@ export const CemetaryGrid = () => {
     </>
   );
 };
+
+const DeleteButtonWrapper = styled.div`
+  position: absolute;
+  bottom: 15px;
+  z-index: 99999;
+`;
 
 const Cell = styled.div`
   height: 100%;
@@ -118,7 +122,8 @@ const Cell = styled.div`
       background-color: ${(p) => p.theme.white.rgba(0.1)};
     }
     #sbut {
-      opacity: 1;
+      opacity: ${p => p.showDelButton && 1};
+      display: ${p => p.showDelButton && "block"};
     }
   }
   &::after {
@@ -131,7 +136,16 @@ const Cell = styled.div`
     background-color: transparent;
   }
   #sbut {
+    display: none;
     opacity: 0;
+  }
+  @media ${device.mobileL}, ${device.tablet} {
+    #sbut {
+      opacity: ${p => p.showDelButton ? 1 : 0};
+      display: ${p => p.showDelButton ? "block" : "none"};
+      padding: 5px;
+      text-transform: lowercase;
+    }
   }
 `;
 
@@ -147,9 +161,16 @@ const CemetaryGridContainer = styled.div`
   animation: ${FadeIn} 0.2s linear forwards;
   @media ${device.mobileL} {
     width: 100vw;
-    height:  ${window.innerHeight - 50 + "px"};
+    height: ${window.innerHeight - 50 + "px"};
     min-width: auto;
     grid-template-columns: repeat(3, calc(100vw / 3 - 10px));
     grid-template-rows: repeat(4, 22%);
+  }
+  @media ${device.tablet} {
+    min-width: auto;
+    grid-template-columns: repeat(4, calc(100vw / 5));
+    grid-template-rows: repeat(3, 25vh);
+    padding: 0px;
+    margin: 0 auto;
   }
 `;

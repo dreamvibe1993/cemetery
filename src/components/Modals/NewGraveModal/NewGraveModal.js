@@ -109,9 +109,7 @@ export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
   if (l)
     return (
       <Backdrop>
-        <PreloaderCont>
-          <Preloader />
-        </PreloaderCont>
+        <Preloader />
       </Backdrop>
     );
 

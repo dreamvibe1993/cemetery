@@ -57,4 +57,8 @@ const UserAuthContainer = styled.div`
     width: calc(100vw - 20px);
     padding: 10px;
   }
+  @media ${device.tablet} {
+    width: calc(100vw - 40px);
+    padding: 10px;
+  }
 `;

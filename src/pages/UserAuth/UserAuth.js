@@ -142,6 +142,9 @@ const LogoWrapper = styled.div`
     height: 100%;
     width: 100%;
   }
+  @media ${device.tablet} {
+    width: 22%;
+  }
 `;
 
 const Title = styled.span`
@@ -164,6 +167,10 @@ const UserAuthContainer = styled.div`
   position: relative;
   border: 1px solid ${p => p.theme.contrastB.hex};
   @media ${device.mobileL} {
+    width: calc(100vw - 20px);
+    padding: 20px 0px;
+  }
+  @media ${device.tablet} {
     width: calc(100vw - 20px);
     padding: 20px 0px;
   }
