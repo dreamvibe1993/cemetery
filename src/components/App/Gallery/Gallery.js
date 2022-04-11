@@ -74,6 +74,7 @@ export const Gallery = ({ src, onClose = () => {} }) => {
       >
         <Pic
           src={src}
+          crossOrigin="anonymous"
           onLoad={endLoading}
           style={{ visibility: !isLoading ? "visible" : "hidden" }}
         />

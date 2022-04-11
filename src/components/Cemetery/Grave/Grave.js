@@ -5,7 +5,7 @@ import { deviceMax } from "../../../configs/css/breakpoints";
 export const Grave = ({grave}) => {
   return (
     <GraveCont>
-      <UserPhoto src={grave.photos[0]} />
+      <UserPhoto src={grave.photos[0]} crossOrigin="anonymous"/>
     </GraveCont>
   );
 };
