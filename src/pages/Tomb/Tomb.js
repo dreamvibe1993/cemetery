@@ -333,7 +333,7 @@ const Monument = styled.div`
   /* z-index: 999; */
   animation: ${FadeIn} 0.2s linear forwards;
   @media ${deviceMax.mobileL} {
-    width: 100%;
+    width: 100vw;
     min-width: auto;
     padding: 10px;
   }
