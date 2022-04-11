@@ -182,7 +182,9 @@ export const MyProfile = () => {
       {userPhotoSrc && <Gallery src={userPhotoSrc} onClose={closeUserPhoto} />}
       <ProfileContainer onSubmit={(e) => saveUserProfile(e)}>
         <Row>
-          <MainUsername>{user.username}</MainUsername>
+          <UsernameWrapper>
+            <MainUsername>{user.username}</MainUsername>
+          </UsernameWrapper>
           <ServiceButton>
             CHANGE PHOTO
             <ChangePhotoInput
@@ -275,6 +277,12 @@ export const MyProfile = () => {
   );
 };
 
+const UsernameWrapper = styled.div`
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+`;
+
 const UserPlatformInput = styled(Input)`
   width: 40%;
   margin-right: 5px;
@@ -332,7 +340,7 @@ const RowEnd = styled(Row)`
 const MainUsername = styled.span`
   font-size: 32px;
   text-transform: uppercase;
-  line-height: 0;
+  line-height: 32px;
   font-weight: bolder;
 `;
 

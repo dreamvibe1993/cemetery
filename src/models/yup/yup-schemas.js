@@ -52,7 +52,7 @@ export const regSchema = yup.object().shape({
   name: yup
     .string()
     .required("Please provide us your name.")
-    .max(10, "Maximum name's length is 10 symbols."),
+    .max(20, "Maximum name's length is 20 symbols."),
 });
 
 export const profileSchema = yup.object().shape({
@@ -60,7 +60,7 @@ export const profileSchema = yup.object().shape({
   name: yup
     .string()
     .required("Please provide us your name.")
-    .max(10, "Maximum name's length is 10 symbols."),
+    .max(20, "Maximum name's length is 20 symbols."),
 });
 
 export const passChangeSchema = yup.object().shape({

@@ -8,6 +8,7 @@ export const app = createSlice({
       withOptions: false,
       options: ["yes", "no"],
       isThereUnsavedData: false,
+      type: null
     },
     notificationConfirm: null,
   },
