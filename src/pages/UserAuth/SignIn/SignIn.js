@@ -2,7 +2,10 @@ import React from "react";
 import styled from "styled-components/macro";
 import { createMyProfile } from "../../../api/user";
 
-import { Input, ServiceButton } from "../../../components/css/sc-components/ScComponents";
+import {
+  Input,
+  ServiceButton,
+} from "../../../components/css/sc-components/ScComponents";
 import { deviceMax } from "../../../configs/css/breakpoints";
 import { regSchema } from "../../../models/yup/yup-schemas";
 import { showError } from "../../../services/errors/showError";
@@ -120,12 +123,15 @@ export const SignIn = () => {
           )}
         </RelativeWrap>
       </SignInSection>
-      <SIGNIN
-        type={isSignInOpen ? "submit" : "button"}
-        onClick={openSignInSection}
-      >
-        CREATE AN ACCOUNT
-      </SIGNIN>
+      {isSignInOpen ? (
+        <SIGNIN_SUB type="submit" onClick={openSignInSection}>
+          CREATE AN ACCOUNT
+        </SIGNIN_SUB>
+      ) : (
+        <SIGNIN type="button" onClick={openSignInSection}>
+          CREATE AN ACCOUNT
+        </SIGNIN>
+      )}
     </Form>
   );
 };
@@ -142,6 +148,7 @@ const SignInSection = styled.div`
   padding-top: ${(p) => (p.open ? "40px" : "0px")};
   height: ${(p) => (p.open ? "280px" : "0px")};
   opacity: ${(p) => (p.open ? "1" : "0")};
+  overflow: hidden;
 `;
 
 const RelativeWrap = styled.div`
@@ -157,7 +164,7 @@ const ErrMessage = styled.span`
   bottom: 4px;
   left: 10px;
   font-size: 12px;
-  color: ${p => p.theme.error.rgba(1)};
+  color: ${(p) => p.theme.error.rgba(1)};
   @media ${deviceMax.mobileL} {
     width: 120%;
     left: 50%;
@@ -169,6 +176,8 @@ const SIGNIN = styled(ServiceButton)`
   margin: 0 auto;
   margin-top: 20px;
 `;
+
+const SIGNIN_SUB = styled(SIGNIN)``
 
 const PasswordInput = styled(Input)``;
 

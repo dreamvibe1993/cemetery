@@ -9,8 +9,7 @@ import { AuthWrapper } from "./components/HOCs/AuthWrapper";
 /*
   TODO:
   *) Waiting till db connected (FAILED)
-  *) Mobile version
-  *) CHANGE MY EMAIL!!!
+  *) CHANGE MY EMAIL!!! (Need to make a special one.)
   *) Deploy
   *) Different clusters of different colors
 */
