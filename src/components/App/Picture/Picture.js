@@ -34,7 +34,7 @@ export const Picture = ({
         src={src || QuestionMark}
         draggable={false}
         onLoad={() => setLoading(false)}
-        crossOrigin="anonymous"
+        crossOrigin="use-credentials"
       />
     </PhotoWrapper>
   );

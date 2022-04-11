@@ -6,7 +6,7 @@ import QuestionMark from "../../../media/img/common/question-mark.png"
 export const RoundUserPic = ({src, onClick = () => {}}) => {
   return (
     <UserPicWrappa onClick={onClick}>
-      <UserPic src={src || QuestionMark} crossOrigin="anonymous"/>
+      <UserPic src={src || QuestionMark} crossOrigin="use-credentials"/>
     </UserPicWrappa>
   );
 };

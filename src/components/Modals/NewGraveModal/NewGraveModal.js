@@ -176,7 +176,7 @@ export const NewGraveModal = ({ graveCellNum, onClose = () => {} }) => {
                 photos.map((blob) => (
                   <LilPicCont key={blob.id}>
                     <Cross onClick={() => deletePhoto(blob.id)} />
-                    <LilPic src={blob.url} crossOrigin="anonymous" />
+                    <LilPic src={blob.url} crossOrigin="use-credentials" />
                   </LilPicCont>
                 ))
               )}
