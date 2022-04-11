@@ -1,4 +1,4 @@
-export const ORIGIN = /*process.env.NODE_ENV === 'development' ? */"http://192.168.0.103:8888" /*: window.location.origin;*/
+export const ORIGIN = /*process.env.NODE_ENV === 'development' ? */"" /*: window.location.origin;*/
 
 export const routes = {
   root: "/",
