@@ -169,7 +169,7 @@ const CemetaryGridContainer = styled.div`
   @media ${deviceMax.tablet} and ${deviceMin.mobileL} {
     min-width: auto;
     grid-template-columns: repeat(4, calc(100vw / 5));
-    grid-template-rows: repeat(3, 25vh);
+    grid-template-rows: repeat(3, calc(100vw / 4));
     padding: 0px;
     margin: 0 auto;
   }
