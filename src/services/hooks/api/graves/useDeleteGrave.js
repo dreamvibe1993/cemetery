@@ -14,7 +14,9 @@ import { handleError } from "../../../errors/handleError";
 export const useDeleteGrave = () => {
   const [getGraves] = useLoadGraves();
   const dispatch = useDispatch();
-  const { notificationConfirm } = useSelector((state) => state.app);
+  const { notificationConfirm, notification } = useSelector(
+    (state) => state.app
+  );
 
   const [graveToDel, setGraveToDel] = React.useState(null);
 
@@ -22,7 +24,8 @@ export const useDeleteGrave = () => {
 
   const cancelFnRef = React.useRef(null);
 
-  const cancelDeleteGraveRequest = () => { // need to be fixed
+  const cancelDeleteGraveRequest = () => {
+    // need to be fixed
     if (graveToDel && typeof cancelFnRef.current === "function")
       cancelFnRef.current("499: Request to get graves was cancelled!");
   };
@@ -31,6 +34,7 @@ export const useDeleteGrave = () => {
     e.stopPropagation();
     dispatch(
       setNotification({
+        type: "deleting",
         text:
           "Are you sure you want to delete the grave of " + grave.name + "?",
         withOptions: true,
@@ -44,6 +48,7 @@ export const useDeleteGrave = () => {
   };
 
   React.useEffect(() => {
+    if (notification.type !== "deleting") return;
     if (notificationConfirm === null) return;
     if (notificationConfirm === false) {
       return dispatch(setNotificationToDefault());
