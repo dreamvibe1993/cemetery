@@ -1,9 +1,18 @@
-# v 1.0.1
+# v 1.0.2
 
-Express
-React
-MongoDb
+Express  
+React  
+MongoDb  
+Firebase storage  
 
-https://last-resort-graveyard.herokuapp.com/
+Link:<br />
+https://last-resort-graveyard.herokuapp.com/<br />
+
+Coming soon:<br />
+- Ability to edit a grave.<br />
+- Languages support. <br />
+- Newsfeed
+
+
 
 // Constantly being improved!
