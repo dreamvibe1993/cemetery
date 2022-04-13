@@ -368,11 +368,6 @@ const Diag = styled.form`
   }
 `;
 
-const PreloaderCont = styled(Diag)`
-  justify-content: center;
-  align-items: center;
-`;
-
 /* <InputName>song to mourn:</InputName> */
 /* <Select
             onChange={(v) => handleLSongInput(v)}

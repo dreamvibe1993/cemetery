@@ -17,7 +17,7 @@ import { Logo } from "../../components/App/Logo/Logo";
 import { deviceMax } from "../../configs/css/breakpoints";
 
 export const UserAuth = () => {
-  const { isAuth, user, isUserLoading } = useSelector((state) => state.user);
+  const { isAuth, user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const [redirect, setRedirect] = React.useState("");

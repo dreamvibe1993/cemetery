@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components/macro";
-import { ColorTheme } from "../../../App";
 import { FadeIn } from "../../../configs/css/animations";
 import { ServiceButton } from "../../css/sc-components/ScComponents";
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components/macro";
-import { DropDown, FadeIn } from "../../../configs/css/animations";
+import { FadeIn } from "../../../configs/css/animations";
 import { ServiceButton } from "../../css/sc-components/ScComponents";
 
 import { localStorageFields } from "../../../configs/local-storage/fields";

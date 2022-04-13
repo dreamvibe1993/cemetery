@@ -2,6 +2,7 @@ export function hexToRgbA(hex, transparency) {
   var c;
   if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
     c = hex.substring(1).split("");
+    // eslint-disable-next-line eqeqeq
     if (c.length == 3) {
       c = [c[0], c[0], c[1], c[1], c[2], c[2]];
     }

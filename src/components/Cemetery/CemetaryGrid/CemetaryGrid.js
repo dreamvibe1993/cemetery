@@ -4,8 +4,6 @@ import { Navigate } from "react-router-dom";
 import styled from "styled-components/macro";
 import { ServiceButton } from "../../css/sc-components/ScComponents";
 
-import GrassPattern from "../../../media/img/grave/grass-p-2.png";
-
 import { NewGraveModal } from "../../Modals/NewGraveModal/NewGraveModal";
 import { Tooltip } from "../../HOCs/Tooltip";
 import { useDeleteGrave } from "../../../services/hooks/api/graves/useDeleteGrave";
