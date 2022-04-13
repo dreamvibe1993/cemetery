@@ -29,7 +29,7 @@ export const DonateGift = ({ onClose = () => {}, grave }) => {
   };
 
   const leaveGift = () => {
-    const dataToValidate = { gift, name: user.username, wish };
+    const dataToValidate = { gift, name: user.name, wish };
     giftSchema
       .validate(dataToValidate)
       .then(() => {

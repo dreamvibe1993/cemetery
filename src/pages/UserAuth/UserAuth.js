@@ -65,7 +65,7 @@ export const UserAuth = () => {
           <LogoWrapper>
             <Logo />
           </LogoWrapper>
-          <Title>Hey {user.username}!</Title>
+          <Title>Hey {user.name}!</Title>
           <LOGOUT onClick={logOut}>LOGOUT</LOGOUT>
         </UserAuthContainer>
       </ContentContainer>

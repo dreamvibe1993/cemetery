@@ -18,7 +18,7 @@ export const authorizeUser = (data) => {
   if (data.user.role === "admin") store.dispatch(setUserAsAdmin());
   const userData = {
     email: data.user.email,
-    username: data.user.name,
+    name: data.user.name,
     photos: data.user.photos,
     id: data.user._id,
     contacts: data.user.contacts,

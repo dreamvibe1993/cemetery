@@ -36,7 +36,7 @@ export const MyProfile = () => {
   const [isAdditInpShow, setAdditInpShow] = React.useState(false);
   const [redirect, setRedirect] = React.useState(null);
   const [picBlobArr, setPicBlobArr] = React.useState(null);
-  const [name, setName] = React.useState(user.username);
+  const [name, setName] = React.useState(user.name);
   const [email, setEmail] = React.useState("");
   const [userPhotoSrc, setUserPhotoSrc] = React.useState("");
   const [contacts, setContacts] = React.useState({});
@@ -53,9 +53,9 @@ export const MyProfile = () => {
 
   React.useEffect(() => {
     if (!isAuth) return;
-    setName(user.username);
+    setName(user.name);
     setEmail(user.email);
-  }, [isAuth, user.contacts, user.email, user.username]);
+  }, [isAuth, user.contacts, user.email, user.name]);
 
   React.useEffect(() => {
     if (!isAuth) return;
@@ -76,12 +76,12 @@ export const MyProfile = () => {
 
   React.useEffect(() => {
     if (!isAuth) return;
-    if (user.username !== name || user.email !== email || picBlobArr !== null) {
+    if (user.name !== name || user.email !== email || picBlobArr !== null) {
       dispatch(setUnsavedDataStatus(true));
       return;
     }
     dispatch(setUnsavedDataStatus(false));
-  }, [dispatch, email, name, picBlobArr, isAuth, user.email, user.username]);
+  }, [dispatch, email, name, picBlobArr, isAuth, user.email, user.name]);
 
   const changeUsername = (e) => {
     setName(e.target.value);
@@ -183,7 +183,7 @@ export const MyProfile = () => {
       <ProfileContainer onSubmit={(e) => saveUserProfile(e)}>
         <Row>
           <UsernameWrapper>
-            <MainUsername>{user.username}</MainUsername>
+            <MainUsername>{user.name}</MainUsername>
           </UsernameWrapper>
           <ServiceButton>
             CHANGE PHOTO

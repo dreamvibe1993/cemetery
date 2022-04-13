@@ -33,7 +33,7 @@ export const user = createSlice({
       state.user.email = action.payload;
     },
     updateUsername(state, action) {
-      state.user.username = action.payload;
+      state.user.name = action.payload;
     },
     updateColorTheme(state,action) {
       state.user.colorTheme = action.payload;

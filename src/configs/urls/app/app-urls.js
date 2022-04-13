@@ -1,4 +1,4 @@
-export const ORIGIN = /*process.env.NODE_ENV === 'development' ? */"" /*: window.location.origin;*/
+export const ORIGIN = process.env.REACT_APP_ENVIRONMENT === 'develop' ? "http://localhost:8888" : "";
 
 export const routes = {
   root: "/",
